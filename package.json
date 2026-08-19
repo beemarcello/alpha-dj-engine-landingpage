@@ -1,0 +1,17 @@
+{
+  "name": "amc-landingpage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alpha Music Converter — Landingpage. Build-Schritt nur fuer Tailwind und die Icons.",
+  "scripts": {
+    "build:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i src/tailwind.css -o css/tailwind.css --watch",
+    "build:icons": "node src/build-icons.mjs",
+    "build": "npm run build:css && npm run build:icons && npm run build:horse",
+    "build:horse": "node src/build-horse.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "lucide-static": "^0.400.0"
+  }
+}

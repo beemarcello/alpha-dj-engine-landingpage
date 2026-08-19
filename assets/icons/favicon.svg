@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alpha Music Converter">
+  <rect width="64" height="64" rx="14" fill="#000000"/>
+  <g fill="none" stroke="#5dff7e" stroke-width="6" stroke-linecap="round">
+    <path d="M16 40 V 24"/>
+    <path d="M28 46 V 18"/>
+    <path d="M40 40 V 24"/>
+    <path d="M52 36 V 28"/>
+  </g>
+</svg>

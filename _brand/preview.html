@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha-DJ-Engine — Marken-Animationen</title>
+<style>
+  /* Bewusst ohne externe Abhängigkeiten — die Datei läuft per Doppelklick,
+     auch ohne Server und ohne den Rest des Projekts. */
+  :root { --ink:#000; --paper:#d5d5d4; --frames:8; }
+  * { box-sizing:border-box; }
+  /* Bewusst KEIN flex mit justify-content:center auf dem body — bei mehr Inhalt
+     als Bildschirmhoehe laeuft der zentrierte Block oben aus dem scrollbaren
+     Bereich heraus. Normaler Fluss plus max-width ist hier robuster. */
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font:16px/1.6 ui-sans-serif, system-ui, sans-serif;
+    padding:48px 24px 72px;
+  }
+  body > * { margin-left:auto; margin-right:auto; }
+  h1 { margin-top:56px; text-align:center; }
+  h1:first-of-type { margin-top:0; }
+  .row, figure { margin-top:28px; }
+  h1 { font-size:20px; margin:0; letter-spacing:.02em; }
+  p  { margin:0; max-width:60ch; text-align:center; color:rgba(0,0,0,.6); font-size:14px; }
+
+  .row { display:flex; flex-wrap:wrap; gap:40px; align-items:flex-end; justify-content:center; }
+  figure { margin:0; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  figcaption { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:rgba(0,0,0,.5); }
+
+  /* Sprite: Container zeigt ein Frame, der Streifen wandert in 8 Schritten */
+  .horse { overflow:hidden; aspect-ratio:42 / 34; }
+  .horse img {
+    display:block; width:calc(var(--frames) * 100%); height:100%;
+    max-width:none; image-rendering:pixelated;
+    animation:run .72s steps(var(--frames)) infinite;
+  }
+  @keyframes run { from { transform:translateX(0); } to { transform:translateX(-100%); } }
+
+  .s  { width:120px; }
+  .m  { width:240px; }
+  .l  { width:400px; }
+
+  .strip { max-width:100%; border:2px solid var(--ink); border-radius:12px; background:#fff; }
+  .strip img { display:block; width:100%; height:auto; image-rendering:pixelated; }
+
+  code { background:#fff; border:1px solid rgba(0,0,0,.2); border-radius:4px; padding:1px 5px; font-size:13px; }
+</style>
+</head>
+<body>
+
+  <h1>Alpha-DJ-Engine — Marken-Animationen</h1>
+  <p>
+    8 Frames, Transversalgalopp mit Schwebephase. Blickrichtung nach links.
+    Erzeugt aus dem Pferd der Wortmarke — siehe <code>horse-gallop/README.md</code>.
+  </p>
+
+  <div class="row">
+    <figure>
+      <div class="horse s"><img src="horse-gallop/horse-gallop.svg" alt="Galoppierendes Pixel-Pferd"></div>
+      <figcaption>120 px</figcaption>
+    </figure>
+    <figure>
+      <div class="horse m"><img src="horse-gallop/horse-gallop.svg" alt=""></div>
+      <figcaption>240 px</figcaption>
+    </figure>
+    <figure>
+      <div class="horse l"><img src="horse-gallop/horse-gallop.svg" alt=""></div>
+      <figcaption>400 px</figcaption>
+    </figure>
+  </div>
+
+  <figure style="width:min(900px,100%)">
+    <div class="strip"><img src="horse-gallop/horse-gallop.svg" alt="Alle acht Frames nebeneinander"></div>
+    <figcaption>Sprite-Streifen, alle 8 Frames</figcaption>
+  </figure>
+
+  <figure>
+    <img src="horse-gallop/horse-gallop.gif" alt="Dasselbe als animiertes GIF" width="336" height="272"
+         style="image-rendering:pixelated; max-width:100%; height:auto;">
+    <figcaption>GIF-Fassung (für Slides und Social)</figcaption>
+  </figure>
+
+  <hr style="width:min(900px,100%);border:0;border-top:2px solid var(--ink);margin:8px 0">
+
+  <h1>Animiertes Logo</h1>
+  <p>
+    Selbsttragendes SVG — das CSS steckt in der Datei, die Wortmarke ist als PNG
+    eingebettet. Läuft deshalb auch als <code>&lt;img src&gt;</code>, ohne Schrift
+    nachzuladen.
+  </p>
+
+  <figure style="width:min(700px,100%)">
+    <img src="logo-animated/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine"
+         style="width:100%;height:auto;image-rendering:pixelated">
+    <figcaption>SVG, als &lt;img&gt; eingebunden</figcaption>
+  </figure>
+
+  <figure style="width:min(460px,100%)">
+    <img src="logo-animated/logo-alpha-dj-engine-animated.svg" alt=""
+         style="width:100%;height:auto;image-rendering:pixelated">
+    <figcaption>dasselbe in Navigationsgrösse</figcaption>
+  </figure>
+
+  <figure style="width:min(700px,100%)">
+    <img src="logo-animated/logo-alpha-dj-engine-animated.gif" alt=""
+         style="width:100%;height:auto;image-rendering:pixelated">
+    <figcaption>GIF-Fassung</figcaption>
+  </figure>
+
+</body>
+</html>

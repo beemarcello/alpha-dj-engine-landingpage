@@ -1,0 +1,8 @@
+# Alpha DJ Engine
+User-agent: *
+Allow: /
+
+# Rechtstexte mit noindex im <head> stehen bewusst nicht in der Sitemap.
+# Kein Disallow: sie sollen erreichbar und crawlbar bleiben, nur nicht ranken.
+
+Sitemap: https://alpha-dj-engine.com/sitemap.xml

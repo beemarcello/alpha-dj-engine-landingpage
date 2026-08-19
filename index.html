@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Alpha-DJ-Engine — Gig-ready Denon USB in seconds</title>
+  <meta name="description" content="Alpha analyzes your own music locally, builds a harmonically sequenced DJ set and writes it straight to your Denon Engine DJ USB. First 10 tracks free, then €30 incl. VAT, once. macOS.">
+
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/">
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Alpha-DJ-Engine — Gig-ready Denon USB in seconds">
+  <meta property="og:description" content="Analyze your music, build a harmonically sequenced set, write it straight to your Denon Engine DJ USB.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/">
+  <meta property="og:locale" content="en">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
+       Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
+  <link rel="stylesheet" href="css/site.css?v=14">
+
+  <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
+       site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
+       Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
+       Konfiguration in tailwind.config.js. -->
+  <link rel="stylesheet" href="css/tailwind.css?v=4">
+
+
+  <script src="js/icons.js?v=1" defer></script>
+  <script src="js/site.js?v=6" defer></script>
+</head>
+
+<body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ======================================================================
+       NAV
+       ====================================================================== -->
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="#" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+
+      <div class="flex items-center gap-6">
+        <div class="cta-mac" hidden>
+          <a href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        </div>
+        <div class="cta-other" hidden>
+          <a href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Get the link</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ====================================================================
+         HERO
+         ==================================================================== -->
+    <section class="bg-white w-full relative">
+      <div class="flex flex-col lg:flex-row min-h-screen">
+
+        <div class="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen order-1 bg-white">
+          <!--
+            object-cover, nicht -contain: der Controller läuft im Foto oben links
+            aus dem Bild heraus. Bei contain schwebt diese Schnittkante mitten in
+            der weissen Fläche; bei cover liegt sie bündig auf der Panel-Kante.
+            Preis dafür ist ~1.25× Hochskalierung — siehe README (höher aufgelöste
+            Variante des Motivs liegt in assets/img/).
+          -->
+          <img
+            src="assets/img/Denon-DJ-Prime-Go-gebraucht-3-768x768.webp"
+            alt="A Denon DJ Prime Go controller, shown from above at an angle"
+            width="768" height="768"
+            class="absolute inset-0 w-full h-full object-cover object-center"
+            fetchpriority="high" decoding="async">
+        </div>
+
+        <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 xl:px-24 pt-32 pb-16 order-2">
+          <div class="max-w-xl mx-auto lg:mx-0">
+            <p class="eyebrow mb-4">For Denon DJ hardware</p>
+
+            <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1] reveal">
+              Gig-ready USB<br>in seconds.
+            </h1>
+
+            <p class="text-lg text-[var(--ink-55)] mb-8 max-w-lg font-medium leading-relaxed">
+              Alpha analyzes your music, builds a harmonically sequenced DJ set
+              and writes it straight to your USB.
+            </p>
+
+            <div class="mb-6">
+              <!--
+                Bewusst nur EIN CTA hier: der Download steht schon oben in der Nav
+                und im Final-CTA-Band. Doppelung im Hero vermieden (Marcel, 2026-08-18).
+              -->
+              <div class="cta-mac" hidden>
+                <button type="button" class="btn btn-primary btn-lg" data-demo-open>
+                  <i data-lucide="play" class="w-5 h-5"></i>Watch demo
+                </button>
+              </div>
+
+              <div class="cta-other" hidden>
+                <form class="flex flex-col sm:flex-row gap-3" data-lead-form>
+                  <label class="sr-only" for="hero-email">Email address</label>
+                  <input id="hero-email" name="email" type="email" autocomplete="email" required
+                         placeholder="Email address" class="input flex-1 sm:max-w-[280px]">
+                  <button type="submit" class="btn btn-primary">Email me the download link</button>
+                </form>
+                <p class="mt-3 text-xs text-[var(--ink-55)] font-medium" data-lead-status>
+                  Alpha is a desktop app. Leave your email and we'll send the download link
+                  for when you're back at your Mac.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAIN / GAIN
+         ==================================================================== -->
+    <section class="w-full flex flex-col lg:flex-row">
+
+      <div class="w-full lg:w-1/2 bg-black text-white py-16 lg:py-24 px-6 lg:px-12 xl:px-20 flex justify-center lg:justify-end">
+        <div class="w-full max-w-[500px] lg:mr-12 xl:mr-24">
+          <h2 class="text-3xl font-light text-white tracking-tight mb-10">Before Alpha</h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-8 w-full list-none p-0 m-0">
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">Rekordbox to DENON sucks</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">Time-consuming playlist creation</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">My USB was a mess</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">Engine DJ sucks</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">Duplicate tracks on USB</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg">No harmonic sets</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-1/2 bg-[var(--purple)] text-black py-16 lg:py-24 px-6 lg:px-12 xl:px-20 flex justify-center lg:justify-start border-t-2 lg:border-t-0 lg:border-l-2 border-black">
+        <div class="w-full max-w-[500px] lg:pl-12">
+          <h2 class="text-3xl font-light text-black tracking-tight mb-10">With Alpha</h2>
+          <ul class="flex flex-col gap-8 list-none p-0 m-0">
+            <li class="flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full border-2 border-black bg-[var(--green-hot)] text-black flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="check" class="w-5 h-5 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg sm:text-xl leading-snug">One-click music analysis</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full border-2 border-black bg-[var(--green-hot)] text-black flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="check" class="w-5 h-5 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg sm:text-xl leading-snug">Harmonic track order suggestion</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full border-2 border-black bg-[var(--green-hot)] text-black flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="check" class="w-5 h-5 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg sm:text-xl leading-snug">No duplicates on your USB</span>
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="w-10 h-10 rounded-full border-2 border-black bg-[var(--green-hot)] text-black flex items-center justify-center shrink-0" aria-hidden="true">
+                <i data-lucide="check" class="w-5 h-5 stroke-[2.5]"></i>
+              </span>
+              <span class="font-light text-lg sm:text-xl leading-snug">Backup before every write</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         HOW IT WORKS — Intro
+         ==================================================================== -->
+
+    <section id="how-it-works" class="border-b-2 border-black bg-[var(--paper-2)] py-24 px-6">
+      <div class="max-w-[1080px] mx-auto flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+        <div>
+          <p class="eyebrow mb-6">Four steps</p>
+          <h2 class="leading-none block md:text-8xl text-5xl font-medium tracking-tight font-doto m-0">
+            <span class="type-line-1">This is how</span><br>
+            <span class="type-line-2">it works</span>
+          </h2>
+        </div>
+
+        <!--
+          Sprite-Streifen mit 8 Galopp-Frames, erzeugt von src/build-horse.mjs
+          aus dem Pixel-Pferd der Wortmarke. Dekorativ, deshalb aria-hidden.
+        -->
+        <div class="horse" aria-hidden="true">
+          <img src="assets/img/horse-gallop.svg" alt="" class="horse__strip"
+               width="336" height="34" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         01 ANALYZE
+         ==================================================================== -->
+    <section id="analyze" class="step-section bg-[var(--green)] border-b-2 border-black py-24 px-6">
+      <div class="grid md:grid-cols-2 max-w-[1080px] mx-auto gap-12 items-center">
+        <div>
+          <span class="step-num">01 Analyze</span>
+          <p class="leading-relaxed text-xl font-normal m-0">
+            Point Alpha at your music folder. It reads BPM, key and energy locally —
+            your audio never leaves your machine.
+          </p>
+        </div>
+
+        <div class="demo-panel p-6 h-64 flex flex-col justify-between">
+          <div class="flex justify-between items-center mb-2 border-b-2 border-black pb-2 gap-3">
+            <div class="font-normal text-lg tracking-tight">Create new playlist / add tracks to existing</div>
+            <i data-lucide="folder-search" class="w-6 h-6 shrink-0"></i>
+          </div>
+
+          <div class="flex-1 w-full relative flex items-center justify-between my-2 overflow-visible" aria-hidden="true">
+            <div class="absolute left-8 right-8 border-t-2 border-dashed border-black/15 top-1/2 -translate-y-1/2"></div>
+
+            <div class="z-10 bg-white p-2 border-2 border-black rounded-lg shadow-[2px_2px_0_0_#000]">
+              <i data-lucide="folder" class="w-5 h-5 block"></i>
+            </div>
+
+            <div class="absolute inset-0 pointer-events-none">
+              <i data-lucide="file-audio" class="w-5 h-5 transfer-file transfer-file--1"></i>
+              <i data-lucide="file-music" class="w-5 h-5 transfer-file transfer-file--2"></i>
+              <i data-lucide="file" class="w-5 h-5 transfer-file transfer-file--3"></i>
+            </div>
+
+            <div class="z-10 bg-[var(--green-hot)] p-2 border-2 border-black rounded-lg shadow-[2px_2px_0_0_#000]">
+              <i data-lucide="usb" class="w-5 h-5 block"></i>
+            </div>
+          </div>
+
+          <div class="space-y-4 mt-2">
+            <div class="h-4 bg-[var(--green-hot)] border-2 border-black rounded-full" style="animation: load-bar 12s infinite ease-in-out;"></div>
+            <!--
+              Statuszeilen bleiben bei der Analyse. Früher stand hier "35 duplicate
+              tracks found" (nicht belegtes Feature) und "Tracks linked to new
+              playlist" (passiert erst in 04 Export).
+            -->
+            <div class="relative h-5 text-sm font-normal text-right text-[var(--ink-55)]">
+              <div class="status-line">Analyzing 124 tracks<span class="loading-dots"></span></div>
+              <div class="status-line">Tempo and key detected</div>
+              <div class="status-line">Energy levels mapped</div>
+              <div class="status-line">124 tracks ready to sequence</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         02 COMPOSE
+         ==================================================================== -->
+    <section id="compose" class="step-section bg-[var(--purple)] border-b-2 border-black py-24 px-6">
+      <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="order-2 md:order-1 demo-panel p-6 min-h-[22rem] flex flex-col" data-energy-arc>
+          <div class="mb-4">
+            <h3 class="font-semibold text-lg text-black mb-1 tracking-tight m-0">Energy arc</h3>
+            <span class="text-xs font-semibold text-[var(--ink-55)] uppercase tracking-widest">Pick a shape</span>
+          </div>
+
+          <div class="flex-1 w-full bg-white border-2 border-black rounded-lg relative overflow-hidden flex flex-col min-h-[180px]">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]" aria-hidden="true"></div>
+
+            <div class="absolute inset-x-2 bottom-0 top-6">
+              <div class="absolute inset-0 flex items-end justify-between gap-[2px] z-10" data-arc-bars></div>
+              <svg class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <path data-arc-path class="transition-all duration-700 ease-in-out" fill="none" stroke="var(--purple-hot)" stroke-width="2.5" vector-effect="non-scaling-stroke"></path>
+              </svg>
+              <div class="absolute inset-0 pointer-events-none z-30" data-arc-dots></div>
+            </div>
+          </div>
+
+          <div class="flex flex-nowrap lg:flex-wrap gap-2 lg:gap-3 mt-6" data-arc-buttons></div>
+        </div>
+
+        <div class="order-1 md:order-2">
+          <span class="step-num">02 Compose</span>
+          <p class="leading-relaxed text-xl font-normal m-0">
+            Pick an energy arc or draw your own. Alpha reorders your tracks harmonically
+            to match the energy of your future gig.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         03 REFINE
+         ==================================================================== -->
+    <section id="refine" class="step-section bg-[var(--red)] border-b-2 border-black py-24 px-6">
+      <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="order-1">
+          <span class="step-num">03 Refine</span>
+          <p class="leading-relaxed text-xl font-normal m-0">
+            Pre-listen, swap tracks and fine-tune your next gig. Alpha keeps your
+            harmonic transitions locked while you experiment.
+          </p>
+        </div>
+
+        <div class="order-2 demo-panel p-6 h-64 flex flex-col justify-between">
+          <div class="flex justify-between items-center mb-4 border-b-2 border-black pb-4">
+            <div class="font-normal text-lg tracking-tight">Setlist editor</div>
+            <i data-lucide="sliders-horizontal" class="w-6 h-6 shrink-0"></i>
+          </div>
+
+          <div class="space-y-3 flex-1 flex flex-col justify-center relative" aria-hidden="true">
+            <div class="relative displace-item flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--paper)]">
+              <div class="flex items-center gap-2">
+                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/30 shrink-0"></i>
+                <span class="w-6 h-6 bg-black border-2 border-black rounded-full flex items-center justify-center shrink-0">
+                  <i data-lucide="play" class="w-3 h-3 text-white fill-white ml-0.5"></i>
+                </span>
+                <span class="text-sm font-light truncate max-w-[120px]">Inner City Life</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">160</span>
+                <span class="text-xs font-doto bg-[var(--green)] border-2 border-black px-1.5 py-0.5 rounded-sm">8A</span>
+              </div>
+            </div>
+
+            <div class="relative drag-item flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--beige-hot)]">
+              <div class="flex items-center gap-2">
+                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/30 shrink-0"></i>
+                <span class="w-6 h-6 bg-white border-2 border-black rounded-full flex items-center justify-center shrink-0">
+                  <i data-lucide="refresh-cw" class="w-3 h-3 text-black"></i>
+                </span>
+                <span class="text-sm font-light truncate max-w-[120px]">Finding match…</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">162</span>
+                <span class="text-xs font-doto bg-white border-2 border-black border-dashed px-1.5 py-0.5 rounded-sm">8A</span>
+              </div>
+            </div>
+
+            <div class="relative flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--paper)] opacity-70">
+              <div class="flex items-center gap-2">
+                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/20 shrink-0"></i>
+                <span class="w-6 h-6 bg-white border-2 border-black rounded-full flex items-center justify-center shrink-0">
+                  <i data-lucide="lock" class="w-3 h-3 text-black"></i>
+                </span>
+                <span class="text-sm font-light truncate max-w-[120px]">Timeless</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">162</span>
+                <span class="text-xs font-doto bg-[var(--green)] border-2 border-black px-1.5 py-0.5 rounded-sm">9A</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         04 EXPORT
+         ==================================================================== -->
+    <section id="export" class="step-section bg-[var(--beige)] border-b-2 border-black py-24 px-6">
+      <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="order-2 md:order-1 demo-panel p-6 min-h-[22rem] flex flex-col">
+          <div class="flex justify-between items-center border-b-2 border-black pb-3">
+            <div class="font-medium text-lg tracking-tight">USB export</div>
+            <i data-lucide="hard-drive" class="w-6 h-6 shrink-0"></i>
+          </div>
+
+          <!-- Ziel-Stick → neu angelegte Playlist -->
+          <div class="mt-4 flex items-center gap-2 flex-wrap">
+            <i data-lucide="usb" class="w-4 h-4 shrink-0"></i>
+            <span class="font-doto text-sm tracking-tight">DENON_DJ</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 text-black/40"></i>
+            <span class="exp-row inline-flex items-center gap-1.5 border-2 border-black rounded-full px-2.5 py-0.5 bg-[var(--beige)]" style="animation-delay:.2s">
+              <i data-lucide="list-music" class="w-3.5 h-3.5 shrink-0"></i>
+              <span class="text-xs font-semibold whitespace-nowrap">Sunset Set</span>
+            </span>
+          </div>
+
+          <!-- Tracks laufen durch, jeder bekommt sein Verdict -->
+          <ul class="mt-4 space-y-2 flex-1 list-none p-0 m-0" aria-hidden="true">
+            <li class="exp-row flex items-center justify-between gap-2 border-2 border-black rounded-sm bg-white px-2 py-1.5" style="animation-delay:1s">
+              <span class="flex items-center gap-2 min-w-0">
+                <i data-lucide="music" class="w-3.5 h-3.5 shrink-0"></i>
+                <span class="text-xs truncate">Inner City Life</span>
+              </span>
+              <span class="exp-chip inline-flex items-center gap-1 shrink-0 text-[10px] font-semibold border-2 border-black rounded-full px-1.5 py-0.5 bg-white" style="animation-delay:1.5s">
+                <i data-lucide="arrow-down-to-line" class="w-3 h-3"></i>Copied
+              </span>
+            </li>
+            <li class="exp-row flex items-center justify-between gap-2 border-2 border-black rounded-sm bg-white px-2 py-1.5" style="animation-delay:1.8s">
+              <span class="flex items-center gap-2 min-w-0">
+                <i data-lucide="music" class="w-3.5 h-3.5 shrink-0"></i>
+                <span class="text-xs truncate">Timeless</span>
+              </span>
+              <span class="exp-chip inline-flex items-center gap-1 shrink-0 text-[10px] font-semibold border-2 border-black rounded-full px-1.5 py-0.5 bg-[var(--green)]" style="animation-delay:2.3s">
+                <i data-lucide="link" class="w-3 h-3"></i>Linked
+              </span>
+            </li>
+            <li class="exp-row flex items-center justify-between gap-2 border-2 border-black rounded-sm bg-white px-2 py-1.5" style="animation-delay:2.6s">
+              <span class="flex items-center gap-2 min-w-0">
+                <i data-lucide="music" class="w-3.5 h-3.5 shrink-0"></i>
+                <span class="text-xs truncate">Brown Paper Bag</span>
+              </span>
+              <span class="exp-chip inline-flex items-center gap-1 shrink-0 text-[10px] font-semibold border-2 border-black rounded-full px-1.5 py-0.5 bg-[var(--green)]" style="animation-delay:3.1s">
+                <i data-lucide="link" class="w-3 h-3"></i>Linked
+              </span>
+            </li>
+          </ul>
+
+          <!-- Fortschritt + Bilanz -->
+          <div class="mt-4">
+            <div class="w-full h-6 bg-[var(--paper)] border-2 border-black rounded-sm overflow-hidden relative shadow-[2px_2px_0_0_#000]">
+              <div class="exp-bar absolute inset-y-0 left-0 bg-[var(--beige-hot)] border-r-2 border-black"></div>
+            </div>
+
+            <div class="relative h-9 mt-2 text-xs">
+              <div class="exp-writing absolute inset-0 text-[var(--ink-55)]">
+                Writing playlist to DENON_DJ<span class="loading-dots"></span>
+              </div>
+              <div class="exp-done absolute inset-0 flex flex-col gap-0.5">
+                <span class="flex items-center gap-1.5 font-medium">
+                  <i data-lucide="circle-check-big" class="w-3.5 h-3.5 shrink-0"></i>
+                  Playlist written — Engine OS database updated
+                </span>
+                <span class="text-[var(--ink-55)]">
+                  Existing tracks re-linked ·
+                  <span class="font-doto">0</span> duplicates written
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 md:order-2">
+          <span class="step-num">04 Export</span>
+          <p class="leading-relaxed text-xl font-normal m-0">
+            Write directly to your USB drive. Alpha formats the metadata and builds the
+            Engine OS database so your set is gig-ready the moment you plug it into your
+            Denon hardware.
+          </p>
+          <p class="leading-relaxed text-xl font-normal mt-4 mb-0">
+            It backs up the database before it touches anything, and tracks already on
+            the drive get re-linked instead of copied twice.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         FINAL CTA
+         ==================================================================== -->
+    <section id="download" class="border-b-2 border-black text-center bg-black py-32 px-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-8xl font-bold text-[var(--green-hot)] tracking-tight mb-12 mt-0">
+          Ready to try?
+        </h2>
+
+        <div class="flex justify-center">
+          <div class="cta-mac text-center" hidden>
+            <a href="#" class="btn btn-primary btn-lg">Download now</a>
+            <p class="text-sm font-semibold text-white/80 mt-6">
+              Free for macOS — your first 10 tracks are on us.<br>
+              If you like it, you can buy a lifetime version for only €30 incl. VAT.
+            </p>
+          </div>
+
+          <div class="cta-other text-center max-w-lg mx-auto w-full" hidden>
+            <form class="flex flex-col sm:flex-row gap-3 w-full" data-lead-form>
+              <label class="sr-only" for="cta-email">Email address</label>
+              <input id="cta-email" name="email" type="email" autocomplete="email" required
+                     placeholder="Email address" class="input flex-1 h-16 text-lg shadow-[4px_4px_0_0_#000]">
+              <button type="submit" class="btn btn-primary h-16 px-8 whitespace-nowrap shadow-[4px_4px_0_0_#000]">
+                Email me the link
+              </button>
+            </form>
+            <p class="mt-6 text-sm text-white/80 font-semibold" data-lead-status>
+              Alpha is a macOS desktop app. Leave your email and we'll send the download
+              link for when you're back at your Mac.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         FAQ
+         Inhalte sind gegen den Code geprüft (Backup/Restore + „reused"-Pfad in
+         core/alpha_core/engine/writer.py). Keine Aussagen zu Features, die noch
+         nicht ausgeliefert sind — siehe README „Copy".
+         ==================================================================== -->
+    <section id="faq" class="border-b-2 border-black py-24 px-6">
+      <div class="max-w-[860px] mx-auto">
+        <h2 class="font-doto font-semibold leading-none tracking-tight text-4xl md:text-6xl m-0">
+          FAQ
+        </h2>
+
+        <div class="mt-10 flex flex-col gap-3">
+
+          <details class="faq-item">
+            <summary>
+              What is Alpha actually doing?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                It turns a folder of tracks into a USB stick your Denon gear is ready to
+                play — analyzed, ordered and plugged in, instead of an evening of prep.
+              </p>
+              <p>
+                You point Alpha at your music. It reads tempo, key and energy straight
+                out of the audio, on your own machine. You pick the energy arc the night
+                should follow, and Alpha orders the set so neighboring tracks actually
+                mix. Then it writes the playlist onto your drive and builds the Engine OS
+                database your player expects — copying only what isn't on the stick yet.
+              </p>
+              <p>
+                What it isn't: a library manager. Alpha doesn't want to own your
+                collection or replace the tool you catalog in. It covers the stretch
+                between “I've got these tracks” and “the stick is ready for tonight”.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Which DJ hardware does Alpha work with?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                We built and tested Alpha specifically for the
+                <strong>Denon DJ Prime Go</strong>. That's the machine every release is
+                checked against.
+              </p>
+              <p>
+                Other hardware running <strong>Engine DJ / Engine OS</strong> reads the
+                exact same drive format, so a stick Alpha writes works there too — among
+                them the Prime 2, Prime 4, SC5000 and SC5000M, SC6000 and SC6000M, and
+                Numark's Engine OS gear such as the Mixstream Pro.
+              </p>
+              <p>
+                Pioneer hardware is not supported: rekordbox keeps its library in an
+                encrypted database that we deliberately leave alone.
+              </p>
+              <p>
+                Your first 10 tracks are free, so the cheapest way to find out is to
+                plug in your drive and try it.
+              </p>
+              <p>
+                We keep adding hardware and software compatibility —
+                <a href="compatibility.html" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">check your device</a>.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              What do I get in the free download?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                The whole app — not a stripped-down demo. Analyse your music, build a
+                sequenced set, write it to your Engine drive, plug it into your gear.
+                The complete flow, end to end.
+              </p>
+              <p>
+                It's free for your first 10 tracks. That's one real set, on your own
+                music, on your own hardware — enough to know whether Alpha is worth
+                anything to you before you spend a cent. No card, no trial countdown.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              What does Alpha cost?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Start free: your first 10 tracks are analyzed and exported at no cost,
+                so you can run the full thing once before deciding anything.
+              </p>
+              <p>
+                Happy with it? Alpha is <strong>€30 incl. VAT, once</strong>. No
+                subscription, no yearly renewal — you buy it and keep it, and updates
+                are included.
+              </p>
+              <p>
+                One licence covers one person on two devices — your studio machine and
+                the laptop you take to gigs. Full details on the
+                <a href="pricing.html" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">pricing page</a>.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              I've lost playlists after an Engine update before. Is my library safe?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Alpha takes a backup of the Engine database before every single write,
+                keeps the last ten of them on the drive, and lets you roll back to any
+                of them from inside the app.
+              </p>
+              <p>
+                So the state your stick was in five minutes ago is always one click
+                away — you don't have to remember to back up before you touch anything.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              I already have those tracks on the stick. Will Alpha copy them again?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No. Alpha checks what's already on the drive and re-links those files
+                into the playlist instead of writing a second copy. Only genuinely new
+                tracks get copied across.
+              </p>
+              <p>
+                That holds either way you work: start a brand-new playlist, or point
+                Alpha at one that's already on the stick and append to it. When you
+                extend, tracks that are already in that playlist are skipped and the
+                new ones land at the end — the rest of your drive stays untouched.
+              </p>
+              <p>
+                So the same track can sit in three playlists without eating three times
+                the space — and without you hunting down duplicates afterwards.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              My collection is huge and Engine crawls. Will Alpha be just as slow?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Alpha isn't a library manager, so it never asks you to load your whole
+                collection into it. You point it at the folder you want to play from,
+                and it builds one gig-ready USB out of that.
+              </p>
+              <p>
+                Your archive stays exactly where it is, across as many drives as you
+                like. Analysis results are cached, so a track is only ever analyzed once.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              I organize my library in Lexicon. Does Alpha get in the way?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Not at all — that's exactly the setup Alpha is built for. Plenty of DJs
+                already curate in Lexicon or something similar and only reach for Engine
+                DJ to get tracks onto the controller.
+              </p>
+              <p>
+                Alpha takes over that last step. It reads the audio files on disk, so it
+                doesn't care which tool you catalog them in, and it never wants to own
+                your library.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              What does Alpha analyze — and does it do energy levels?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Tempo, musical key in Camelot notation, and an energy value for every
+                track — all computed by Alpha itself from your audio, not read out of
+                someone else's tags.
+              </p>
+              <p>
+                Energy isn't a number you have to look at, either: it's what the arc in
+                step 02 is built from.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              What does “harmonically sequenced” actually mean?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Alpha takes the key, tempo and energy of every track and orders the set
+                so that neighboring tracks mix cleanly and the whole thing follows the
+                energy arc you picked — calm intro, build, peak, soft landing, or
+                whatever shape you draw.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Do I have to stop using Engine DJ?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No. Alpha writes a normal Engine OS drive — your hardware reads it the
+                way it reads any other stick, and Engine DJ still opens it. Alpha
+                replaces the tedious prep, not your gear or your software.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Does Alpha do stems?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No. Stem separation stays with Engine DJ and your player. Alpha's job
+                ends when your set is analyzed, sequenced and written to the drive.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Does my music leave my computer?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Your audio never does. Tempo, key and energy are analyzed locally on your
+                own machine, and no audio file is ever uploaded.
+              </p>
+              <p>
+                Arranging the set happens on our servers, so the app sends the metadata
+                of the tracks in your set — title, artist, tempo, key, energy, length —
+                and gets the running order back. Details are on the
+                <a href="privacy.html" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">privacy page</a>.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Does Alpha change my audio files?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No. Analysis only reads them — no re-encoding, no rewriting of tags,
+                no moving files around in your library.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Can Alpha download tracks from Spotify?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No — and it never will. Streaming audio is DRM-protected, and working
+                around that is off the table for us. Alpha works with the audio files
+                you already own.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Which platforms are supported?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>macOS today. Windows and Linux are planned.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       DEMO-MODAL
+       Natives <dialog>: Escape, Fokusfalle und Backdrop kommen vom Browser.
+
+       ► YOUTUBE EINBAUEN: den Platzhalter-<div data-demo-placeholder> ersetzen durch
+         <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+                 title="Alpha-DJ-Engine demo" frameborder="0" allowfullscreen
+                 allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+         Dann in js/site.js die markierte Zeile aktivieren, die beim Schliessen
+         das src zurücksetzt — sonst läuft der Ton im Hintergrund weiter.
+         Hinweis: youtube-nocookie.com statt youtube.com wegen DSGVO.
+       ====================================================================== -->
+  <dialog id="demo-modal" class="demo-modal" aria-labelledby="demo-modal-title">
+    <div class="demo-modal__head">
+      <h2 id="demo-modal-title" class="demo-modal__title">Alpha in 90 seconds</h2>
+      <button type="button" class="demo-modal__close" data-demo-close aria-label="Close demo">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="demo-modal__frame">
+      <div data-demo-placeholder class="demo-modal__placeholder">
+        <i data-lucide="clapperboard" class="w-10 h-10"></i>
+        <p class="font-semibold m-0">Demo video coming soon</p>
+        <p class="text-sm m-0 text-[var(--ink-55)]">
+          In the meantime, the four steps below walk through the whole flow.
+        </p>
+        <a href="#how-it-works" class="btn btn-primary" data-demo-close>See how it works</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="py-12 px-6">
+    <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <a href="#" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="text-sm font-semibold text-[var(--ink-55)]">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold" aria-label="Footer">
+        <a href="compatibility.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Works with your setup?</a>
+        <a href="pricing.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Pricing</a>
+        <a href="terms.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Terms</a>
+        <a href="withdrawal.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Withdrawal</a>
+        <a href="privacy.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Privacy</a>
+        <a href="#" data-cookie-settings class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Cookie settings</a>
+        <a href="imprint.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Imprint</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

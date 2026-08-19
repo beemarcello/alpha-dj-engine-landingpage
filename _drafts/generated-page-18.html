@@ -1,0 +1,710 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Music Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+      :root {
+        --ink: #000000;
+        --paper: #d5d5d4;
+        --paper-2: #f5f5f5;
+        --white: #ffffff;
+        --ink-55: rgba(0,0,0,.56);
+        --ink-40: rgba(0,0,0,.40);
+        --green: #cff7d7; --green-hot: #5dff7e;
+        --purple: #e6cef9; --purple-hot: #c987fd;
+        --red: #ff5159; --red-hot: #e2010b;
+        --beige: #ecdfd8; --beige-hot: #f5aa82;
+        --caution: #f5aa82;
+        --stroke: 2px solid var(--ink);
+        --r-lg: 20px;
+        --r-md: 16px;
+        --r-sm: 12px;
+        --r-pill: 999px;
+        --ease-out: cubic-bezier(.23,1,.32,1);
+      }
+      body { background: var(--paper); color: var(--ink); font-family: 'Space Grotesk', sans-serif; }
+      .font-doto { font-family: 'Doto', monospace; }
+      .btn {
+        font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600;
+        display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+        min-height: 44px; padding: 0 22px;
+        background: var(--white); color: var(--ink);
+        border: var(--stroke); border-radius: var(--r-pill);
+        cursor: pointer; transition: background 120ms var(--ease-out), transform 120ms var(--ease-out);
+      }
+      .btn:active { transform: scale(.96); }
+      .btn-primary:hover { background: var(--green-hot); }
+      .btn-compose:hover { background: var(--purple-hot); }
+      .btn-export:hover { background: var(--beige-hot); }
+      .card {
+        background: var(--white); color: var(--ink);
+        border: var(--stroke); border-radius: var(--r-md);
+        padding: clamp(20px, 3vw, 32px);
+      }
+      .panel {
+        border: var(--stroke); border-radius: var(--r-lg);
+      }
+      .input {
+        font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 500;
+        background: var(--white); color: var(--ink);
+        border: var(--stroke); border-radius: var(--r-sm); padding: 11px 14px; outline: none;
+      }
+      .input:focus { outline: 3px solid rgba(0,0,0,.16); outline-offset: 1px; }
+      .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-55); }
+    </style>
+  <link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style></head>
+  <body class="antialiased selection:bg-yellow-200 selection:text-black">
+    <!-- Navigation -->
+    <nav class="fixed z-50 transition-all duration-300 w-full top-0" id="navbar">
+      <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+        <a href="#" class="flex items-center gap-2 font-['Space_Grotesk'] font-bold text-lg">
+          <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+            <span class="text-white text-xs font-bold font-doto">AMC</span>
+          </div>
+          Alpha Music Converter
+        </a>
+        <div class="cta-container">
+          <div class="cta-mac">
+  <button class="btn btn-primary text-sm px-4 min-h-[36px]">Download for free</button>
+</div>
+          <div class="cta-other hidden">
+            <button class="btn btn-primary text-sm px-4 min-h-[36px]">
+              Get the link
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="bg-white w-full relative">
+  <div class="flex flex-col lg:flex-row min-h-screen">
+    <div class="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-[100vh] order-1 bg-gray-50">
+  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3ea24fbc-a5a7-4cf0-bac3-1aee28956a33_1600w.webp" alt="Denon DJ Prime Go Controller" class="absolute inset-0 w-full h-full object-cover object-center">
+</div>
+    <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 xl:px-24 pt-32 pb-16 order-2">
+      <div class="max-w-xl mx-auto lg:mx-0">
+        <p class="eyebrow mb-4">For Denon Engine DJs</p>
+        <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1]" style="font-family: 'Space Grotesk', sans-serif">Gig-ready USB <br> in seconds.</h1>
+        <p class="text-lg text-[var(--ink-55)] mb-8 max-w-lg font-medium leading-relaxed">Alpha analyzes your music, builds a harmonically sequenced DJ set and writes it straight to your USB.</p>
+        <div class="cta-container mb-6">
+          <div class="cta-mac">
+  <div class="flex flex-col sm:flex-row gap-3 gap-x-3 gap-y-3">
+    <button class="btn btn-primary text-xl px-10 h-16 shadow-[4px_4px_0_0_#000] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000]">watch demo</button>
+  </div>
+  
+</div>
+          <div class="cta-other hidden">
+            <form class="flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault(); this.querySelector('button').innerText='Nice — we\'ll send the link!';">
+              <input type="email" placeholder="Email address" class="input flex-1 sm:max-w-[280px]" required="">
+              <button type="submit" class="btn btn-primary">
+                Email me the download link
+              </button>
+            </form>
+            <p class="mt-3 text-xs text-[var(--ink-55)] font-medium">
+              macOS today. Windows &amp; Linux coming — leave your email and
+              we'll ping you.
+            </p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- FEATURES GRID -->
+    <section class="border-y-[2px] border-white/20 border-dashed w-full flex flex-col lg:flex-row">
+  
+  <!-- LEFT SIDE: Problems -->
+  <div class="w-full lg:w-1/2 bg-black text-white py-16 lg:py-24 px-6 lg:px-12 xl:px-20 flex justify-center lg:justify-end">
+    <div class="w-full max-w-[500px] lg:mr-12 xl:mr-24">
+      <h2 class="text-3xl font-medium text-white tracking-tight font-extralight mb-10" style="font-family: 'Space Grotesk', sans-serif">Before Alpha I had much pain</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-8 w-full sm:w-max sm:max-w-none">
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">Rekordbox sucks</span>
+        </div>
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">Rekordbox to DENON sucks</span>
+        </div>
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">My USB was a mess</span>
+        </div>
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">Engine DJ sucks</span>
+        </div>
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">Duplicate Tracks on USB</span>
+        </div>
+        
+        <div class="flex gap-4 gap-x-4 gap-y-4 items-center justify-start">
+          <div class="w-8 h-8 rounded-full border-[2px] border-white/20 bg-[#E2010B] flex items-center justify-center flex-shrink-0">
+            <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+          </div>
+          <span class="font-thin text-lg text-left whitespace-nowrap">No harmonic sets</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE: Solution Block -->
+  <div class="w-full lg:w-1/2 bg-[#E6BAFD] text-black py-16 lg:py-24 px-6 lg:px-12 xl:px-20 flex justify-center lg:justify-start border-t-[2px] lg:border-t-0 lg:border-l-[2px] border-black">
+    <div class="w-full max-w-[500px] translate-x-4 sm:translate-x-8 lg:translate-x-12">
+      <h2 class="text-3xl font-medium text-black tracking-tight font-extralight mb-10" style="font-family: 'Space Grotesk', sans-serif">With Alpha I feel chill</h2>
+      <div class="flex flex-col gap-8">
+        
+        <div class="flex items-center gap-4 justify-start">
+          <div class="w-10 h-10 rounded-full border-[2px] border-black bg-[#5DFF7E] text-black flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-5 h-5 stroke-[2.5]"><path d="M20 6 9 17l-5-5"></path></svg>
+          </div>
+          <span class="font-thin text-lg sm:text-xl leading-snug">One-click music analysis</span>
+        </div>
+        
+        <div class="flex gap-4 gap-x-4 gap-y-4 items-center justify-start">
+          <div class="w-10 h-10 rounded-full border-[2px] border-black bg-[#5DFF7E] text-black flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-5 h-5 stroke-[2.5]"><path d="M20 6 9 17l-5-5"></path></svg>
+          </div>
+          <span class="font-thin text-lg sm:text-xl leading-snug">Harmonic track order suggestion</span>
+        </div>
+        
+        <div class="flex gap-4 gap-x-4 gap-y-4 items-center justify-start">
+          <div class="w-10 h-10 rounded-full border-[2px] border-black bg-[#5DFF7E] text-black flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-5 h-5 stroke-[2.5]"><path d="M20 6 9 17l-5-5"></path></svg>
+          </div>
+          <span class="font-thin text-lg sm:text-xl leading-snug">Smart export features</span>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</section>
+
+    <!-- AI SECTION -->
+    <section class="border-b-[2px] group bg-slate-50 border-black pt-24 pr-6 pb-24 pl-6" id="how-it-works">
+      <div class="grid md:grid-cols-2 max-w-[1080px] mr-auto ml-auto gap-x-12 gap-y-12 items-center">
+        <div class="">
+          <span class="leading-none block md:text-8xl text-5xl font-medium tracking-tight font-doto mb-6">
+  <style class="">
+    .type-line-1 {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      border-right: 0.12em solid transparent;
+      animation: type1 3s infinite;
+    }
+    .type-line-2 {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      border-right: 0.12em solid transparent;
+      animation: type2 3s infinite;
+    }
+    @keyframes type1 {
+      0% { width: 0; border-right-color: currentColor; animation-timing-function: steps(12, end); }
+      33.33% { width: 11.5ch; border-right-color: currentColor; animation-timing-function: step-end; }
+      33.34% { width: 11.5ch; border-right-color: transparent; animation-timing-function: step-end; }
+      100% { width: 11.5ch; border-right-color: transparent; }
+    }
+    @keyframes type2 {
+      0% { width: 0; border-right-color: transparent; animation-timing-function: step-end; }
+      33.33% { width: 0; border-right-color: currentColor; animation-timing-function: steps(9, end); }
+      60% { width: 8.5ch; border-right-color: currentColor; animation-timing-function: step-end; }
+      68% { width: 8.5ch; border-right-color: transparent; animation-timing-function: step-end; }
+      76% { width: 8.5ch; border-right-color: currentColor; animation-timing-function: step-end; }
+      84% { width: 8.5ch; border-right-color: transparent; animation-timing-function: step-end; }
+      92% { width: 8.5ch; border-right-color: currentColor; animation-timing-function: step-end; }
+      100% { width: 8.5ch; border-right-color: transparent; }
+    }
+  </style>
+  <span class="type-line-1">This is how</span><br>
+  <span class="type-line-2">it works</span>
+</span>
+          
+          
+        </div>
+        
+      </div>
+    </section><section class="bg-[#CFF7D7] border-b-[2px] group border-black pt-24 pr-6 pb-24 pl-6" id="how-it-works">
+      <div class="grid md:grid-cols-2 max-w-[1080px] mr-auto ml-auto gap-x-12 gap-y-12 items-center">
+        <div class="">
+          <span class="leading-none block text-6xl font-semibold tracking-tight font-doto mb-6">01 Analyze</span>
+          
+          <p class="text-[var(--ink-55)] leading-relaxed text-xl font-normal text-slate-950">Point Alpha at your music folder. It reads BPM, key and energy locally — nothing leaves your machine.</p>
+        </div>
+        <div class="bg-white panel p-6 h-64 flex flex-col justify-between transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform shadow-[4px_4px_0_0_#000]">
+  <style>
+    @keyframes load-bar {
+      0% { width: 5%; }
+      25% { width: 100%; }
+      100% { width: 100%; }
+    }
+    @keyframes text1 {
+      0% { opacity: 0; transform: translateY(5px); }
+      4% { opacity: 1; transform: translateY(0); }
+      21% { opacity: 1; transform: translateY(0); }
+      25% { opacity: 0; transform: translateY(-5px); }
+      100% { opacity: 0; }
+    }
+    @keyframes text2 {
+      0%, 21% { opacity: 0; transform: translateY(5px); }
+      25% { opacity: 1; transform: translateY(0); }
+      46% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0; transform: translateY(-5px); }
+      100% { opacity: 0; }
+    }
+    @keyframes text3 {
+      0%, 46% { opacity: 0; transform: translateY(5px); }
+      50% { opacity: 1; transform: translateY(0); }
+      71% { opacity: 1; transform: translateY(0); }
+      75% { opacity: 0; transform: translateY(-5px); }
+      100% { opacity: 0; }
+    }
+    @keyframes text4 {
+      0%, 71% { opacity: 0; transform: translateY(5px); }
+      75% { opacity: 1; transform: translateY(0); }
+      96% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-5px); }
+    }
+    @keyframes dots {
+      0%, 33% { content: "."; }
+      34%, 66% { content: ".."; }
+      67%, 100% { content: "..."; }
+    }
+    .loading-dots::after {
+      content: ".";
+      animation: dots 1.5s infinite;
+      display: inline-block;
+      width: 12px;
+      text-align: left;
+    }
+    @keyframes transfer-file-1 {
+      0% { left: 15%; opacity: 0; transform: scale(0.5) translateY(0); }
+      15% { opacity: 1; transform: scale(1) translateY(-16px); }
+      85% { opacity: 1; transform: scale(1) translateY(16px); }
+      100% { left: 75%; opacity: 0; transform: scale(0.5) translateY(0); }
+    }
+    @keyframes transfer-file-2 {
+      0% { left: 15%; opacity: 0; transform: scale(0.5) translateY(0); }
+      15% { opacity: 1; transform: scale(1) translateY(16px); }
+      85% { opacity: 1; transform: scale(1) translateY(-16px); }
+      100% { left: 75%; opacity: 0; transform: scale(0.5) translateY(0); }
+    }
+  </style>
+
+  <div class="flex justify-between items-center mb-2 border-b-[2px] border-black pb-2">
+    <div class="font-normal text-lg tracking-tight">Create new Playlist / add tracks to existing Playlist</div>
+    <i data-lucide="folder-search" class="w-6 h-6"></i>
+  </div>
+
+  <div class="flex-1 w-full relative flex items-center justify-between my-2 overflow-visible">
+    <div class="absolute left-8 right-8 h-[2px] border-t-2 border-dashed border-gray-200 top-1/2 -translate-y-1/2"></div>
+    
+    <div class="z-10 bg-white p-2 border-2 border-black rounded-lg shadow-[2px_2px_0_0_#000]">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-5 h-5"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg>
+    </div>
+
+    <div class="absolute inset-0 pointer-events-none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-audio w-5 h-5 absolute text-black" style="animation: transfer-file-1 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1); top: calc(50% - 10px);"><path d="M17.5 22h.5a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h.5"></path><path d="M14 2v6h6"></path><path d="M8 18v-7.7L16 9v2.4"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-music w-5 h-5 absolute text-black" style="animation: transfer-file-2 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1) 0.8s; top: calc(50% - 10px);"><path d="M10.5 22H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v8.4"></path><path d="M8 18v-7.7L16 9v2.4"></path><circle cx="6" cy="18" r="2"></circle><circle cx="14" cy="11" r="2"></circle><path d="M14 2v4a2 2 0 0 0 2 2h4"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file w-5 h-5 absolute text-black" style="animation: transfer-file-1 2.5s infinite cubic-bezier(0.4, 0, 0.2, 1) 1.6s; top: calc(50% - 10px);"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path></svg>
+    </div>
+
+    <div class="z-10 bg-[var(--green-hot)] p-2 border-2 border-black rounded-lg shadow-[2px_2px_0_0_#000]">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-usb w-5 h-5"><circle cx="10" cy="7" r="1"></circle><circle cx="4" cy="20" r="1"></circle><path d="M4.7 19.3 19 5"></path><path d="m21 3-3 1 2 2Z"></path><path d="M9.26 7.68 5 12l2 5"></path><path d="m10 14 5 2 3.5-3.5"></path><path d="m18 12 1-1 1 1-1 1Z"></path></svg>
+    </div>
+  </div>
+
+  <div class="space-y-4 mt-2">
+    <div class="h-4 bg-[var(--green-hot)] border-[2px] border-black rounded-full" style="animation: load-bar 12s infinite ease-in-out;"></div>
+    <div class="relative h-5 text-sm font-normal text-right text-[var(--ink-55)]">
+      <div class="absolute right-0 top-0 w-full opacity-0" style="animation: text1 12s infinite;">
+        Analyzing 124 tracks<span class="loading-dots"></span>
+      </div>
+      <div class="absolute right-0 top-0 w-full opacity-0" style="animation: text2 12s infinite;">
+        124 tracks analyzed
+      </div>
+      <div class="absolute right-0 top-0 w-full opacity-0" style="animation: text3 12s infinite;">
+        35 duplicate tracks found
+      </div>
+      <div class="absolute right-0 top-0 w-full opacity-0" style="animation: text4 12s infinite;">
+        tracks linked to new playlist
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+    <section class="bg-[#E6CEF9] border-b-[2px] group border-black pt-24 pr-6 pb-24 pl-6">
+      <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1 bg-[#ecd7ff] p-6 min-h-[22rem] flex flex-col transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform shadow-[4px_4px_0_0_#000] rounded-2xl border-[2px] border-black">
+  <div class="mb-4">
+    <h3 class="font-semibold text-lg text-black mb-1 tracking-tight">Energy arc</h3>
+    <span class="text-xs font-semibold text-gray-600 uppercase tracking-widest">Drag the points</span>
+  </div>
+
+  <div class="flex-1 w-full bg-white border-[2px] border-black rounded-lg relative overflow-hidden flex flex-col min-h-[180px]">
+    <!-- Grid Pattern -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]"></div>
+    
+    <div class="absolute inset-x-2 bottom-0 top-6">
+      <div class="absolute inset-0 flex items-end justify-between gap-[2px] z-10 chart-bars-aura"></div>
+      <svg class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path class="chart-path-aura transition-all duration-700 ease-in-out" fill="none" stroke="#cfa5ff" stroke-width="2.5" vector-effect="non-scaling-stroke"></path>
+      </svg>
+      <div class="absolute inset-0 pointer-events-none z-30 chart-dots-aura"></div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-3 mt-6 chart-buttons-aura"></div>
+
+  <script class="">
+    (() => {
+      const container = document.querySelector('[data-element-id="aura-emsysicsm8szue1se"]');
+      if (!container) return;
+      
+      const barsContainer = container.querySelector('.chart-bars-aura');
+      const svgPath = container.querySelector('.chart-path-aura');
+      const dotsContainer = container.querySelector('.chart-dots-aura');
+      const buttonsContainer = container.querySelector('.chart-buttons-aura');
+
+      const tabs = ['Journey', 'Wave', 'Build', 'Peak-time', 'Cooldown'];
+      let activeTab = 'Journey';
+      const numBars = 50; 
+
+      const shapes = {
+        'Journey': [20, 25, 40, 50, 60, 75, 80, 70, 50, 45],
+        'Wave': [40, 70, 40, 70, 40, 70, 40, 70, 40, 70],
+        'Build': [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        'Peak-time': [60, 80, 100, 90, 100, 80, 95, 100, 90, 80],
+        'Cooldown': [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+      };
+
+      function interpolate(heights, steps) {
+          let result = [];
+          for(let i=0; i<steps; i++) {
+              let t = i / (steps-1);
+              let index = t * (heights.length - 1);
+              let lower = Math.floor(index);
+              let upper = Math.ceil(index);
+              if (lower === upper) {
+                  result.push(heights[lower]);
+              } else {
+                  let weight = index - lower;
+                  let smoothWeight = (1 - Math.cos(weight * Math.PI)) / 2;
+                  let h = heights[lower] * (1-smoothWeight) + heights[upper] * smoothWeight;
+                  result.push(h);
+              }
+          }
+          return result;
+      }
+
+      function render() {
+          const heights = interpolate(shapes[activeTab], numBars);
+          
+          if (barsContainer.children.length === 0) {
+              heights.forEach(h => {
+                  const bar = document.createElement('div');
+                  bar.className = 'flex-1 bg-black rounded-t-[1px] transition-all duration-700 ease-in-out';
+                  bar.style.height = `${h}%`;
+                  barsContainer.appendChild(bar);
+              });
+          } else {
+              Array.from(barsContainer.children).forEach((bar, i) => {
+                  bar.style.height = `${heights[i]}%`;
+              });
+          }
+
+          let d = '';
+          heights.forEach((h, i) => {
+              let x = (i / (numBars - 1)) * 100;
+              let y = 100 - h;
+              if (i === 0) d += `M ${x} ${y} `;
+              else d += `L ${x} ${y} `;
+          });
+          svgPath.setAttribute('d', d);
+
+          const numDots = shapes[activeTab].length;
+          if (dotsContainer.children.length === 0) {
+              shapes[activeTab].forEach((h, i) => {
+                  let x = (i / (numDots - 1)) * 100;
+                  let y = 100 - h;
+                  const dot = document.createElement('div');
+                  dot.className = 'absolute w-3.5 h-3.5 bg-white border-[2px] border-black rounded-full transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out z-10';
+                  dot.style.left = `${x}%`;
+                  dot.style.top = `${y}%`;
+                  dotsContainer.appendChild(dot);
+              });
+          } else {
+              Array.from(dotsContainer.children).forEach((dot, i) => {
+                  let y = 100 - shapes[activeTab][i];
+                  dot.style.top = `${y}%`;
+              });
+          }
+      }
+
+      function renderBtns() {
+          buttonsContainer.innerHTML = '';
+          tabs.forEach(tab => {
+              const btn = document.createElement('button');
+              const isActive = tab === activeTab;
+              btn.className = `px-4 py-1.5 rounded-full border-[2px] border-black font-semibold text-sm transition-all shadow-[2px_2px_0_0_#000] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0_0_#000] active:translate-y-[2px] active:translate-x-[2px] active:shadow-none ${isActive ? 'bg-[#cfa5ff]' : 'bg-white'}`;
+              btn.textContent = tab;
+              btn.onclick = () => {
+                  activeTab = tab;
+                  renderBtns();
+                  render();
+                  startAutoPlay();
+              };
+              buttonsContainer.appendChild(btn);
+          });
+      }
+
+      let autoPlayInterval;
+      function startAutoPlay() {
+          clearInterval(autoPlayInterval);
+          autoPlayInterval = setInterval(() => {
+              let currentIndex = tabs.indexOf(activeTab);
+              currentIndex = (currentIndex + 1) % tabs.length;
+              activeTab = tabs[currentIndex];
+              renderBtns();
+              render();
+          }, 2500);
+      }
+
+      setTimeout(() => {
+          renderBtns();
+          render();
+          startAutoPlay();
+      }, 50);
+    })();
+  </script>
+</div>
+        <div class="order-1 md:order-2">
+          <span class="leading-none block text-6xl font-semibold tracking-tight font-doto mb-6">02 Compose</span>
+          
+          <p class="text-[var(--ink-55)] leading-relaxed text-xl font-normal text-slate-950">Pick an energy arc or draw your own. Alpha reorders your tracks harmonically to match the energy of your future gig.</p>
+        </div>
+      </div>
+    </section><section class="border-b-[2px] group border-black pt-24 pr-6 pb-24 pl-6 bg-[#FF5159]">
+  <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="order-1">
+      <span class="leading-none block text-6xl font-semibold text-slate-950 tracking-tight font-doto mb-6">03 Refine</span>
+      
+      <p class="text-[var(--ink-55)] leading-relaxed text-xl font-normal text-slate-950">Pre-listen, Swap tracks and fine-tune your next gig. Alpha ensures your harmonic transitions stay perfectly locked while you experiment.</p>
+    </div>
+    <div class="order-2 bg-white panel p-6 h-64 flex flex-col justify-between transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform shadow-[4px_4px_0_0_#000]">
+  <style>
+    @keyframes dragSwap {
+      0%, 15% { transform: translate(0, 0); box-shadow: 0 0 0 0 #000; }
+      20% { transform: translate(-4px, -4px); box-shadow: 4px 4px 0 0 #000; }
+      35% { transform: translate(-4px, -60px); box-shadow: 4px 4px 0 0 #000; }
+      45%, 55% { transform: translate(0, -56px); box-shadow: 0 0 0 0 #000; }
+      65% { transform: translate(-4px, -60px); box-shadow: 4px 4px 0 0 #000; }
+      80% { transform: translate(-4px, -4px); box-shadow: 4px 4px 0 0 #000; }
+      85%, 100% { transform: translate(0, 0); box-shadow: 0 0 0 0 #000; }
+    }
+    @keyframes displaceDown {
+      0%, 20% { transform: translateY(0); }
+      35%, 65% { transform: translateY(56px); }
+      80%, 100% { transform: translateY(0); }
+    }
+    .drag-item {
+      animation: dragSwap 6s infinite ease-in-out;
+      z-index: 10;
+    }
+    .displace-item {
+      animation: displaceDown 6s infinite ease-in-out;
+      z-index: 1;
+    }
+  </style>
+  <div class="flex justify-between items-center mb-4 border-b-[2px] border-black pb-4">
+    <div class="font-normal text-lg tracking-tight">Setlist Editor</div>
+    <i data-lucide="sliders-horizontal" class="w-6 h-6"></i>
+  </div>
+  <div class="space-y-3 flex-1 flex flex-col justify-center relative">
+    <div class="relative displace-item flex items-center justify-between p-2 border-[2px] border-black rounded-sm bg-[var(--paper)]">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical w-4 h-4 text-black/30 cursor-grab shrink-0"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+        <div class="w-6 h-6 bg-black border-[2px] border-black rounded-full flex items-center justify-center shrink-0">
+          <i data-lucide="play" class="w-3 h-3 text-white fill-white ml-0.5"></i>
+        </div>
+        <div class="text-sm font-light truncate max-w-[120px]">Inner City Life</div>
+      </div>
+      <div class="flex gap-2">
+        <span class="text-xs font-doto font-light bg-white border-[2px] border-black px-1.5 py-0.5 rounded-sm">160</span>
+        <span class="text-xs font-doto font-light bg-[var(--green)] border-[2px] border-black px-1.5 py-0.5 rounded-sm">8A</span>
+      </div>
+    </div>
+    <div class="relative drag-item flex items-center justify-between p-2 border-[2px] border-black rounded-sm bg-[var(--beige-hot)] cursor-grab">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical w-4 h-4 text-black/30 shrink-0"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+        <div class="w-6 h-6 bg-white border-[2px] border-black rounded-full flex items-center justify-center shrink-0">
+          <i data-lucide="refresh-cw" class="w-3 h-3 text-black"></i>
+        </div>
+        <div class="text-sm font-light truncate max-w-[120px]">Finding match...</div>
+      </div>
+      <div class="flex gap-2">
+        <span class="text-xs font-doto font-light bg-white border-[2px] border-black px-1.5 py-0.5 rounded-sm">162</span>
+        <span class="text-xs font-doto font-light bg-white border-[2px] border-black border-dashed px-1.5 py-0.5 rounded-sm">8A</span>
+      </div>
+    </div>
+    <div class="relative flex items-center justify-between p-2 border-[2px] border-black rounded-sm bg-[var(--paper)] opacity-70">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical w-4 h-4 text-black/20 cursor-not-allowed shrink-0"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+        <div class="w-6 h-6 bg-white border-[2px] border-black rounded-full flex items-center justify-center shrink-0">
+          <i data-lucide="lock" class="w-3 h-3 text-black"></i>
+        </div>
+        <div class="text-sm font-light truncate max-w-[120px]">Timeless</div>
+      </div>
+      <div class="flex gap-2">
+        <span class="text-xs font-doto font-light bg-white border-[2px] border-black px-1.5 py-0.5 rounded-sm">162</span>
+        <span class="text-xs font-doto font-light bg-[var(--green)] border-[2px] border-black px-1.5 py-0.5 rounded-sm">9A</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section><section class="border-b-[2px] group bg-[#ECDFD8] border-black pt-24 pr-6 pb-24 pl-6">
+  <div class="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <div class="order-2 md:order-1 bg-white panel p-6 h-64 flex flex-col justify-between transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform shadow-[4px_4px_0_0_#000]">
+      <div class="flex justify-between items-center mb-4 border-b-[2px] border-black pb-4">
+        <div class="font-medium text-lg tracking-tight">USB Export</div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-hard-drive w-6 h-6"><line x1="22" x2="2" y1="12" y2="12"></line><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" x2="6.01" y1="16" y2="16"></line><line x1="10" x2="10.01" y1="16" y2="16"></line></svg>
+      </div>
+      <div class="flex-1 flex flex-col justify-center space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-usb w-4 h-4"><circle cx="10" cy="7" r="1"></circle><circle cx="10" cy="17" r="1"></circle><polyline points="10 7 10 17 14 17 14 12 10 12"></polyline><path d="M14 7h-4"></path><path d="M14 17v-5"></path><path d="M10 12H6v-2"></path><circle cx="6" cy="10" r="1"></circle></svg>
+            <span class="font-doto text-sm font-medium tracking-tight">DENON_DJ (D:)</span>
+          </div>
+          <span class="text-xs font-doto font-normal bg-[var(--green)] border-[2px] border-black px-1.5 py-0.5 rounded-sm">100%</span>
+        </div>
+        <div class="w-full h-8 bg-[var(--paper)] border-[2px] border-black rounded-sm overflow-hidden relative shadow-[2px_2px_0_0_#000]">
+          <div class="absolute top-0 left-0 h-full bg-[#5DFF7E] w-full border-r-[2px] border-black flex items-center justify-end px-2"></div>
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-check-circle-2 w-4 h-4 text-black"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span class="text-sm font-medium text-[var(--ink-55)]">Engine OS database built successfully</span>
+        </div>
+      </div>
+    </div>
+    <div class="order-1 md:order-2">
+      <span class="leading-none block text-6xl font-semibold tracking-tight font-doto mb-6 text-slate-950">04 Export</span>
+      <p class="text-[var(--ink-55)] leading-relaxed text-xl font-normal text-slate-950">
+        Write directly to your USB drive. Alpha formats the metadata and builds the Engine OS database so your set is gig-ready the moment you plug it into your Denon hardware.
+      </p>
+    </div>
+  </div>
+</section>
+    
+
+    <!-- PORTFOLIO / VISUAL SECTION -->
+    <section class="border-b-[2px] text-center bg-slate-950 border-black pt-32 pr-6 pb-32 pl-6">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl font-bold text-[#5DFF7E] tracking-tight font-space-grotesk mb-12 md:text-8xl">Ready to try? </h2>
+
+        <div class="cta-container flex justify-center">
+          <div class="cta-mac text-center">
+            <button class="btn btn-primary text-xl px-10 h-16 shadow-[4px_4px_0_0_#000] hover:translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_#000]">Download now</button>
+            <p class="text-[var(--ink-55)] text-sm font-semibold text-slate-50 mt-6">Free Download for macOS — (limited to 10 tracks.)</p>
+          </div>
+          <div class="cta-other hidden text-center max-w-lg mx-auto w-full">
+            <form class="flex flex-col sm:flex-row gap-3 w-full" onsubmit="event.preventDefault(); this.querySelector('button').innerText='Nice — we\'ll send the link!';">
+              <input type="email" placeholder="Email address" class="input flex-1 h-16 text-lg shadow-[4px_4px_0_0_#000]" required="">
+              <button type="submit" class="btn btn-primary h-16 px-8 whitespace-nowrap shadow-[4px_4px_0_0_#000]">
+                Email me the link
+              </button>
+            </form>
+            <p class="mt-6 text-sm text-[var(--ink-55)] font-semibold">
+              macOS today. Windows &amp; Linux coming — leave your email and
+              we'll ping you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRATIONS / BANKS -->
+
+    <!-- HOW IT WORKS STEPS -->
+    
+
+    <!-- COMPARISON TABLE -->
+
+    <!-- MOBILE PROMO -->
+    
+
+    <!-- FINAL CTA -->
+
+    <!-- Footer -->
+    <footer class="pt-12 pr-6 pb-12 pl-6">
+      <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-2 font-['Space_Grotesk'] font-bold">
+          <div class="w-8 h-8 bg-black rounded-md flex items-center justify-center">
+            <span class="text-white text-[10px] font-bold font-doto">AMC</span>
+          </div>
+          Alpha Music Converter
+        </div>
+        <div class="text-sm font-semibold text-[var(--ink-55)]">
+          Engineered in Berlin by Alphabees
+        </div>
+        <div class="flex gap-8 text-sm font-bold text-[var(--ink)]">
+          <a href="#" class="hover:underline underline-offset-4 decoration-2">
+            Download
+          </a>
+          <a href="#" class="hover:underline underline-offset-4 decoration-2">Pricing</a>
+          <a href="#" class="hover:underline underline-offset-4 decoration-2">
+            Privacy
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0 && !('ontouchstart' in window);
+        document.querySelectorAll('.cta-mac').forEach(el => el.classList.toggle('hidden', !isMac));
+        document.querySelectorAll('.cta-other').forEach(el => el.classList.toggle('hidden', isMac));
+      });
+      document.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if(nav) {
+          if (window.scrollY > 10) nav.classList.add('shadow-[0_8px_24px_rgba(0,0,0,0.1)]', 'border-b-[2px]', 'border-black');
+          else nav.classList.remove('shadow-[0_8px_24px_rgba(0,0,0,0.1)]', 'border-b-[2px]', 'border-black');
+        }
+      });
+      if (typeof lucide !== 'undefined') { lucide.createIcons(); }
+    </script>
+  
+</body></html>

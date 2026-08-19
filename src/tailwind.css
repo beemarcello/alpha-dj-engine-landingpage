@@ -1,0 +1,6 @@
+/* Eingabe fuer den Tailwind-Build. Ausgabe: css/tailwind.css
+   Wird NACH site.css geladen — genau wie zuvor die Play-CDN, die ihren
+   <style> ans Ende des <head> gehaengt hat. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Privacy — Alpha-DJ-Engine</title>
+  <meta name="description" content="How Alpha-DJ-Engine handles your data. Your audio is analyzed locally and never uploaded.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/privacy.html">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="css/site.css?v=14">
+
+  <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
+       site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
+       Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
+       Konfiguration in tailwind.config.js. -->
+  <link rel="stylesheet" href="css/tailwind.css?v=4">
+
+  <script src="js/icons.js?v=1" defer></script>
+  <script src="js/site.js?v=6" defer></script>
+</head>
+
+<body class="antialiased">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <a href="index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+    </div>
+  </nav>
+
+  <main id="main" class="subpage">
+    <div class="subpage__inner">
+
+      <h1>Privacy</h1>
+      <p class="subpage__lead">
+        How Alpha-DJ-Engine handles your data.
+      </p>
+
+      <!-- ==================================================================
+           Struktur und übertragbare Inhalte von https://alphalearn.ai/en/privacy.html
+           (Stand 2026-08-19), gleiche Firma. NICHT übernommen, weil bei AMC
+           gegenstandslos: KI-Verarbeitung (OpenAI/Groq/Fireworks/Vertex),
+           Chatverläufe, Learner Profile, Datei-Uploads nach S3, Neon-Datenbank,
+           Contabo-Embeddings, EU-AI-Act-Transparenz.
+
+           Noch offene Blöcke sind als todo-box markiert — die Fragen dazu
+           gingen am 2026-08-19 an Marcel.
+           ================================================================== -->
+      <div class="todo-box">
+        <p><strong>Entwurf — inhaltlich vollständig, drei Punkte hängen an der
+        Umsetzung.</strong> Offen sind die Logfile-Aufbewahrungsdauer, das
+        Consent-Banner für Google Analytics und das Double-Opt-in-Backend für das
+        E-Mail-Formular. Bis dahin trägt die Seite <code>noindex</code> — und GA sowie
+        das Formular dürfen nicht scharf geschaltet werden.</p>
+      </div>
+
+      <h2>Controller</h2>
+      <p>
+        Alphabees UG (haftungsbeschränkt)<br>
+        Kolonnenstraße 8, 10827 Berlin, Germany<br>
+        Phone: <a href="tel:+493020008140">0049 (0)30 20008140</a><br>
+        Email: <a href="mailto:info@alphabees.de">info@alphabees.de</a>
+      </p>
+      <p>
+        Responsible for data protection: Lasse Erdweg, reachable at the address above.
+      </p>
+
+      <h2>Your account</h2>
+      <p>
+        Using Alpha requires an account. We store your email address, a username and
+        your password. The username does not have to be your real name — pick whatever
+        you like. Passwords are never stored in plain text; we keep only a salted hash.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+      </p>
+
+      <h2>Licence and devices</h2>
+      <p>
+        We store your licence key together with an identifier for each device you
+        activate. We need this to honour the licence terms — one person, two devices —
+        and to let you move your licence to a new machine.
+      </p>
+      <p>
+        While you are on the free tier, we also count how many tracks you have analyzed,
+        up to the limit of ten. After that the counter stops mattering: the paid licence
+        is unlimited and permanent.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+      </p>
+
+      <h2>What the app sends us</h2>
+      <p>
+        Your audio files stay on your machine. Tempo, key and energy are computed
+        locally, and no audio is ever transmitted.
+      </p>
+      <p>
+        Arranging your set is done on our servers. For that, the app sends the
+        <em>metadata</em> of the tracks in your set — such as title, artist, tempo, key,
+        energy and duration — so the sequencing engine can order them. This is what
+        makes the harmonic arrangement work.
+      </p>
+      <p>
+        Writing the USB drive is local as well — the drive is plugged into your machine,
+        not ours.
+      </p>
+      <p>
+        The app contains no crash reporting and no usage analytics. It does not report
+        back what you do with it.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+      </p>
+
+      <h2>How long we keep your account</h2>
+      <p>
+        Because the licence is permanent, we keep your account data for as long as your
+        account exists. You can ask us to delete it at any time and we will, subject
+        only to invoices and accounting records, which German tax and commercial law
+        (§ 147 AO, § 257 HGB) requires us to retain for up to ten years.
+      </p>
+
+      <h2>This website</h2>
+      <p>
+        The site consists of static pages and loads nothing from anyone else — fonts,
+        stylesheets, scripts and icons all come from this domain. No request goes to
+        Google Fonts or to any content delivery network.
+      </p>
+      <p>
+        Hosting is provided by Hetzner Online GmbH, in a data centre in Germany, as our
+        processor under a data processing agreement (Art. 28 GDPR). Their servers keep
+        the usual access logs — your IP address, the time of the request, the page
+        requested, the referring page and your browser's user agent. We use these only
+        to operate the site securely and to investigate faults.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(f) GDPR — our legitimate interest in a working, secure
+        website.
+      </p>
+      <div class="todo-box">
+        <p><strong>Offen:</strong> die tatsächliche Aufbewahrungsdauer der Logfiles.
+        Sie muss mit der Server-Konfiguration übereinstimmen — üblich und gut
+        vertretbar sind sieben Tage. Bitte bei Hetzner prüfen und hier eintragen.</p>
+        <p>Die CDN-Einbindungen von Tailwind und Lucide sind seit 2026-08-19 entfernt;
+        dieser Punkt ist damit erledigt.</p>
+      </div>
+
+      <h2>Cookies and analytics</h2>
+      <p>
+        The site itself sets no cookies of its own.
+      </p>
+      <p>
+        We use Google Analytics 4, a service of Google Ireland Ltd., to understand how
+        the site is used. It sets cookies and processes usage data, including a
+        shortened form of your IP address. This happens <strong>only if you consent</strong>;
+        you can withdraw that consent at any time with effect for the future. Data may
+        be transferred to Google LLC in the USA, safeguarded by the European
+        Commission's standard contractual clauses.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(a) GDPR and § 25(1) TDDDG — your consent.
+      </p>
+      <div class="todo-box">
+        <p><strong>Offen: nur noch die GA-Mess-ID.</strong> Der Consent-Banner steht
+        (drei Stufen, Widerruf über „Cookie settings" im Footer) und setzt Google
+        Consent Mode v2 korrekt — Ausgangszustand ist alles <em>denied</em>.
+        Google Analytics selbst ist noch nicht eingebunden: In
+        <code>js/site.js → loadAnalytics()</code> ist der Block markiert, in den die
+        Mess-ID <code>G-XXXXXXX</code> gehört. Erst danach lädt GA, und zwar nur nach
+        Einwilligung.</p>
+      </div>
+
+      <h2>Email addresses you give us</h2>
+      <p>
+        If you leave an email address — for the download link, or to tell us which device
+        you use — we confirm it with you first: you will receive a message with a
+        confirmation link, and we only add your address once you have clicked it
+        (double opt-in). We record the time of your confirmation so we can demonstrate
+        that you gave it.
+      </p>
+      <p>
+        We use your address to send you what you asked for and occasional news about
+        Alpha. We do not pass it on. Every message contains an unsubscribe link, and you
+        can withdraw your consent at any time with effect for the future.
+      </p>
+      <p>
+        We keep your address until you unsubscribe. After that we retain the record of
+        your consent for up to three years, so we can show it was given if that is ever
+        questioned.
+      </p>
+      <p>
+        Emails are sent through Twilio SendGrid as our processor under a data processing
+        agreement (Art. 28 GDPR). Where processing takes place outside the EU, it is
+        safeguarded by standard contractual clauses.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(a) GDPR — your consent.
+      </p>
+      <div class="todo-box">
+        <p><strong>Umsetzung fehlt noch:</strong> Das Formular auf der Website hat noch
+        kein Backend — Double-Opt-in-Mail, Bestätigungslink und Abmeldelink müssen
+        gebaut werden, bevor dieser Abschnitt stimmt.</p>
+      </div>
+
+      <h2>Payment</h2>
+      <p>
+        Payments are processed by Stripe. You enter your payment details directly with
+        Stripe; they are not visible to us. We receive only what we need to issue your
+        licence and your invoice.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+      </p>
+
+      <h2>How we share data</h2>
+      <p>
+        We do not sell your data. We share it only with processors bound by a data
+        processing agreement under Art. 28 GDPR, with public authorities where we are
+        legally required to, and otherwise only with your explicit consent.
+      </p>
+
+      <h2>Transfers outside the EU</h2>
+      <p>
+        Where a processor operates outside the EU, the transfer is safeguarded by the
+        European Commission's standard contractual clauses under Art. 46 GDPR.
+      </p>
+
+      <h2>Data security</h2>
+      <p>
+        We use TLS encryption for data in transit, role-based access control with
+        multi-factor authentication on our own systems, separated development and
+        production environments, and regular backups.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under the GDPR you have the right to access your data (Art. 15), to have it
+        corrected (Art. 16) or deleted (Art. 17), to restrict its processing (Art. 18),
+        to receive it in a portable format (Art. 20) and to object to processing
+        (Art. 21). You can withdraw consent at any time with effect for the future.
+      </p>
+      <p>
+        To exercise any of these, write to
+        <a href="mailto:info@alphabees.de">info@alphabees.de</a>. You also have the right
+        to lodge a complaint with a supervisory authority — for us that is the Berlin
+        Commissioner for Data Protection and Freedom of Information.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        Alpha is not directed at children under 13, and we do not knowingly collect their
+        data. If you believe a child has provided us with personal data, please contact
+        us and we will delete it.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        We revise this page when our processing changes. The current version is always
+        the one published here.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        See the <a href="imprint.html">imprint</a>.
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="py-12 px-6">
+    <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <a href="index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="text-sm font-semibold text-[var(--ink-55)]">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold" aria-label="Footer">
+        <a href="compatibility.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Works with your setup?</a>
+        <a href="pricing.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Pricing</a>
+        <a href="terms.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Terms</a>
+        <a href="withdrawal.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Withdrawal</a>
+        <a href="privacy.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Privacy</a>
+        <a href="#" data-cookie-settings class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Cookie settings</a>
+        <a href="imprint.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Imprint</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
