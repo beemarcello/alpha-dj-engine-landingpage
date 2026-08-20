@@ -531,6 +531,17 @@ body {
   border-radius: var(--r-md);
   box-shadow: var(--shadow-hard);
   padding: clamp(24px, 5vw, 40px);
+
+  /* Leichte Schräglage (Marcel, 2026-08-20): rechte obere Ecke nach oben, also
+     gegen den Uhrzeigersinn — in CSS ein negativer Winkel. Der Inhalt kippt
+     automatisch mit, weil transform auf das ganze Element samt Kindern wirkt;
+     der harte Schatten dreht ebenfalls mit und bleibt an der Kante kleben.
+
+     Der Winkel ist bewusst klein. Die Überschrift steht in Doto, einer
+     Pixelschrift: je stärker gedreht, desto mehr verliert ihr Punktraster die
+     Ausrichtung auf das Bildschirmraster und franst aus. Bei 2° bleibt das im
+     Rahmen, bei 5° sieht der Titel matschig aus. */
+  transform: rotate(-2deg);
 }
 
 .why-card__title {
