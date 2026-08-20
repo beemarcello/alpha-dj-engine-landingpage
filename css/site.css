@@ -544,6 +544,15 @@ body {
   transform: rotate(-2deg);
 }
 
+/* Mobil gerade (Marcel, 2026-08-20). Unter 768px füllt die Karte die Spalte
+   komplett aus — die Drehung drückt sie dann bis auf wenige Pixel an den
+   Bildschirmrand, und die schräge Kante gegen die gerade Displaykante wirkt
+   eher wie ein Fehler als wie Absicht. Ab Tablet ist links und rechts genug
+   Luft, dass die Schräge als Gestaltung gelesen wird. */
+@media (max-width: 767px) {
+  .why-card { transform: none; }
+}
+
 .why-card__title {
   font-family: var(--font-display);
   font-weight: 600;
