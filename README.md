@@ -232,13 +232,59 @@ Details, die leicht kaputtgehen:
       Solange leer, endet das Modal ehrlich mit „the macOS build isn't public yet"
       statt einen toten Download zu starten.
 - [ ] **E-Mail-Provider** für das Lead-Capture (`js/site.js::initLeadForms()` ist
-      ein Platzhalter ohne Backend).
+      ein Platzhalter ohne Backend). Betrifft **drei** Formulare: Hero-Mobil
+      (`index.html`), Final-CTA (`index.html`) und die Gerätesuche
+      (`js/site.js::initDeviceSearch`).
 
-#### Clerk — Registrierung im Download-Modal
+      Am 2026-08-20 besprochen, **noch nicht entschieden**. Empfehlung war eine
+      Listen-Software (Kit / ConvertKit) statt AWS SES: die Seite sagt in
+      `privacy.html` Double-Opt-in, Abmeldelink und Nachweis der Einwilligung
+      mit Zeitstempel zu (§ 7 UWG, Art. 7 Abs. 1 DSGVO) — genau das gibt es dort
+      fertig und ist selbst gebaut der teuerste Teil. SES ist nur Versand, keine
+      Listenverwaltung. Falls Kit: **nicht** deren Embed-Skript einbauen, sondern
+      aus dem eigenen Formular auf deren Endpunkt posten, sonst lädt die Seite
+      wieder ein fremdes Skript.
 
-Seit 2026-08-20 registriert und verifiziert der Nutzer direkt im Modal, statt
-einen Link aus der Inbox zu holen (siehe „Download-Flow" weiter unten). Dafür
-fehlt noch:
+      In **keinem** Fall darf ein API-Key für SES / SendGrid / Resend ins
+      Frontend — auf einer statischen Seite ist alles im Quelltext lesbar.
+
+- [ ] **Mobil-CTA klären.** Der Nav-Button auf Mobil heißt „Get the link", trägt
+      aber `data-download` und öffnet damit das Registrierungs-Modal statt der
+      E-Mail-Erfassung. Das ist inzwischen halbwegs stimmig — wer sich am Handy
+      registriert, bekommt den Link ja per Mail — war aber nicht so geplant.
+      Entweder bewusst so lassen und den Text schärfen, oder auf ein
+      `data-lead-form` umstellen.
+
+#### Registrierung im Download-Modal — WARTET AUF LASSE
+
+> **Blockiert, Stand 2026-08-20.** Marcel wartet darauf, dass **Lasse** die
+> Authentifizierung aufsetzt; erst danach werden die Buttons angeschlossen.
+> **Hier bitte nicht weiterbauen** — insbesondere `DL_CFG.publishableKey` nicht
+> setzen und keinen AVV anstoßen.
+>
+> **Der Anbieter ist offen.** Das Modal ist gegen **Clerk** gebaut, Marcel
+> vermutet aber, dass Lasse **better-auth** einsetzt. Das ist kein Austausch
+> gleicher Teile:
+>
+> | | Clerk | better-auth |
+> |---|---|---|
+> | Art | gehosteter Dienst | TypeScript-Bibliothek |
+> | Braucht Backend | nein | **ja**, eigener Server |
+> | Auf GitHub Pages | läuft | läuft nicht — Seite spricht gegen Lasses Endpunkt |
+> | Datenschutz | US-Auftragsverarbeiter, AVV + SCC nötig | selbst gehostet, kein Drittanbieter |
+>
+> Wird es better-auth, **sinkt** der Frontend-Aufwand: statt des SDK nur ein
+> `fetch` auf den eigenen Endpunkt, und der ganze Drittanbieter-Teil entfällt.
+> Dann muss der **Clerk-Abschnitt in `privacy.html` („Your account") wieder
+> raus** — er beschreibt sonst eine Verarbeitung, die es nicht gibt.
+>
+> Die drei Schritte im Modal (E-Mail → Code → Download) bleiben in beiden
+> Fällen gleich, ebenso das gesamte Markup und CSS. Auszutauschen sind nur
+> `loadClerk`, `sendCode` und `verifyCode` in `js/site.js`.
+
+Zum Hintergrund: Seit 2026-08-20 registriert und verifiziert der Nutzer direkt
+im Modal, statt einen Link aus der Inbox zu holen (siehe „Download-Flow" weiter
+unten). Offen ist — sobald der Anbieter feststeht:
 
 - [ ] **Publishable Key** aus dem Clerk-Dashboard → `js/site.js` → `DL_CFG.publishableKey`
       (`pk_live_…`). Der Key ist öffentlich und gehört ins Frontend. **Ohne Key
