@@ -209,9 +209,24 @@ Wer eine neue CTA-Stelle ergänzt, braucht immer beide `<div>`s mit `hidden`.
 
 ## Copy — Tonalität
 
-Die Pain-Spalte ist bewusst direkt gehalten („Rekordbox sucks", „Rekordbox to DENON
-sucks", „Engine DJ sucks") — von Marcel am 2026-08-18 so bestätigt. Nicht
-eigenmächtig entschärfen.
+Die Pain-Spalte ist bewusst direkt gehalten („Rekordbox to DENON sucks") — von
+Marcel am 2026-08-18 so bestätigt. Nicht eigenmächtig entschärfen. Einzelne Punkte
+wurden später gezielt sachlicher gefasst, wo „sucks" zu unspezifisch war
+(„Engine DJ sync & library issues", „Time-consuming playlist creation").
+
+### Keine unbelegten Feature-Aussagen
+
+Jede Funktionsaussage auf der Seite muss im Code belegbar sein. Zwei Fälle, die
+bereits auffielen:
+
+- **Analyse-Cache — gibt es NICHT.** In der FAQ stand „Analysis results are cached,
+  so a track is only ever analyzed once". Falsch: `analyze_file` läuft bei jedem
+  Durchgang neu, im Sidecar gibt es keinen Cache im Analysepfad. Der
+  `song_key`-Zähler ist idempotent, betrifft aber nur das Free-Limit. Entfernt am
+  2026-08-19. `cache_key()` in `contracts.py` ist nur der Mechanismus, kein Store.
+Die Duplikaterkennung dagegen **gibt es** (Marcel, 2026-08-19) — im Writer über
+`skip_duplicates`, durchgereicht bis in den Sidecar. Meine frühere Notiz, es gäbe
+sie nicht, war falsch.
 
 Die Überschriften lauten „Before Alpha" / „With Alpha" (der Builder-Entwurf hatte
 dort „Before Alpha I had much pain" / „With Alpha I feel chill" — grammatikalisch

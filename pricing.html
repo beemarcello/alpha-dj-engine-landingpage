@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Pricing — Alpha-DJ-Engine</title>
-  <meta name="description" content="Alpha-DJ-Engine pricing: your first 10 tracks are free, then €30 incl. VAT, once. Lifetime licence for one person on two devices, updates included.">
+  <meta name="description" content="Alpha-DJ-Engine pricing: your first 10 tracks are free, then €30 incl. VAT, once. Lifetime licence for one person on one device, updates included.">
 
   <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="assets/icons/favicon.png">
@@ -13,21 +13,21 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pricing — Alpha-DJ-Engine">
-  <meta property="og:description" content="First 10 tracks free, then €30 incl. VAT, once. One person, two devices.">
+  <meta property="og:description" content="First 10 tracks free, then €30 incl. VAT, once. One person, one device.">
   <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
   <meta property="og:url" content="https://alpha-dj-engine.com/pricing.html">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="css/site.css?v=14">
+  <link rel="stylesheet" href="css/site.css?v=17">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=4">
+  <link rel="stylesheet" href="css/tailwind.css?v=6">
 
   <script src="js/icons.js?v=1" defer></script>
-  <script src="js/site.js?v=6" defer></script>
+  <script src="js/site.js?v=9" defer></script>
 </head>
 
 <body class="antialiased">
@@ -40,7 +40,7 @@
         <img src="assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
              class="h-9 sm:h-10 w-auto" decoding="async">
       </a>
-      <a href="index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+      <a data-download href="index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
     </div>
   </nav>
 
@@ -63,7 +63,7 @@
             <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>Analyze, sequence and write one real set</span></li>
             <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>No card, no trial countdown</span></li>
           </ul>
-          <a href="index.html#download" class="btn btn-primary">Download for free</a>
+          <a data-download href="index.html#download" class="btn btn-primary">Download for free</a>
         </div>
 
         <div class="plan plan--featured">
@@ -72,12 +72,12 @@
           <p class="plan__meta">incl. VAT · one payment, yours for good</p>
           <ul>
             <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>Unlimited tracks and sets</span></li>
-            <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>One person, two devices</span></li>
+            <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>One person, one device</span></li>
             <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>All future updates included</span></li>
             <li><i data-lucide="check" class="w-4 h-4 mt-1 shrink-0"></i><span>No subscription, no yearly renewal</span></li>
           </ul>
           <!-- TODO: auf den echten Kauf-/Checkout-Link zeigen, sobald vorhanden -->
-          <a href="index.html#download" class="btn btn-primary">Start free, upgrade later</a>
+          <a data-download href="index.html#download" class="btn btn-primary">Start free, upgrade later</a>
         </div>
 
       </div>
@@ -109,14 +109,14 @@
 
           <details class="faq-item">
             <summary>
-              Is the licence per device or per person?
+              How many devices does one licence cover?
               <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
             </summary>
             <div class="faq-answer">
               <p>
-                Per person — and it covers <strong>two devices</strong>. Your studio machine
-                and your gig laptop are the typical pair, and that's exactly the case we had
-                in mind.
+                <strong>One device.</strong> If you replace that machine or want to move to
+                another one, you can transfer the licence yourself in your account — it is
+                tied to you, not welded to one computer.
               </p>
             </div>
           </details>

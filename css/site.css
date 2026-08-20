@@ -322,6 +322,81 @@ body {
   padding: var(--gutter);
 }
 
+/* --------------------------------------------------------------------------
+   Download-Modal — Registrierung vor dem Download
+   Markup erzeugt js/site.js, damit es auf allen Seiten ohne Duplikat existiert.
+   -------------------------------------------------------------------------- */
+.dl-modal {
+  width: min(520px, 100%);
+  padding: 0;
+  background: var(--paper-2);
+  color: var(--ink);
+  border: var(--stroke);
+  border-radius: var(--r-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+}
+.dl-modal::backdrop { background: rgba(0, 0, 0, .55); }
+
+.dl-modal__inner { padding: clamp(24px, 5vw, 36px); }
+
+.dl-modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.dl-modal__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(24px, 4vw, 32px);
+  line-height: 1.1;
+  letter-spacing: .03em;
+  margin: 0;
+}
+.dl-modal__close {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-xs);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.dl-modal__close:hover { background: var(--green-hot); }
+
+.dl-modal__lead { font-size: 15px; color: var(--ink-55); line-height: 1.55; margin: 0 0 20px; }
+
+/* Bewusst nur EIN Feld: Auf der Website wird ausschliesslich die E-Mail
+   erhoben. Nickname und Passwort legt der Nutzer erst in der Desktop-App an
+   (Marcel, 2026-08-19) — dort wird der Account in die DB geschrieben und fuer
+   die 10 Gratis-Tracks freigeschaltet. */
+.dl-modal__form { display: flex; flex-direction: column; gap: 10px; }
+.dl-modal__form .input { width: 100%; height: 52px; font-size: 16px; }
+.dl-modal__form .btn { min-height: 52px; font-size: 16px; }
+
+.dl-modal__fine { font-size: 12px; color: var(--ink-55); line-height: 1.5; margin: 14px 0 0; }
+.dl-modal__fine a { color: var(--ink); }
+
+/* Bestätigung nach dem Absenden */
+.dl-modal__done { display: none; text-align: center; padding: 8px 0 4px; }
+.dl-modal.is-done .dl-modal__form,
+.dl-modal.is-done .dl-modal__lead,
+.dl-modal.is-done .dl-modal__perks,
+.dl-modal.is-done .dl-modal__fine { display: none; }
+.dl-modal.is-done .dl-modal__done { display: block; }
+.dl-modal__done .mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; margin-bottom: 14px;
+  background: var(--green-hot);
+  border: var(--stroke);
+  border-radius: 999px;
+}
+
+/* Freie Tracks als kleiner Vertrauensanker unter dem Feld */
+.dl-modal__perks { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 20px; padding: 0; list-style: none; }
+.dl-modal__perks li { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-55); }
+
 /* FAQ-Accordion — natives <details>/<summary>, damit Tastatur- und
    Screenreader-Bedienung ohne JS funktioniert. */
 .faq-item {

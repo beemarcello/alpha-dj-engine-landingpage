@@ -23,17 +23,17 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=14">
+  <link rel="stylesheet" href="css/site.css?v=17">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=4">
+  <link rel="stylesheet" href="css/tailwind.css?v=6">
 
 
   <script src="js/icons.js?v=1" defer></script>
-  <script src="js/site.js?v=6" defer></script>
+  <script src="js/site.js?v=9" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -52,10 +52,10 @@
 
       <div class="flex items-center gap-6">
         <div class="cta-mac" hidden>
-          <a href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+          <a data-download href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
         </div>
         <div class="cta-other" hidden>
-          <a href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Get the link</a>
+          <a data-download href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Get the link</a>
         </div>
       </div>
     </div>
@@ -134,9 +134,15 @@
     <section class="w-full flex flex-col lg:flex-row">
 
       <div class="w-full lg:w-1/2 bg-black text-white py-16 lg:py-24 px-6 lg:px-12 xl:px-20 flex justify-center lg:justify-end">
-        <div class="w-full max-w-[500px] lg:mr-12 xl:mr-24">
+        <div class="w-full max-w-[560px] lg:mr-8 xl:mr-16">
           <h2 class="text-3xl font-light text-white tracking-tight mb-10">Before Alpha</h2>
-          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-x-6 gap-y-8 w-full list-none p-0 m-0">
+          <!--
+            Ab lg bewusst EINSPALTIG: die Haelfte ist dort nur rund 180 px breit,
+            zweispaltig brachen die laengeren Punkte auf drei Zeilen um und die
+            Reihen standen unterschiedlich hoch. Zwei Spalten nur auf sm/md, wo
+            die Sektion noch die volle Breite hat.
+          -->
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-6 gap-y-6 w-full list-none p-0 m-0">
             <li class="flex items-center gap-4">
               <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
                 <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
@@ -159,7 +165,7 @@
               <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
                 <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
               </span>
-              <span class="font-light text-lg">Engine DJ sucks</span>
+              <span class="font-light text-lg">Engine DJ sync &amp; library issues</span>
             </li>
             <li class="flex items-center gap-4">
               <span class="w-8 h-8 rounded-full border-2 border-white/20 bg-[var(--red-hot)] flex items-center justify-center shrink-0" aria-hidden="true">
@@ -502,7 +508,7 @@
 
         <div class="flex justify-center">
           <div class="cta-mac text-center" hidden>
-            <a href="#" class="btn btn-primary btn-lg">Download now</a>
+            <a data-download href="#" class="btn btn-primary btn-lg">Download now</a>
             <p class="text-sm font-semibold text-white/80 mt-6">
               Free for macOS — your first 10 tracks are on us.<br>
               If you like it, you can buy a lifetime version for only €30 incl. VAT.
@@ -633,8 +639,8 @@
                 are included.
               </p>
               <p>
-                One licence covers one person on two devices — your studio machine and
-                the laptop you take to gigs. Full details on the
+                One licence covers one person on one device, and you can move it to a
+                new machine yourself. Full details on the
                 <a href="pricing.html" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">pricing page</a>.
               </p>
             </div>
@@ -693,9 +699,18 @@
                 collection into it. You point it at the folder you want to play from,
                 and it builds one gig-ready USB out of that.
               </p>
+              <!--
+                Hier stand bis 2026-08-19 "Analysis results are cached, so a track is
+                only ever analyzed once." Das stimmt NICHT: im Analysepfad gibt es
+                keinen Cache, analyze_file laeuft bei jedem Durchgang neu (von Marcel
+                im Sidecar geprueft). Der song_key-Zaehler ist idempotent, aber das
+                betrifft nur das Free-Limit, nicht die Analyse.
+                Falls ein Cache nachgeruestet wird, kann der Satz zurueck.
+              -->
               <p>
                 Your archive stays exactly where it is, across as many drives as you
-                like. Analysis results are cached, so a track is only ever analyzed once.
+                like. Alpha only ever works through the folder you picked, so you wait
+                for the tracks going into this set — not for your whole collection.
               </p>
             </div>
           </details>

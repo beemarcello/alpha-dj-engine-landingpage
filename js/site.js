@@ -587,6 +587,127 @@
   }
 
   /* ------------------------------------------------------------------------
+     8. Download-Modal — Registrierung vor dem Download
+
+     Jeder Download-CTA traegt data-download und oeffnet dieses Modal statt
+     direkt zu laden. Das Markup wird hier erzeugt, damit es auf allen Seiten
+     ohne kopiertes HTML existiert.
+
+     Ablauf (Marcel, 2026-08-19):
+       1. Website: NUR die E-Mail-Adresse. Kein Passwort, kein Nickname.
+       2. Bestaetigungsmail mit Downloadlink.
+       3. Desktop-App: dort legt der Nutzer Passwort und Nickname an, der
+          Account landet in der DB und wird fuer die 10 Gratis-Tracks
+          freigeschaltet.
+     Wer hier Felder ergaenzen will, prueft vorher, ob sie nicht in Schritt 3
+     gehoeren — die Website soll moeglichst wenig Daten erheben.
+
+     TODO Backend: der Submit ist noch ein Platzhalter. Anzubinden sind
+     Double-Opt-in-Mail mit Bestaetigungslink und der eigentliche Downloadlink
+     (siehe privacy.html, Abschnitt "Email addresses you give us").
+     ------------------------------------------------------------------------ */
+  function initDownloadModal() {
+    if (!document.querySelector('[data-download]')) return;
+
+    var dlg = document.createElement('dialog');
+    dlg.className = 'dl-modal';
+    dlg.id = 'download-modal';
+    dlg.setAttribute('aria-labelledby', 'dl-title');
+    dlg.innerHTML = '' +
+      '<div class="dl-modal__inner">' +
+        '<div class="dl-modal__head">' +
+          '<h2 class="dl-modal__title" id="dl-title">Where should we send it?</h2>' +
+          '<button type="button" class="dl-modal__close" data-dl-close aria-label="Close">' +
+            '<i data-lucide="x" class="w-5 h-5"></i></button>' +
+        '</div>' +
+
+        '<p class="dl-modal__lead">' +
+          'Leave your email and we\'ll send the download link.' +
+        '</p>' +
+
+        '<ul class="dl-modal__perks">' +
+          '<li><i data-lucide="check" class="w-4 h-4"></i>First 10 tracks free</li>' +
+          '<li><i data-lucide="check" class="w-4 h-4"></i>No payment details</li>' +
+          '<li><i data-lucide="check" class="w-4 h-4"></i>macOS</li>' +
+        '</ul>' +
+
+        '<form class="dl-modal__form" data-dl-form novalidate>' +
+          '<label class="sr-only" for="dl-email">Email address</label>' +
+          '<input id="dl-email" name="email" type="email" autocomplete="email" required ' +
+                 'placeholder="you@example.com" class="input">' +
+          '<button type="submit" class="btn btn-primary">' +
+            '<i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Send me the download link' +
+          '</button>' +
+        '</form>' +
+
+        // Auf Wunsch entfernt (Marcel, 2026-08-19): der Datenschutzhinweis unter
+        // dem Feld. Siehe Anmerkung in der README — bei Erhebung der E-Mail
+        // verlangt Art. 13 DSGVO eine Information an der Erhebungsstelle,
+        // ueblicherweise ein Link zur Datenschutzerklaerung.
+
+
+        '<div class="dl-modal__done" data-dl-done>' +
+          '<span class="mark"><i data-lucide="check" class="w-6 h-6 stroke-[2.5]"></i></span>' +
+          '<p style="font-weight:600;font-size:17px;margin:0 0 6px">Check your inbox</p>' +
+          '<p style="font-size:14px;color:var(--ink-55);margin:0">' +
+            'We sent a confirmation link to <span data-dl-echo></span>. ' +
+            'Click it, download Alpha, and set your nickname and password when it ' +
+            'first opens.</p>' +
+        '</div>' +
+      '</div>';
+
+    document.body.appendChild(dlg);
+    if (window.lucide) window.lucide.createIcons();
+
+    var lastFocus = null;
+
+    function open(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      dlg.classList.remove('is-done');
+      var form = dlg.querySelector('[data-dl-form]');
+      form.reset();
+      var btn = form.querySelector('button[type="submit"]');
+      btn.disabled = false;
+      dlg.showModal();
+      dlg.querySelector('#dl-email').focus();
+    }
+
+    function close() {
+      dlg.close();
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('[data-download]').forEach(function (el) {
+      el.addEventListener('click', open);
+    });
+
+    dlg.querySelectorAll('[data-dl-close]').forEach(function (b) {
+      b.addEventListener('click', close);
+    });
+
+    // Klick auf den Backdrop schliesst
+    dlg.addEventListener('click', function (event) {
+      if (event.target !== dlg) return;
+      var box = dlg.getBoundingClientRect();
+      var drin = event.clientX >= box.left && event.clientX <= box.right &&
+                 event.clientY >= box.top && event.clientY <= box.bottom;
+      if (!drin) close();
+    });
+
+    dlg.querySelector('[data-dl-form]').addEventListener('submit', function (event) {
+      event.preventDefault();
+      var input = dlg.querySelector('#dl-email');
+      if (!input.checkValidity()) { input.reportValidity(); return; }
+
+      // TODO: hier den echten Endpoint aufrufen.
+      dlg.querySelector('[data-dl-echo]').textContent = input.value;
+      dlg.classList.add('is-done');
+      dlg.querySelector('[data-dl-close]').focus();
+    });
+  }
+
+  /* ------------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------------ */
   function boot() {
@@ -596,6 +717,7 @@
     initNavbar();
     initEnergyArc();
     initDeviceSearch();
+    initDownloadModal();
     initConsent();
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
