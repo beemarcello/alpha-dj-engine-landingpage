@@ -13,7 +13,7 @@
   <link rel="canonical" href="https://alpha-dj-engine.com/privacy.html">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="css/site.css?v=17">
+  <link rel="stylesheet" href="css/site.css?v=18">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -21,8 +21,8 @@
        Konfiguration in tailwind.config.js. -->
   <link rel="stylesheet" href="css/tailwind.css?v=6">
 
-  <script src="js/icons.js?v=1" defer></script>
-  <script src="js/site.js?v=9" defer></script>
+  <script src="js/icons.js?v=2" defer></script>
+  <script src="js/site.js?v=10" defer></script>
 </head>
 
 <body class="antialiased">
@@ -83,7 +83,27 @@
         you like. Passwords are never stored in plain text; we keep only a salted hash.
       </p>
       <p>
-        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+        The account starts on this website: when you click a download button, you enter
+        your email address and confirm it with a six-digit code we send you. Only after
+        that confirmation does the download begin. You choose your username and password
+        later, the first time you open Alpha.
+      </p>
+      <p>
+        This sign-up runs on <strong>Clerk</strong> (Clerk.com, Inc., San Francisco,
+        USA) as our processor under a data processing agreement (Art. 28 GDPR). Clerk
+        receives your email address, the confirmation code, your IP address and your
+        browser's user agent, and sets cookies needed to keep you signed in. The transfer
+        to the USA is safeguarded by the European Commission's standard contractual
+        clauses under Art. 46 GDPR.
+      </p>
+      <p>
+        Clerk's software is loaded only when you actually open the download dialog — not
+        when you simply browse this site. If you never click a download button, no data
+        reaches Clerk.
+      </p>
+      <p>
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract and steps taken at
+        your request before entering into one.
       </p>
 
       <h2>Licence and devices</h2>
@@ -184,34 +204,42 @@
 
       <h2>Email addresses you give us</h2>
       <p>
-        If you leave an email address — for the download link, or to tell us which device
-        you use — we confirm it with you first: you will receive a message with a
-        confirmation link, and we only add your address once you have clicked it
-        (double opt-in). We record the time of your confirmation so we can demonstrate
-        that you gave it.
+        There are two different reasons we might have your address, and they follow
+        different rules.
       </p>
       <p>
-        We use your address to send you what you asked for and occasional news about
-        Alpha. We do not pass it on. Every message contains an unsubscribe link, and you
-        can withdraw your consent at any time with effect for the future.
+        <strong>To download Alpha.</strong> Your address becomes your account name, so we
+        need it to give you the software and your free tracks. We confirm it with a
+        six-digit code before the download starts, and we send you the download link
+        afterwards as a backup in case the download fails or you switch machines. This is
+        not marketing, and it does not depend on your consent — it is what you asked us
+        to do. Legal basis: Art. 6(1)(b) GDPR.
       </p>
       <p>
-        We keep your address until you unsubscribe. After that we retain the record of
-        your consent for up to three years, so we can show it was given if that is ever
-        questioned.
+        <strong>To tell you about Alpha.</strong> If you ask to hear about new releases,
+        or leave your address to be told when your device is supported, we confirm it
+        first: you receive a message with a confirmation link, and we only add your
+        address once you have clicked it (double opt-in). We record the time of your
+        confirmation so we can demonstrate that you gave it. Every message contains an
+        unsubscribe link, and you can withdraw your consent at any time with effect for
+        the future. Legal basis: Art. 6(1)(a) GDPR — your consent.
+      </p>
+      <p>
+        We do not pass your address on. We keep it for as long as you have an account, or
+        until you unsubscribe. After that we retain the record of your consent for up to
+        three years, so we can show it was given if that is ever questioned.
       </p>
       <p>
         Emails are sent through Twilio SendGrid as our processor under a data processing
-        agreement (Art. 28 GDPR). Where processing takes place outside the EU, it is
-        safeguarded by standard contractual clauses.
-      </p>
-      <p>
-        Legal basis: Art. 6(1)(a) GDPR — your consent.
+        agreement (Art. 28 GDPR). The confirmation code itself is sent by Clerk (see
+        “Your account”). Where processing takes place outside the EU, it is safeguarded
+        by standard contractual clauses.
       </p>
       <div class="todo-box">
-        <p><strong>Umsetzung fehlt noch:</strong> Das Formular auf der Website hat noch
-        kein Backend — Double-Opt-in-Mail, Bestätigungslink und Abmeldelink müssen
-        gebaut werden, bevor dieser Abschnitt stimmt.</p>
+        <p><strong>Umsetzung fehlt noch:</strong> Der Code-Versand über Clerk ist
+        beschrieben, aber noch nicht scharf geschaltet — es fehlen der Publishable Key
+        und der AVV mit Clerk. Für die Backup-Mail mit dem Downloadlink und für den
+        Newsletter-Teil (Double-Opt-in, Abmeldelink) fehlt weiterhin das Backend.</p>
       </div>
 
       <h2>Payment</h2>

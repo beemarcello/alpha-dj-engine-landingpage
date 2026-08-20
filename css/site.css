@@ -378,13 +378,84 @@ body {
 .dl-modal__fine { font-size: 12px; color: var(--ink-55); line-height: 1.5; margin: 14px 0 0; }
 .dl-modal__fine a { color: var(--ink); }
 
+/* --------------------------------------------------------------------------
+   Schritt-Umschaltung: email → code → done
+
+   Das Modal traegt data-step; sichtbar ist genau der Block, dessen data-for
+   passt. Alle drei bleiben im DOM, damit Fokus- und Icon-Initialisierung nur
+   einmal beim Aufbau laufen muss.
+   -------------------------------------------------------------------------- */
+.dl-step { display: none; }
+.dl-modal[data-step="email"] .dl-step[data-for="email"],
+.dl-modal[data-step="code"]  .dl-step[data-for="code"],
+.dl-modal[data-step="done"]  .dl-step[data-for="done"] { display: block; }
+
+/* Perks nur im ersten Schritt — ab der Code-Eingabe sind sie erledigt. */
+.dl-modal:not([data-step="email"]) .dl-modal__perks { display: none; }
+
+/* Sechsstelliger Bestaetigungscode. Ein einzelnes Feld statt sechs Boxen:
+   autocomplete="one-time-code" fuellt sich damit auf macOS/iOS von selbst aus
+   der Mail-App — und Alpha ist ein macOS-Produkt, das trifft also die Mehrheit.
+   Sechs Einzelfelder brechen genau diese Autofill-Uebergabe. */
+.dl-code {
+  width: 100%; height: 60px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: .35em;
+  text-align: center;
+  text-indent: .35em; /* gleicht das Trailing-Spacing des letzten Zeichens aus */
+}
+
+.dl-modal__error {
+  display: none;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--red);
+  border: var(--stroke);
+  border-radius: var(--r-xs);
+  padding: 10px 12px;
+  margin: 0 0 12px;
+}
+.dl-modal__error.is-shown { display: flex; }
+.dl-modal__error svg { flex-shrink: 0; margin-top: 1px; }
+
+/* Sekundaerzeile unter dem Button: Code erneut senden / zurueck zur E-Mail */
+.dl-modal__alt {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px;
+  font-size: 13px; margin: 14px 0 0;
+}
+.dl-modal__alt button {
+  background: none; border: 0; padding: 0;
+  font: inherit; color: var(--ink-55);
+  text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer;
+}
+.dl-modal__alt button:hover:not(:disabled) { color: var(--ink); }
+.dl-modal__alt button:disabled { cursor: default; opacity: .55; text-decoration: none; }
+
+/* Ladezustand des Submit-Buttons. Das Label wird ausgeblendet statt ersetzt,
+   damit die Buttonbreite nicht springt. */
+.btn.is-busy { pointer-events: none; position: relative; color: transparent; }
+.btn.is-busy > * { visibility: hidden; }
+.btn.is-busy::after {
+  content: "";
+  position: absolute; top: 50%; left: 50%;
+  width: 18px; height: 18px; margin: -9px 0 0 -9px;
+  border: 2px solid var(--ink);
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: dl-spin .6s linear infinite;
+}
+@keyframes dl-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .btn.is-busy::after { animation-duration: 2s; }
+}
+
 /* Bestätigung nach dem Absenden */
-.dl-modal__done { display: none; text-align: center; padding: 8px 0 4px; }
-.dl-modal.is-done .dl-modal__form,
-.dl-modal.is-done .dl-modal__lead,
-.dl-modal.is-done .dl-modal__perks,
-.dl-modal.is-done .dl-modal__fine { display: none; }
-.dl-modal.is-done .dl-modal__done { display: block; }
+.dl-modal__done { text-align: center; padding: 8px 0 4px; }
 .dl-modal__done .mark {
   display: inline-flex; align-items: center; justify-content: center;
   width: 56px; height: 56px; margin-bottom: 14px;

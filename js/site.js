@@ -587,43 +587,71 @@
   }
 
   /* ------------------------------------------------------------------------
-     8. Download-Modal — Registrierung vor dem Download
+     8. Download-Modal — Registrierung + Verifikation auf der Seite (Clerk)
 
      Jeder Download-CTA traegt data-download und oeffnet dieses Modal statt
      direkt zu laden. Das Markup wird hier erzeugt, damit es auf allen Seiten
      ohne kopiertes HTML existiert.
 
-     Ablauf (Marcel, 2026-08-19):
-       1. Website: NUR die E-Mail-Adresse. Kein Passwort, kein Nickname.
-       2. Bestaetigungsmail mit Downloadlink.
-       3. Desktop-App: dort legt der Nutzer Passwort und Nickname an, der
-          Account landet in der DB und wird fuer die 10 Gratis-Tracks
-          freigeschaltet.
-     Wer hier Felder ergaenzen will, prueft vorher, ob sie nicht in Schritt 3
-     gehoeren — die Website soll moeglichst wenig Daten erheben.
+     Ablauf (Marcel, 2026-08-20) — drei Schritte in EINEM Modal:
+       1. E-Mail eingeben  → Clerk legt den Sign-up an und mailt einen
+                             sechsstelligen Code.
+       2. Code eingeben    → Verifikation passiert auf der Seite. Kein
+                             Bestaetigungslink, kein Tabwechsel.
+       3. Download startet sofort. Der Link geht zusaetzlich per Mail raus,
+          falls der Download abbricht oder das Geraet gewechselt wird.
 
-     TODO Backend: der Submit ist noch ein Platzhalter. Anzubinden sind
-     Double-Opt-in-Mail mit Bestaetigungslink und der eigentliche Downloadlink
-     (siehe privacy.html, Abschnitt "Email addresses you give us").
+     Warum Code statt Link: der Link-Weg zwingt den Nutzer in die Inbox UND
+     zurueck ueber einen neuen Tab — der urspruengliche Tab bleibt verwaist.
+     Beim Code bleibt der Nutzer hier, der Zustand geht nicht verloren. Der
+     Inbox-Weg entfaellt damit nicht ganz (E-Mail-Besitz muss ja belegt
+     werden), aber er schrumpft auf "Code abholen".
+
+     Weiterhin gilt: hier wird NUR die E-Mail erhoben. Nickname und Passwort
+     legt der Nutzer erst in der Desktop-App an. Wer Felder ergaenzen will,
+     prueft vorher, ob sie nicht dorthin gehoeren.
+
+     Clerk wird bewusst ERST beim ersten Klick geladen, nicht im <head>:
+       - die Startseite bleibt damit frei von Drittanbieter-Requests,
+       - und das Skript laedt nur, wenn der Nutzer die Registrierung aktiv
+         angefordert hat.
+     Wer das nach oben zieht, macht aus dem Modal einen Tracker auf jeder
+     Seite. Nicht tun.
      ------------------------------------------------------------------------ */
+
+  /*  Konfiguration — hier eintragen, sonst faellt das Modal auf den alten
+      "wir mailen dir den Link"-Text zurueck (siehe CONFIGURED unten).
+
+      publishableKey  Clerk → Dashboard → API Keys → "Publishable key".
+                      Faengt mit pk_live_ (Produktion) oder pk_test_ an.
+                      Der Key ist oeffentlich, er gehoert ins Frontend.
+      downloadUrl     Direkte URL zum .dmg.
+      notifyEndpoint  Optional. Bekommt nach erfolgreicher Verifikation
+                      { email } gePOSTet und verschickt die Backup-Mail mit
+                      dem Downloadlink. Leer lassen = keine Backup-Mail.   */
+  var DL_CFG = {
+    publishableKey: '',
+    downloadUrl: '',
+    notifyEndpoint: ''
+  };
+
   function initDownloadModal() {
     if (!document.querySelector('[data-download]')) return;
+
+    var CONFIGURED = !!DL_CFG.publishableKey;
 
     var dlg = document.createElement('dialog');
     dlg.className = 'dl-modal';
     dlg.id = 'download-modal';
     dlg.setAttribute('aria-labelledby', 'dl-title');
+    dlg.setAttribute('data-step', 'email');
     dlg.innerHTML = '' +
       '<div class="dl-modal__inner">' +
         '<div class="dl-modal__head">' +
-          '<h2 class="dl-modal__title" id="dl-title">Where should we send it?</h2>' +
+          '<h2 class="dl-modal__title" id="dl-title">Create your account</h2>' +
           '<button type="button" class="dl-modal__close" data-dl-close aria-label="Close">' +
             '<i data-lucide="x" class="w-5 h-5"></i></button>' +
         '</div>' +
-
-        '<p class="dl-modal__lead">' +
-          'Leave your email and we\'ll send the download link.' +
-        '</p>' +
 
         '<ul class="dl-modal__perks">' +
           '<li><i data-lucide="check" class="w-4 h-4"></i>First 10 tracks free</li>' +
@@ -631,28 +659,57 @@
           '<li><i data-lucide="check" class="w-4 h-4"></i>macOS</li>' +
         '</ul>' +
 
-        '<form class="dl-modal__form" data-dl-form novalidate>' +
-          '<label class="sr-only" for="dl-email">Email address</label>' +
-          '<input id="dl-email" name="email" type="email" autocomplete="email" required ' +
-                 'placeholder="you@example.com" class="input">' +
-          '<button type="submit" class="btn btn-primary">' +
-            '<i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Send me the download link' +
-          '</button>' +
-        '</form>' +
+        '<p class="dl-modal__error" data-dl-error role="alert" aria-live="assertive">' +
+          '<i data-lucide="triangle-alert" class="w-4 h-4"></i>' +
+          '<span data-dl-error-text></span>' +
+        '</p>' +
 
-        // Auf Wunsch entfernt (Marcel, 2026-08-19): der Datenschutzhinweis unter
-        // dem Feld. Siehe Anmerkung in der README — bei Erhebung der E-Mail
-        // verlangt Art. 13 DSGVO eine Information an der Erhebungsstelle,
-        // ueblicherweise ein Link zur Datenschutzerklaerung.
+        /* ---- Schritt 1: E-Mail ---- */
+        '<div class="dl-step" data-for="email">' +
+          '<p class="dl-modal__lead">' +
+            'Enter your email, confirm the code we send, and the download starts ' +
+            'right here.' +
+          '</p>' +
+          '<form class="dl-modal__form" data-dl-email-form novalidate>' +
+            '<label class="sr-only" for="dl-email">Email address</label>' +
+            '<input id="dl-email" name="email" type="email" autocomplete="email" required ' +
+                   'placeholder="you@example.com" class="input">' +
+            '<button type="submit" class="btn btn-primary">' +
+              '<span><i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>' +
+              'Continue</span>' +
+            '</button>' +
+          '</form>' +
+        '</div>' +
 
+        /* ---- Schritt 2: Code ---- */
+        '<div class="dl-step" data-for="code">' +
+          '<p class="dl-modal__lead">' +
+            'We sent a 6-digit code to <strong data-dl-echo></strong>. ' +
+            'Enter it below — no need to leave this page.' +
+          '</p>' +
+          '<form class="dl-modal__form" data-dl-code-form novalidate>' +
+            '<label class="sr-only" for="dl-code">6-digit code</label>' +
+            '<input id="dl-code" name="code" class="input dl-code" required ' +
+                   'inputmode="numeric" autocomplete="one-time-code" ' +
+                   'maxlength="6" pattern="[0-9]{6}" placeholder="······">' +
+            '<button type="submit" class="btn btn-primary">' +
+              '<span><i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>' +
+              'Verify &amp; download</span>' +
+            '</button>' +
+          '</form>' +
+          '<p class="dl-modal__alt">' +
+            '<button type="button" data-dl-resend>Resend code</button>' +
+            '<button type="button" data-dl-restart>Use a different email</button>' +
+          '</p>' +
+        '</div>' +
 
-        '<div class="dl-modal__done" data-dl-done>' +
-          '<span class="mark"><i data-lucide="check" class="w-6 h-6 stroke-[2.5]"></i></span>' +
-          '<p style="font-weight:600;font-size:17px;margin:0 0 6px">Check your inbox</p>' +
-          '<p style="font-size:14px;color:var(--ink-55);margin:0">' +
-            'We sent a confirmation link to <span data-dl-echo></span>. ' +
-            'Click it, download Alpha, and set your nickname and password when it ' +
-            'first opens.</p>' +
+        /* ---- Schritt 3: fertig ---- */
+        '<div class="dl-step" data-for="done">' +
+          '<div class="dl-modal__done">' +
+            '<span class="mark"><i data-lucide="check" class="w-6 h-6 stroke-[2.5]"></i></span>' +
+            '<p style="font-weight:600;font-size:17px;margin:0 0 6px" data-dl-done-title></p>' +
+            '<p style="font-size:14px;color:var(--ink-55);margin:0" data-dl-done-text></p>' +
+          '</div>' +
         '</div>' +
       '</div>';
 
@@ -660,17 +717,211 @@
     if (window.lucide) window.lucide.createIcons();
 
     var lastFocus = null;
+    var email = '';
+    var mode = 'signUp';   // 'signUp' = neuer Account, 'signIn' = Adresse gibt es schon
+    var clerkPromise = null;
+
+    var titleEl  = dlg.querySelector('#dl-title');
+    var errEl    = dlg.querySelector('[data-dl-error]');
+    var errText  = dlg.querySelector('[data-dl-error-text]');
+    var emailIn  = dlg.querySelector('#dl-email');
+    var codeIn   = dlg.querySelector('#dl-code');
+
+    var TITLES = {
+      email: 'Create your account',
+      code:  'Check your email',
+      done:  'You\'re in'
+    };
+
+    // titel ueberschreibt den Standard — gebraucht im Fallback, wo der Nutzer
+    // den done-Schritt sieht, ohne verifiziert zu haben.
+    function setStep(name, titel) {
+      dlg.setAttribute('data-step', name);
+      titleEl.textContent = titel || TITLES[name];
+      clearError();
+    }
+
+    function showError(msg) {
+      errText.textContent = msg;
+      errEl.classList.add('is-shown');
+    }
+    function clearError() { errEl.classList.remove('is-shown'); }
+
+    function busy(form, on) {
+      var btn = form.querySelector('button[type="submit"]');
+      btn.classList.toggle('is-busy', on);
+      btn.disabled = on;
+    }
+
+    /* Clerk laedt sein eigenes Skript von der Frontend-API, deren Host im
+       Publishable Key steckt: pk_live_<base64> decodiert zu "clerk.deine-
+       domain.com$". Das "$" am Ende ist ein Trenner von Clerk, kein Teil des
+       Hosts. */
+    function clerkHost(key) {
+      var raw = key.replace(/^pk_(test|live)_/, '');
+      return atob(raw).replace(/\$+$/, '');
+    }
+
+    /* Zwei Dinge, die hier leicht schiefgehen und beide schon passiert sind:
+
+       1. Ohne Timeout haengt der Spinner bei blockiertem oder langsamem Netz
+          minutenlang. Content-Blocker filtern Clerk regelmaessig weg, und ein
+          DNS-Fehler braucht je nach Resolver 30 s und mehr. 15 s reichen fuer
+          jede gesunde Verbindung.
+       2. Die Promise darf im Fehlerfall NICHT zwischengespeichert bleiben —
+          sonst liefert jeder weitere Klick sofort dieselbe alte Ablehnung und
+          der Nutzer kommt bis zum Reload nicht mehr weiter. Deshalb wird
+          clerkPromise bei Misserfolg zurueckgesetzt.                          */
+    var CLERK_TIMEOUT_MS = 15000;
+
+    function loadClerk() {
+      if (clerkPromise) return clerkPromise;
+
+      clerkPromise = new Promise(function (resolve, reject) {
+        var host, fertig = false;
+        try { host = clerkHost(DL_CFG.publishableKey); }
+        catch (e) { reject(new Error('Publishable key is malformed.')); return; }
+
+        var frist = setTimeout(function () {
+          if (fertig) return;
+          fertig = true;
+          reject(new Error('The sign-up service is taking too long to respond. ' +
+                           'If you use a content blocker, allow clerk.com and try again.'));
+        }, CLERK_TIMEOUT_MS);
+
+        function scheitern(msg) {
+          if (fertig) return;
+          fertig = true; clearTimeout(frist);
+          reject(new Error(msg));
+        }
+        function gelingen(clerk) {
+          if (fertig) return;
+          fertig = true; clearTimeout(frist);
+          resolve(clerk);
+        }
+
+        var s = document.createElement('script');
+        s.src = 'https://' + host + '/npm/@clerk/clerk-js@5/dist/clerk.browser.js';
+        s.async = true;
+        s.crossOrigin = 'anonymous';
+        s.setAttribute('data-clerk-publishable-key', DL_CFG.publishableKey);
+        s.onload = function () {
+          if (!window.Clerk) { scheitern('The sign-up service failed to start.'); return; }
+          window.Clerk.load().then(
+            function () { gelingen(window.Clerk); },
+            function () { scheitern('The sign-up service failed to start.'); }
+          );
+        };
+        s.onerror = function () {
+          scheitern('Could not reach the sign-up service. If you use a content ' +
+                    'blocker, allow clerk.com and try again.');
+        };
+        document.head.appendChild(s);
+      });
+
+      clerkPromise.catch(function () { clerkPromise = null; });
+      return clerkPromise;
+    }
+
+    /* Clerk wirft ClerkAPIResponseError mit .errors[]. longMessage ist der
+       ausformulierte Satz, message die Kurzform. */
+    function readError(err) {
+      var first = err && err.errors && err.errors[0];
+      if (first) return { code: first.code, text: first.longMessage || first.message };
+      return { code: '', text: (err && err.message) || 'Something went wrong. Please try again.' };
+    }
+
+    /* Schickt den Code — als neuer Sign-up oder, wenn es die Adresse schon
+       gibt, als Sign-in. Beides endet im selben Code-Schritt. */
+    async function sendCode(clerk) {
+      try {
+        var su = await clerk.client.signUp.create({ emailAddress: email });
+        await su.prepareEmailAddressVerification({ strategy: 'email_code' });
+        mode = 'signUp';
+        return;
+      } catch (err) {
+        var info = readError(err);
+        // Adresse existiert schon → derselbe Nutzer will nur nochmal laden.
+        if (info.code !== 'form_identifier_exists') throw err;
+      }
+
+      var si = await clerk.client.signIn.create({ identifier: email });
+      var factor = (si.supportedFirstFactors || []).filter(function (f) {
+        return f.strategy === 'email_code';
+      })[0];
+      if (!factor) {
+        throw new Error('This email is already registered. Please open Alpha and sign in there.');
+      }
+      await si.prepareFirstFactor({ strategy: 'email_code', emailAddressId: factor.emailAddressId });
+      mode = 'signIn';
+    }
+
+    async function verifyCode(clerk, code) {
+      if (mode === 'signUp') {
+        return clerk.client.signUp.attemptEmailAddressVerification({ code: code });
+      }
+      return clerk.client.signIn.attemptFirstFactor({ strategy: 'email_code', code: code });
+    }
+
+    /* Backup-Mail mit dem Downloadlink. Fire and forget — wenn das schiefgeht,
+       hat der Nutzer die Datei ja bereits. */
+    function sendBackupMail() {
+      if (!DL_CFG.notifyEndpoint) return;
+      try {
+        fetch(DL_CFG.notifyEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        }).catch(function () {});
+      } catch (e) { /* egal */ }
+    }
+
+    function startDownload() {
+      if (!DL_CFG.downloadUrl) return;
+      var a = document.createElement('a');
+      a.href = DL_CFG.downloadUrl;
+      a.rel = 'noopener';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function finish() {
+      var t = dlg.querySelector('[data-dl-done-title]');
+      var p = dlg.querySelector('[data-dl-done-text]');
+
+      if (DL_CFG.downloadUrl) {
+        t.textContent = 'Your download is starting';
+        p.innerHTML = 'We also emailed the link to <strong></strong>, in case you ' +
+                      'need it again. Set your nickname and password the first time ' +
+                      'Alpha opens.<br><br>' +
+                      '<a href="' + DL_CFG.downloadUrl + '">Download didn\'t start? Get it here.</a>';
+        p.querySelector('strong').textContent = email;
+        setStep('done');
+        sendBackupMail();
+        startDownload();
+      } else {
+        // Kein Artefakt hinterlegt — ehrlich bleiben statt einen toten
+        // Download vorzutaeuschen.
+        t.textContent = 'You\'re on the list';
+        p.textContent = 'Your account is verified. The macOS build isn\'t public ' +
+                        'yet — we\'ll email ' + email + ' the moment it is.';
+        setStep('done');
+        sendBackupMail();
+      }
+      dlg.querySelector('[data-dl-close]').focus();
+    }
 
     function open(e) {
       if (e) e.preventDefault();
       lastFocus = document.activeElement;
-      dlg.classList.remove('is-done');
-      var form = dlg.querySelector('[data-dl-form]');
-      form.reset();
-      var btn = form.querySelector('button[type="submit"]');
-      btn.disabled = false;
+      dlg.querySelector('[data-dl-email-form]').reset();
+      dlg.querySelector('[data-dl-code-form]').reset();
+      setStep('email');
       dlg.showModal();
-      dlg.querySelector('#dl-email').focus();
+      emailIn.focus();
+      // Clerk schon mal anstossen, waehrend der Nutzer tippt.
+      if (CONFIGURED) loadClerk().catch(function () {});
     }
 
     function close() {
@@ -695,15 +946,91 @@
       if (!drin) close();
     });
 
-    dlg.querySelector('[data-dl-form]').addEventListener('submit', function (event) {
+    /* ---- Schritt 1 absenden ---- */
+    dlg.querySelector('[data-dl-email-form]').addEventListener('submit', async function (event) {
       event.preventDefault();
-      var input = dlg.querySelector('#dl-email');
-      if (!input.checkValidity()) { input.reportValidity(); return; }
+      if (!emailIn.checkValidity()) { emailIn.reportValidity(); return; }
+      email = emailIn.value.trim();
+      clearError();
 
-      // TODO: hier den echten Endpoint aufrufen.
-      dlg.querySelector('[data-dl-echo]').textContent = input.value;
-      dlg.classList.add('is-done');
-      dlg.querySelector('[data-dl-close]').focus();
+      // Ohne Clerk-Key bleibt es beim alten Verhalten, damit die Live-Seite
+      // durch das Ausrollen nicht kaputtgeht.
+      if (!CONFIGURED) {
+        var t = dlg.querySelector('[data-dl-done-title]');
+        var p = dlg.querySelector('[data-dl-done-text]');
+        t.textContent = 'Check your inbox';
+        p.textContent = 'We sent a confirmation link to ' + email + '. Click it, ' +
+                        'download Alpha, and set your nickname and password when it ' +
+                        'first opens.';
+        setStep('done', 'Check your email');
+        dlg.querySelector('[data-dl-close]').focus();
+        return;
+      }
+
+      busy(this, true);
+      try {
+        var clerk = await loadClerk();
+        await sendCode(clerk);
+        dlg.querySelector('[data-dl-echo]').textContent = email;
+        setStep('code');
+        codeIn.focus();
+      } catch (err) {
+        showError(readError(err).text);
+      } finally {
+        busy(this, false);
+      }
+    });
+
+    /* ---- Schritt 2 absenden ---- */
+    dlg.querySelector('[data-dl-code-form]').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      var code = codeIn.value.replace(/\D/g, '');
+      if (code.length !== 6) { showError('Please enter the 6-digit code from the email.'); return; }
+      clearError();
+
+      busy(this, true);
+      try {
+        var clerk = await loadClerk();
+        var res = await verifyCode(clerk, code);
+        if (res.status === 'complete') {
+          await clerk.setActive({ session: res.createdSessionId });
+          finish();
+        } else {
+          showError('That didn\'t complete. Please request a new code.');
+        }
+      } catch (err) {
+        showError(readError(err).text);
+        codeIn.select();
+      } finally {
+        busy(this, false);
+      }
+    });
+
+    /* ---- Code erneut senden ---- */
+    dlg.querySelector('[data-dl-resend]').addEventListener('click', async function () {
+      var btn = this;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      clearError();
+      try {
+        await sendCode(await loadClerk());
+        btn.textContent = 'Code sent';
+      } catch (err) {
+        showError(readError(err).text);
+        btn.textContent = 'Resend code';
+      }
+      // Kurze Sperre, damit der Link nicht zum Mail-Bombardement wird.
+      setTimeout(function () {
+        btn.disabled = false;
+        btn.textContent = 'Resend code';
+      }, 30000);
+    });
+
+    /* ---- Zurueck zur E-Mail-Eingabe ---- */
+    dlg.querySelector('[data-dl-restart]').addEventListener('click', function () {
+      setStep('email');
+      emailIn.focus();
+      emailIn.select();
     });
   }
 

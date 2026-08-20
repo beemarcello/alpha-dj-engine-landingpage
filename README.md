@@ -150,12 +150,59 @@ Wer eine neue CTA-Stelle ergänzt, braucht immer beide `<div>`s mit `hidden`.
 
 ---
 
+## Download-Flow (wichtig)
+
+Jeder Button mit `data-download` öffnet das Modal aus
+`js/site.js::initDownloadModal()`. Drei Schritte in **einem** Dialog, ohne
+Seitenwechsel:
+
+| Schritt | Was passiert | Clerk-Aufruf |
+|---------|--------------|--------------|
+| `email` | Adresse eingeben | `signUp.create` + `prepareEmailAddressVerification({strategy:'email_code'})` |
+| `code`  | Sechsstelligen Code eingeben | `signUp.attemptEmailAddressVerification` |
+| `done`  | Download startet, Backup-Mail geht raus | `setActive` |
+
+Sichtbar ist immer der Block, dessen `data-for` zum `data-step` des Dialogs
+passt — die Umschaltung ist reines CSS.
+
+**Warum Code statt Bestätigungslink.** Der Link zwingt den Nutzer in die Inbox
+*und* über einen neuen Tab zurück; der ursprüngliche Tab bleibt verwaist und der
+Zustand ist weg. Beim Code bleibt der Nutzer im Modal. Der Inbox-Weg entfällt
+damit nicht ganz — E-Mail-Besitz muss belegt werden — aber er schrumpft auf
+„Code abholen".
+
+Details, die leicht kaputtgehen:
+
+- **Ein Feld für den Code, nicht sechs.** `autocomplete="one-time-code"` füllt
+  sich auf macOS/iOS von selbst aus der Mail-App. Alpha ist ein macOS-Produkt,
+  das trifft also die Mehrheit der Nutzer. Sechs Einzelfelder brechen genau
+  diese Autofill-Übergabe.
+- **Bereits registrierte Adressen.** `signUp.create` wirft dann
+  `form_identifier_exists`; der Code fängt das ab und wechselt auf den
+  Sign-in-Pfad (`signIn.create` → `prepareFirstFactor`). Ohne das läuft jeder
+  wiederkehrende Nutzer in eine Sackgasse.
+- **15-Sekunden-Timeout beim Laden von Clerk.** Content-Blocker filtern Clerk
+  regelmäßig weg. Ohne Timeout dreht sich der Spinner minutenlang.
+- **Die Lade-Promise wird bei Misserfolg zurückgesetzt.** Sonst liefert jeder
+  weitere Klick sofort dieselbe alte Ablehnung, und der Nutzer kommt bis zum
+  Reload nicht mehr weiter.
+- **Ohne `DL_CFG.publishableKey`** fällt das Modal auf das alte
+  „wir mailen dir einen Link"-Verhalten zurück. Das ist Absicht: die Live-Seite
+  darf durch das Ausrollen nicht kaputtgehen.
+
+---
+
 ## Offene Punkte
 
 ### A — Entscheidungen (blockieren die Umsetzung)
 
-- [ ] **Domain festlegen.** Wird für `<link rel="canonical">` und die absolute
-      `og:image`-URL gebraucht. Beides ist aktuell bewusst leer bzw. relativ.
+- [x] ~~Domain festlegen~~ — **alpha-dj-engine.com**, seit 2026-08-19 live auf
+      GitHub Pages (`beemarcello/alpha-dj-engine-landingpage`, `main:/`).
+      `canonical`, `og:url`, `robots.txt` und `sitemap.xml` zeigen darauf. Die
+      `CNAME`-Datei im Repo-Root hält die Domain-Bindung — wird sie gelöscht,
+      verliert Pages die Domain und das TLS-Zertifikat. Die Cloudflare-Records
+      müssen **DNS only** bleiben (graue Wolke), sonst kann GitHub das
+      Zertifikat nicht ausstellen.
 - [x] ~~Netto oder brutto~~ — entschieden am 2026-08-19: **30 € brutto**, überall
       als „€30 incl. VAT" ausgezeichnet (Startseite, FAQ, Preisseite, beide
       Meta-Descriptions, OG-Bild). Beim Anlegen des Stripe-Produkts muss der Preis
@@ -181,9 +228,40 @@ Wer eine neue CTA-Stelle ergänzt, braucht immer beide `<div>`s mit `hidden`.
       `Denon-DJ-Prime-Go-gebraucht-3-768x768.webp` ist wasserzeichenfrei, die Herkunft offen.
 - [ ] **Hero-Bild ab ~1600 px.** Aktuell 768×768, wird per `object-cover` ~1.25×
       hochskaliert. Nicht die 1280er-Variante nehmen — Wasserzeichen.
-- [ ] **Release-URL** für den Download (`index.html` Final-CTA + `pricing.html`).
+- [ ] **Release-URL** für den Download → `js/site.js` → `DL_CFG.downloadUrl`.
+      Solange leer, endet das Modal ehrlich mit „the macOS build isn't public yet"
+      statt einen toten Download zu starten.
 - [ ] **E-Mail-Provider** für das Lead-Capture (`js/site.js::initLeadForms()` ist
       ein Platzhalter ohne Backend).
+
+#### Clerk — Registrierung im Download-Modal
+
+Seit 2026-08-20 registriert und verifiziert der Nutzer direkt im Modal, statt
+einen Link aus der Inbox zu holen (siehe „Download-Flow" weiter unten). Dafür
+fehlt noch:
+
+- [ ] **Publishable Key** aus dem Clerk-Dashboard → `js/site.js` → `DL_CFG.publishableKey`
+      (`pk_live_…`). Der Key ist öffentlich und gehört ins Frontend. **Ohne Key
+      bleibt das Modal beim alten „wir mailen dir einen Link"-Verhalten** — die
+      Live-Seite geht durch das Ausrollen also nicht kaputt.
+- [ ] **Clerk-Instanz konfigurieren:** Sign-up-Strategie auf **E-Mail + Code**
+      (nicht Link, nicht Passwort). Passwort und Nickname legt der Nutzer weiterhin
+      erst in der Desktop-App an.
+- [ ] **Eigene Domain für Clerk** (`clerk.alpha-dj-engine.com`) statt der
+      `*.clerk.accounts.dev`-Adresse. Der Host steckt base64-kodiert im Key, das
+      Skript folgt automatisch.
+- [ ] **AVV mit Clerk** (Art. 28 DSGVO) abschließen — Clerk.com, Inc. sitzt in den
+      USA. `privacy.html` → „Your account" beschreibt die Verarbeitung bereits,
+      der Vertrag muss aber existieren, bevor der Key scharf geschaltet wird.
+- [ ] **Backup-Mail** mit dem Downloadlink → `DL_CFG.notifyEndpoint`. Bekommt
+      `{ email }` gePOSTet. Leer lassen = keine Backup-Mail, der Flow funktioniert
+      trotzdem.
+- [ ] **Echten Gate-Schutz entscheiden.** Der Download-Link ist eine statische URL:
+      wer sie kennt, lädt ohne Account. Die Registrierung ist damit vorerst
+      Lead-Erfassung, keine Zugangskontrolle. Für echten Schutz bräuchte es einen
+      Endpunkt, der das Clerk-Session-Token prüft und eine kurzlebige signierte URL
+      ausstellt — auf GitHub Pages nur mit externem Dienst (z. B. Cloudflare Worker,
+      die Domain liegt ohnehin bei Cloudflare).
 - [ ] **Demo-Video** (YouTube-ID) für das Modal im Hero. Einbauanleitung steht als
       Kommentar in `index.html` beim `<dialog id="demo-modal">`.
 
@@ -200,9 +278,16 @@ Wer eine neue CTA-Stelle ergänzt, braucht immer beide `<div>`s mit `hidden`.
 
 ### D — Technik vor Livegang
 
-- [x] ~~Tailwind und Lucide von der CDN lösen~~ — erledigt am 2026-08-19. Die Seite
-      lädt **keine externen Ressourcen mehr**; das war zugleich der DSGVO-Blocker in
-      der Datenschutzerklärung. Siehe Abschnitt „Build" unten.
+- [x] ~~Tailwind und Lucide von der CDN lösen~~ — erledigt am 2026-08-19. Siehe
+      Abschnitt „Build" unten. Das war zugleich der DSGVO-Blocker in der
+      Datenschutzerklärung.
+
+      **Einschränkung seit 2026-08-20:** Sobald `DL_CFG.publishableKey` gesetzt ist,
+      lädt das Download-Modal Clerk nach — aber **erst beim Klick auf einen
+      Download-Button**, nie beim reinen Betrachten der Seite. Wer nicht klickt,
+      löst weiterhin keinen einzigen Drittanbieter-Request aus. Das ist bewusst so
+      gebaut: das Skript ins `<head>` zu ziehen würde aus dem Modal einen Tracker
+      auf jeder Unterseite machen. Nicht verschieben.
 - [ ] **Fonts als WOFF2** — aktuell TTF (134 kB + 2× 141 kB), spart grob 60 %.
 - [ ] **`noindex` entfernen** auf `privacy.html` und `withdrawal.html`, sobald geprüft.
 - [ ] **Geräteliste pflegen:** `js/site.js` → `DEVICES`, `aliases` nicht vergessen.
