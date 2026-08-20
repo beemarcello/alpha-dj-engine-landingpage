@@ -518,6 +518,46 @@ body {
 .faq-item[open] .faq-answer { animation: faq-reveal var(--dur) var(--ease-out); }
 
 /* --------------------------------------------------------------------------
+   4a. Why — Steckbrief über der FAQ
+
+   Sitzt wie die FAQ ohne eigene Flächenfarbe auf dem Body-Grau (--paper), die
+   Karte selbst ist weiss. Kein Akkordeon: der Text ist kurz und der Grund, warum
+   es Alpha gibt, soll niemand erst aufklappen müssen.
+   -------------------------------------------------------------------------- */
+.why-card {
+  max-width: 68ch;              /* gleiche Zeilenlänge wie .faq-answer */
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-hard);
+  padding: clamp(24px, 5vw, 40px);
+}
+
+.why-card__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(22px, 3.5vw, 30px);
+  line-height: 1.1;
+  letter-spacing: .03em;
+  margin: 0 0 18px;
+}
+
+.why-card p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-55);
+  margin: 0;
+}
+.why-card p + p { margin-top: 1em; }
+
+/* Schlusszeile in voller Tinte — sie ist die Pointe, nicht Fliesstext. */
+.why-card__send {
+  margin-top: 1.4em !important;
+  color: var(--ink) !important;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
    4b. Unterseiten (pricing / privacy / imprint / compatibility)
    -------------------------------------------------------------------------- */
 .subpage {

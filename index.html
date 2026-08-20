@@ -23,7 +23,7 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=18">
+  <link rel="stylesheet" href="css/site.css?v=19">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -534,6 +534,37 @@
     </section>
 
     <!-- ====================================================================
+         Why — Steckbrief direkt über der FAQ
+
+         Bewusst kein Akkordeon: die Herkunft der Software ist das Argument,
+         das vor den Detailfragen kommt, und niemand klappt einen Grund auf,
+         nach dem er nicht gesucht hat. Gleiche Fläche wie die FAQ (Body-Grau),
+         damit beide Blöcke als ein Abschnitt gelesen werden.
+         ==================================================================== -->
+    <section id="why" class="border-b-2 border-black py-24 px-6">
+      <div class="max-w-[860px] mx-auto">
+        <h2 class="font-doto font-semibold leading-none tracking-tight text-4xl md:text-6xl m-0">
+          Why?
+        </h2>
+
+        <div class="why-card mt-10">
+          <h3 class="why-card__title">Why Alpha?</h3>
+          <p>
+            Alpha was written by DJs who were tired of losing the afternoon before a
+            gig to a USB stick. This wasn't a market we spotted — it was our own
+            Saturday, gone, every single time.
+          </p>
+          <p>
+            Maybe there are some other DJs out there who have the same issues.
+          </p>
+          <p class="why-card__send">
+            Now go and play your banger set.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
          FAQ
          Inhalte sind gegen den Code geprüft (Backup/Restore + „reused"-Pfad in
          core/alpha_core/engine/writer.py). Keine Aussagen zu Features, die noch
@@ -635,8 +666,8 @@
               </p>
               <p>
                 Happy with it? Alpha is <strong>€30 incl. VAT, once</strong>. No
-                subscription, no yearly renewal — you buy it and keep it, and updates
-                are included.
+                subscription, no yearly renewal — you buy it and keep it, and new
+                hardware support and fixes are included.
               </p>
               <p>
                 One licence covers one person on one device, and you can move it to a
