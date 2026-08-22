@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Feature Knowledge Base — Alpha-DJ-Engine</title>
+  <meta name="description" content="Complete reference of every Alpha-DJ-Engine feature: what it does, how to use it, its settings, its in-app tooltips, its limits, and the questions customers ask about it.">
+
+  <!-- INDEXIERBAR — bewusst KEIN noindex.
+       Der AI-Support-Agent kann nur Seiten crawlen, die indexierbar sind
+       (Marcel, 2026-08-20). Wer hier ein noindex einbaut, schaltet damit den
+       First-Level-Support ab. Auch robots.txt darf diesen Pfad nicht
+       blockieren. -->
+
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/knowledgebase/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../css/site.css?v=22">
+  <link rel="stylesheet" href="../css/tailwind.css?v=6">
+
+  <script src="../js/icons.js?v=2" defer></script>
+  <script src="../js/site.js?v=10" defer></script>
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  ANLEITUNG FÜR DEN SOFTWARE-AGENT  —  BITTE VOLLSTÄNDIG LESEN
+================================================================================
+
+  Diese Seite ist die Wissensbasis des AI-Support-Agents von Alpha-DJ-Engine.
+  Aus ihr wird eine Vektordatenbank gebaut. Sie wird NICHT von Besuchern
+  gelesen, sondern von einer Maschine zerlegt und von Support-Leuten
+  überflogen. Die Struktur ist deshalb wichtiger als der Stil.
+
+  ========================================================================
+  DIE ZEHN REGELN
+  ========================================================================
+
+  1.  EIN FEATURE = EIN <article class="kb-feature">.
+      Kopiere die Vorlage unten unverändert und fülle sie. Erfinde keine
+      eigenen Klassen und keine eigene Reihenfolge der Blöcke.
+
+  2.  JEDE <h3> WIEDERHOLT DEN FEATURE-NAMEN.
+      Also "Loudness Leveler settings", nicht "Settings". Das ist die
+      wichtigste Regel auf dieser Seite. Die Vektordatenbank zerschneidet den
+      Text in Stücke; ein Stück mit der Überschrift "Settings" ist beim
+      Abruf wertlos, weil niemand mehr weiß, wovon es handelt. Aus demselben
+      Grund: schreibe "the Loudness Leveler writes ..." statt "it writes ...".
+
+  3.  JEDES FEATURE BRAUCHT EINE EINDEUTIGE, STABILE id.
+      Kleinbuchstaben mit Bindestrichen, z. B. id="loudness-leveler". Die id
+      ist die Zitieradresse für den Support-Agent und darf sich NIE ändern,
+      auch nicht wenn das Feature umbenannt wird.
+
+  4.  TRAGE JEDES FEATURE INS INHALTSVERZEICHNIS EIN (<ul class="kb-toc__list">).
+
+  5.  FÜLLE DIE data-ATTRIBUTE.
+      data-kb-status    available | beta | planned | removed
+      data-kb-since     Versionsnummer der Einführung, z. B. 1.2.0
+      data-kb-category  analysis | sequencing | export | library | licensing | app
+      data-kb-platforms z. B. macOS
+      Sie erlauben der Vektordatenbank, nach Status und Version zu filtern,
+      ohne Fließtext zu interpretieren.
+
+  6.  TOOLTIPS UND UI-TEXTE WORTWÖRTLICH, in <span class="kb-verbatim">.
+      Der Kunde schreibt "da steht bei mir ...". Nur wenn der Text exakt so
+      dasteht, wie die App ihn zeigt, findet der Agent die Stelle. Nicht
+      glätten, nicht übersetzen, nicht kürzen — auch Tippfehler der App
+      bleiben stehen.
+
+  7.  DER BLOCK "does not do" IST PFLICHT.
+      Er verhindert, dass der Support-Agent Fähigkeiten erfindet. Was dort
+      nicht ausgeschlossen ist, wird er im Zweifel behaupten.
+
+  8.  FRAGEN SO FORMULIEREN, WIE KUNDEN SIE STELLEN.
+      "Does the Loudness Leveler change my original files?" — nicht
+      "Destructive processing". Suchanfragen sind Fragen; Überschriften, die
+      wie Fragen klingen, werden zuverlässiger gefunden.
+
+  9.  NIE ANDERE FEATURES LÖSCHEN ODER UMSORTIEREN.
+      Nur den eigenen Block hinzufügen oder ändern. Wird ein Feature
+      entfernt, setze data-kb-status="removed" und schreibe dazu, was an
+      seine Stelle tritt — Kunden mit alten Versionen fragen weiter danach.
+
+  10. NICHTS INTERNES.
+      Diese Seite ist öffentlich abrufbar und wird indexiert. Keine
+      Kulanzregeln, keine internen Workarounds, keine unveröffentlichte
+      Roadmap, keine Preis-Ausnahmen.
+
+  ========================================================================
+  SPRACHE
+  ========================================================================
+  Englisch, wie die gesamte Website und die App.
+
+  ========================================================================
+  VORLAGE — AB HIER KOPIEREN
+  ========================================================================
+
+  <article class="kb-feature" id="FEATURE-ID"
+           data-kb-status="available"
+           data-kb-since="1.0.0"
+           data-kb-category="export"
+           data-kb-platforms="macOS">
+
+    <h2>FEATURE NAME</h2>
+
+    <p class="kb-meta">
+      <span class="is-available">Available</span>
+      <span>Since 1.0.0</span>
+      <span>macOS</span>
+    </p>
+
+    <p class="kb-summary">
+      Ein einziger, vollstaendiger Satz: was das Feature ist und was es dem
+      Nutzer bringt. Muss allein stehen koennen.
+    </p>
+
+    <section class="kb-block">
+      <h3>What the FEATURE NAME does</h3>
+      <p>...</p>
+    </section>
+
+    <section class="kb-block">
+      <h3>How to use the FEATURE NAME</h3>
+      <ol>
+        <li>...</li>
+      </ol>
+    </section>
+
+    <section class="kb-block">
+      <h3>FEATURE NAME settings</h3>
+      <div class="kb-table-wrap">
+        <table class="kb-table">
+          <thead>
+            <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kb-block">
+      <h3>FEATURE NAME tooltips and on-screen text</h3>
+      <div class="kb-table-wrap">
+        <table class="kb-table">
+          <thead>
+            <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>...</td><td><span class="kb-verbatim">...</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kb-block">
+      <h3>What the FEATURE NAME does not do</h3>
+      <ul>
+        <li>...</li>
+      </ul>
+    </section>
+
+    <section class="kb-block">
+      <h3>Common questions about the FEATURE NAME</h3>
+      <dl class="kb-qa">
+        <dt>Frage, so wie ein Kunde sie stellt?</dt>
+        <dd>Antwort.</dd>
+      </dl>
+    </section>
+
+    <section class="kb-block">
+      <h3>FEATURE NAME troubleshooting</h3>
+      <div class="kb-table-wrap">
+        <table class="kb-table">
+          <thead>
+            <tr><th>What the customer sees</th><th>Why it happens</th><th>What to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>...</td><td>...</td><td>...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="kb-block">
+      <h3>FEATURE NAME error messages</h3>
+      <div class="kb-table-wrap">
+        <table class="kb-table">
+          <thead>
+            <tr><th>Message</th><th>What it means</th><th>What to do</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="kb-verbatim">...</span></td><td>...</td><td>...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </article>
+
+  ========================================================================
+  Blöcke, die auf ein Feature nicht zutreffen, ersatzlos weglassen —
+  aber NIE "does not do" und NIE "Common questions".
+================================================================================
+-->
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <a data-download href="../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+    </div>
+  </nav>
+
+  <main id="main" class="kb">
+    <div class="kb__inner">
+
+      <h1>Feature knowledge base</h1>
+      <p class="kb__lead">
+        Every feature of Alpha-DJ-Engine: what it does, how to use it, what it
+        cannot do, the exact wording shown in the app, and the questions
+        customers actually ask.
+      </p>
+
+      <div class="kb-note">
+        <p><strong>What this page is.</strong> A complete, structured reference
+        for Alpha-DJ-Engine support. Each feature is one self-contained entry
+        with a stable link, so an answer can always point at the exact
+        section.</p>
+        <p><strong>Keeping it current.</strong> Every released feature is
+        documented here, and every change to a feature is reflected here.
+        A feature that is not on this page cannot be supported.</p>
+      </div>
+
+      <nav class="kb-toc" aria-label="Features">
+        <h2>All features</h2>
+        <!-- AGENT: hier je Feature EINE Zeile ergaenzen, alphabetisch innerhalb
+             der Kategorie. Der Linktext ist exakt der Feature-Name. -->
+        <ul class="kb-toc__list">
+          <li><a href="#example-feature">Example entry (delete me)</a></li>
+        </ul>
+      </nav>
+
+      <!-- ====================================================================
+           AGENT: Feature-Artikel ab hier einfuegen, gruppiert unter den
+           Kategorie-Ueberschriften. Kategorien, die noch leer sind, bleiben
+           auskommentiert stehen, bis das erste Feature dazukommt.
+           ==================================================================== -->
+
+      <!-- <h2 class="kb-category">Analysis</h2> -->
+      <!-- <h2 class="kb-category">Sequencing</h2> -->
+      <!-- <h2 class="kb-category">Export</h2> -->
+      <!-- <h2 class="kb-category">Library</h2> -->
+      <!-- <h2 class="kb-category">Licensing and account</h2> -->
+      <!-- <h2 class="kb-category">The app itself</h2> -->
+
+      <article class="kb-feature kb-feature--example" id="example-feature"
+               data-kb-status="planned"
+               data-kb-since="0.0.0"
+               data-kb-category="app"
+               data-kb-platforms="macOS">
+
+        <p class="kb-example-warning">
+          EXAMPLE ENTRY — this is a filled-in illustration of the required
+          structure, not a real feature. Delete this entire article, and its
+          line in the table of contents, as soon as the first real feature is
+          documented.
+        </p>
+
+        <h2>Example Feature</h2>
+
+        <p class="kb-meta">
+          <span class="is-planned">Planned</span>
+          <span>Since 0.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          The Example Feature shows how one entry in this knowledge base is
+          built, so that every real feature can follow the same shape.
+        </p>
+
+        <section class="kb-block">
+          <h3>What the Example Feature does</h3>
+          <p>
+            Notice that this heading repeats the feature name, and that this
+            sentence says <em>the Example Feature</em> rather than <em>it</em>.
+            When the knowledge base is split into pieces for the support agent,
+            each piece is retrieved on its own — a piece that only says
+            &ldquo;it writes the file&rdquo; is useless, because nothing in it
+            says what &ldquo;it&rdquo; is.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use the Example Feature</h3>
+          <ol>
+            <li>Describe one action per step.</li>
+            <li>Name the exact button or menu the customer has to find.</li>
+            <li>State what the customer should see when the step worked.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Example Feature settings</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Example setting</td>
+                  <td>Settings → Example</td>
+                  <td><code>Off</code></td>
+                  <td><code>On</code> / <code>Off</code></td>
+                  <td>Explain the effect in one sentence.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>Example Feature tooltips and on-screen text</h3>
+          <p>
+            Copy every tooltip word for word, including any wording that reads
+            oddly. Customers quote what they see, and the support agent can
+            only match it if the text is identical.
+          </p>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tooltip on the Example toggle</td>
+                  <td><span class="kb-verbatim">Turn this on to do the example thing.</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What the Example Feature does not do</h3>
+          <ul>
+            <li>It does not do the thing customers most often assume it does.</li>
+            <li>It does not touch anything the customer would be upset about.</li>
+            <li>This block is mandatory. Anything not ruled out here may be
+                claimed by the support agent as a capability.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about the Example Feature</h3>
+          <dl class="kb-qa">
+            <dt>Does the Example Feature change my original files?</dt>
+            <dd>Phrase the question the way a customer would type it, then
+                answer it plainly in one or two sentences.</dd>
+            <dt>Why is the Example Feature greyed out?</dt>
+            <dd>Cover the conditions that make the feature unavailable.</dd>
+          </dl>
+        </section>
+
+        <section class="kb-block">
+          <h3>Example Feature troubleshooting</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>What the customer sees</th><th>Why it happens</th><th>What to do</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nothing happens after clicking Example</td>
+                  <td>The precondition was not met.</td>
+                  <td>The concrete steps that resolve it.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>Example Feature error messages</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Message</th><th>What it means</th><th>What to do</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="kb-verbatim">Example failed. Please try again.</span></td>
+                  <td>What actually went wrong behind that message.</td>
+                  <td>What the customer should do next.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="py-12 px-6">
+    <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <a href="../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="text-sm font-semibold text-[var(--ink-55)]">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold" aria-label="Footer">
+        <a href="../compatibility.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Works with your setup?</a>
+        <a href="../pricing.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Pricing</a>
+        <a href="../terms.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Terms</a>
+        <a href="../withdrawal.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Withdrawal</a>
+        <a href="../privacy.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Privacy</a>
+        <a href="#" data-cookie-settings class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Cookie settings</a>
+        <a href="../imprint.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Imprint</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>

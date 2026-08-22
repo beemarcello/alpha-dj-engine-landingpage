@@ -150,6 +150,40 @@ Wer eine neue CTA-Stelle ergänzt, braucht immer beide `<div>`s mit `hidden`.
 
 ---
 
+## Knowledgebase (`/knowledgebase/`) — wird von einem Agent befüllt
+
+`knowledgebase/index.html` ist die Wissensbasis des **AI-Support-Agents**. Aus
+ihr wird eine Vektordatenbank gebaut; der Agent macht damit First-Level-Support.
+Befüllt wird sie vom **Software-Agent**, nicht von Hand — die verbindlichen
+Regeln und die Copy-Paste-Vorlage stehen als großer Kommentar direkt am Anfang
+der Datei.
+
+Drei Eigenschaften, die leicht kaputtgehen und dann teuer sind:
+
+- **Die Seite MUSS indexierbar bleiben.** Kein `noindex`, kein `Disallow` in
+  `robots.txt`. Der Support-Agent kann nur indexierbare Seiten crawlen — ein
+  `noindex` schaltet damit den First-Level-Support ab. Aus demselben Grund
+  steht sie in der `sitemap.xml`: sie ist von keiner Seite verlinkt und wäre
+  sonst für keinen Crawler auffindbar.
+- **Jede `<h3>` wiederholt den Feature-Namen** („Loudness Leveler settings",
+  nicht „Settings"). Die Vektordatenbank zerschneidet den Text; ein Stück mit
+  der Überschrift „Settings" ist beim Abruf wertlos. Dasselbe gilt für „it" im
+  Fließtext.
+- **Keine `--` in HTML-Kommentaren.** Das ist in HTML unzulässig. Chrome
+  verzeiht es, ein strengerer Parser beendet den Kommentar früher — dann landet
+  die Vorlage („FEATURE NAME", „Frage, so wie ein Kunde sie stellt?") als echter
+  Inhalt in der Vektordatenbank und vergiftet die Antworten des Support-Agents.
+  Deshalb sind alle Trennlinien im Anleitungskommentar aus `=`, nicht aus `-`.
+
+Öffentlich heißt öffentlich: nicht verlinkt ist **nicht** privat. Keine
+Kulanzregeln, keine internen Workarounds, keine unveröffentlichte Roadmap.
+
+Der Beispiel-Artikel (`id="example-feature"`) ist eine ausgefüllte Illustration
+der Struktur und muss gelöscht werden, sobald das erste echte Feature drinsteht
+— samt seiner Zeile im Inhaltsverzeichnis.
+
+---
+
 ## Download-Flow (wichtig)
 
 Jeder Button mit `data-download` öffnet das Modal aus

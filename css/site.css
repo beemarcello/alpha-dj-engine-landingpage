@@ -1041,3 +1041,161 @@ body {
   .exp-writing { opacity: 0 !important; }
   .exp-done { opacity: 1 !important; }
 }
+
+/* ==========================================================================
+   Knowledgebase (/knowledgebase/)
+
+   Wissensbasis fuer den AI-Support-Agent. Befuellt wird sie vom
+   Software-Agent, NICHT von Hand — die Regeln stehen als Kommentar oben in
+   knowledgebase/index.html und in der README.
+
+   Gestaltung bewusst nuechtern und dicht: die Seite wird ueberwiegend von
+   Maschinen gelesen und von Support-Leuten ueberflogen, nicht von Besuchern
+   durchgescrollt. Deshalb keine Animationen, keine Schraeglagen, kein Doto im
+   Fliesstext — nur klare Hierarchie und gut abgrenzbare Bloecke.
+   ========================================================================== */
+.kb { padding-block: clamp(96px, 12vw, 144px) clamp(48px, 8vw, 96px); }
+.kb__inner { width: min(940px, 100%); margin-inline: auto; padding-inline: var(--gutter); }
+
+.kb h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.05;
+  letter-spacing: .03em;
+  margin: 0 0 16px;
+}
+.kb__lead { font-size: 17px; color: var(--ink-55); margin: 0 0 12px; max-width: 68ch; line-height: 1.6; }
+
+/* Hinweiskasten fuer Redakteure — erklaert, was diese Seite ist. */
+.kb-note {
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  padding: 16px 18px;
+  margin: 28px 0 40px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.kb-note p { margin: 0; }
+.kb-note p + p { margin-top: .7em; }
+.kb-note code { font-family: var(--font-display); font-size: .95em; }
+
+/* Inhaltsverzeichnis */
+.kb-toc {
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-hard);
+  padding: 22px 24px;
+  margin: 0 0 56px;
+}
+.kb-toc h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 14px; font-weight: 700; }
+.kb-toc ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 32px; }
+.kb-toc li { break-inside: avoid; margin: 0 0 7px; font-size: 14px; }
+.kb-toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink-40); }
+.kb-toc a:hover { border-bottom-color: var(--ink); }
+@media (max-width: 640px) { .kb-toc ul { columns: 1; } }
+
+/* Kategorie-Trenner */
+.kb-category {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 600;
+  letter-spacing: .03em;
+  margin: 64px 0 8px;
+  padding-bottom: 10px;
+  border-bottom: var(--stroke);
+}
+
+/* --------------------------------------------------------------------------
+   Ein Feature = ein <article>. Die data-Attribute sind fuer die
+   Vektordatenbank gedacht: Status, Version und Kategorie lassen sich damit
+   auslesen, ohne Fliesstext zu interpretieren.
+   -------------------------------------------------------------------------- */
+.kb-feature {
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-md);
+  padding: clamp(20px, 3.5vw, 32px);
+  margin: 28px 0;
+  scroll-margin-top: 90px;      /* damit der Sprunganker nicht unter der Nav landet */
+}
+.kb-feature > h2 {
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin: 0 0 10px;
+}
+.kb-summary { font-size: 16px; line-height: 1.6; margin: 0 0 16px; max-width: 72ch; }
+
+.kb-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+.kb-meta span {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--paper-2);
+}
+.kb-meta .is-available { background: var(--green); }
+.kb-meta .is-beta      { background: var(--beige-hot); }
+.kb-meta .is-planned   { background: var(--paper-2); }
+.kb-meta .is-removed   { background: var(--red); }
+
+.kb-block { margin-top: 26px; }
+.kb-block > h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink-40);
+}
+.kb-block p, .kb-block li { font-size: 15px; line-height: 1.65; }
+.kb-block > p { margin: 0 0 .8em; max-width: 72ch; }
+/* list-style MUSS hier explizit gesetzt werden: Tailwinds Preflight setzt
+   ol/ul global auf list-style: none. Ohne die beiden Zeilen verlieren die
+   Schritte unter "How to use" ihre Nummern und die Ausschlussliste ihre
+   Punkte — beides ist in einer Wissensbasis kein Schoenheitsfehler, sondern
+   Informationsverlust: aus einer nummerierten Reihenfolge werden lose Saetze. */
+.kb-block ul, .kb-block ol { margin: 0 0 .8em; padding-left: 1.3em; }
+.kb-block ul { list-style: disc; }
+.kb-block ol { list-style: decimal; }
+.kb-block li { margin-bottom: .4em; padding-left: .2em; }
+
+/* Tabellen — Einstellungen, Tooltips, Fehlermeldungen, Troubleshooting.
+   Auf schmalen Viewports scrollt die Tabelle in sich, nicht die Seite. */
+.kb-table-wrap { overflow-x: auto; margin: 0 0 .8em; }
+.kb-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 460px; }
+.kb-table th, .kb-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 9px 12px;
+  border: 1px solid var(--ink-40);
+  line-height: 1.5;
+}
+.kb-table th { background: var(--paper-2); font-weight: 700; }
+.kb-table code { font-family: var(--font-display); font-size: .95em; }
+
+/* Wortwoertliche UI-Texte werden ausgezeichnet, damit der Support-Agent sie
+   von unseren Erklaerungen unterscheiden kann. */
+.kb-verbatim { font-style: normal; background: var(--green); padding: 1px 5px; border-radius: 3px; }
+
+/* Frage-Antwort — die Fragen sind so formuliert, wie Kunden sie stellen. */
+.kb-qa { margin: 0; }
+.kb-qa dt { font-weight: 700; font-size: 15px; margin: 16px 0 5px; }
+.kb-qa dt:first-child { margin-top: 0; }
+.kb-qa dd { margin: 0; font-size: 15px; line-height: 1.65; max-width: 72ch; }
+
+/* Beispielblock — muss geloescht werden, sobald echte Features drinstehen. */
+.kb-feature--example { border-style: dashed; background: var(--paper-2); }
+.kb-example-warning {
+  background: var(--beige-hot);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}

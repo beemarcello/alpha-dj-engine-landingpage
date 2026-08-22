@@ -5,4 +5,8 @@ Allow: /
 # Rechtstexte mit noindex im <head> stehen bewusst nicht in der Sitemap.
 # Kein Disallow: sie sollen erreichbar und crawlbar bleiben, nur nicht ranken.
 
+# /knowledgebase/ ist die Wissensbasis des AI-Support-Agents und MUSS crawlbar
+# und indexierbar bleiben — der Agent kann nur indexierbare Seiten lesen.
+# Hier niemals ein Disallow eintragen, und in der Seite kein noindex setzen.
+
 Sitemap: https://alpha-dj-engine.com/sitemap.xml
