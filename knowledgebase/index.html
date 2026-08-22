@@ -248,7 +248,15 @@
         <!-- AGENT: hier je Feature EINE Zeile ergaenzen, alphabetisch innerhalb
              der Kategorie. Der Linktext ist exakt der Feature-Name. -->
         <ul class="kb-toc__list">
-          <li><a href="#example-feature">Example entry (delete me)</a></li>
+          <li><a href="#track-analysis">Track analysis</a></li>
+          <li><a href="#track-selection">Track selection</a></li>
+          <li><a href="#compose">Compose</a></li>
+          <li><a href="#refine">Refine</a></li>
+          <li><a href="#local-backups">Local backups</a></li>
+          <li><a href="#match-loudness">Match loudness</a></li>
+          <li><a href="#skip-duplicates">Skip duplicates</a></li>
+          <li><a href="#usb-export">USB export</a></li>
+          <li><a href="#playlists-on-device">Playlists on device</a></li>
         </ul>
       </nav>
 
@@ -258,62 +266,492 @@
            auskommentiert stehen, bis das erste Feature dazukommt.
            ==================================================================== -->
 
-      <!-- <h2 class="kb-category">Analysis</h2> -->
-      <!-- <h2 class="kb-category">Sequencing</h2> -->
-      <!-- <h2 class="kb-category">Export</h2> -->
-      <!-- <h2 class="kb-category">Library</h2> -->
-      <!-- <h2 class="kb-category">Licensing and account</h2> -->
-      <!-- <h2 class="kb-category">The app itself</h2> -->
+      <h2 class="kb-category">Analysis</h2>
 
-      <article class="kb-feature kb-feature--example" id="example-feature"
-               data-kb-status="planned"
-               data-kb-since="0.0.0"
-               data-kb-category="app"
+      <article class="kb-feature" id="track-analysis"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="analysis"
                data-kb-platforms="macOS">
 
-        <p class="kb-example-warning">
-          EXAMPLE ENTRY — this is a filled-in illustration of the required
-          structure, not a real feature. Delete this entire article, and its
-          line in the table of contents, as soon as the first real feature is
-          documented.
-        </p>
-
-        <h2>Example Feature</h2>
+        <h2>Track analysis</h2>
 
         <p class="kb-meta">
-          <span class="is-planned">Planned</span>
-          <span>Since 0.0.0</span>
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
           <span>macOS</span>
         </p>
 
         <p class="kb-summary">
-          The Example Feature shows how one entry in this knowledge base is
-          built, so that every real feature can follow the same shape.
+          Track analysis interprets each of the DJ's own audio files locally and
+          reads its BPM, musical key (as a Camelot value), energy and loudness,
+          so Alpha can sequence and level the set. Track analysis is the first
+          step, labelled <span class="kb-verbatim">01 Analyze</span>.
         </p>
 
         <section class="kb-block">
-          <h3>What the Example Feature does</h3>
+          <h3>What Track analysis does</h3>
           <p>
-            Notice that this heading repeats the feature name, and that this
-            sentence says <em>the Example Feature</em> rather than <em>it</em>.
-            When the knowledge base is split into pieces for the support agent,
-            each piece is retrieved on its own — a piece that only says
-            &ldquo;it writes the file&rdquo; is useless, because nothing in it
-            says what &ldquo;it&rdquo; is.
+            Track analysis reads the selected audio files on the DJ's own
+            computer and detects, per track, the BPM (tempo), the musical key
+            expressed on the Camelot wheel, an energy value used to shape the
+            set, and the loudness (LUFS) and true peak used by Match loudness.
+            Track analysis runs entirely on the DJ's machine; the audio never
+            leaves the computer. Nothing is written to the USB stick during this
+            step. When analysis finishes, the DJ continues to the Composer.
           </p>
         </section>
 
         <section class="kb-block">
-          <h3>How to use the Example Feature</h3>
+          <h3>How to use Track analysis</h3>
           <ol>
-            <li>Describe one action per step.</li>
-            <li>Name the exact button or menu the customer has to find.</li>
-            <li>State what the customer should see when the step worked.</li>
+            <li>Add tracks or a folder in the <span class="kb-verbatim">Source / tracks to analyze</span> box (see Track selection).</li>
+            <li>Choose the target USB drive in the <span class="kb-verbatim">USB drive / target device</span> box.</li>
+            <li>Click <span class="kb-verbatim">Analyze</span>.</li>
+            <li>When the count under <span class="kb-verbatim">ANALYZED</span> is complete, click <span class="kb-verbatim">Open Composer</span> to build the set.</li>
           </ol>
         </section>
 
         <section class="kb-block">
-          <h3>Example Feature settings</h3>
+          <h3>Track analysis tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Analyze step, intro line</td><td><span class="kb-verbatim">Pick the folder of tracks you own. Alpha interprets BPM, key and energy locally.</span></td></tr>
+                <tr><td>Analyze step, tooltip on the Analyze button</td><td><span class="kb-verbatim">This step only interprets BPM, key &amp; energy locally. Nothing is written to the USB stick yet - writing happens in the last step (Export).</span></td></tr>
+                <tr><td>Analyze step, tooltip on the Open Composer button</td><td><span class="kb-verbatim">Continue to the Composer to build your set</span></td></tr>
+                <tr><td>Analyze step, tooltip on the drive chooser</td><td><span class="kb-verbatim">Choose the USB drive to write the interpreted library to</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Track analysis does not do</h3>
+          <ul>
+            <li>Track analysis does not upload the DJ's audio anywhere. Analysis happens locally on the DJ's computer.</li>
+            <li>Track analysis does not write anything to the USB stick. Writing happens only in the Export step.</li>
+            <li>Track analysis does not change the DJ's audio files; it only reads them.</li>
+            <li>Track analysis does not need an internet connection to read BPM, key, energy and loudness.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Track analysis</h3>
+          <dl class="kb-qa">
+            <dt>Does Track analysis upload my music?</dt>
+            <dd>No. Track analysis runs on the DJ's own computer and the audio files never leave the machine.</dd>
+            <dt>Does Track analysis change or move my files?</dt>
+            <dd>No. Track analysis only reads the files to detect BPM, key, energy and loudness. The files are not changed, and nothing is written to the USB stick in this step.</dd>
+            <dt>The detected key or BPM looks wrong &mdash; why?</dt>
+            <dd>Key and tempo detection is automatic and can occasionally differ from the DJ's own value, especially for tracks with an ambiguous key. The value is a starting point for sequencing.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="track-selection"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="analysis"
+               data-kb-platforms="macOS">
+
+        <h2>Track selection</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Track selection lets the DJ build the list of tracks to analyze from
+          whole folders and from individually picked files across several
+          folders, collected in a staging list before analysis starts.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Track selection does</h3>
+          <p>
+            Track selection gathers the files the DJ wants in the set. The DJ can
+            add every track from a folder, or pick individual tracks from
+            different folders, and all chosen tracks appear in a scrollable
+            staging list in the <span class="kb-verbatim">Source / tracks to analyze</span>
+            box. Tracks can be removed one by one or all at once before analysis.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Track selection</h3>
+          <ol>
+            <li>Click <span class="kb-verbatim">+ Folder</span> to add every track from a folder.</li>
+            <li>Click <span class="kb-verbatim">+ Tracks</span> to pick individual files (multiple can be selected at once); repeat from other folders as needed.</li>
+            <li>Review the staging list; remove a single track with its remove control, or use <span class="kb-verbatim">Clear</span> to empty the list.</li>
+            <li>Click <span class="kb-verbatim">Analyze</span> to interpret the staged tracks.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Track selection tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tooltip on the + Folder button</td><td><span class="kb-verbatim">Add every track from a folder</span></td></tr>
+                <tr><td>Tooltip on the + Tracks button</td><td><span class="kb-verbatim">Add individual tracks (multi-select)</span></td></tr>
+                <tr><td>Tooltip on the Clear button</td><td><span class="kb-verbatim">Remove all</span></td></tr>
+                <tr><td>Tooltip on a staged track's remove control</td><td><span class="kb-verbatim">Remove</span></td></tr>
+                <tr><td>Empty staging list</td><td><span class="kb-verbatim">No tracks yet - add a folder or individual tracks.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Track selection does not do</h3>
+          <ul>
+            <li>Track selection does not copy or move the chosen files. It only lists which files to analyze.</li>
+            <li>Track selection does not analyze the tracks on its own; analysis starts when the DJ clicks Analyze.</li>
+            <li>Track selection does not import from streaming services; it works with the DJ's local files.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Track selection</h3>
+          <dl class="kb-qa">
+            <dt>Can I pick tracks from more than one folder?</dt>
+            <dd>Yes. Use <span class="kb-verbatim">+ Tracks</span> to add individual files, and repeat from any folder; every chosen track collects in the same staging list.</dd>
+            <dt>How do I remove a track I added by mistake?</dt>
+            <dd>Use the remove control on that track in the staging list, or use <span class="kb-verbatim">Clear</span> to remove all of them and start over.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <h2 class="kb-category">Sequencing</h2>
+
+      <article class="kb-feature" id="compose"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="sequencing"
+               data-kb-platforms="macOS">
+
+        <h2>Compose</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Compose builds an ordered set from the analyzed tracks: the DJ draws an
+          energy arc, sets the length, and chooses how strongly to favour
+          harmonic mixing, then Alpha generates a sequence that follows the arc.
+          Compose is the second step, labelled <span class="kb-verbatim">02 Compose</span>.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Compose does</h3>
+          <p>
+            Compose orders the analyzed tracks into a set. The DJ picks an energy
+            arc template and can drag its points to shape the curve, sets the
+            target length, and adjusts two priorities. Compose then generates a
+            track order that follows the drawn energy arc and mixes harmonically
+            according to those priorities. The result is opened in the Refine
+            step for review.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Compose</h3>
+          <ol>
+            <li>Pick an energy arc template (<span class="kb-verbatim">Journey</span>, <span class="kb-verbatim">Wave</span>, <span class="kb-verbatim">Build</span>, <span class="kb-verbatim">Peak-time</span>, <span class="kb-verbatim">Cooldown</span>) and drag its points to shape the curve.</li>
+            <li>Set the length with the minus/plus controls, or click <span class="kb-verbatim">Fit all tracks</span> to size it to all imported tracks.</li>
+            <li>Set the two priority sliders (harmonic vs. energy arc, and key vs. BPM).</li>
+            <li>Click <span class="kb-verbatim">Generate</span> to build the ordered set.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Compose settings</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Energy arc template</td><td>Compose, above the arc</td><td><code>Journey</code></td><td>Journey / Wave / Build / Peak-time / Cooldown</td><td>The shape of the energy curve the set follows.</td></tr>
+                <tr><td>Set length</td><td>Compose, minus/plus control</td><td><code>1h 00m</code></td><td>Adjusts in 10-minute steps</td><td>The target total length of the set.</td></tr>
+                <tr><td>Priority: harmonic vs. energy arc</td><td>Compose, first slider</td><td>Centre</td><td>Harmonic &harr; Energy arc</td><td>Whether ordering favours smooth key transitions or following the drawn curve.</td></tr>
+                <tr><td>Key vs. BPM balance</td><td>Compose, second slider</td><td>Centre</td><td>Key &harr; BPM</td><td>Whether neighbouring tracks are matched more on key or on tempo.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>Compose tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Compose step, intro line</td><td><span class="kb-verbatim">Draw the dramaturgy and set the length.</span></td></tr>
+                <tr><td>Energy arc box, corner label</td><td><span class="kb-verbatim">choose a template - drag the points</span></td></tr>
+                <tr><td>Tooltip on the harmonic/arc priority slider</td><td><span class="kb-verbatim">How the set is ordered. Pull toward Harmonic for the smoothest key transitions between tracks; pull toward Energy arc to follow your drawn energy curve more closely, even if some key changes are rougher.</span></td></tr>
+                <tr><td>Tooltip on the key/BPM balance slider</td><td><span class="kb-verbatim">When placing neighbouring tracks, what matters more. Pull toward Key to favour compatible musical keys (Camelot wheel); pull toward BPM to favour similar tempos. Most harmonic sets sit slightly toward Key.</span></td></tr>
+                <tr><td>Tooltip on Fit all tracks</td><td><span class="kb-verbatim">Set the length to include all imported tracks (back-to-back total)</span></td></tr>
+                <tr><td>Tooltip on the length minus/plus buttons</td><td><span class="kb-verbatim">10 minutes shorter</span> / <span class="kb-verbatim">10 minutes longer</span></td></tr>
+                <tr><td>Tooltip on the Generate button</td><td><span class="kb-verbatim">Generate an ordered set that follows the energy arc</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Compose does not do</h3>
+          <ul>
+            <li>Compose does not write anything to the USB stick; it only builds the order, which is written later in Export.</li>
+            <li>Compose does not change the DJ's audio files.</li>
+            <li>Compose does not change a track's key or tempo; it only orders the tracks.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Compose</h3>
+          <dl class="kb-qa">
+            <dt>What does the energy arc do?</dt>
+            <dd>The energy arc is the shape the set follows over time. Compose orders the tracks so their energy rises and falls along the curve the DJ draws.</dd>
+            <dt>Should I favour harmonic or energy arc?</dt>
+            <dd>Pull toward Harmonic for the smoothest key transitions; pull toward Energy arc to follow the drawn curve more closely, even if some key changes are rougher.</dd>
+            <dt>Can I change the order after generating?</dt>
+            <dd>Yes. The generated order opens in the Refine step, where individual tracks can be reordered or removed.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="refine"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="sequencing"
+               data-kb-platforms="macOS">
+
+        <h2>Refine</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Refine is where the DJ reviews the generated set: audition each track in
+          a mini-player, drag tracks to reorder them, and remove tracks that do
+          not fit. Refine is the third step, labelled <span class="kb-verbatim">03 Refine</span>.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Refine does</h3>
+          <p>
+            Refine shows the generated set as a row of energy bars with a
+            mini-player. The DJ can click a bar to load that track, play it, drag
+            a bar to move a track to a new position, and delete a track that does
+            not belong. The Refine step also carries the Match loudness control
+            (documented separately). When the set is ready, the DJ sends it to
+            Export.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Refine</h3>
+          <ol>
+            <li>Click a bar to select and load that track into the mini-player.</li>
+            <li>Press play to audition it; drag the progress bar to scrub.</li>
+            <li>Drag a bar left or right to reorder that track in the set.</li>
+            <li>Use the remove control in the player to delete the selected track.</li>
+            <li>Click <span class="kb-verbatim">Send to Export</span> when the set is ready.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Refine tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tooltip on the play/pause button</td><td><span class="kb-verbatim">Play / pause the selected track</span></td></tr>
+                <tr><td>Tooltip on the delete-track button</td><td><span class="kb-verbatim">Remove the selected track from the set</span></td></tr>
+                <tr><td>Hint under the set</td><td><span class="kb-verbatim">drag bars to fine-tune</span></td></tr>
+                <tr><td>Tooltip on Send to Export</td><td><span class="kb-verbatim">Send this set to the Export card to write it to a USB stick</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Refine does not do</h3>
+          <ul>
+            <li>Refine does not write anything to the USB stick; writing happens in Export.</li>
+            <li>Refine does not change the DJ's audio files when reordering or removing tracks; removing a track only takes it out of this set.</li>
+            <li>Refine does not delete the audio file from disk when a track is removed from the set.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Refine</h3>
+          <dl class="kb-qa">
+            <dt>If I remove a track in Refine, is the file deleted?</dt>
+            <dd>No. Removing a track in Refine only takes it out of this set. The audio file on disk is not touched.</dd>
+            <dt>How do I change the order of a track?</dt>
+            <dd>Drag its bar left or right to the position you want; the set re-numbers around it.</dd>
+            <dt>Can I hear a track before deciding?</dt>
+            <dd>Yes. Click a bar to load the track into the mini-player, then press play and scrub through it.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <h2 class="kb-category">Export</h2>
+
+      <article class="kb-feature" id="local-backups"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>Local backups</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Local backups saves a copy of the USB stick's Engine library to the
+          DJ's own computer before Alpha writes to the stick, so playlists can be
+          restored if they are ever lost &mdash; for example after an Engine OS
+          update clears the stick.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Local backups does</h3>
+          <p>
+            Before writing a playlist to a stick that already has an Engine
+            library, Local backups copies that library to the DJ's computer. The
+            backup is kept on the local disk, not on the stick, so it survives
+            even if the stick itself is wiped. Each backup is tied to the stick it
+            came from, and an earlier version can be restored later.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Local backups</h3>
+          <ol>
+            <li>Write a set to a USB stick in the Export step. A backup of the stick's existing library is made automatically first.</li>
+            <li>To restore, open the device's playlists and choose an earlier backup version.</li>
+            <li>Confirm the restore to bring the earlier playlists back.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Local backups tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tooltip on a backup's restore control</td><td><span class="kb-verbatim">Restore this version</span></td></tr>
+                <tr><td>Restore confirmation button</td><td><span class="kb-verbatim">Restore</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Local backups does not do</h3>
+          <ul>
+            <li>Local backups does not store the backup on the USB stick; it is kept on the DJ's own computer, so it survives a wipe of the stick.</li>
+            <li>Local backups does not copy the audio files; it backs up the Engine library (the playlists and their order).</li>
+            <li>Local backups does not upload anything; the backup stays on the DJ's computer.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Local backups</h3>
+          <dl class="kb-qa">
+            <dt>An Engine OS update wiped my playlists &mdash; can I get them back?</dt>
+            <dd>If Alpha wrote to that stick before, a backup of its library was saved on the DJ's computer. Open the device's playlists and restore the earlier version.</dd>
+            <dt>Where is the backup stored?</dt>
+            <dd>On the DJ's own computer, not on the USB stick, so it is not lost if the stick is wiped.</dd>
+            <dt>Does Local backups back up my music files too?</dt>
+            <dd>No. Local backups saves the Engine library (playlists and order). The audio files are the DJ's own copies.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="match-loudness"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>Match loudness</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Match loudness makes every track in a set play at the same perceived
+          loudness (measured in LUFS), so the DJ never has to ride the gain
+          between songs. Match loudness is set in the Refine step and written
+          into the files during Export.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Match loudness does</h3>
+          <p>
+            Match loudness measures each track's integrated loudness in LUFS
+            (the EBU R128 / ITU-R BS.1770 standard) and its true peak while the
+            track is analyzed. In the Refine step the DJ picks a target loudness,
+            and the Refine mini-player then plays every track at that matched
+            level so the DJ can hear the result. In the Export step, when Match
+            loudness is ticked, Match loudness bakes a per-track gain into the
+            copies written to the USB stick: a track quieter than the target is
+            turned up, a louder one is turned down, so all tracks play at the
+            same level on any device. Match loudness never raises a track's true
+            peak above -1 dB, which prevents clipping.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Match loudness</h3>
+          <ol>
+            <li>Analyze the tracks &mdash; loudness is measured automatically during analysis.</li>
+            <li>In the Refine step, keep <span class="kb-verbatim">Match loudness</span> ticked and set the target with the slider, or click one of the reference points beneath the slider.</li>
+            <li>Play a track in the Refine mini-player to hear it at the matched level.</li>
+            <li>Go to the Export step and tick <span class="kb-verbatim">Match loudness (-14 LUFS)</span> (the number shows the target).</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span>. The write confirmation reports how many tracks were matched.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Match loudness settings</h3>
           <div class="kb-table-wrap">
             <table class="kb-table">
               <thead>
@@ -321,11 +759,32 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Example setting</td>
-                  <td>Settings → Example</td>
+                  <td>Match loudness (Refine toggle)</td>
+                  <td>Refine, next to the stats above the mini-player</td>
+                  <td><code>On</code></td>
+                  <td><code>On</code> / <code>Off</code></td>
+                  <td>Turns loudness matching on for the mini-player preview.</td>
+                </tr>
+                <tr>
+                  <td>Target loudness (Refine slider)</td>
+                  <td>Refine, beside the Match loudness toggle</td>
+                  <td><code>-14 LUFS</code></td>
+                  <td><code>-20</code> to <code>-6 LUFS</code></td>
+                  <td>The loudness every track is matched to.</td>
+                </tr>
+                <tr>
+                  <td>Reference points: Apple Music / Streaming / Club / DJ Master</td>
+                  <td>Refine, on the scale under the slider</td>
+                  <td>&mdash;</td>
+                  <td><code>-16</code> / <code>-14</code> / <code>-10</code> / <code>-6 LUFS</code></td>
+                  <td>Clicking a point sets the target to that typical level.</td>
+                </tr>
+                <tr>
+                  <td>Match loudness (Export checkbox)</td>
+                  <td>Export, next to <span class="kb-verbatim">Skip duplicates</span></td>
                   <td><code>Off</code></td>
                   <td><code>On</code> / <code>Off</code></td>
-                  <td>Explain the effect in one sentence.</td>
+                  <td>When on, bakes the matched gain into the files written to USB.</td>
                 </tr>
               </tbody>
             </table>
@@ -333,12 +792,7 @@
         </section>
 
         <section class="kb-block">
-          <h3>Example Feature tooltips and on-screen text</h3>
-          <p>
-            Copy every tooltip word for word, including any wording that reads
-            oddly. Customers quote what they see, and the support agent can
-            only match it if the text is identical.
-          </p>
+          <h3>Match loudness tooltips and on-screen text</h3>
           <div class="kb-table-wrap">
             <table class="kb-table">
               <thead>
@@ -346,8 +800,48 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Tooltip on the Example toggle</td>
-                  <td><span class="kb-verbatim">Turn this on to do the example thing.</span></td>
+                  <td>Refine, tooltip on the Match loudness toggle</td>
+                  <td><span class="kb-verbatim">Match every track to the same perceived loudness so you never ride the gain between songs</span></td>
+                </tr>
+                <tr>
+                  <td>Refine, tooltip on the target slider</td>
+                  <td><span class="kb-verbatim">Target loudness - every track is matched to this level (LUFS); peaks never exceed -1 dB, so no clipping</span></td>
+                </tr>
+                <tr>
+                  <td>Refine, target value display</td>
+                  <td><span class="kb-verbatim">-14 LUFS</span> (changes with the slider)</td>
+                </tr>
+                <tr>
+                  <td>Refine, tooltip on the Apple Music reference point</td>
+                  <td><span class="kb-verbatim">Apple Music loudness reference</span></td>
+                </tr>
+                <tr>
+                  <td>Refine, tooltip on the Streaming reference point</td>
+                  <td><span class="kb-verbatim">Streaming reference (Spotify / YouTube / Tidal)</span></td>
+                </tr>
+                <tr>
+                  <td>Refine, tooltip on the Club reference point</td>
+                  <td><span class="kb-verbatim">Club playback reference</span></td>
+                </tr>
+                <tr>
+                  <td>Refine, tooltip on the DJ Master reference point</td>
+                  <td><span class="kb-verbatim">Loud DJ / club master</span></td>
+                </tr>
+                <tr>
+                  <td>Export, the checkbox label</td>
+                  <td><span class="kb-verbatim">Match loudness (-14 LUFS)</span></td>
+                </tr>
+                <tr>
+                  <td>Export, tooltip on the Match loudness checkbox</td>
+                  <td><span class="kb-verbatim">Bakes an equal-loudness gain into the exported files so every track plays at the same level on any device - using the target set on Refine. Off = files are copied unchanged.</span></td>
+                </tr>
+                <tr>
+                  <td>Export, in the write confirmation</td>
+                  <td><span class="kb-verbatim">20 matched to -14 LUFS</span> (the numbers vary)</td>
+                </tr>
+                <tr>
+                  <td>Export, in the write confirmation when a track could not be matched</td>
+                  <td><span class="kb-verbatim">4 not matched (loudness encoder unavailable)</span> (the numbers vary)</td>
                 </tr>
               </tbody>
             </table>
@@ -355,28 +849,36 @@
         </section>
 
         <section class="kb-block">
-          <h3>What the Example Feature does not do</h3>
+          <h3>What Match loudness does not do</h3>
           <ul>
-            <li>It does not do the thing customers most often assume it does.</li>
-            <li>It does not touch anything the customer would be upset about.</li>
-            <li>This block is mandatory. Anything not ruled out here may be
-                claimed by the support agent as a capability.</li>
+            <li>Match loudness does not change the DJ's original files. It applies the gain only to the copies written to the USB stick; the library files are untouched.</li>
+            <li>Match loudness does not add a compressor or a limiter and does not change a track's dynamics. Match loudness only changes the level (a gain adjustment).</li>
+            <li>Match loudness does not push a track above -1 dB true peak, so a quiet, highly dynamic track may stay a little below the target rather than clip.</li>
+            <li>Match loudness in Refine (the toggle and slider) only affects the mini-player preview. It changes no files. Only the Export checkbox writes the change into the files.</li>
+            <li>Match loudness does not read or reuse loudness or gain tags written by other DJ software; Match loudness bakes the level into the audio instead.</li>
           </ul>
         </section>
 
         <section class="kb-block">
-          <h3>Common questions about the Example Feature</h3>
+          <h3>Common questions about Match loudness</h3>
           <dl class="kb-qa">
-            <dt>Does the Example Feature change my original files?</dt>
-            <dd>Phrase the question the way a customer would type it, then
-                answer it plainly in one or two sentences.</dd>
-            <dt>Why is the Example Feature greyed out?</dt>
-            <dd>Cover the conditions that make the feature unavailable.</dd>
+            <dt>Does Match loudness change my original files?</dt>
+            <dd>No. Match loudness applies the gain only to the copies written to the USB stick. The files in the DJ's library are not changed.</dd>
+            <dt>I ticked Match loudness in Export but the tracks are not louder &mdash; why?</dt>
+            <dd>The write confirmation may say <span class="kb-verbatim">not matched (loudness encoder unavailable)</span>. Match loudness needs the loudness encoder to bake the gain into the files; when it is not available the tracks are copied unchanged, so their loudness is not adjusted.</dd>
+            <dt>What target loudness should I choose?</dt>
+            <dd>-14 LUFS matches streaming (Spotify, YouTube, Tidal), -16 LUFS is Apple Music, and around -6 to -10 LUFS is louder, club-master territory. Consistency between tracks matters more than the exact number.</dd>
+            <dt>Why does one track stay quieter than the others?</dt>
+            <dd>Match loudness never lets a track's true peak exceed -1 dB. A quiet track with strong peaks reaches that ceiling before it reaches the target and stays a little below it.</dd>
+            <dt>Do I have to turn Match loudness on in both Refine and Export?</dt>
+            <dd>The Refine toggle controls what the DJ hears in the mini-player; the Export checkbox controls what is written to the stick. Tick the Export checkbox to bake the matched loudness into the exported files.</dd>
+            <dt>Why is the Match loudness slider in Refine greyed out?</dt>
+            <dd>The <span class="kb-verbatim">Match loudness</span> toggle in Refine is off. Tick it to enable the target slider.</dd>
           </dl>
         </section>
 
         <section class="kb-block">
-          <h3>Example Feature troubleshooting</h3>
+          <h3>Match loudness troubleshooting</h3>
           <div class="kb-table-wrap">
             <table class="kb-table">
               <thead>
@@ -384,27 +886,19 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Nothing happens after clicking Example</td>
-                  <td>The precondition was not met.</td>
-                  <td>The concrete steps that resolve it.</td>
+                  <td><span class="kb-verbatim">not matched (loudness encoder unavailable)</span> in the write report</td>
+                  <td>The loudness encoder needed to bake the gain was not available.</td>
+                  <td>The tracks were written without matching; the set order and tags are still correct. Match loudness applies once the encoder is available.</td>
                 </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="kb-block">
-          <h3>Example Feature error messages</h3>
-          <div class="kb-table-wrap">
-            <table class="kb-table">
-              <thead>
-                <tr><th>Message</th><th>What it means</th><th>What to do</th></tr>
-              </thead>
-              <tbody>
                 <tr>
-                  <td><span class="kb-verbatim">Example failed. Please try again.</span></td>
-                  <td>What actually went wrong behind that message.</td>
-                  <td>What the customer should do next.</td>
+                  <td>The Refine loudness slider cannot be moved</td>
+                  <td>The Match loudness toggle in Refine is off.</td>
+                  <td>Tick <span class="kb-verbatim">Match loudness</span> in Refine to enable the slider.</td>
+                </tr>
+                <tr>
+                  <td>One track plays at a different level than the others in the mini-player</td>
+                  <td>That track has no measured loudness because it was not analyzed.</td>
+                  <td>Re-analyze the track so Match loudness can measure its loudness.</td>
                 </tr>
               </tbody>
             </table>
@@ -412,6 +906,295 @@
         </section>
 
       </article>
+
+      <article class="kb-feature" id="skip-duplicates"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>Skip duplicates</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Skip duplicates avoids re-copying tracks that are already on the USB
+          stick: a track used in several playlists is stored once and every
+          playlist links to that one file, which saves space and time.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Skip duplicates does</h3>
+          <p>
+            When Skip duplicates is on, the Export step only copies tracks that
+            are not already on the stick. If a track appears in several
+            playlists, the file is stored once and each playlist links to it. The
+            playlist order is written in full either way; Skip duplicates only
+            affects whether the audio file is copied again.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Skip duplicates</h3>
+          <ol>
+            <li>In the Export step, find the <span class="kb-verbatim">Skip duplicates</span> checkbox next to the write action.</li>
+            <li>Leave it ticked (the default) to reuse files already on the stick, or untick it to copy every track again.</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span>.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Skip duplicates settings</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Skip duplicates</td><td>Export, next to Write to USB</td><td><code>On</code></td><td><code>On</code> / <code>Off</code></td><td>Whether tracks already on the stick are reused instead of copied again.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>Skip duplicates tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tooltip on the Skip duplicates checkbox</td><td><span class="kb-verbatim">Only transfers tracks that aren't already on the stick. If a track appears in several playlists, the file is stored once and every playlist just links to it - saves space.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Skip duplicates does not do</h3>
+          <ul>
+            <li>Skip duplicates does not leave tracks out of the playlist. The full order is always written; only the file copy is skipped when the file is already present.</li>
+            <li>Skip duplicates does not delete anything from the stick.</li>
+            <li>Skip duplicates does not change the DJ's original files.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Skip duplicates</h3>
+          <dl class="kb-qa">
+            <dt>Will Skip duplicates leave songs out of my playlist?</dt>
+            <dd>No. The whole playlist order is written. Skip duplicates only avoids copying an audio file that is already on the stick; the playlist still links to it.</dd>
+            <dt>Should I turn Skip duplicates off?</dt>
+            <dd>Usually no. Leaving it on saves space and time. Turn it off only if you specifically want every track copied again.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="usb-export"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>USB export</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          USB export writes the finished set to a Denon Engine DJ USB stick: it
+          picks the controller format, copies the tracks with their interpreted
+          metadata and playlist order, validates the result, and lets the DJ
+          eject the stick safely. USB export is the last step, labelled
+          <span class="kb-verbatim">04 Export</span>.
+        </p>
+
+        <section class="kb-block">
+          <h3>What USB export does</h3>
+          <p>
+            USB export writes a standard Engine OS 3.x library to the chosen USB
+            stick: the audio files, the interpreted metadata (BPM, key), and the
+            playlist order. It plays on any Denon hardware running Engine OS.
+            Before writing to a stick that already has a library, USB export makes
+            a local backup (see Local backups). After writing, USB export
+            validates the result, and the DJ can eject the stick safely.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use USB export</h3>
+          <ol>
+            <li>Confirm the target device / format (Denon, Engine OS 3.x).</li>
+            <li>Check the playlist name, track count and duration.</li>
+            <li>Choose whether <span class="kb-verbatim">Skip duplicates</span> and <span class="kb-verbatim">Match loudness</span> are ticked.</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
+            <li>Use the eject control to unmount the stick before removing it.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>USB export settings</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Target device / format</td><td>Export, top of the step</td><td><code>Denon DJ / Engine OS 3.x</code></td><td>Denon (Engine OS 3.x); Pioneer / AlphaTheta is marked coming soon</td><td>The library format written to the stick.</td></tr>
+                <tr><td>USB drive</td><td>Chosen in the Analyze step</td><td>&mdash;</td><td>The connected USB drives</td><td>Which stick the library is written to.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>USB export tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Export step, intro line</td><td><span class="kb-verbatim">Pick the controller format for your device - Alpha writes the matching library.</span></td></tr>
+                <tr><td>Tooltip on the target device / format chooser</td><td><span class="kb-verbatim">Choose the controller / export format</span></td></tr>
+                <tr><td>Note under the device chooser</td><td><span class="kb-verbatim">Works with any Denon Engine OS 3.x hardware - validated on the Prime Go</span></td></tr>
+                <tr><td>Tooltip on the Write to USB button</td><td><span class="kb-verbatim">Sends all Music Files including interpreted Metadata and Playlist order on your USB stick.</span></td></tr>
+                <tr><td>Tooltip on the eject control</td><td><span class="kb-verbatim">Safely unmount the USB stick so you can remove it</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What USB export does not do</h3>
+          <ul>
+            <li>USB export does not write a Pioneer / rekordbox library; that format is marked coming soon. It writes Denon Engine OS 3.x.</li>
+            <li>USB export does not change the DJ's original files; it copies them to the stick.</li>
+            <li>USB export does not erase the stick. It adds to the Engine library and backs up the existing one first (see Local backups).</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about USB export</h3>
+          <dl class="kb-qa">
+            <dt>Which gear does USB export work with?</dt>
+            <dd>Any Denon hardware running Engine OS 3.x. It was validated on the Prime Go. Pioneer / AlphaTheta (rekordbox) is marked coming soon.</dd>
+            <dt>Does USB export erase what is already on my stick?</dt>
+            <dd>No. USB export adds the new set and makes a local backup of the stick's existing library first.</dd>
+            <dt>Can I remove the stick as soon as writing finishes?</dt>
+            <dd>Use the eject control first. It safely unmounts the stick so it can be removed without corrupting the library.</dd>
+          </dl>
+        </section>
+
+        <section class="kb-block">
+          <h3>USB export troubleshooting</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>What the customer sees</th><th>Why it happens</th><th>What to do</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>My controller does not show the playlist</td><td>The stick may not have been ejected safely, or the device needs to re-read the stick</td><td>Eject the stick from Alpha, reinsert it into the controller, and let Engine OS re-scan it.</td></tr>
+                <tr><td>The playlist is there but tracks have no waveform yet</td><td>The device generates its own waveform/beatgrid the first time it loads a track</td><td>Load the track once on the device; the waveform is generated then.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </article>
+
+      <h2 class="kb-category">Library</h2>
+
+      <article class="kb-feature" id="playlists-on-device"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="library"
+               data-kb-platforms="macOS">
+
+        <h2>Playlists on device</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Playlists on device lets the DJ see and manage the playlists already on
+          a connected USB stick &mdash; renaming or deleting them, and restoring
+          an earlier backed-up version.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Playlists on device does</h3>
+          <p>
+            Playlists on device reads the Engine library on the connected stick
+            and lists its playlists. From there the DJ can rename a playlist,
+            delete a playlist, or restore an earlier version of the library from a
+            local backup (see Local backups). Deleting a playlist removes the
+            playlist entry, not necessarily every audio file it referenced.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Playlists on device</h3>
+          <ol>
+            <li>With a stick connected, open the device's playlists (from the Analyze or Export step).</li>
+            <li>To rename, use the rename control on a playlist, type the new name, and save.</li>
+            <li>To delete, use the delete control and confirm.</li>
+            <li>To restore an earlier version, choose a backup and confirm the restore.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Playlists on device tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Tooltip on the rename control</td><td><span class="kb-verbatim">Rename playlist</span></td></tr>
+                <tr><td>Tooltip on the delete control</td><td><span class="kb-verbatim">Delete playlist</span></td></tr>
+                <tr><td>Rename confirmation button</td><td><span class="kb-verbatim">Save</span></td></tr>
+                <tr><td>Delete confirmation buttons</td><td><span class="kb-verbatim">Keep</span> / <span class="kb-verbatim">Delete</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Playlists on device does not do</h3>
+          <ul>
+            <li>Playlists on device does not change the DJ's original files on the computer; it manages the library on the stick.</li>
+            <li>Deleting a playlist does not necessarily remove every audio file it linked to from the stick.</li>
+            <li>Playlists on device does not sync with any cloud; it reads the connected stick.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Playlists on device</h3>
+          <dl class="kb-qa">
+            <dt>I deleted a playlist by mistake &mdash; can I get it back?</dt>
+            <dd>If Alpha wrote to that stick before, restore an earlier version from a local backup (see Local backups).</dd>
+            <dt>Does deleting a playlist delete the songs?</dt>
+            <dd>Deleting a playlist removes the playlist entry. It does not necessarily remove every audio file the playlist referenced from the stick.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <!-- <h2 class="kb-category">Licensing and account</h2> -->
+      <!-- <h2 class="kb-category">The app itself</h2> -->
 
     </div>
   </main>
