@@ -29,7 +29,7 @@
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=6">
+  <link rel="stylesheet" href="css/tailwind.css?v=8">
 
 
   <script src="js/icons.js?v=2" defer></script>
@@ -347,9 +347,22 @@
             Pre-listen, swap tracks and fine-tune your next gig. Alpha keeps your
             harmonic transitions locked while you experiment.
           </p>
+          <!--
+            Match loudness (Marcel, 2026-08-22). Alle Angaben belegt in
+            /knowledgebase/#match-loudness — Regler und Referenzpunkte sitzen
+            laut Doku im Refine-Schritt, deshalb steht es hier und nicht bei 04.
+            NICHT schreiben: Limiter, Kompressor, Mastering. Es ist reine
+            Pegelanpassung, die Dynamik bleibt unberuehrt; Clipping wird
+            verhindert, indem der Gain zurueckgenommen wird, nicht durch
+            Begrenzen.
+          -->
+          <p class="leading-relaxed text-xl font-normal mt-4 mb-0">
+            Set a target loudness once — streaming, club, or your own number — and
+            hear every track matched to it before you write anything.
+          </p>
         </div>
 
-        <div class="order-2 demo-panel p-6 h-64 flex flex-col justify-between">
+        <div class="order-2 demo-panel p-6 min-h-[20rem] flex flex-col justify-between">
           <div class="flex justify-between items-center mb-4 border-b-2 border-black pb-4">
             <div class="font-normal text-lg tracking-tight">Setlist editor</div>
             <i data-lucide="sliders-horizontal" class="w-6 h-6 shrink-0"></i>
@@ -397,6 +410,38 @@
                 <span class="text-xs font-doto bg-[var(--green)] border-2 border-black px-1.5 py-0.5 rounded-sm">9A</span>
               </div>
             </div>
+          </div>
+
+          <!--
+            Loudness-Skala. Die Prozentwerte sind KEINE Optik, sondern gerechnet:
+            der Regler laeuft in der App von -20 bis -6 LUFS, das sind 14
+            Schritte. Position = (Wert + 20) / 14.
+              Apple Music -16 -> 28.6%   Streaming -14 -> 42.9%
+              Club       -10 -> 71.4%   DJ Master  -6 -> 100%
+            Der Knopf steht auf dem Standardwert -14. Wer die Werte aendert,
+            rechnet die Positionen mit derselben Formel neu — sonst zeigt die
+            Grafik eine Skala, die es in der App nicht gibt.
+          -->
+          <div class="mt-4 pt-4 border-t-2 border-black" aria-hidden="true">
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-semibold">Match loudness</span>
+              <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">-14 LUFS</span>
+            </div>
+
+            <div class="relative h-4">
+              <span class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1.5 bg-white border-2 border-black rounded-full"></span>
+              <span class="absolute left-0 top-1/2 -translate-y-1/2 h-1.5 bg-black rounded-full" style="width:42.9%"></span>
+
+              <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:28.6%"></span>
+              <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:71.4%"></span>
+              <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:100%"></span>
+
+              <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-2 border-black rounded-full shadow-[2px_2px_0_0_#000]" style="left:42.9%"></span>
+            </div>
+
+            <p class="mt-3 mb-0 text-[10px] leading-snug font-medium text-black/60">
+              Apple Music -16 · Streaming -14 · Club -10 · DJ Master -6
+            </p>
           </div>
         </div>
 
@@ -463,7 +508,12 @@
               <div class="exp-bar absolute inset-y-0 left-0 bg-[var(--beige-hot)] border-r-2 border-black"></div>
             </div>
 
-            <div class="relative h-9 mt-2 text-xs">
+            <!-- h-14 statt h-9: die Bilanz hat drei Zeilen. Wer hier eine
+                 vierte ergaenzt, muss die Hoehe mitziehen — .exp-writing und
+                 .exp-done liegen beide absolut auf diesem Container, eine zu
+                 niedrige Hoehe schneidet die letzte Zeile ab, ohne dass es
+                 einen Fehler gibt. -->
+            <div class="relative h-16 mt-2 text-xs">
               <div class="exp-writing absolute inset-0 text-[var(--ink-55)]">
                 Writing playlist to DENON_DJ<span class="loading-dots"></span>
               </div>
@@ -475,6 +525,13 @@
                 <span class="text-[var(--ink-55)]">
                   Existing tracks re-linked ·
                   <span class="font-doto">0</span> duplicates written
+                </span>
+                <!-- Wortwoertlich die Bestaetigungsmeldung der App, siehe
+                     /knowledgebase/#match-loudness. Nicht umformulieren: der
+                     Kunde soll denselben Satz wiedererkennen. -->
+                <span class="text-[var(--ink-55)]">
+                  <span class="font-doto">20</span> matched to
+                  <span class="font-doto">-14 LUFS</span>
                 </span>
               </div>
             </div>
@@ -843,6 +900,24 @@
             </div>
           </details>
 
+          <!--
+            Umgeschrieben am 2026-08-22 wegen Match loudness. Hier stand vorher
+            pauschal "No. Analysis only reads them" — das war mit dem neuen
+            Feature falsch: die Bibliothek bleibt unangetastet, die exportierten
+            KOPIEN bekommen aber einen Gain eingebacken, wenn der Nutzer die
+            Checkbox setzt. Die Trennung Bibliothek/Kopie ist der Kern der
+            Antwort und darf nicht wieder zu einem pauschalen "Nein" verkuerzt
+            werden.
+
+            Belegt in /knowledgebase/#match-loudness. NICHT schreiben: Limiter,
+            Kompressor, Mastering — es ist reine Pegelanpassung. Und kein
+            "always": es gibt den dokumentierten Fall "loudness encoder
+            unavailable", in dem unveraendert kopiert wird; deshalb "if you tick"
+            statt "Alpha does".
+
+            Zu Cue Points steht bewusst nichts — die Wissensbasis sagt dazu
+            nichts, also duerfen wir es auch nicht behaupten.
+          -->
           <details class="faq-item">
             <summary>
               Does Alpha change my audio files?
@@ -850,8 +925,21 @@
             </summary>
             <div class="faq-answer">
               <p>
-                No. Analysis only reads them — no re-encoding, no rewriting of tags,
-                no moving files around in your library.
+                <strong>The files in your library: never.</strong> Analysis only reads
+                them — no re-encoding, no rewriting of tags, no moving files around.
+              </p>
+              <p>
+                <strong>The copies on your USB stick: only if you ask for it.</strong>
+                Alpha measures every track's loudness in LUFS while it analyzes, and if
+                you tick <strong>Match loudness</strong> on export it bakes an
+                equal-loudness gain into the copies it writes. The whole set then plays
+                at one level on any player, so you are not riding the gain between
+                songs. Peaks never go above -1 dB, so nothing clips.
+              </p>
+              <p>
+                That is a level adjustment, not mastering: no compressor, no limiter,
+                no change to the dynamics of your tracks. Leave the box unticked and
+                the files are copied exactly as they are.
               </p>
             </div>
           </details>
