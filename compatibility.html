@@ -62,7 +62,7 @@
   </script>
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=20" defer></script>
+  <script src="js/site.js?v=21" defer></script>
 </head>
 
 <body class="antialiased">
@@ -98,7 +98,7 @@
         </div>
       </form>
       <p class="dev-hint" id="device-hint">
-        Type a model name — Prime Go, SC6000, Mixstream, CDJ …
+        Type a model name — Prime Go, SC6000, CDJ-3000, XDJ-RX3, OPUS-QUAD …
       </p>
 
       <!-- aria-live: Screenreader bekommen jedes neue Ergebnis vorgelesen -->
@@ -106,21 +106,34 @@
 
       <h2>The short version</h2>
       <p>
-        Alpha writes drives for hardware running <strong>Engine DJ / Engine OS</strong>. We
-        built and tested it on the Denon DJ Prime Go; the rest of the Engine OS family
-        reads the exact same drive format.
+        Alpha writes three drive formats, and you pick one right before it writes:
+        <strong>Denon Engine OS</strong>, <strong>rekordbox</strong> for Pioneer DJ and
+        AlphaTheta players, and <strong>VirtualDJ</strong>.
+      </p>
+      <p>
+        For <strong>Engine DJ / Engine OS</strong> we built and tested Alpha on the Denon DJ
+        Prime Go; the rest of the Engine OS family reads the exact same drive format.
       </p>
       <!--
-        Geaendert am 2026-08-22 (Marcel). Hier stand "not on the list — and won't be".
-        Die App fuehrt das rekordbox-Format als "coming soon"; das "won't be" war damit
-        eine Zusage, die das Produkt selbst widerlegt. Bewusst ohne Datum und ohne
-        Nennung konkreter Geraete, solange nichts ausgeliefert ist.
+        Geaendert am 2026-08-25 (Marcel). Hier stand, Pioneer sei ein anderes
+        Oekosystem und "not on the list yet". Das ist ueberholt: Alpha schreibt
+        den rekordbox-Stick inzwischen selbst, siehe /knowledgebase/#rekordbox-export.
+        Der Vorbehalt "neues Ziel, bitte am eigenen Player bestaetigen" steht so in
+        der Wissensbasis und gehoert mit auf die Seite — nicht streichen, solange
+        er dort steht.
       -->
       <p>
-        Pioneer hardware is a different ecosystem: rekordbox keeps its library in an
-        encrypted database, which is a separate problem from Engine OS. Those players
-        aren't on the list <em>yet</em> — other formats are in the works, but Engine OS
-        is what Alpha writes today.
+        <strong>Pioneer DJ and AlphaTheta players are supported too.</strong> Alpha writes a
+        full rekordbox USB — both the classic library and the newer encrypted one — that a
+        CDJ or XDJ reads directly. You do not need rekordbox installed anywhere: the stick
+        plugs straight into the player. On the list are the CDJ-3000 and CDJ-2000NXS2, the
+        XDJ-RX3 and RX2, XDJ-XZ, XDJ-1000MK2 and XDJ-700, plus the OPUS-QUAD and XDJ-AZ.
+        This target is new, so please confirm it on your own gear.
+      </p>
+      <p>
+        Playing from <strong>VirtualDJ</strong>? Alpha writes a VirtualDJ library onto the
+        stick as well, with your tags, BPM and key and the playlist in order. That one is
+        loaded by the VirtualDJ app on your Mac or PC rather than by the hardware itself.
       </p>
       <p>
         Missing something? <a href="#device-q">Search for it above</a> and leave us your

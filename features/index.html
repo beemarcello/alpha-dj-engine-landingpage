@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Features — Alpha-DJ-Engine</title>
-  <meta name="description" content="Everything Alpha-DJ-Engine does: analyze your own music, import a rekordbox library, compose a harmonic set along an energy arc, match loudness, and write a gig-ready Denon Engine OS USB drive.">
+  <meta name="description" content="Everything Alpha-DJ-Engine does: analyze your own music, import a rekordbox library, compose a harmonic set along an energy arc, match loudness, and write a gig-ready USB for Denon Engine OS, Pioneer rekordbox or VirtualDJ.">
 
   <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
@@ -13,7 +13,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Features — Alpha-DJ-Engine">
-  <meta property="og:description" content="Analyze, compose, level and write a gig-ready Denon Engine OS drive. Everything Alpha does, in one place.">
+  <meta property="og:description" content="Analyze, compose, level and write a gig-ready drive for Denon, Pioneer or VirtualDJ. Everything Alpha does, in one place.">
   <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
   <meta property="og:url" content="https://alpha-dj-engine.com/features/">
   <meta name="theme-color" content="#d5d5d4">
@@ -57,7 +57,7 @@
   </script>
 
   <script src="../js/icons.js?v=6" defer></script>
-  <script src="../js/site.js?v=20" defer></script>
+  <script src="../js/site.js?v=21" defer></script>
 </head>
 
 <body class="antialiased">
@@ -207,19 +207,62 @@
 
         <div class="feat-grid">
 
+          <!--
+            Drei Export-Ziele, drei Karten — bewusst in dieser Reihenfolge:
+            Engine OS ist das aelteste und getestete Ziel, rekordbox das
+            wichtigste neue (es oeffnet die gesamte Pioneer-Installationsbasis),
+            VirtualDJ das Nischenziel. Quelle jeweils /knowledgebase/#usb-export,
+            #rekordbox-export und #virtualdj-export.
+
+            Hier stand bis 2026-08-25 als Limit "Writing a rekordbox drive isn't
+            supported yet". Das ist ueberholt und war die falscheste Aussage auf
+            der Seite — wer als CDJ-Nutzer hier landete, ging wieder.
+          -->
           <article class="feat-card">
-            <h3>USB export</h3>
+            <h3>Denon Engine OS export</h3>
             <p class="feat-card__lead">
-              Writes a proper Denon Engine OS drive: your tracks, their metadata
+              Writes a proper Engine OS drive: your tracks, their metadata
               and the playlist order, ready to play the moment you plug in.
             </p>
             <ul>
               <li><i data-lucide="check" class="w-4 h-4"></i>Engine OS 3.x, the format the whole Engine DJ family reads</li>
               <li><i data-lucide="check" class="w-4 h-4"></i>Validates the result, then lets you eject safely</li>
               <li><i data-lucide="check" class="w-4 h-4"></i>Adds to the existing library — it never erases the stick</li>
-              <!-- Belegt in /knowledgebase/#usb-export: rekordbox schreiben ist
-                   als "coming soon" markiert. Ohne Datum lassen. -->
-              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Writing a rekordbox drive isn't supported yet</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>rekordbox export</h3>
+            <p class="feat-card__lead">
+              Writes a Pioneer DJ / AlphaTheta USB that a CDJ or XDJ reads
+              directly — with no rekordbox software anywhere in the chain.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Plugs straight into the player — rekordbox doesn't need to be installed</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Writes both libraries: the classic one and the newer encrypted one the latest players prefer</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Beat grid, waveform, cues and artwork written as the analysis files the player reads</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>CDJ-3000 and 2000NXS2, XDJ-RX3 and RX2, XZ, 1000MK2, 700, OPUS-QUAD, XDJ-AZ</li>
+              <!-- Beide Punkte stehen so in /knowledgebase/#rekordbox-export.
+                   Der "new target"-Vorbehalt ist eine bewusste Zusage an den
+                   Kunden und faellt erst weg, wenn er dort wegfaellt. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>One constant beat grid per track — tempo changes inside a track aren't modelled</li>
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>A new target — worth confirming on your own player</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>VirtualDJ export</h3>
+            <p class="feat-card__lead">
+              Writes a VirtualDJ library onto the stick: every track's tags, BPM
+              and key, plus the playlist in the order you built it.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Audio, artist, title, album, year, BPM, key and length</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Your key arrives in VirtualDJ's own notation — 8A becomes 8m, 8B becomes 8d</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>The set lands as a ready-made playlist, not a loose pile of files</li>
+              <!-- Wichtige Abgrenzung, steht in /knowledgebase/#virtualdj-export
+                   unter "does not do" und ist dort sogar eine eigene FAQ-Frage. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Loaded by the VirtualDJ app on a computer — not a standalone stick for CDJ or XDJ</li>
             </ul>
           </article>
 

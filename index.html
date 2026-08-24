@@ -68,7 +68,7 @@
   </script>
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=20" defer></script>
+  <script src="js/site.js?v=21" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -122,7 +122,14 @@
 
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 xl:px-24 pt-32 pb-16 order-2">
           <div class="max-w-xl mx-auto lg:mx-0">
-            <p class="eyebrow mb-4">For Denon DJ hardware</p>
+            <!--
+              Geaendert am 2026-08-25 (Marcel). Hier stand "For Denon DJ hardware".
+              Seit rekordbox- und VirtualDJ-Export stimmt das nicht mehr, und es
+              war die erste Zeile, die ein Pioneer-Nutzer im Hero gelesen hat —
+              danach war er weg. Wer hier ein Oekosystem ergaenzt oder streicht,
+              zieht Titel, og:title und die FAQ "Which DJ hardware" mit.
+            -->
+            <p class="eyebrow mb-4">For Denon, Pioneer and VirtualDJ</p>
 
             <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1] reveal">
               Gig-ready USB<br>in seconds.
@@ -631,9 +638,10 @@
         <div class="order-1 md:order-2">
           <span class="step-num">04 Export</span>
           <p class="leading-relaxed text-xl font-normal m-0">
-            Write directly to your USB drive. Alpha formats the metadata and builds the
-            Engine OS database so your set is gig-ready the moment you plug it into your
-            Denon hardware.
+            Write directly to your USB drive. Pick your format — <strong>Denon Engine OS</strong>,
+            <strong>rekordbox</strong> for CDJ and XDJ players, or <strong>VirtualDJ</strong> — and
+            Alpha formats the metadata and builds the library your gear expects, so the set is
+            gig-ready the moment you plug in.
           </p>
           <p class="leading-relaxed text-xl font-normal mt-4 mb-0">
             It backs up the database before it touches anything, and tracks already on
@@ -823,7 +831,7 @@
             </summary>
             <div class="faq-answer">
               <p>
-                It turns a folder of tracks into a USB stick your Denon gear is ready to
+                It turns a folder of tracks into a USB stick your gear is ready to
                 play — analyzed, ordered and plugged in, instead of an evening of prep.
               </p>
               <p>
@@ -831,8 +839,9 @@
                 straight out of the audio, on your own machine. You pick the energy arc
                 the night should follow, and Alpha orders the set so neighboring tracks
                 actually mix. Then it writes the playlist onto your drive and builds the
-                Engine OS database your player expects — copying only what isn't on the
-                stick yet, and levelling the tracks if you asked it to.
+                library your player expects — Engine OS, rekordbox or VirtualDJ — copying
+                only what isn't on the stick yet, and levelling the tracks if you asked it
+                to.
               </p>
               <p>
                 What it isn't: a library manager. Alpha doesn't want to own your
@@ -849,7 +858,11 @@
             </summary>
             <div class="faq-answer">
               <p>
-                We built and tested Alpha specifically for the
+                Alpha writes three drive formats, and you pick one right before it writes:
+                Denon Engine OS, rekordbox, and VirtualDJ.
+              </p>
+              <p>
+                For Engine OS we built and tested Alpha specifically for the
                 <strong>Denon DJ Prime Go</strong>. That's the machine every release is
                 checked against.
               </p>
@@ -860,17 +873,26 @@
                 Numark's Engine OS gear such as the Mixstream Pro.
               </p>
               <!--
-                Geaendert am 2026-08-22 von "not supported" auf "not yet" (Marcel).
-                Die App fuehrt das rekordbox-Format als "coming soon", waehrend hier
-                stand, es werde nie kommen — das widersprach sich. "Won't be" ist die
-                staerkstmoegliche Zusage; wer sich deshalb fuer ein Konkurrenzprodukt
-                entscheidet, faehlt sich zu Recht getaeuscht, wenn es doch kommt.
-                Bewusst ohne Datum.
+                Geaendert am 2026-08-25 (Marcel): aus "isn't supported yet" wurde
+                die Unterstuetzung selbst. Alpha schreibt den rekordbox-Stick
+                inzwischen, siehe /knowledgebase/#rekordbox-export. Der Vorbehalt
+                "neues Ziel, bitte am eigenen Player bestaetigen" steht so in der
+                Wissensbasis und bleibt stehen, solange er dort steht — er ist der
+                Unterschied zwischen einer Zusage und einer Uebertreibung.
               -->
               <p>
-                Pioneer hardware isn't supported yet. rekordbox keeps its library in an
-                encrypted database, which is a different problem from Engine OS — we're
-                working on other formats, but today Alpha writes Denon Engine OS drives.
+                <strong>Pioneer DJ and AlphaTheta players work too.</strong> Alpha writes a
+                full rekordbox USB — both the classic library and the newer encrypted one —
+                that a CDJ or XDJ reads directly. You don't need rekordbox installed
+                anywhere; the stick plugs straight into the player. On the list are the
+                CDJ-3000 and CDJ-2000NXS2, the XDJ-RX3 and RX2, XDJ-XZ, XDJ-1000MK2 and
+                XDJ-700, plus the OPUS-QUAD and XDJ-AZ. It's a new target, so please
+                confirm it on your own gear.
+              </p>
+              <p>
+                Playing from <strong>VirtualDJ</strong>? Alpha writes a VirtualDJ library
+                onto the stick as well — that one is loaded by the VirtualDJ app on your
+                computer rather than by the hardware itself.
               </p>
               <p>
                 Your first 10 tracks are free, so the cheapest way to find out is to

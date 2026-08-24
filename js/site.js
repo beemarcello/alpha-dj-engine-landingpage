@@ -261,11 +261,27 @@
      Leute wirklich tippen (ohne Leerzeichen, ohne Marke, Spitznamen).
 
      status:
-       'yes'    → Engine OS, schreibt Alpha
-       'never'  → anderes Ökosystem, bewusst nicht unterstützt (rekordbox/Serato)
+       'yes'    → Alpha schreibt einen Stick, den das Gerät liest
+       'never'  → anderes Ökosystem, bewusst nicht unterstützt (Serato)
        (kein Treffer) → "Not supported yet" + Gerät melden
+
+     Geaendert am 2026-08-25 (Marcel): CDJ/XDJ standen hier auf 'never' mit der
+     Begruendung, rekordbox sei eine verschluesselte Datenbank, die wir bewusst
+     in Ruhe lassen. Das ist ueberholt — Alpha schreibt den rekordbox-Stick
+     inzwischen selbst (siehe /knowledgebase/#rekordbox-export). Die Suche hat
+     Pioneer-Nutzern also aktiv abgesagt, obwohl ihr Geraet unterstuetzt ist.
+     Der Vorbehalt aus der Wissensbasis ("neues Ziel, bitte am eigenen Player
+     bestaetigen") steht bewusst im note-Feld und darf nicht wegfallen.
      ------------------------------------------------------------------------ */
   var ENGINE = 'Fully compatible · Engine DJ';
+  var REKORDBOX = 'Fully compatible · rekordbox USB';
+
+  /* Marken- und Formatnamen, die Leute statt des Modells tippen. Wer
+     "pioneer", "alphatheta" oder "rekordbox" sucht, soll alle Player sehen. */
+  var RB = ['pioneer', 'alphatheta', 'rekordbox'];
+  var RB_NOTE = 'Alpha writes the rekordbox library itself, so the stick plays ' +
+                'straight on the player — no rekordbox software needed. This ' +
+                'target is new: please confirm it on your own gear.';
   var DEVICES = [
     { name: 'Denon DJ Prime Go',   status: 'yes', meta: ENGINE, aliases: ['primego', 'prime go', 'go'],
       note: 'Our reference device — every release is tested on it.' },
@@ -280,12 +296,29 @@
       aliases: ['lc6000'],
       note: 'An expansion controller — it has no drive of its own. Write the USB for the SC5000 or SC6000 it is paired with.' },
 
-    { name: 'Pioneer DJ CDJ', status: 'never', meta: 'Not supported — rekordbox ecosystem',
-      aliases: ['cdj', 'cdj3000', 'cdj 3000', 'cdj2000', 'pioneer'],
-      note: 'rekordbox stores its library in an encrypted database. We deliberately leave that alone, so Pioneer players are out of scope.' },
-    { name: 'Pioneer DJ XDJ', status: 'never', meta: 'Not supported — rekordbox ecosystem',
-      aliases: ['xdj', 'xdj rx', 'xdjrx', 'xdj xz'],
-      note: 'rekordbox stores its library in an encrypted database. We deliberately leave that alone, so Pioneer players are out of scope.' },
+    { name: 'Pioneer DJ CDJ-3000', status: 'yes', meta: REKORDBOX,
+      aliases: ['cdj3000', 'cdj 3000'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ CDJ-2000NXS2', status: 'yes', meta: REKORDBOX,
+      aliases: ['cdj2000', 'cdj 2000', 'nxs2', 'nexus'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ XDJ-RX3', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdjrx3', 'xdj rx3', 'rx3'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ XDJ-RX2', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdjrx2', 'xdj rx2', 'rx2'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ XDJ-XZ', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdjxz', 'xdj xz', 'xz'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ XDJ-1000MK2', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdj1000', 'xdj 1000', '1000mk2'].concat(RB), note: RB_NOTE },
+    { name: 'Pioneer DJ XDJ-700', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdj700', 'xdj 700'].concat(RB), note: RB_NOTE },
+    { name: 'AlphaTheta OPUS-QUAD', status: 'yes', meta: REKORDBOX,
+      aliases: ['opus', 'opusquad', 'opus quad'].concat(RB), note: RB_NOTE },
+    { name: 'AlphaTheta XDJ-AZ', status: 'yes', meta: REKORDBOX,
+      aliases: ['xdjaz', 'xdj az'].concat(RB), note: RB_NOTE },
+
+    { name: 'VirtualDJ (any controller)', status: 'yes', meta: 'Fully compatible · VirtualDJ library',
+      aliases: ['virtualdj', 'virtual dj', 'vdj'],
+      note: 'Alpha writes a VirtualDJ library onto the stick. It is loaded by the VirtualDJ app on a Mac or PC, so any controller VirtualDJ supports will play the set — it is not a standalone stick for the gear itself.' },
+
     { name: 'Serato hardware', status: 'never', meta: 'Not supported — Serato ecosystem',
       aliases: ['serato', 'rane'],
       note: 'Serato runs from a laptop rather than a self-contained USB drive, so there is nothing for Alpha to write.' }
