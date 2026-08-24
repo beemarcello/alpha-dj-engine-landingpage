@@ -447,7 +447,13 @@
      uneingeschraenkt erlaubt.
      ------------------------------------------------------------------------ */
   var GA_CFG = {
-    measurementId: 'G-DQBC6VLYFP',
+    /* VORUEBERGEHEND LEER (2026-08-22): das rohe Google-Tag steht gerade fest
+       im <head> von index.html. Waere die ID hier ebenfalls gesetzt, wuerde
+       loadAnalytics() nach der Einwilligung ein ZWEITES gtag.js einhaengen und
+       ein zweites config abschicken — jeder Seitenaufruf zaehlte doppelt.
+       Beim Zurueckbauen des Tags diese Zeile wieder aktivieren:
+         measurementId: 'G-DQBC6VLYFP', */
+    measurementId: '',
     adsConversionId: ''
   };
 
