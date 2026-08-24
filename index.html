@@ -23,7 +23,7 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=37">
+  <link rel="stylesheet" href="css/site.css?v=39">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -650,41 +650,29 @@
           <div class="calc__box calc__box--them">
             <p class="calc__boxLabel">What you pay today</p>
 
-            <div class="ptag">
+            <div class="ptag" style="animation-delay:0s">
               <span class="ptag__hole" aria-hidden="true"></span>
               <span class="ptag__body">
                 <span class="ptag__name">rekordbox</span>
                 <span class="ptag__for">Track analysis</span>
                 <span class="ptag__price">€30 per month</span>
               </span>
-              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M 1 14 Q 26 33, 51 51 T 99 87" pathLength="100" style="animation-delay:0s"/>
-                <path d="M 99 11 Q 73 36, 48 53 T 1 89" pathLength="100" style="animation-delay:0.3s"/>
-              </svg>
             </div>
-            <div class="ptag">
+            <div class="ptag" style="animation-delay:1.1s">
               <span class="ptag__hole" aria-hidden="true"></span>
               <span class="ptag__body">
                 <span class="ptag__name">WaveAlign</span>
                 <span class="ptag__for">Loudness matching</span>
                 <span class="ptag__price">€49 one time</span>
               </span>
-              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M 2 11 Q 29 38, 50 50 T 98 90" pathLength="100" style="animation-delay:0.95s"/>
-                <path d="M 98 15 Q 71 33, 47 52 T 2 85" pathLength="100" style="animation-delay:1.25s"/>
-              </svg>
             </div>
-            <div class="ptag">
+            <div class="ptag" style="animation-delay:2.2s">
               <span class="ptag__hole" aria-hidden="true"></span>
               <span class="ptag__body">
                 <span class="ptag__name">Mixo</span>
                 <span class="ptag__for">Writing playlists to USB</span>
                 <span class="ptag__price">€7 per month</span>
               </span>
-              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M 1 13 Q 24 35, 52 53 T 99 86" pathLength="100" style="animation-delay:1.9s"/>
-                <path d="M 99 12 Q 74 39, 49 51 T 1 88" pathLength="100" style="animation-delay:2.2s"/>
-              </svg>
             </div>
 
             <div class="calc__sumrow">

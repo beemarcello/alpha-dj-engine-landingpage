@@ -1542,7 +1542,11 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: var(--white);
+  /* Rot (Marcel): das Schild ist das, was wegfaellt — es soll schon vor dem
+     Riss als "das Teure" lesbar sein. --red ist die Pastellstufe des Rot-Paars,
+     schwarzer Text darauf kommt auf 6,6:1 und damit ueber die AA-Schwelle;
+     --red-hot waere fuer eine Flaeche dieser Groesse zu laut. */
+  background: var(--red);
   border: var(--stroke);
   border-radius: var(--r-sm);
   box-shadow: var(--shadow-hard-sm);
@@ -1560,14 +1564,11 @@ body {
   width: 13px; height: 13px;
   border: var(--stroke);
   border-radius: 999px;
-  background: var(--paper-2);
+  background: var(--white);
 }
 .ptag__body { flex: 1; min-width: 0; }
 .ptag__name { display: block; font-weight: 700; font-size: 15px; line-height: 1.2; }
-.ptag__for  { display: block; font-size: 12px; color: var(--ink-55); margin-top: 2px; }
-/* Preise bewusst in Space Grotesk fett, nicht in Doto (Marcel): Doto ist eine
-   Punktmatrix-Schrift und unter einem dicken Marker-Strich kaum noch lesbar —
-   die Punkte verschwinden im Strich. Fette Groteske haelt dagegen. */
+.ptag__for  { display: block; font-size: 12px; color: rgba(0,0,0,.62); margin-top: 2px; }
 .ptag__price {
   display: block;
   font-family: var(--font-ui);
@@ -1577,47 +1578,51 @@ body {
   margin-top: 6px;
 }
 
-/* Das Kreuz liegt ueber dem ganzen Schild. preserveAspectRatio="none" streckt
-   es auf die Schildform; vector-effect haelt die Strichstaerke davon
-   unabhaengig, sonst wuerde sie mitverzerrt. pathLength="100" macht die
-   Strichlaenge unabhaengig von der tatsaechlichen Diagonale — sonst muesste
-   die dasharray je Schildgroesse anders sein. */
-.ptag__x {
-  position: absolute;
-  inset: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  pointer-events: none;
-  overflow: visible;
-}
-/* Marker-Optik: dicker Strich, runde Enden, und die Striche sind im Markup
-   leicht krumme Pfade statt Geraden — eine perfekt gerade Linie sieht nach
-   Lineal aus, nicht nach Hand.
+/* Zucken — die einzige Bewegung an den Schildern.
 
-   Die Striche werden NACHEINANDER gezogen, gesteuert ueber animation-delay im
-   Markup: erst beide Striche von Schild 1, dann Schild 2, dann Schild 3. Ein
-   Strich braucht 0.28s — so schnell, wie man ihn wirklich zieht. */
-.ptag__x path {
-  fill: none;
-  stroke: var(--red-hot);
-  stroke-width: 9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: ptag-x 8s infinite linear;
+   Ein kurzer Schauer von 0.16s bis 0.88s im 8s-Zyklus, danach Ruhe. Die drei
+   Schilder sind ueber animation-delay im Markup versetzt (0 / 1.1 / 2.2s), es
+   zuckt also eins nach dem anderen.
+
+   Jedes Schild braucht eigene Keyframes, weil seine Grundneigung mit in den
+   transform-Wert gehoert: rotate und translate teilen sich eine Eigenschaft,
+   eine gemeinsame Animation wuerde die Neigung ueberschreiben und die Schilder
+   waehrend des Zuckens geradeziehen. */
+@keyframes ptag-shake-1 {
+  0%, 2%    { transform: rotate(-1.4deg) translate(0, 0); }
+  3.4%      { transform: rotate(-2.6deg) translate(-3px, 1px); }
+  4.6%      { transform: rotate(-0.2deg) translate(3px, -1px); }
+  5.8%      { transform: rotate(-2.2deg) translate(-2px, 1px); }
+  7%        { transform: rotate(-0.8deg) translate(2px, 0); }
+  8.2%      { transform: rotate(-1.7deg) translate(-1px, 0); }
+  9.4%, 100% { transform: rotate(-1.4deg) translate(0, 0); }
 }
-@keyframes ptag-x {
-  0%        { stroke-dashoffset: 100; opacity: 1; }
-  3.5%      { stroke-dashoffset: 0;   opacity: 1; }
-  72%       { stroke-dashoffset: 0;   opacity: 1; }
-  79%, 100% { stroke-dashoffset: 0;   opacity: 0; }
+@keyframes ptag-shake-2 {
+  0%, 2%    { transform: rotate(0.9deg) translate(0, 0); }
+  3.4%      { transform: rotate(2.1deg) translate(3px, -1px); }
+  4.6%      { transform: rotate(-0.4deg) translate(-3px, 1px); }
+  5.8%      { transform: rotate(1.8deg) translate(2px, -1px); }
+  7%        { transform: rotate(0.1deg) translate(-2px, 0); }
+  8.2%      { transform: rotate(1.3deg) translate(1px, 0); }
+  9.4%, 100% { transform: rotate(0.9deg) translate(0, 0); }
 }
+@keyframes ptag-shake-3 {
+  0%, 2%    { transform: rotate(-0.6deg) translate(0, 0); }
+  3.4%      { transform: rotate(-1.9deg) translate(-3px, -1px); }
+  4.6%      { transform: rotate(0.7deg) translate(3px, 1px); }
+  5.8%      { transform: rotate(-1.5deg) translate(-2px, 0); }
+  7%        { transform: rotate(0.2deg) translate(2px, 1px); }
+  8.2%      { transform: rotate(-1deg) translate(-1px, 0); }
+  9.4%, 100% { transform: rotate(-0.6deg) translate(0, 0); }
+}
+.ptag:nth-of-type(1) { animation: ptag-shake-1 8s infinite linear; }
+.ptag:nth-of-type(2) { animation: ptag-shake-2 8s infinite linear; }
+.ptag:nth-of-type(3) { animation: ptag-shake-3 8s infinite linear; }
+
 @media (prefers-reduced-motion: reduce) {
-  /* Ohne Bewegung bleibt das Kreuz stehen — die Aussage darf nicht an der
-     Animation haengen. */
-  .ptag__x path { animation: none; stroke-dashoffset: 0; opacity: 1; }
+  .ptag:nth-of-type(1),
+  .ptag:nth-of-type(2),
+  .ptag:nth-of-type(3) { animation: none; }
 }
 
 /* Summe unten in der linken Box */
