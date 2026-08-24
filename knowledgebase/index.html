@@ -292,6 +292,8 @@
           <li><a href="#match-loudness">Match loudness</a></li>
           <li><a href="#skip-duplicates">Skip duplicates</a></li>
           <li><a href="#usb-export">USB export</a></li>
+          <li><a href="#virtualdj-export">VirtualDJ export</a></li>
+          <li><a href="#rekordbox-export">rekordbox export</a></li>
           <li><a href="#playlists-on-device">Playlists on device</a></li>
         </ul>
       </nav>
@@ -1258,7 +1260,7 @@
                 <tr><th>Setting</th><th>Where to find it</th><th>Default</th><th>Range</th><th>What it changes</th></tr>
               </thead>
               <tbody>
-                <tr><td>Target device / format</td><td>Export, top of the step</td><td><code>Denon DJ / Engine OS 3.x</code></td><td>Denon (Engine OS 3.x); Pioneer / AlphaTheta is marked coming soon</td><td>The library format written to the stick.</td></tr>
+                <tr><td>Target device / format</td><td>Export, top of the step</td><td><code>Denon DJ / Engine OS 3.x</code></td><td>Denon (Engine OS 3.x), VirtualDJ, or Pioneer / AlphaTheta (rekordbox)</td><td>The library format written to the stick. See the VirtualDJ export and rekordbox export entries for the other two.</td></tr>
                 <tr><td>USB drive</td><td>Chosen in the Analyze step</td><td>&mdash;</td><td>The connected USB drives</td><td>Which stick the library is written to.</td></tr>
               </tbody>
             </table>
@@ -1286,7 +1288,7 @@
         <section class="kb-block">
           <h3>What USB export does not do</h3>
           <ul>
-            <li>USB export does not write a Pioneer / rekordbox library; that format is marked coming soon. It writes Denon Engine OS 3.x.</li>
+            <li>This entry covers the Denon / Engine OS 3.x write. VirtualDJ and Pioneer / rekordbox are separate formats with their own entries (VirtualDJ export, rekordbox export).</li>
             <li>USB export does not change the DJ's original files; it copies them to the stick.</li>
             <li>USB export does not erase the stick. It adds to the Engine library and backs up the existing one first (see Local backups).</li>
           </ul>
@@ -1296,7 +1298,7 @@
           <h3>Common questions about USB export</h3>
           <dl class="kb-qa">
             <dt>Which gear does USB export work with?</dt>
-            <dd>Any Denon hardware running Engine OS 3.x. It was validated on the Prime Go. Pioneer / AlphaTheta (rekordbox) is marked coming soon.</dd>
+            <dd>The Export step writes three formats: Denon (Engine OS 3.x, validated on the Prime Go), VirtualDJ, and Pioneer / AlphaTheta (rekordbox). Pick the format at the top of the step; this entry covers the Denon write.</dd>
             <dt>Does USB export erase what is already on my stick?</dt>
             <dd>No. USB export adds the new set and makes a local backup of the stick's existing library first.</dd>
             <dt>Can I remove the stick as soon as writing finishes?</dt>
@@ -1317,6 +1319,187 @@
               </tbody>
             </table>
           </div>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="virtualdj-export"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>VirtualDJ export</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          VirtualDJ export writes the finished set as a VirtualDJ library on the USB stick:
+          a <span class="kb-verbatim">database.xml</span> with every track's tags, BPM and
+          key, plus an ordered playlist. It is one of the three formats in the 04 Export
+          target picker.
+        </p>
+
+        <section class="kb-block">
+          <h3>What VirtualDJ export does</h3>
+          <p>
+            VirtualDJ export copies the audio to <span class="kb-verbatim">VirtualDJ/Music</span>
+            on the stick and writes a <span class="kb-verbatim">VirtualDJ/database.xml</span>
+            describing every track (artist, title, album, year, BPM, key, length) plus an
+            ordered playlist under <span class="kb-verbatim">MyLists</span>. VirtualDJ reads
+            the key as its own Camelot notation (8A becomes 8m, 8B becomes 8d). Cover art is
+            read from each file's tags, so it is not copied separately.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use VirtualDJ export</h3>
+          <ol>
+            <li>Open the target device chooser and pick <span class="kb-verbatim">VirtualDJ</span>.</li>
+            <li>Check the playlist name, track count and duration.</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
+            <li>Eject the stick, plug it into a computer running VirtualDJ, and load the library.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Which devices VirtualDJ export works with</h3>
+          <p>
+            VirtualDJ is software: the stick is loaded by the VirtualDJ app on a Windows or
+            macOS computer, and any of VirtualDJ's supported controllers can then be used.
+            It is not a standalone stick that plugs straight into hardware.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>VirtualDJ export tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead><tr><th>Where it appears</th><th>Exact wording in the app</th></tr></thead>
+              <tbody>
+                <tr><td>Device picker, the VirtualDJ option</td><td><span class="kb-verbatim">VirtualDJ</span> &mdash; <span class="kb-verbatim">USB with a VirtualDJ database.xml + playlist</span></td></tr>
+                <tr><td>Device picker group</td><td><span class="kb-verbatim">DJ software</span></td></tr>
+                <tr><td>"See all supported devices" panel</td><td><span class="kb-verbatim">VirtualDJ runs on the computer, not the stick. Load this USB in the VirtualDJ app on Windows or macOS, then plug in any supported controller.</span></td></tr>
+                <tr><td>Panel, controllers line</td><td><span class="kb-verbatim">Controllers &amp; mixers (plug &amp; play), hundreds supported: Pioneer DJ / AlphaTheta / Denon DJ / Numark / Native Instruments / Rane / Reloop / Hercules / Roland / Korg / Novation / Mixars / Gemini / Stanton / American Audio / Behringer / AKAI / Mixvibes ...</span></td></tr>
+                <tr><td>Panel, mobile note</td><td><span class="kb-verbatim">iOS / Android: control only, via the VirtualDJ Remote companion app.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What VirtualDJ export does not do</h3>
+          <ul>
+            <li>VirtualDJ export does not make a standalone stick for CDJ / XDJ hardware; the stick is read by the VirtualDJ app on a computer.</li>
+            <li>VirtualDJ export does not copy cover-art files; VirtualDJ reads the cover from each track's tags.</li>
+            <li>VirtualDJ export does not change the DJ's original files; it copies them to the stick.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about VirtualDJ export</h3>
+          <dl class="kb-qa">
+            <dt>Does my key survive the export?</dt>
+            <dd>Yes. The Camelot key is written in VirtualDJ's own notation (a number plus d for major or m for minor, so 8A becomes 8m and 8B becomes 8d).</dd>
+            <dt>VirtualDJ shows the set on a laptop but my CDJ does not &mdash; why?</dt>
+            <dd>VirtualDJ is computer software. For a stick that plays directly on Pioneer / AlphaTheta hardware, use the rekordbox export instead.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="rekordbox-export"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>rekordbox export</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          rekordbox export writes a Pioneer / AlphaTheta USB that CDJ and XDJ players read
+          directly, with no rekordbox software needed. It is one of the three formats in the
+          04 Export target picker.
+        </p>
+
+        <section class="kb-block">
+          <h3>What rekordbox export does</h3>
+          <p>
+            rekordbox export writes a full rekordbox USB: the classic
+            <span class="kb-verbatim">export.pdb</span> library that every CDJ / XDJ has read
+            for years, the newer encrypted <span class="kb-verbatim">exportLibrary.db</span>
+            that the latest players use, per-track analysis files (beat grid, cues and
+            waveforms), album artwork, and the audio under
+            <span class="kb-verbatim">Contents/&lt;Artist&gt;/&lt;Album&gt;</span>. The beat
+            grid is built from the interpreted BPM, so tracks arrive beat-ready. No rekordbox
+            software is needed on the DJ's side.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use rekordbox export</h3>
+          <ol>
+            <li>Open the target device chooser and pick <span class="kb-verbatim">Pioneer DJ / AlphaTheta / CDJ / XDJ</span>.</li>
+            <li>Check the playlist name, track count and duration.</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
+            <li>Eject the stick, plug it straight into the player, and load the playlist.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Which devices rekordbox export works with</h3>
+          <p>
+            Standalone rekordbox players that read a USB directly &mdash; the stick plugs
+            into the gear, no computer: CDJ-3000, CDJ-2000NXS2, XDJ-RX3 / RX2, XDJ-XZ,
+            XDJ-1000MK2, XDJ-700, OPUS-QUAD and XDJ-AZ. This is a new target; please confirm
+            it on your own player.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>rekordbox export tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead><tr><th>Where it appears</th><th>Exact wording in the app</th></tr></thead>
+              <tbody>
+                <tr><td>Device picker, the rekordbox option</td><td><span class="kb-verbatim">Pioneer DJ / AlphaTheta / CDJ / XDJ</span> &mdash; <span class="kb-verbatim">rekordbox USB - export.pdb + beatgrid, cues, waveforms</span></td></tr>
+                <tr><td>Device picker group</td><td><span class="kb-verbatim">Pioneer DJ / AlphaTheta hardware</span></td></tr>
+                <tr><td>"See all supported devices" panel, players</td><td><span class="kb-verbatim">Standalone players (USB straight into the gear): CDJ-3000 / CDJ-2000NXS2 / XDJ-RX3 / RX2 / XDJ-XZ / XDJ-1000MK2 / XDJ-700 / OPUS-QUAD / XDJ-AZ</span></td></tr>
+                <tr><td>Panel, description</td><td><span class="kb-verbatim">Alpha writes both rekordbox libraries (export.pdb + exportLibrary.db), ANLZ beatgrid/cues/waveforms and artwork - no rekordbox software needed. New target: please confirm on your own gear.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What rekordbox export does not do</h3>
+          <ul>
+            <li>rekordbox export does not need the rekordbox app; the stick plays straight on the hardware.</li>
+            <li>rekordbox export does not change the DJ's original files; it copies them to the stick.</li>
+            <li>rekordbox export writes one constant beat grid per track from the BPM; it does not model tempo changes within a track.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about rekordbox export</h3>
+          <dl class="kb-qa">
+            <dt>Do I need rekordbox installed?</dt>
+            <dd>No. Alpha writes the rekordbox library and analysis files itself, so the stick plays directly on a CDJ or XDJ.</dd>
+            <dt>Will it work on the newest players?</dt>
+            <dd>Alpha writes both the classic library (export.pdb) and the newer encrypted one (exportLibrary.db) that the latest players prefer. It is a new target, so please confirm on your own gear.</dd>
+            <dt>Are my cues and beat grid included?</dt>
+            <dd>Yes. Each track gets a beat grid (from the interpreted BPM), a waveform and any cues, written into the analysis files the player reads.</dd>
+          </dl>
         </section>
 
       </article>
