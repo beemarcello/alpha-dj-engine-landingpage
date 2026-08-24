@@ -23,17 +23,17 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=33">
+  <link rel="stylesheet" href="css/site.css?v=34">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=15">
+  <link rel="stylesheet" href="css/tailwind.css?v=16">
 
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=14" defer></script>
+  <script src="js/site.js?v=15" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -604,6 +604,55 @@
             It backs up the database before it touches anything, and tracks already on
             the drive get re-linked instead of copied twice.
           </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ERSPARNIS-RECHNER
+
+         Steht bewusst zwischen 04 Export und dem Download-Band: der Besucher
+         hat gerade den ganzen Ablauf gesehen und fragt sich, was ihn das wert
+         ist — und der naechste Block ist der Knopf. Davor waere zu frueh (er
+         weiss noch nicht, was Alpha kann), danach zu spaet.
+
+         VERGLEICHENDE WERBUNG. Paragraf 6 UWG erlaubt sie, verlangt aber
+         objektive, nachpruefbare und aktuelle Angaben. Die Preise stehen
+         deshalb gebuendelt in js/site.js (CALC_TOOLS), nicht hier im Markup,
+         und darunter steht ein sichtbares Pruefdatum. Wer einen Preis aendert,
+         aendert das Datum mit.
+         ==================================================================== -->
+    <section id="savings" class="calc border-b-2 border-black py-24 px-6">
+      <div class="max-w-[860px] mx-auto">
+
+        <span class="step-num">The maths</span>
+        <p class="leading-relaxed text-xl font-normal m-0 mb-8 max-w-[60ch]">
+          Alpha does the job of a small stack of tools. Tick what you pay for
+          today and see what that costs you.
+        </p>
+
+        <div class="calc__card">
+          <div data-calc-tools></div>
+
+          <div class="calc__period" role="group" aria-label="Time period" data-calc-period></div>
+
+          <div class="calc__result">
+            <div class="calc__box2 calc__box2--them">
+              <p class="calc__label">Your current stack</p>
+              <p class="calc__sum" data-calc-them>—</p>
+              <p class="calc__note" data-calc-them-note></p>
+            </div>
+            <div class="calc__box2 calc__box2--us">
+              <p class="calc__label">Alpha-DJ-Engine</p>
+              <p class="calc__sum" data-calc-us>—</p>
+              <p class="calc__note">One payment. No renewal, ever.</p>
+            </div>
+          </div>
+
+          <p class="calc__save" data-calc-save></p>
+
+          <p class="calc__legal" data-calc-legal></p>
         </div>
 
       </div>

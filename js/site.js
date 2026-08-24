@@ -1219,6 +1219,132 @@
   }
 
   /* ------------------------------------------------------------------------
+     10. Ersparnis-Rechner
+
+     VERGLEICHENDE WERBUNG — Paragraf 6 UWG erlaubt sie, verlangt aber
+     objektive, nachpruefbare und AKTUELLE Angaben. Ein falscher Konkurrenzpreis
+     ist ein klassischer Abmahngrund.
+
+     Deshalb drei Regeln:
+       1. Alle Preise stehen HIER in CALC_TOOLS, nicht verstreut im Markup.
+       2. CALC_CHECKED ist das Datum, an dem sie zuletzt geprueft wurden. Es
+          steht sichtbar unter dem Rechner. Wer einen Preis aendert, aendert das
+          Datum mit — sonst behauptet die Seite eine Aktualitaet, die sie nicht
+          hat.
+       3. Formulierungen bleiben bei "Alpha covers this", nicht bei "du
+          brauchst X nicht mehr". Die Wettbewerber koennen mehr als das eine
+          Feature; die Aussage waere sonst unwahr.
+
+     Preise von Marcel (2026-08-22). Keine Netto/Brutto-Angabe erhalten —
+     ausgewiesen wie geliefert.
+     ------------------------------------------------------------------------ */
+  var CALC_CHECKED = '22 August 2026';
+  var ALPHA_PRICE = 30;
+
+  var CALC_TOOLS = [
+    { id: 'rekordbox', name: 'rekordbox',  covers: 'Track analysis',            price: 30, per: 'month' },
+    { id: 'wavealign', name: 'WaveAlign',  covers: 'Loudness matching',         price: 49, per: 'once'  },
+    { id: 'mixo',      name: 'Mixo',       covers: 'Writing playlists to USB',  price: 7,  per: 'month' }
+  ];
+
+  var CALC_PERIODS = [
+    { jahre: 1, label: '1 year' },
+    { jahre: 2, label: '2 years' },
+    { jahre: 3, label: '3 years' },
+    { jahre: 5, label: '5 years' }
+  ];
+
+  function initSavings() {
+    var wurzel = document.getElementById('savings');
+    if (!wurzel) return;
+
+    var listeEl  = wurzel.querySelector('[data-calc-tools]');
+    var periodEl = wurzel.querySelector('[data-calc-period]');
+    if (!listeEl || !periodEl) return;
+
+    var aktiv = {};
+    CALC_TOOLS.forEach(function (t) { aktiv[t.id] = true; });
+    var jahre = 3;   // Voreinstellung: lang genug, dass Abos ihr Gewicht zeigen
+
+    function euro(n) {
+      return '€' + n.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+    }
+
+    listeEl.innerHTML = CALC_TOOLS.map(function (t) {
+      return '' +
+        '<button type="button" class="calc__tool" role="checkbox" aria-checked="true" data-tool="' + t.id + '">' +
+          '<span class="calc__box"><i data-lucide="check" class="stroke-[3]"></i></span>' +
+          '<span class="calc__name">' + t.name +
+            '<span class="calc__for">' + t.covers + '</span></span>' +
+          '<span class="calc__price">' + euro(t.price) +
+            '<small>' + (t.per === 'month' ? 'per month' : 'one time') + '</small></span>' +
+        '</button>';
+    }).join('');
+
+    periodEl.innerHTML = CALC_PERIODS.map(function (p) {
+      return '<button type="button" aria-pressed="' + (p.jahre === jahre) + '" data-years="' + p.jahre + '">' +
+             p.label + '</button>';
+    }).join('');
+
+    if (window.lucide) window.lucide.createIcons();
+
+    function rechne() {
+      var monate = jahre * 12;
+      var summe = 0;
+      CALC_TOOLS.forEach(function (t) {
+        if (!aktiv[t.id]) return;
+        summe += t.per === 'month' ? t.price * monate : t.price;
+      });
+
+      var zeitraum = jahre === 1 ? 'over one year' : 'over ' + jahre + ' years';
+      wurzel.querySelector('[data-calc-them]').textContent = euro(summe);
+      wurzel.querySelector('[data-calc-them-note]').textContent =
+        summe === 0 ? 'Nothing ticked.' : zeitraum;
+      wurzel.querySelector('[data-calc-us]').textContent = euro(ALPHA_PRICE);
+
+      var spart = summe - ALPHA_PRICE;
+      var saveEl = wurzel.querySelector('[data-calc-save]');
+      if (spart > 0) {
+        saveEl.hidden = false;
+        saveEl.innerHTML = 'You save <strong>' + euro(spart) + '</strong> ' + zeitraum + '.';
+      } else {
+        // Nichts angehakt oder billiger: keine erfundene Ersparnis behaupten.
+        saveEl.hidden = true;
+      }
+
+      var namen = CALC_TOOLS.filter(function (t) { return aktiv[t.id]; })
+                            .map(function (t) { return t.name; });
+      wurzel.querySelector('[data-calc-legal]').textContent =
+        'Prices as published by ' + (namen.length ? namen.join(', ') : 'the vendors') +
+        ', checked on ' + CALC_CHECKED + '. Subscription tools are counted at their ' +
+        'monthly price for the whole period. Those tools do more than the one job listed ' +
+        'here — the comparison covers the part Alpha replaces. Please check current ' +
+        'prices yourself before deciding.';
+    }
+
+    listeEl.querySelectorAll('[data-tool]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var id = btn.dataset.tool;
+        aktiv[id] = !aktiv[id];
+        btn.setAttribute('aria-checked', String(aktiv[id]));
+        rechne();
+      });
+    });
+
+    periodEl.querySelectorAll('[data-years]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        jahre = parseInt(btn.dataset.years, 10);
+        periodEl.querySelectorAll('[data-years]').forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
+        rechne();
+      });
+    });
+
+    rechne();
+  }
+
+  /* ------------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------------ */
   function boot() {
@@ -1230,6 +1356,7 @@
     initDeviceSearch();
     initDownloadModal();
     initRefineDemo();
+    initSavings();
     initConsent();
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
