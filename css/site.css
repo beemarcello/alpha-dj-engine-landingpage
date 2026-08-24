@@ -1267,6 +1267,43 @@ body {
   transition-duration: .09s;
 }
 
+/* Referenzpunkte unter dem Loudness-Regler.
+
+   Jede Beschriftung sitzt absolut ueber ihrer Marke. Die beiden mittleren
+   werden auf ihrer Position zentriert, die letzte (DJ Master bei 100%) wird
+   nach links gezogen, sonst haengt sie ueber den Panelrand hinaus.
+
+   clamp() bei der Schriftgroesse ist kein Feinschliff: Apple Music (28.6%) und
+   Streaming (42.9%) liegen nur 14.3% auseinander — auf schmalen Panels
+   ueberlappen sie sonst. */
+.rf-scale {
+  position: relative;
+  height: 13px;
+  margin-top: 9px;
+}
+.rf-scale__pt {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: clamp(8px, 2.1vw, 10px);
+  line-height: 1.2;
+  font-weight: 500;
+  color: var(--ink-55);
+}
+.rf-scale__pt.is-active { color: var(--ink); font-weight: 700; }
+.rf-scale__pt--end { transform: translateX(-100%); }
+
+/* Apple Music (28.6%) und Streaming (42.9%) liegen nur 14.3% auseinander und
+   sind damit das engste Paar der Skala. Unter 560px reicht der Platz fuer den
+   vollen Namen nicht: bei 375px ueberlappten sie um 2px, bei 481px blieb genau
+   1px Abstand — zu wenig, um sich auf jede Schriftdarstellung zu verlassen.
+   Deshalb dort nur "Apple". Die Referenz bleibt eindeutig, weil Streaming,
+   Club und DJ Master danebenstehen. Ab 561px sind es rund 12px Abstand. */
+@media (max-width: 560px) {
+  .rf-scale__long { display: none; }
+}
+
 /* Fortschrittsleiste im Mini-Player */
 .rf-progress {
   position: relative;

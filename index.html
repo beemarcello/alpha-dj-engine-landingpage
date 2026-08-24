@@ -23,7 +23,7 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=25">
+  <link rel="stylesheet" href="css/site.css?v=28">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -426,9 +426,24 @@
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:100%"></span>
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-2 border-black rounded-full shadow-[2px_2px_0_0_#000]" style="left:42.9%"></span>
             </div>
-            <p class="mt-3 mb-0 text-[10px] leading-snug font-medium text-black/60">
-              Apple Music -16 · <span class="text-black font-bold">Streaming -14</span> · Club -10 · DJ Master -6
-            </p>
+            <!--
+              Jede Beschriftung steht ueber ihrer eigenen Marke, nicht als
+              durchlaufende Zeile. left ist derselbe gerechnete Wert wie beim
+              Strich darueber: (Wert + 20) / 14 des Bereichs -20 bis -6 LUFS.
+              Wer einen Referenzpunkt aendert, muss Strich UND Beschriftung
+              mitziehen — sonst zeigen sie auf verschiedene Stellen.
+
+              Die Zahlen stehen bewusst nicht mehr dabei: der aktive Wert steht
+              oben rechts als "-14 LUFS", und ohne die Zahlen passen Apple Music
+              und Streaming nebeneinander, die mit 28.6% und 42.9% am engsten
+              beieinander liegen.
+            -->
+            <div class="rf-scale" aria-hidden="true">
+              <span class="rf-scale__pt" style="left:28.6%">Apple<span class="rf-scale__long"> Music</span></span>
+              <span class="rf-scale__pt is-active" style="left:42.9%">Streaming</span>
+              <span class="rf-scale__pt" style="left:71.4%">Club</span>
+              <span class="rf-scale__pt rf-scale__pt--end" style="left:100%">DJ Master</span>
+            </div>
           </div>
 
           <div aria-hidden="true">
