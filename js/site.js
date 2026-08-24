@@ -421,26 +421,66 @@
     });
 
     if (analytics) loadAnalytics();
+    if (ads) loadAds();
   }
 
-  var analyticsLoaded = false;
+  /* ------------------------------------------------------------------------
+     Google-Tags — laden AUSSCHLIESSLICH nach Einwilligung
+
+     Beide IDs hier eintragen, dann laeuft es. Solange sie leer sind, wird nichts
+     geladen und nichts gemessen; die Seite bleibt ohne Einwilligung vollstaendig
+     frei von Google-Requests.
+
+       measurementId    GA4, Form G-XXXXXXXXXX. In Google Analytics unter
+                        Verwaltung -> Datenstreams -> Web-Stream fuer
+                        alpha-dj-engine.com.
+       adsConversionId  Google Ads, Form AW-XXXXXXXXX. Nur noetig, wenn
+                        wirklich Ads-Conversions gemessen werden sollen.
+
+     WICHTIG: gtag.js wird nur EINMAL geladen, auch wenn beide IDs gesetzt sind.
+     GA4 und Ads teilen sich dasselbe Skript und werden ueber je einen eigenen
+     config-Aufruf angemeldet; zwei Skript-Tags wuerden Seitenaufrufe doppelt
+     zaehlen.
+
+     Die Consent-Mode-Defaults stehen in initConsent() und werden VOR dem Laden
+     gesetzt. Das ist Pflicht: was Google vor dem ersten Default sieht, gilt als
+     uneingeschraenkt erlaubt.
+     ------------------------------------------------------------------------ */
+  var GA_CFG = {
+    measurementId: '',
+    adsConversionId: ''
+  };
+
+  function gtagPush() { (window.dataLayer = window.dataLayer || []).push(arguments); }
+
+  var gtagScriptGeladen = false;
+  function ensureGtag(ersteId) {
+    if (gtagScriptGeladen) return;
+    gtagScriptGeladen = true;
+    var sc = document.createElement('script');
+    sc.async = true;
+    sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ersteId);
+    document.head.appendChild(sc);
+    gtagPush('js', new Date());
+  }
+
+  var gaAngemeldet = false;
   function loadAnalytics() {
-    if (analyticsLoaded) return;
-    analyticsLoaded = true;
-    /* ====================================================================
-       HIER GOOGLE ANALYTICS EINSETZEN — laeuft nur nach Einwilligung.
+    if (gaAngemeldet || !GA_CFG.measurementId) return;
+    gaAngemeldet = true;
+    ensureGtag(GA_CFG.measurementId);
+    /* anonymize_ip bewusst NICHT gesetzt: bei GA4 gibt es die Option nicht mehr,
+       die IP-Kuerzung passiert dort immer und laesst sich nicht abschalten. Ein
+       gesetztes Flag wuerde nur suggerieren, der Schutz haenge daran. */
+    gtagPush('config', GA_CFG.measurementId);
+  }
 
-       var s = document.createElement('script');
-       s.async = true;
-       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX';
-       document.head.appendChild(s);
-       window.dataLayer = window.dataLayer || [];
-       function gtag(){ dataLayer.push(arguments); }
-       gtag('js', new Date());
-       gtag('config', 'G-XXXXXXX', { anonymize_ip: true });
-
-       Solange die Mess-ID fehlt, passiert hier bewusst nichts.
-       ==================================================================== */
+  var adsAngemeldet = false;
+  function loadAds() {
+    if (adsAngemeldet || !GA_CFG.adsConversionId) return;
+    adsAngemeldet = true;
+    ensureGtag(GA_CFG.adsConversionId);
+    gtagPush('config', GA_CFG.adsConversionId);
   }
 
   /* Zwei Ebenen:
