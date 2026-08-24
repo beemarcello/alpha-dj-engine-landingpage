@@ -1,17 +1,32 @@
 /* Erzeugt js/icons.js aus lucide-static — nur die Icons, die wirklich im
  * Markup vorkommen. Ersetzt die komplette Lucide-Runtime von unpkg.
  * Neu bauen nach dem Hinzufuegen eines Icons:  npm run build:icons        */
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-// Alle data-lucide="..." aus HTML und JS einsammeln
-const files = [
-  ...readdirSync(root).filter(f => f.endsWith('.html')).map(f => join(root, f)),
-  ...readdirSync(join(root, 'js')).filter(f => f.endsWith('.js')).map(f => join(root, 'js', f)),
-];
+// Alle data-lucide="..." aus HTML und JS einsammeln.
+//
+// REKURSIV, und das ist wichtig: frueher wurde nur das Wurzelverzeichnis
+// gelesen. Als mit knowledgebase/ der erste Unterordner dazukam, fiel das nicht
+// auf, weil dort zufaellig nur Icons vorkamen, die auch in Wurzeldateien
+// stehen. Bei features/ flog es dann auf — das dort verwendete "minus" fehlte
+// im Bundle, und das <i data-lucide> blieb einfach unersetzt stehen, ohne
+// Fehlermeldung im Browser. Wer hier wieder auf eine flache Liste zurueckgeht,
+// baut denselben stillen Fehler erneut ein.
+function sammle(dir) {
+  const out = [];
+  for (const name of readdirSync(dir)) {
+    if (name === 'node_modules' || name.startsWith('.')) continue;
+    const voll = join(dir, name);
+    if (statSync(voll).isDirectory()) out.push(...sammle(voll));
+    else if (name.endsWith('.html') || name.endsWith('.js')) out.push(voll);
+  }
+  return out;
+}
+const files = sammle(root);
 const used = new Set();
 for (const f of files) {
   for (const m of readFileSync(f, 'utf8').matchAll(/data-lucide="([a-z0-9-]+)"/g)) used.add(m[1]);

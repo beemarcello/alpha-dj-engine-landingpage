@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Features — Alpha-DJ-Engine</title>
+  <meta name="description" content="Everything Alpha-DJ-Engine does: analyze your own music, import a rekordbox library, compose a harmonic set along an energy arc, match loudness, and write a gig-ready Denon Engine OS USB drive.">
+
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/features/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Features — Alpha-DJ-Engine">
+  <meta property="og:description" content="Analyze, compose, level and write a gig-ready Denon Engine OS drive. Everything Alpha does, in one place.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/features/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../css/site.css?v=29">
+  <link rel="stylesheet" href="../css/tailwind.css?v=13">
+
+  <script src="../js/icons.js?v=6" defer></script>
+  <script src="../js/site.js?v=13" defer></script>
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  Feature-Uebersicht — abgeleitet aus /knowledgebase/
+
+  Beide Seiten beschreiben dieselben zehn Funktionen, aber fuer verschiedene
+  Leser. Die Wissensbasis ist dicht und vollstaendig fuer den AI-Support-Agent;
+  diese Seite ist zum Ueberfliegen durch Kunden.
+
+  REGELN, wenn hier etwas geaendert wird:
+
+  1. Jede Aussage muss in /knowledgebase/ belegt sein. Diese Seite ist eine
+     Ableitung, keine eigene Quelle. Kommt dort ein Feature dazu oder aendert
+     sich eines, gehoert es hier nachgezogen.
+  2. KEINE Tooltips, Fehlermeldungen oder Troubleshooting-Tabellen. Wer die
+     sucht, ist in der Wissensbasis richtig.
+  3. Grenzen bleiben sichtbar (.is-limit). Was Alpha nicht tut, gehoert auf eine
+     Feature-Seite genauso wie das, was es tut — sonst schreibt der Support
+     hinterher Entschuldigungen.
+  4. Reihenfolge folgt dem Arbeitsablauf, nicht der Wichtigkeit: erst Musik
+     hineinbekommen, dann Set bauen, dann schreiben, dann Sticks verwalten.
+================================================================================
+-->
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <a data-download href="../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+    </div>
+  </nav>
+
+  <main id="main" class="subpage">
+    <div class="subpage__inner subpage__inner--wide">
+
+      <h1>Features</h1>
+      <p class="subpage__lead">
+        Everything Alpha does, in the order you'd actually use it: get your music
+        in, build the set, write the drive.
+      </p>
+
+      <!-- ================= 01 Get your music in ================= -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">01</span>
+          <h2 class="feat-group__title">Get your music in</h2>
+        </div>
+
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <h3>Pick your tracks</h3>
+            <p class="feat-card__lead">
+              Point Alpha at a whole folder, at several, or at individual tracks
+              from different places. They all land in one list.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Whole folders and hand-picked files, mixed freely</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Everything collects in one list before anything runs</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Nothing is copied or moved — your files stay where they are</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Analysis</h3>
+            <p class="feat-card__lead">
+              Alpha reads tempo, key, energy and loudness straight out of the
+              audio, on your own machine.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>BPM, musical key in Camelot notation, energy and loudness</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Runs locally — no internet connection needed for it</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Read-only: your audio files are never modified</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>rekordbox import</h3>
+            <p class="feat-card__lead">
+              Coming from Pioneer? Export your collection as a rekordbox XML and
+              Alpha keeps the BPM, key and beatgrid rekordbox already worked out.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>No re-analysis of tempo, key or beatgrid</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Pick tracks for one set, or write the whole library to the stick as-is</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Filter the import by search, key, genre or BPM range</li>
+              <!-- Steht so in /knowledgebase/#rekordbox-import unter "does not do".
+                   Nicht weglassen: Cue Points sind fuer DJs ein Kaufkriterium. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Cue points are not carried over from the XML</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= 02 Build the set ================= -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">02</span>
+          <h2 class="feat-group__title">Build the set</h2>
+        </div>
+
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <h3>Compose</h3>
+            <p class="feat-card__lead">
+              Draw the energy arc your night should follow, say how long it runs,
+              and Alpha orders the tracks to match.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Five arc templates — Journey, Wave, Build, Peak-time, Cooldown — or drag the curve yourself</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Set the target length in 10-minute steps</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Two sliders: harmonic transitions vs. following your curve, and key vs. tempo matching</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Refine</h3>
+            <p class="feat-card__lead">
+              Audition every track, drag the bars to reorder them, and drop
+              anything that doesn't fit.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Built-in mini-player for pre-listening</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Drag a bar to move a track to a new position</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Removing a track takes it out of this set — never off your disk</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= 03 Write the drive ================= -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">03</span>
+          <h2 class="feat-group__title">Write the drive</h2>
+        </div>
+
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <h3>USB export</h3>
+            <p class="feat-card__lead">
+              Writes a proper Denon Engine OS drive: your tracks, their metadata
+              and the playlist order, ready to play the moment you plug in.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Engine OS 3.x, the format the whole Engine DJ family reads</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Validates the result, then lets you eject safely</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Adds to the existing library — it never erases the stick</li>
+              <!-- Belegt in /knowledgebase/#usb-export: rekordbox schreiben ist
+                   als "coming soon" markiert. Ohne Datum lassen. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Writing a rekordbox drive isn't supported yet</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Match loudness</h3>
+            <p class="feat-card__lead">
+              Every track in the set plays at the same perceived loudness, so
+              you're not riding the gain between songs.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Set a target in LUFS, from −20 to −6</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Reference points for Apple Music, streaming, club and DJ master</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Peaks never pass −1 dB, so nothing clips</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Applied to the copies on the stick — your library files stay untouched</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Skip duplicates</h3>
+            <p class="feat-card__lead">
+              A track that's already on the stick is linked, not copied a second
+              time — however many playlists use it.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>One file on the drive, linked from every playlist that needs it</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Saves space and cuts the write time</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>The full playlist order is always written — only the copy is skipped</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Backup before every write</h3>
+            <p class="feat-card__lead">
+              Before Alpha touches a stick, it copies that stick's Engine library
+              to your own computer.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Kept on your machine, not on the stick — so it survives a wipe</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Restore an earlier version whenever you need it</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Happens automatically on every write</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= 04 Manage your sticks ================= -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">04</span>
+          <h2 class="feat-group__title">Manage your sticks</h2>
+        </div>
+
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <h3>Playlists on device</h3>
+            <p class="feat-card__lead">
+              Plug a drive in and Alpha shows what's already on it — so you can
+              tidy up without opening Engine DJ.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>See every playlist on the connected stick</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Rename or delete them</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Roll the library back to an earlier backup</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= Abschluss ================= -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">—</span>
+          <h2 class="feat-group__title">Try it on your own music</h2>
+        </div>
+        <p style="font-size:16px;line-height:1.65;max-width:64ch;margin:0 0 22px">
+          Every feature on this page is in the free download. The only limit is that
+          it stops after 10 tracks — enough for one real set on your own stick,
+          which is the only way to judge a DJ tool anyway.
+        </p>
+        <a data-download href="../index.html#download" class="btn btn-primary">
+          <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+        </a>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="py-12 px-6">
+    <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex flex-col items-center md:items-start gap-1">
+        <a href="../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="text-sm font-semibold text-[var(--ink-55)]">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold" aria-label="Footer">
+        <a href="./" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Features</a>
+        <a href="../compatibility.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Works with your setup?</a>
+        <a href="../pricing.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Pricing</a>
+        <a href="../terms.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Terms</a>
+        <a href="../withdrawal.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Withdrawal</a>
+        <a href="../privacy.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Privacy</a>
+        <a href="#" data-cookie-settings class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Cookie settings</a>
+        <a href="../imprint.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Imprint</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
+</body>
+</html>

@@ -1,7 +1,12 @@
 /** Ersetzt den frueheren Inline-Block `tailwind.config = {...}` aus dem <head>.
  *  Nach jeder Aenderung an HTML/JS neu bauen:  npm run build:css           */
 module.exports = {
-  content: ['./*.html', './js/**/*.js'],
+  /* Unterordner MUESSEN mit drin sein. Stand vorher nur './*.html', wodurch
+     knowledgebase/ und features/ beim Purgen unsichtbar waren — dort benutzte
+     Utility-Klassen waeren stillschweigend aus dem Stylesheet geflogen.
+     node_modules ist ausgeschlossen, sonst durchsucht der Build tausende
+     Fremddateien. */
+  content: ['./**/*.html', './js/**/*.js', '!./node_modules/**'],
   theme: {
     extend: {
       colors: {

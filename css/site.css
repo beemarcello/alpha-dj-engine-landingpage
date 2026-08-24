@@ -1327,3 +1327,98 @@ body {
   .rf-cursor { display: none; }
   .rf-bar, .rf-progress__fill { transition: none; }
 }
+
+/* ==========================================================================
+   Feature-Übersicht (/features/)
+
+   Kundenseitige Ableitung aus /knowledgebase/. Beide Seiten beschreiben
+   dieselben Funktionen, aber fuer verschiedene Leser: die Wissensbasis ist
+   dicht und vollstaendig fuer den Support-Agent, diese Seite ist zum
+   Ueberfliegen. Deshalb hier KEINE Tooltips, Fehlermeldungen oder
+   Troubleshooting-Tabellen — wer die sucht, ist auf der falschen Seite.
+
+   Inhaltlich muss sie der Wissensbasis folgen. Kommt dort ein Feature dazu
+   oder aendert sich eines, gehoert es hier nachgezogen.
+   ========================================================================== */
+.feat-group { margin-top: clamp(48px, 7vw, 72px); }
+.feat-group:first-of-type { margin-top: 8px; }
+
+.feat-group__head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 12px;
+  border-bottom: var(--stroke);
+  margin-bottom: 24px;
+}
+.feat-group__num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 3vw, 26px);
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+.feat-group__title {
+  font-size: clamp(17px, 2.4vw, 21px);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin: 0;
+}
+
+/* Zwei Spalten ab 720px. Karten einer Reihe enden auf gleicher Hoehe, damit
+   die Liste beim Ueberfliegen ein Raster bleibt und nicht ausfranst. */
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+@media (min-width: 720px) {
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.feat-card {
+  height: 100%;
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-md);
+  padding: clamp(18px, 2.6vw, 26px);
+  transition: transform var(--dur) var(--ease-card),
+              box-shadow var(--dur) var(--ease-card);
+}
+.feat-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-hard);
+}
+@media (prefers-reduced-motion: reduce) {
+  .feat-card { transition: none; }
+  .feat-card:hover { transform: none; }
+}
+
+.feat-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  margin: 0 0 8px;
+}
+.feat-card__lead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-55);
+  margin: 0 0 14px;
+}
+.feat-card ul { list-style: none; margin: 0; padding: 0; }
+.feat-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.feat-card li:last-child { margin-bottom: 0; }
+.feat-card li svg { flex-shrink: 0; margin-top: 2px; }
+
+/* Einschraenkung statt Haken — ehrliche Grenzen gehoeren sichtbar dazu und
+   duerfen nicht wie ein Feature aussehen. */
+.feat-card li.is-limit { color: var(--ink-55); }
