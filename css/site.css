@@ -1492,89 +1492,162 @@ body {
 }
 
 /* ==========================================================================
-   Ersparnis-Vergleich
+   Ersparnis-Vergleich — Preisschilder gegen einen Preis
 
-   Bewusst ohne Interaktion (Marcel, 2026-08-22): keine Haken, keine
-   Zeitraumwahl. Der Besucher soll die Zahl sehen, nicht sie sich
-   zusammenklicken. Deshalb auch kein JavaScript — reines Markup.
+   Ohne Interaktion (Marcel): nichts zum Klicken, keine Zeitraumwahl. Links die
+   Werkzeuge als Preisschilder, jedes von einem roten Kreuz durchgestrichen,
+   rechts der eine Preis.
+
+   Das Kreuz laeuft im Kreis und blendet sich zwischendurch komplett aus, damit
+   das Schild immer wieder lesbar wird — ein dauerhaft durchgestrichener Preis
+   waere schlechter lesbar als gar keiner. Die drei Schilder sind versetzt
+   getaktet, es ist also nie alles gleichzeitig zugestrichen.
 
    VERGLEICHENDE WERBUNG. Paragraf 6 UWG erlaubt sie, verlangt aber objektive,
-   nachpruefbare und AKTUELLE Angaben; ein falscher Konkurrenzpreis ist ein
-   klassischer Abmahngrund. Die Preise stehen deshalb gebuendelt in EINEM Block
-   im Markup, mit sichtbarem Pruefdatum darunter. Wer einen Preis aendert,
-   aendert das Datum mit und rechnet die Summe neu.
+   nachpruefbare und AKTUELLE Angaben. Preise stehen gebuendelt im Markup, mit
+   sichtbarem Pruefdatum. Wer einen Preis aendert, rechnet die Summe neu und
+   zieht das Datum mit.
    ========================================================================== */
 .calc { background: var(--paper-2); }
 
-.calc__card {
-  background: var(--white);
+.calc__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+@media (min-width: 800px) { .calc__grid { grid-template-columns: 1.05fr 1fr; gap: 22px; } }
+
+.calc__box {
   border: var(--stroke);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-hard);
-  padding: clamp(20px, 4vw, 34px);
-}
-
-.calc__tool {
+  padding: clamp(20px, 3.4vw, 30px);
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--ink-40);
+  flex-direction: column;
 }
-.calc__name { font-weight: 600; font-size: 15px; }
-.calc__for  { display: block; font-size: 12.5px; color: var(--ink-55); font-weight: 400; margin-top: 1px; }
-.calc__price { font-family: var(--font-display); font-size: 15px; white-space: nowrap; text-align: right; }
-.calc__price small { display: block; font-family: var(--font-ui); font-size: 11px; color: var(--ink-55); }
+.calc__box--them { background: var(--white); }
+.calc__box--us   { background: var(--green-hot); justify-content: center; text-align: center; }
 
-/* Summenzeile — abgesetzt, damit sie als Ergebnis liest und nicht als viertes
-   Werkzeug. */
-.calc__sumrow {
+.calc__boxLabel {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-55); margin: 0 0 18px;
+}
+
+/* --------------------------------------------------------------------------
+   Preisschild — Anhaenger mit Loch links
+   -------------------------------------------------------------------------- */
+.ptag {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 0 0;
-  border-top: var(--stroke);
-  margin-top: 4px;
-}
-.calc__sumrow .calc__name { font-size: 16px; }
-
-.calc__result {
-  display: grid;
-  grid-template-columns: 1fr;
+  align-items: center;
   gap: 14px;
-  margin-top: 22px;
-}
-@media (min-width: 620px) { .calc__result { grid-template-columns: 1fr 1fr; } }
-
-.calc__box2 { border: var(--stroke); border-radius: var(--r-md); padding: 18px 20px; }
-.calc__box2--them { background: var(--red); }
-.calc__box2--us   { background: var(--green); }
-.calc__box2 p { margin: 0; }
-.calc__label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
-.calc__sum {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 7vw, 46px);
-  font-weight: 600;
-  line-height: 1.05;
-  margin: 6px 0 2px !important;
-}
-.calc__note { font-size: 12.5px; color: rgba(0,0,0,.62); }
-
-.calc__save {
-  margin-top: 18px;
-  padding: 18px 20px;
+  background: var(--white);
   border: var(--stroke);
-  border-radius: var(--r-md);
-  background: var(--green-hot);
-  text-align: center;
-  font-size: clamp(18px, 3.6vw, 24px);
-  font-weight: 600;
-  line-height: 1.35;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-hard-sm);
+  padding: 12px 16px 12px 14px;
+  margin-bottom: 14px;
 }
-.calc__save strong { font-family: var(--font-display); font-weight: 600; }
-.calc__after { display: block; font-size: 14px; font-weight: 500; margin-top: 6px; color: rgba(0,0,0,.7); }
+/* Leichte, unterschiedliche Neigung — von Hand angehaengt, nicht ausgerichtet. */
+.ptag:nth-of-type(1) { transform: rotate(-1.4deg); }
+.ptag:nth-of-type(2) { transform: rotate(0.9deg); }
+.ptag:nth-of-type(3) { transform: rotate(-0.6deg); }
 
-/* Pruefdatum und Einordnung — nicht wegkuerzen, siehe Kopf dieser Sektion. */
-.calc__legal { font-size: 11.5px; line-height: 1.5; color: var(--ink-55); margin: 16px 0 0; }
+/* Das Loch, durch das die Schnur ginge. */
+.ptag__hole {
+  flex-shrink: 0;
+  width: 13px; height: 13px;
+  border: var(--stroke);
+  border-radius: 999px;
+  background: var(--paper-2);
+}
+.ptag__body { flex: 1; min-width: 0; }
+.ptag__name { display: block; font-weight: 700; font-size: 15px; line-height: 1.2; }
+.ptag__for  { display: block; font-size: 12px; color: var(--ink-55); margin-top: 2px; }
+.ptag__price {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.6vw, 21px);
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Das Kreuz liegt ueber dem ganzen Schild. preserveAspectRatio="none" streckt
+   es auf die Schildform; vector-effect haelt die Strichstaerke davon
+   unabhaengig, sonst wuerde sie mitverzerrt. pathLength="100" macht die
+   Strichlaenge unabhaengig von der tatsaechlichen Diagonale — sonst muesste
+   die dasharray je Schildgroesse anders sein. */
+.ptag__x {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  pointer-events: none;
+  overflow: visible;
+}
+.ptag__x line {
+  stroke: var(--red-hot);
+  stroke-width: 5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: ptag-x 7.5s infinite ease-in-out;
+}
+@keyframes ptag-x {
+  0%,  6%   { stroke-dashoffset: 100; opacity: 1; }
+  20%       { stroke-dashoffset: 0;   opacity: 1; }
+  66%       { stroke-dashoffset: 0;   opacity: 1; }
+  76%, 100% { stroke-dashoffset: 0;   opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* Ohne Bewegung bleibt das Kreuz stehen — die Aussage darf nicht an der
+     Animation haengen. */
+  .ptag__x line { animation: none; stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* Summe unten in der linken Box */
+.calc__sumrow {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: var(--stroke);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.calc__sumLabel { font-size: 13px; font-weight: 600; color: var(--ink-55); }
+.calc__sumValue {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 5vw, 34px);
+  font-weight: 600;
+  color: var(--red-hot);
+}
+
+/* --------------------------------------------------------------------------
+   Rechte Box — der eine Preis
+   -------------------------------------------------------------------------- */
+.calc__usName {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 6vw, 44px);
+  font-weight: 600;
+  letter-spacing: .03em;
+  margin: 0 0 14px;
+  line-height: 1;
+}
+.calc__usPay {
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
+.calc__usPay span { font-family: var(--font-display); }
+.calc__usForever {
+  font-size: clamp(17px, 3.2vw, 22px);
+  font-weight: 600;
+  margin: 10px 0 0;
+}
+.calc__usNote { font-size: 12.5px; color: rgba(0,0,0,.62); margin: 16px 0 0; }
+
+.calc__legal { font-size: 11.5px; line-height: 1.5; color: var(--ink-55); margin: 18px 0 0; }

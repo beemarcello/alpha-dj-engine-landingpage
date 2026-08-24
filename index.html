@@ -23,13 +23,13 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=35">
+  <link rel="stylesheet" href="css/site.css?v=36">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=17">
+  <link rel="stylesheet" href="css/tailwind.css?v=18">
 
 
   <script src="js/icons.js?v=6" defer></script>
@@ -612,86 +612,103 @@
     <!-- ====================================================================
          ERSPARNIS-VERGLEICH
 
-         Statisch, ohne Interaktion (Marcel): keine Haken, keine Zeitraumwahl.
-         Der Besucher soll die Zahl sehen, nicht sie sich zusammenklicken.
+         Statisch, ohne Interaktion (Marcel): links die Werkzeuge als
+         Preisschilder mit animiertem rotem Kreuz, rechts der eine Preis.
+
+         Das Kreuz blendet sich zyklisch aus, damit jedes Schild immer wieder
+         vollstaendig lesbar wird; die drei sind versetzt getaktet
+         (animation-delay 0 / 2.5 / 5s), es ist also nie alles gleichzeitig
+         zugestrichen.
 
          Steht zwischen 04 Export und dem Download-Band: der Ablauf ist gerade
          erklaert, der naechste Block ist der Knopf.
 
          VERGLEICHENDE WERBUNG — Paragraf 6 UWG erlaubt sie, verlangt aber
-         objektive, nachpruefbare und AKTUELLE Angaben. Die drei Preise stehen
-         deshalb in EINEM Block beisammen, mit Pruefdatum darunter.
+         objektive, nachpruefbare und AKTUELLE Angaben.
 
-         RECHNUNG (erstes Jahr, bei Aenderung neu rechnen):
+         RECHNUNG (bei Aenderung neu rechnen):
            rekordbox  30 x 12 = 360
            WaveAlign  49 einmalig
            Mixo        7 x 12 =  84
-                              = 493
-           Alpha                 30  ->  Ersparnis 463
-           Ab dem zweiten Jahr laufen nur die Abos weiter:
-           (30 + 7) x 12 = 444 pro Jahr gegen 0.
+                              = 493 im ERSTEN Jahr
+
+         Bewusst "first year", nicht "per year": WaveAlign faellt nur einmal an,
+         ab dem zweiten Jahr sind es (30 + 7) x 12 = 444. "493 per year" waere
+         eine um 49 Euro zu hohe Dauerangabe — bei vergleichender Werbung genau
+         die Art Ungenauigkeit, die angreifbar macht.
          ==================================================================== -->
     <section id="savings" class="calc border-b-2 border-black py-24 px-6">
-      <div class="max-w-[820px] mx-auto">
+      <div class="max-w-[980px] mx-auto">
 
         <span class="step-num">The maths</span>
-        <p class="leading-relaxed text-xl font-normal m-0 mb-8 max-w-[58ch]">
-          Alpha does the job of three separate tools. Here is what that stack
-          costs in your first year.
+        <p class="leading-relaxed text-xl font-normal m-0 mb-10 max-w-[58ch]">
+          Alpha does the job of three separate tools.
         </p>
 
-        <div class="calc__card">
+        <div class="calc__grid">
 
-          <div class="calc__tool">
-            <span class="calc__name">rekordbox
-              <span class="calc__for">Track analysis</span></span>
-            <span class="calc__price">€360<small>€30 per month</small></span>
-          </div>
+          <div class="calc__box calc__box--them">
+            <p class="calc__boxLabel">What you pay today</p>
 
-          <div class="calc__tool">
-            <span class="calc__name">WaveAlign
-              <span class="calc__for">Loudness matching</span></span>
-            <span class="calc__price">€49<small>one time</small></span>
-          </div>
-
-          <div class="calc__tool">
-            <span class="calc__name">Mixo
-              <span class="calc__for">Writing playlists to USB</span></span>
-            <span class="calc__price">€84<small>€7 per month</small></span>
-          </div>
-
-          <div class="calc__sumrow">
-            <span class="calc__name">Together, first year</span>
-            <span class="calc__price">€493</span>
-          </div>
-
-          <div class="calc__result">
-            <div class="calc__box2 calc__box2--them">
-              <p class="calc__label">That stack</p>
-              <p class="calc__sum">€493</p>
-              <p class="calc__note">first year — and it keeps running</p>
+            <div class="ptag">
+              <span class="ptag__hole" aria-hidden="true"></span>
+              <span class="ptag__body">
+                <span class="ptag__name">rekordbox</span>
+                <span class="ptag__for">Track analysis</span>
+                <span class="ptag__price">€30 per month</span>
+              </span>
+              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="4" y1="8" x2="96" y2="92" pathLength="100" style="animation-delay:0s"/>
+                <line x1="96" y1="8" x2="4" y2="92" pathLength="100" style="animation-delay:0.35s"/>
+              </svg>
             </div>
-            <div class="calc__box2 calc__box2--us">
-              <p class="calc__label">Alpha-DJ-Engine</p>
-              <p class="calc__sum">€30</p>
-              <p class="calc__note">once, incl. VAT. Never again.</p>
+            <div class="ptag">
+              <span class="ptag__hole" aria-hidden="true"></span>
+              <span class="ptag__body">
+                <span class="ptag__name">WaveAlign</span>
+                <span class="ptag__for">Loudness matching</span>
+                <span class="ptag__price">€49 one time</span>
+              </span>
+              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="4" y1="8" x2="96" y2="92" pathLength="100" style="animation-delay:2.5s"/>
+                <line x1="96" y1="8" x2="4" y2="92" pathLength="100" style="animation-delay:2.85s"/>
+              </svg>
+            </div>
+            <div class="ptag">
+              <span class="ptag__hole" aria-hidden="true"></span>
+              <span class="ptag__body">
+                <span class="ptag__name">Mixo</span>
+                <span class="ptag__for">Writing playlists to USB</span>
+                <span class="ptag__price">€7 per month</span>
+              </span>
+              <svg class="ptag__x" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="4" y1="8" x2="96" y2="92" pathLength="100" style="animation-delay:5s"/>
+                <line x1="96" y1="8" x2="4" y2="92" pathLength="100" style="animation-delay:5.35s"/>
+              </svg>
+            </div>
+
+            <div class="calc__sumrow">
+              <span class="calc__sumLabel">First year</span>
+              <span class="calc__sumValue">€493</span>
             </div>
           </div>
 
-          <p class="calc__save">
-            You save <strong>€463</strong> in your first year.
-            <span class="calc__after">After that it is <strong>€444</strong> a year against nothing —
-              the subscriptions keep billing, Alpha does not.</span>
-          </p>
-
-          <p class="calc__legal">
-            Prices as published by rekordbox, WaveAlign and Mixo, checked on 22 August 2026.
-            Monthly tools are counted for twelve months. Those tools do more than the one job
-            listed here — this compares the part Alpha replaces. Please check current prices
-            yourself before deciding.
-          </p>
+          <div class="calc__box calc__box--us">
+            <p class="calc__usName">Alpha</p>
+            <p class="calc__usPay">Pay <span>€30</span> once</p>
+            <p class="calc__usForever">Use forever!</p>
+            <p class="calc__usNote">incl. VAT · no subscription · no renewal</p>
+          </div>
 
         </div>
+
+        <p class="calc__legal">
+          Prices as published by rekordbox, WaveAlign and Mixo, checked on 22 August 2026.
+          Monthly tools counted for twelve months; WaveAlign is a one-off, so from the second
+          year that stack is €444 a year while Alpha is nothing. Those tools do more than the
+          one job listed here — this compares the part Alpha replaces. Please check current
+          prices yourself before deciding.
+        </p>
 
       </div>
     </section>
