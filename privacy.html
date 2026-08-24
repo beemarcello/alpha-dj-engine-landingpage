@@ -94,8 +94,9 @@
            ================================================================== -->
       <div class="todo-box">
         <p><strong>Entwurf — inhaltlich vollständig, zwei Punkte hängen noch an der
-        Umsetzung.</strong> Offen sind die <strong>Logfile-Aufbewahrungsdauer</strong> bei
-        Hetzner und das <strong>Double-Opt-in-Backend</strong> für das E-Mail-Formular.
+        Umsetzung.</strong> Offen sind das <strong>Hosting-Kapitel</strong> (AVV und
+        US-Übermittlung bei GitHub, siehe unten) und das
+        <strong>Double-Opt-in-Backend</strong> für das E-Mail-Formular.
         Bis beides steht, trägt die Seite <code>noindex</code> und das Formular darf nicht
         scharf geschaltet werden.</p>
         <p>Erledigt am 2026-08-22: Consent-Banner (zwei gleichrangige Knöpfe, keine
@@ -224,23 +225,43 @@
         angeforderte Funktion davon ausgenommen ist. Ich habe hier bewusst nur
         beschrieben, was sich von aussen belegen lässt.</p>
       </div>
+      <!--
+        Korrigiert am 2026-08-22. Hier stand "Hetzner Online GmbH, in a data centre
+        in Germany" samt AVV. Das war falsch: die Seite wird von GitHub Pages
+        ausgeliefert. Nachgemessen — Antwortkopf "server: GitHub.com", die vier
+        A-Records 185.199.108-111.153 gehoeren laut Whois GitHub, Inc., und
+        "x-github-edge-region: fra" nennt den Auslieferungsort.
+
+        Das war kein Detailfehler: die Erklaerung nannte einen deutschen
+        Auftragsverarbeiter samt AVV, wo tatsaechlich ein US-Unternehmen
+        ausliefert. Wer hier wieder Hetzner eintraegt, prueft vorher, ob die
+        Seite wirklich umgezogen ist.
+      -->
       <p>
-        Hosting is provided by Hetzner Online GmbH, in a data centre in Germany, as our
-        processor under a data processing agreement (Art. 28 GDPR). Their servers keep
-        the usual access logs — your IP address, the time of the request, the page
-        requested, the referring page and your browser's user agent. We use these only
-        to operate the site securely and to investigate faults.
+        The site is served by <strong>GitHub Pages</strong>, a service of GitHub, Inc.
+        (San Francisco, USA), delivered through edge servers — the one that answered most
+        recently sat in Frankfurt. GitHub receives the usual request data: your IP
+        address, the time of the request, the page requested, the referring page and your
+        browser's user agent.
+      </p>
+      <p>
+        We have no access to those logs and no way to influence how long GitHub keeps
+        them. Nothing is stored on servers of our own, because for this site we operate
+        none.
       </p>
       <p>
         Legal basis: Art. 6(1)(f) GDPR — our legitimate interest in a working, secure
         website.
       </p>
       <div class="todo-box">
-        <p><strong>Offen:</strong> die tatsächliche Aufbewahrungsdauer der Logfiles.
-        Sie muss mit der Server-Konfiguration übereinstimmen — üblich und gut
-        vertretbar sind sieben Tage. Bitte bei Hetzner prüfen und hier eintragen.</p>
-        <p>Die CDN-Einbindungen von Tailwind und Lucide sind seit 2026-08-19 entfernt;
-        dieser Punkt ist damit erledigt.</p>
+        <p><strong>Durch den Hoster-Fehler neu zu bewerten.</strong> Bei GitHub Pages
+        gibt es keine eigenen Logfiles und keine von uns einstellbare
+        Aufbewahrungsdauer — es gibt also nichts „bei Hetzner nachzusehen“, wie hier
+        vorher stand. Zu klären ist stattdessen: (1) ein <strong>AVV mit GitHub</strong>,
+        (2) auf welcher Grundlage die Übermittlung in die USA steht — GitHub gehört zu
+        Microsoft, ob dessen Zertifizierung im EU-US Data Privacy Framework GitHub
+        mit abdeckt, muss geprüft werden, (3) ob GitHub Pages für eine kommerzielle
+        Seite die passende Wahl bleibt. Bis dahin trägt die Seite <code>noindex</code>.</p>
       </div>
 
       <h2>Cookies and analytics</h2>
