@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Diese Datei wird in der Google Search Console unter "Sitemaps" eingereicht:
+  https://alpha-dj-engine.com/sitemap.xml
+
+  lastmod aus der git-Historie gesetzt (letzter Commit je Datei). Wer eine Seite
+  aendert, zieht das Datum hier mit — ein falsches lastmod ist schlechter als
+  keines: Google lernt daraus, dass die Angabe unzuverlaessig ist, und ignoriert
+  sie kuenftig.
+
+  NICHT enthalten: privacy.html. Die Seite traegt noch noindex, solange
+  Hosting-AVV und Double-Opt-in offen sind. Eine Seite mit noindex in die
+  Sitemap zu schreiben, ist ein Widerspruch, den die Search Console als Fehler
+  meldet.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alpha-dj-engine.com/compatibility.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/imprint.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/features/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/pricing.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.8</priority>
   </url>
   <!-- Wissensbasis des AI-Support-Agents. Steht hier drin, weil sie von keiner
@@ -31,7 +45,7 @@
        lesen (Marcel, 2026-08-22). -->
   <url>
     <loc>https://alpha-dj-engine.com/knowledgebase/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.6</priority>
   </url>
   <!-- terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex
@@ -39,12 +53,12 @@
        draussen: dort sind Logfile-Aufbewahrung und Double-Opt-in noch offen. -->
   <url>
     <loc>https://alpha-dj-engine.com/terms.html</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/withdrawal.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.4</priority>
   </url>
 </urlset>
