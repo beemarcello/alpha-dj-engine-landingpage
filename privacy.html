@@ -21,8 +21,43 @@
        Konfiguration in tailwind.config.js. -->
   <link rel="stylesheet" href="css/tailwind.css?v=18">
 
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=19" defer></script>
+  <script src="js/site.js?v=20" defer></script>
 </head>
 
 <body class="antialiased">
@@ -177,9 +212,9 @@
         transmits your IP address in doing so.
       </p>
       <p>
-        The second is Google Analytics, and it loads <strong>only if you have agreed to
-        it</strong>. Decline, or simply never answer the cookie question, and no request
-        goes to Google at all. See the next section.
+        The second is Google Analytics. Its script is loaded on every page, but it starts
+        in a switched-off state: until you agree, it sets <strong>no cookies</strong> and
+        cannot recognise you. Declining keeps it that way. See the next section.
       </p>
       <div class="todo-box">
         <p><strong>Zu ergänzen, bevor die Seite ohne <code>noindex</code> live geht:</strong>
@@ -224,9 +259,17 @@
         Legal basis: Art. 6(1)(a) GDPR and § 25(1) TDDDG — your consent.
       </p>
       <p>
-        The measurement ID for this site is <code>G-DQBC6VLYFP</code>. Analytics is loaded
-        only after you consent, and only then does any data reach Google; the site sets
-        Google Consent Mode to “denied” for everything before you answer.
+        The measurement ID for this site is <code>G-DQBC6VLYFP</code>. The script is on
+        every page, but Google Consent Mode is set to “denied” for everything before it
+        loads, so until you agree it stores nothing on your device and cannot identify
+        you. Agreeing switches it on; declining leaves it off. You can change your mind at
+        any time via “Cookie settings” in the footer.
+      </p>
+      <p>
+        In its switched-off state the script still contacts Google once per page, which
+        transmits your IP address. No cookie is set and no profile is built from it.
+        Legal basis for that contact: Art. 6(1)(f) GDPR — our legitimate interest in
+        measuring the site at all — and you can object at any time.
       </p>
 
       <h2>Email addresses you give us</h2>

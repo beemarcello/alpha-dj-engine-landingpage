@@ -32,39 +32,43 @@
   <link rel="stylesheet" href="css/tailwind.css?v=18">
 
 
-  <!-- ####################################################################
-       ####  VORUEBERGEHEND — WIEDER ENTFERNEN  ############################
-       ####################################################################
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
 
-       Rohes Google-Tag, eingebaut am 2026-08-22 auf ausdruecklichen Wunsch
-       von Marcel (dreimal bestaetigt). Zweck: pruefen, ob die GA-Meldung
-       "No data received" verschwindet, wenn das Tag ohne Einwilligung laedt.
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
 
-       WAS DAS HIER BEDEUTET, SOLANGE ES DRINSTEHT:
-       Google Analytics laedt bei JEDEM Aufruf dieser Startseite und setzt
-       Cookies — auch bei Besuchern, die im Banner gleich danach auf "Reject"
-       klicken. Deren Ablehnung bleibt fuer Analytics wirkungslos. Das ist der
-       Zustand, den der Banner eigentlich verhindert, und nach Paragraf 25
-       TDDDG angreifbar.
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
 
-       NUR auf index.html eingebaut, nicht auf den anderen acht Seiten — die
-       Startseite ist die Stream-URL, mehr braucht der Test nicht.
-
-       ZURUECKBAUEN (zwei Handgriffe):
-         1. Diesen Block hier loeschen.
-         2. In js/site.js GA_CFG.measurementId wieder auf 'G-DQBC6VLYFP'
-            setzen — sie steht dort auskommentiert bereit.
-       ################################################################### -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
     gtag('js', new Date());
     gtag('config', 'G-DQBC6VLYFP');
   </script>
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=19" defer></script>
+  <script src="js/site.js?v=20" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">

@@ -367,17 +367,16 @@
   /* ------------------------------------------------------------------------
      7. Consent-Banner
 
-     Drei Stufen, abgebildet als Plattenteller: volle Platte, halbe Platte,
-     leerer Teller mit abgehobenem Tonarm.
-
-     Zuordnung zu Google Consent Mode v2:
+     Drei Stufen in Klartext, Zuordnung zu Google Consent Mode v2:
        all   → analytics_storage + ad_storage/ad_user_data/ad_personalization
        stats → nur analytics_storage
-       none  → alles denied (Ausgangszustand)
+       none  → alles denied
 
-     WICHTIG: Google Analytics wird hier NICHT geladen. Der Banner setzt nur
-     den Consent-Zustand. Zum Scharfschalten den markierten Block in
-     loadAnalytics() ausfüllen — dann laedt GA erst nach Einwilligung.
+     Der Banner LAEDT nichts. gtag.js steht im <head> und startet mit dem
+     Default "denied"; der Banner schickt nur das consent-update. Bis dahin
+     setzt GA keine Cookies. Google Ads ist der einzige Tag, der zusaetzlich
+     einen config-Aufruf braucht — der steht in loadAds() und feuert nur bei
+     Stufe "all".
      ------------------------------------------------------------------------ */
   var CONSENT_KEY = 'amc-consent-v1';
 
@@ -420,72 +419,36 @@
       ad_personalization:  granted(ads)
     });
 
-    if (analytics) loadAnalytics();
+    /* Kein loadAnalytics mehr — GA laeuft ueber den <head> und richtet sich
+       allein nach diesem Update. */
     if (ads) loadAds();
   }
 
   /* ------------------------------------------------------------------------
-     Google-Tags — laden AUSSCHLIESSLICH nach Einwilligung
+     Google-Tags
 
-     Beide IDs hier eintragen, dann laeuft es. Solange sie leer sind, wird nichts
-     geladen und nichts gemessen; die Seite bleibt ohne Einwilligung vollstaendig
-     frei von Google-Requests.
+     GA4 wird nicht mehr von hier geladen. gtag.js und der config-Aufruf stehen
+     fest im <head> jeder Seite, weil Googles Installationspruefung die Seite
+     abruft und das Tag im Quelltext sucht — nachgeladen findet sie es nie.
 
-       measurementId    GA4, Form G-XXXXXXXXXX. In Google Analytics unter
-                        Verwaltung -> Datenstreams -> Web-Stream fuer
-                        alpha-dj-engine.com.
-       adsConversionId  Google Ads, Form AW-XXXXXXXXX. Nur noetig, wenn
-                        wirklich Ads-Conversions gemessen werden sollen.
+     Gemessen wird trotzdem erst nach der Entscheidung: der consent-default im
+     <head> steht auf denied, und erst applyConsent() schickt das Update. Bis
+     dahin setzt GA keine Cookies.
 
-     WICHTIG: gtag.js wird nur EINMAL geladen, auch wenn beide IDs gesetzt sind.
-     GA4 und Ads teilen sich dasselbe Skript und werden ueber je einen eigenen
-     config-Aufruf angemeldet; zwei Skript-Tags wuerden Seitenaufrufe doppelt
-     zaehlen.
-
-     Die Consent-Mode-Defaults stehen in initConsent() und werden VOR dem Laden
-     gesetzt. Das ist Pflicht: was Google vor dem ersten Default sieht, gilt als
-     uneingeschraenkt erlaubt.
+     Bleibt hier: Google Ads. Das Skript ist durch den <head> schon geladen, es
+     fehlt nur der config-Aufruf — und der darf ausschliesslich bei Stufe "all"
+     kommen.
      ------------------------------------------------------------------------ */
   var GA_CFG = {
-    /* VORUEBERGEHEND LEER (2026-08-22): das rohe Google-Tag steht gerade fest
-       im <head> von index.html. Waere die ID hier ebenfalls gesetzt, wuerde
-       loadAnalytics() nach der Einwilligung ein ZWEITES gtag.js einhaengen und
-       ein zweites config abschicken — jeder Seitenaufruf zaehlte doppelt.
-       Beim Zurueckbauen des Tags diese Zeile wieder aktivieren:
-         measurementId: 'G-DQBC6VLYFP', */
-    measurementId: '',
-    adsConversionId: ''
+    adsConversionId: ''      // AW-XXXXXXXXX, nur falls Ads geschaltet werden
   };
 
   function gtagPush() { (window.dataLayer = window.dataLayer || []).push(arguments); }
-
-  var gtagScriptGeladen = false;
-  function ensureGtag(ersteId) {
-    if (gtagScriptGeladen) return;
-    gtagScriptGeladen = true;
-    var sc = document.createElement('script');
-    sc.async = true;
-    sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ersteId);
-    document.head.appendChild(sc);
-    gtagPush('js', new Date());
-  }
-
-  var gaAngemeldet = false;
-  function loadAnalytics() {
-    if (gaAngemeldet || !GA_CFG.measurementId) return;
-    gaAngemeldet = true;
-    ensureGtag(GA_CFG.measurementId);
-    /* anonymize_ip bewusst NICHT gesetzt: bei GA4 gibt es die Option nicht mehr,
-       die IP-Kuerzung passiert dort immer und laesst sich nicht abschalten. Ein
-       gesetztes Flag wuerde nur suggerieren, der Schutz haenge daran. */
-    gtagPush('config', GA_CFG.measurementId);
-  }
 
   var adsAngemeldet = false;
   function loadAds() {
     if (adsAngemeldet || !GA_CFG.adsConversionId) return;
     adsAngemeldet = true;
-    ensureGtag(GA_CFG.adsConversionId);
     gtagPush('config', GA_CFG.adsConversionId);
   }
 
@@ -543,16 +506,12 @@
   function initConsent() {
     var stored = readConsent();
 
-    // Ausgangszustand: alles verweigert, bis eine Wahl vorliegt.
+    /* Der Ausgangszustand (alles denied) wird NICHT mehr hier gesetzt, sondern
+       im <head> jeder Seite — direkt vor dem Laden von gtag.js. site.js laeuft
+       mit defer und damit zu spaet: einen Default nach der Initialisierung
+       ignoriert Google, und die Seite haette stillschweigend ohne Schutz
+       gemessen. Hier bleibt nur das Update nach der Entscheidung. */
     window.dataLayer = window.dataLayer || [];
-    (function () {
-      function gtag() { window.dataLayer.push(arguments); }
-      gtag('consent', 'default', {
-        analytics_storage: 'denied', ad_storage: 'denied',
-        ad_user_data: 'denied', ad_personalization: 'denied',
-        wait_for_update: 500
-      });
-    })();
 
     if (stored) applyConsent(stored);
 

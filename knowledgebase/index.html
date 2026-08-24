@@ -21,8 +21,43 @@
   <link rel="stylesheet" href="../css/site.css?v=39">
   <link rel="stylesheet" href="../css/tailwind.css?v=18">
 
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
   <script src="../js/icons.js?v=6" defer></script>
-  <script src="../js/site.js?v=19" defer></script>
+  <script src="../js/site.js?v=20" defer></script>
 </head>
 
 <body class="antialiased">
