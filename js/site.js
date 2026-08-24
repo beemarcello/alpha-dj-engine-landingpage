@@ -381,13 +381,20 @@
      ------------------------------------------------------------------------ */
   var CONSENT_KEY = 'amc-consent-v1';
 
+  /* Reihenfolge = Anzeigereihenfolge in der Feineinstellung: von der
+     sparsamsten zur weitgehendsten Stufe. Die ids bleiben unveraendert
+     ('none' | 'stats' | 'all') — sie stehen so im localStorage der bisherigen
+     Besucher, und ein Umbenennen wuerde deren Entscheidung entwerten und die
+     Frage erneut stellen. Nur die sichtbaren Namen sind neu: die alten
+     DJ-Metaphern ("Needle up", "Play it all") waren der Grund, warum Besucher
+     nicht wussten, was sie anklicken. */
   var CONSENT_LEVELS = [
-    { id: 'all', name: 'Play it all',
-      desc: 'Usage stats plus campaign measurement, so we know which posts actually bring DJs here.' },
-    { id: 'stats', name: 'Stats only',
-      desc: 'Anonymous usage measurement — which pages get read and where people drop off.' },
-    { id: 'none', name: 'Needle up',
-      desc: 'Nothing is measured. The site works exactly the same.' }
+    { id: 'none',  name: 'Essential only',
+      desc: 'Nothing is measured. Only your choice here is stored, in your browser.' },
+    { id: 'stats', name: 'Essential + statistics',
+      desc: 'Anonymous usage measurement: which pages get read and where people drop off.' },
+    { id: 'all',   name: 'Statistics + campaign measurement',
+      desc: 'The above, plus which post or ad brought someone here.' }
   ];
 
   function readConsent() {
@@ -397,53 +404,6 @@
     try { localStorage.setItem(CONSENT_KEY, v); } catch (e) { /* Private Mode */ }
   }
 
-  /** Plattenteller als SVG. fill: 'full' | 'half' | 'none' */
-  function deckSvg(fill, labelColor) {
-    var grooves = '';
-    [38, 33, 28, 23].forEach(function (r) {
-      grooves += '<circle cx="60" cy="60" r="' + r + '" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>';
-    });
-
-    var vinyl = '';
-    if (fill !== 'none') {
-      // Halbe Platte: rechte Haelfte wegschneiden
-      var clip = fill === 'half'
-        ? '<defs><clipPath id="cc-half"><rect x="0" y="0" width="60" height="120"/></clipPath></defs>'
-        : '';
-      var clipAttr = fill === 'half' ? ' clip-path="url(#cc-half)"' : '';
-      vinyl =
-        clip +
-        '<g class="deck__spin">' +
-          '<g' + clipAttr + '>' +
-            '<circle cx="60" cy="60" r="44" fill="#111" stroke="#000" stroke-width="2"/>' +
-            grooves +
-            '<circle cx="60" cy="60" r="15" fill="' + labelColor + '" stroke="#000" stroke-width="2"/>' +
-          '</g>' +
-          // Schnittkante der halben Platte sichtbar machen
-          (fill === 'half'
-            ? '<line x1="60" y1="16" x2="60" y2="104" stroke="#000" stroke-width="2"/>'
-            : '') +
-        '</g>';
-    }
-
-    return '' +
-      '<svg viewBox="0 0 120 120" aria-hidden="true">' +
-        // Teller
-        '<circle cx="60" cy="60" r="52" fill="#d9d9d7" stroke="#000" stroke-width="2"/>' +
-        vinyl +
-        // Spindel
-        '<circle cx="60" cy="60" r="3" fill="#000"/>' +
-        // Tonarm
-        '<g class="deck__arm">' +
-          '<circle cx="104" cy="18" r="7" fill="#fff" stroke="#000" stroke-width="2"/>' +
-          '<line x1="104" y1="18" x2="72" y2="52" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>' +
-          '<rect x="66" y="48" width="10" height="7" rx="2" fill="#fff" stroke="#000" stroke-width="2" transform="rotate(-45 71 51)"/>' +
-        '</g>' +
-      '</svg>';
-  }
-
-  var LABEL_COLORS = { all: '#5dff7e', stats: '#c987fd', none: '#ffffff' };
-  var FILL_BY_ID   = { all: 'full',    stats: 'half',    none: 'none' };
 
   /** Consent an Google Consent Mode v2 melden. */
   function applyConsent(level) {
@@ -483,50 +443,56 @@
        ==================================================================== */
   }
 
+  /* Zwei Ebenen:
+       1. Leiste — ein Satz, "Reject" und "Accept", daneben "Settings".
+       2. Feineinstellung — die drei Stufen, erst nach Klick sichtbar.
+
+     Ebene 1 hat KEINE Vorauswahl. Das ist kein Versehen: vorher stand die
+     Stufe "stats" vorgewaehlt da, und eine vorangekreuzte nicht-notwendige
+     Einwilligung ist unwirksam. Zwei ausdrueckliche Knoepfe loesen das ganz. */
   function buildBanner(current) {
     var wrap = document.createElement('div');
     wrap.className = 'cc';
     wrap.id = 'cc-banner';
 
     var opts = CONSENT_LEVELS.map(function (l) {
-      var checked = l.id === current;
       return '' +
         '<button type="button" class="cc-opt" role="radio" data-consent="' + l.id + '" ' +
-                'aria-checked="' + checked + '">' +
-          '<span class="deck"><span class="deck__inner">' +
-            deckSvg(FILL_BY_ID[l.id], LABEL_COLORS[l.id]) +
-          '</span></span>' +
-          '<span class="cc-opt__name">' + l.name + '</span>' +
-          '<span class="cc-opt__desc">' + l.desc + '</span>' +
+                'aria-checked="' + (l.id === current) + '">' +
+          '<span class="cc-opt__dot"></span>' +
+          '<span><span class="cc-opt__name">' + l.name + '</span>' +
+          '<span class="cc-opt__desc">' + l.desc + '</span></span>' +
         '</button>';
     }).join('');
 
     wrap.innerHTML = '' +
-      '<div class="cc__panel" role="dialog" aria-modal="true" aria-labelledby="cc-title">' +
-        '<p class="cc__eyebrow">A quick word on cookies</p>' +
-        '<h2 class="cc__title" id="cc-title">How much should we measure?</h2>' +
-        '<p class="cc__lead">We only want to know whether this site works: which pages get read ' +
-          'and where people drop off. Anonymous, never sold, never shared with advertisers ' +
-          'beyond what you pick here.</p>' +
-        '<div class="cc__options" role="radiogroup" aria-labelledby="cc-title">' + opts + '</div>' +
-        '<button type="button" class="btn btn-primary cc__confirm" data-cc-confirm>Confirm selection</button>' +
-        '<p class="cc__foot">You can change this any time via “Cookie settings” in the footer. ' +
-          'See the <a href="privacy.html">privacy page</a> for detail.</p>' +
-        '<details class="cc__details">' +
-          '<summary>What exactly do we measure?</summary>' +
-          '<div class="cc__detailsBody">' +
-            '<p><strong>Needle up</strong> — nothing at all. No cookies, no measurement. ' +
-              'Only your choice here is remembered, in your browser.</p>' +
-            '<p><strong>Stats only</strong> — Google Analytics with a shortened IP: pages viewed, ' +
-              'roughly where in the world you are, which link brought you. No advertising features.</p>' +
-            '<p><strong>Play it all</strong> — the above plus campaign measurement, so we can tell ' +
-              'which post or ad actually sent a DJ our way.</p>' +
+      '<div class="cc__panel" role="region" aria-label="Cookie notice">' +
+        '<div class="cc__row">' +
+          '<p class="cc__text">We use cookies to measure how this site is used. ' +
+            'You can accept, reject, or choose in detail. ' +
+            '<a href="' + PRIVACY_HREF + '">Privacy</a></p>' +
+          '<div class="cc__actions">' +
+            '<button type="button" class="btn" data-cc-set="none">Reject</button>' +
+            '<button type="button" class="btn btn-primary" data-cc-set="all">Accept</button>' +
+            '<button type="button" class="cc__more" data-cc-more aria-expanded="false">Settings</button>' +
           '</div>' +
-        '</details>' +
+        '</div>' +
+
+        '<div class="cc__detail">' +
+          '<div role="radiogroup" aria-label="How much may we measure?">' + opts + '</div>' +
+          '<button type="button" class="btn btn-primary cc__save" data-cc-save>Save selection</button>' +
+        '</div>' +
       '</div>';
 
     return wrap;
   }
+
+  /* Die Datenschutzseite liegt je nach Unterordner anders. Ein fest kodiertes
+     "privacy.html" haette auf /features/ und /knowledgebase/ ins Leere gezeigt. */
+  var PRIVACY_HREF = (function () {
+    var tiefe = window.location.pathname.replace(/\/[^\/]*$/, '/').split('/').length - 2;
+    return (tiefe > 0 ? '../'.repeat(tiefe) : '') + 'privacy.html';
+  })();
 
   function initConsent() {
     var stored = readConsent();
@@ -544,14 +510,35 @@
 
     if (stored) applyConsent(stored);
 
-    function open(preselect) {
-      if (document.getElementById('cc-banner')) return;
-      var selected = preselect || readConsent() || 'stats';
+    function open(detailSofort) {
+      var vorhanden = document.getElementById('cc-banner');
+      if (vorhanden) {
+        // Schon offen — dann nur die Feineinstellung aufklappen.
+        if (detailSofort) zeigeDetail(vorhanden);
+        return;
+      }
+
+      // Vorauswahl NUR in der Feineinstellung, und nur aus einer frueheren
+      // Entscheidung. Ohne gespeicherte Wahl steht die sparsamste Stufe vorn —
+      // niemals eine, die etwas erlaubt.
+      var selected = readConsent() || 'none';
       var el = buildBanner(selected);
       document.body.appendChild(el);
-      if (window.lucide) window.lucide.createIcons();
+      if (detailSofort) zeigeDetail(el);
 
-      var lastFocus = document.activeElement;
+      function entscheide(level) {
+        writeConsent(level);
+        applyConsent(level);
+        el.remove();
+      }
+
+      el.querySelectorAll('[data-cc-set]').forEach(function (btn) {
+        btn.addEventListener('click', function () { entscheide(btn.dataset.ccSet); });
+      });
+
+      el.querySelector('[data-cc-more]').addEventListener('click', function () {
+        zeigeDetail(el);
+      });
 
       el.querySelectorAll('.cc-opt').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -562,27 +549,24 @@
         });
       });
 
-      el.querySelector('[data-cc-confirm]').addEventListener('click', function () {
-        writeConsent(selected);
-        applyConsent(selected);
-        el.remove();
-        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      el.querySelector('[data-cc-save]').addEventListener('click', function () {
+        entscheide(selected);
       });
+    }
 
-      // Escape = ablehnen, aber nicht speichern — die Frage bleibt offen.
-      el.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { el.remove(); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
-      });
-
-      var first = el.querySelector('.cc-opt[aria-checked="true"]') || el.querySelector('.cc-opt');
-      if (first) first.focus();
+    function zeigeDetail(el) {
+      el.classList.add('is-detail');
+      var more = el.querySelector('[data-cc-more]');
+      if (more) { more.setAttribute('aria-expanded', 'true'); more.hidden = true; }
+      var erste = el.querySelector('.cc-opt[aria-checked="true"]') || el.querySelector('.cc-opt');
+      if (erste) erste.focus();
     }
 
     if (!stored) open();
 
     // Footer-Link „Cookie settings"
     document.querySelectorAll('[data-cookie-settings]').forEach(function (a) {
-      a.addEventListener('click', function (e) { e.preventDefault(); open(); });
+      a.addEventListener('click', function (e) { e.preventDefault(); open(true); });
     });
   }
 

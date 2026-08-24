@@ -696,150 +696,131 @@ body {
 .dev-tell .input { flex: 1 1 220px; }
 
 /* --------------------------------------------------------------------------
-   4d. Consent-Banner — Plattenteller statt Keks
-   Markup wird von js/site.js erzeugt, deshalb steht hier nur das Styling.
+   4d. Consent-Banner
+
+   Umgebaut am 2026-08-22. Vorher: blockierendes Modal, drei
+   Plattenteller-Grafiken, DJ-Metaphern als Optionsnamen ("Needle up", "Play it
+   all") und ein separater "Confirm selection". Besucher waren verwirrt
+   (Marcel) — nachvollziehbar: wer eine Cookie-Frage beantworten will, sucht
+   "Akzeptieren" und "Ablehnen", nicht eine Metapher, die er erst entschluesseln
+   und dann in einem zweiten Schritt bestaetigen muss.
+
+   Jetzt bewusst unspektakulaer: schmale Leiste unten, ein Satz, zwei
+   gleichrangige Knoepfe, Feineinstellung dahinter. Rund 60px hoch statt eines
+   halben Bildschirms. Kein Overlay — die Seite bleibt bedienbar.
+
+   Die beiden Knoepfe MUESSEN gleich gross und gleich auffaellig bleiben.
+   Ablehnen darf nicht schwerer sein als Zustimmen; ein optisch
+   zurueckgenommenes "Reject" ist der haeufigste Abmahngrund bei
+   Cookie-Bannern.
+
+   Markup erzeugt js/site.js.
    -------------------------------------------------------------------------- */
 .cc {
   position: fixed;
-  inset: 0;
-  z-index: 9000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--gutter);
-  background: rgba(0, 0, 0, .55);
-  animation: cc-fade var(--dur) var(--ease-out) both;
-}
-@keyframes cc-fade { from { opacity: 0; } to { opacity: 1; } }
-
-.cc__panel {
-  width: min(760px, 100%);
-  max-height: calc(100dvh - 2 * var(--gutter));
-  overflow-y: auto;
-  background: var(--paper-2);
-  border: var(--stroke);
-  border-radius: var(--r-lg);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
-  padding: clamp(22px, 4vw, 36px);
-  text-align: center;
-  animation: cc-rise var(--dur-slow) var(--ease-card) both;
+  left: 0; right: 0; bottom: 0;
+  z-index: 90;
+  padding: 12px var(--gutter);
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  animation: cc-rise var(--dur) var(--ease-out);
 }
 @keyframes cc-rise {
-  from { opacity: 0; transform: translateY(18px) scale(.97); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.cc__eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+.cc__panel {
+  width: min(var(--container), 100%);
+  margin-inline: auto;
   background: var(--white);
   border: var(--stroke);
-  border-radius: var(--r-pill);
-  padding: 5px 14px;
-  margin: 0 0 16px;
-}
-.cc__title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(26px, 4.4vw, 40px);
-  line-height: 1.05;
-  letter-spacing: .03em;
-  margin: 0 0 12px;
-}
-.cc__lead {
-  font-size: 15px;
-  color: var(--ink-55);
-  max-width: 52ch;
-  margin: 0 auto 26px;
-  line-height: 1.55;
+  border-radius: var(--r-sm);
+  box-shadow: var(--shadow-hard-sm);
+  padding: 12px 16px;
 }
 
-/* Die drei Optionen */
-.cc__options {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 1fr;
-  margin-bottom: 22px;
+/* Eine Zeile: Text links, Knoepfe rechts. Bricht erst um, wenn es eng wird. */
+.cc__row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.cc__text {
+  flex: 1 1 320px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-55);
+  margin: 0;
 }
-@media (min-width: 640px) { .cc__options { grid-template-columns: repeat(3, 1fr); } }
+.cc__text a { color: var(--ink); font-weight: 600; }
+
+.cc__actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.cc__actions .btn {
+  min-height: 38px;
+  padding: 0 18px;
+  font-size: 14px;
+  min-width: 104px;
+}
+.cc__more {
+  background: none; border: 0; padding: 4px 6px;
+  font: inherit; font-size: 13px; font-weight: 600;
+  color: var(--ink-55);
+  text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cc__more:hover { color: var(--ink); }
+
+@media (max-width: 560px) {
+  .cc__actions { width: 100%; }
+  .cc__actions .btn { flex: 1 1 0; min-width: 0; }
+  /* Die Chat-Blase klebt fest in der rechten unteren Ecke und lag sonst ueber
+     "Settings". Die Leiste rueckt deshalb darueber statt sich mit ihr zu
+     ueberlappen — verdeckte Bedienelemente sind schlimmer als etwas Luft. */
+  .cc { padding-bottom: 88px; }
+}
+
+/* Feineinstellung — erst nach Klick auf „Settings“ */
+.cc__detail { display: none; margin-top: 14px; padding-top: 12px; border-top: 2px solid var(--ink-40); }
+.cc.is-detail .cc__detail { display: block; }
 
 .cc-opt {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  background: var(--white);
-  border: var(--stroke);
-  border-radius: var(--r-md);
-  padding: 18px 14px 16px;
-  cursor: pointer;
-  font-family: inherit;
-  text-align: center;
-  transition: background var(--dur-fast) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out),
-              box-shadow var(--dur-fast) var(--ease-out);
-}
-.cc-opt:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hard-sm); }
-.cc-opt[aria-checked="true"] { background: var(--green); box-shadow: var(--shadow-hard); }
-.cc-opt__name { font-weight: 600; font-size: 15px; margin-top: 10px; }
-.cc-opt__desc { font-size: 12px; color: var(--ink-55); line-height: 1.45; }
-
-/* --- Plattenteller, 3D gekippt --- */
-.deck {
-  width: 108px;
-  height: 74px;                 /* gekippt braucht es weniger Hoehe als Breite */
-  display: grid;
-  place-items: center;
-  perspective: 520px;
-}
-.deck__inner {
-  width: 108px;
-  height: 108px;
-  transform: rotateX(58deg) rotateZ(-12deg);
-  transform-style: preserve-3d;
-}
-.deck svg { display: block; width: 100%; height: 100%; overflow: visible; }
-
-/* Platte dreht sich nur in der gewaehlten Karte */
-.cc-opt[aria-checked="true"] .deck__spin { animation: deck-spin 3.4s linear infinite; transform-origin: 60px 60px; }
-
-@keyframes deck-spin { to { transform: rotate(360deg); } }
-
-/* Tonarm: bei „nichts" abgehoben */
-.deck__arm { transform-origin: 104px 18px; transition: transform var(--dur) var(--ease-card); }
-.cc-opt[data-consent="none"] .deck__arm { transform: rotate(-24deg); }
-
-/* Bestaetigen + Fusszeile */
-.cc__confirm { min-height: 52px; padding: 0 30px; font-size: 16px; }
-.cc__foot { font-size: 12px; color: var(--ink-55); margin: 14px 0 0; }
-.cc__foot a { color: var(--ink); }
-
-.cc__details {
-  margin-top: 18px;
-  background: var(--white);
-  border: var(--stroke);
-  border-radius: var(--r-md);
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
   text-align: left;
-}
-.cc__details summary {
+  background: var(--white);
+  border: var(--stroke);
+  border-radius: var(--r-xs);
+  padding: 9px 12px;
+  margin-bottom: 7px;
   cursor: pointer;
-  list-style: none;
-  padding: 14px 18px;
-  font-weight: 600;
-  font-size: 14px;
+  font: inherit;
+  transition: background var(--dur-fast) var(--ease-out);
 }
-.cc__details summary::-webkit-details-marker { display: none; }
-.cc__details summary::marker { content: ""; }
-.cc__details .cc__detailsBody { padding: 0 18px 16px; font-size: 13px; color: var(--ink-55); line-height: 1.6; }
-.cc__details p { margin: 0 0 8px; }
-.cc__details p:last-child { margin-bottom: 0; }
+.cc-opt:hover { background: var(--paper-2); }
+.cc-opt[aria-checked="true"] { background: var(--green); }
+
+/* Runder Punkt, damit erkennbar ist, dass genau eine Stufe gilt. */
+.cc-opt__dot {
+  flex-shrink: 0;
+  width: 15px; height: 15px;
+  margin-top: 2px;
+  border: var(--stroke);
+  border-radius: 999px;
+  background: var(--white);
+  position: relative;
+}
+.cc-opt[aria-checked="true"] .cc-opt__dot::after {
+  content: "";
+  position: absolute; inset: 3px;
+  background: var(--ink);
+  border-radius: 999px;
+}
+.cc-opt__name { display: block; font-weight: 600; font-size: 13px; }
+.cc-opt__desc { display: block; font-size: 12px; color: var(--ink-55); line-height: 1.4; margin-top: 2px; }
+
+.cc__save { margin-top: 10px; min-height: 38px; padding: 0 18px; font-size: 14px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cc, .cc__panel { animation: none !important; }
-  .cc-opt[aria-checked="true"] .deck__spin { animation: none !important; }
+  .cc { animation: none; }
 }
 
 /* --------------------------------------------------------------------------

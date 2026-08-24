@@ -23,17 +23,17 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=31">
+  <link rel="stylesheet" href="css/site.css?v=33">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=14">
+  <link rel="stylesheet" href="css/tailwind.css?v=15">
 
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=13" defer></script>
+  <script src="js/site.js?v=14" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
