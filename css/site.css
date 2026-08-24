@@ -1422,3 +1422,90 @@ body {
 /* Einschraenkung statt Haken — ehrliche Grenzen gehoeren sichtbar dazu und
    duerfen nicht wie ein Feature aussehen. */
 .feat-card li.is-limit { color: var(--ink-55); }
+
+/* ==========================================================================
+   Footer
+
+   Vorher lagen alle acht Links gleichwertig in einer Reihe — Impressum stand
+   so laut wie Pricing. Jetzt zwei Ebenen (Marcel, 2026-08-22):
+
+     - Produktseiten (Features, Kompatibilitaet, Pricing) gross und in voller
+       Tinte. Das sind die Wege, die ein Besucher wirklich gehen soll.
+     - Rechtstexte klein, gedaempft und gestapelt am rechten Rand. Sie muessen
+       auffindbar sein — das Impressum ist Pflicht nach Paragraf 5 DDG — aber
+       nicht um Aufmerksamkeit konkurrieren.
+
+   Auf schmalen Schirmen laufen die Rechtstexte als umbrechende Zeile statt als
+   Stapel: fuenf Zeilen untereinander waeren dort mehr Footer als noetig.
+   ========================================================================== */
+.site-footer { padding-block: clamp(40px, 6vw, 64px); padding-inline: var(--gutter); }
+
+/* Unten mehr Luft auf schmalen Schirmen: die Chat-Blase klebt fest in der
+   rechten unteren Ecke und liegt am Seitenende sonst ueber den Rechtstexten.
+   Gemessen verdeckte sie dort "Cookie settings" — beschnitten war nichts, aber
+   verdeckt ist fuer einen Pflichtlink genauso schlecht. */
+@media (max-width: 759px) {
+  .site-footer { padding-bottom: 104px; }
+}
+
+.site-footer__inner {
+  width: min(var(--container), 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  justify-items: center;
+  text-align: center;
+}
+@media (min-width: 760px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr auto auto;
+    gap: 24px 56px;
+    align-items: start;
+    justify-items: start;
+    text-align: left;
+  }
+}
+
+.site-footer__brand { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+@media (min-width: 760px) { .site-footer__brand { align-items: flex-start; } }
+.site-footer__tag { font-size: 13px; font-weight: 600; color: var(--ink-55); }
+
+/* Ebene 1 — Produktseiten */
+.site-footer__main { display: flex; flex-direction: column; gap: 11px; align-items: center; }
+@media (min-width: 760px) { .site-footer__main { align-items: flex-start; } }
+.site-footer__main a {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-footer__main a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+/* Ebene 2 — Rechtstexte */
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 18px;
+}
+@media (min-width: 760px) {
+  .site-footer__legal { flex-direction: column; flex-wrap: nowrap; gap: 8px; justify-content: flex-start; }
+}
+.site-footer__legal a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-55);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-footer__legal a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

@@ -13,13 +13,13 @@
   <link rel="canonical" href="https://alpha-dj-engine.com/privacy.html">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="css/site.css?v=29">
+  <link rel="stylesheet" href="css/site.css?v=31">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=13">
+  <link rel="stylesheet" href="css/tailwind.css?v=14">
 
   <script src="js/icons.js?v=6" defer></script>
   <script src="js/site.js?v=13" defer></script>
@@ -328,26 +328,31 @@
     </div>
   </main>
 
-  <footer class="py-12 px-6">
-    <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="flex flex-col items-center md:items-start gap-1">
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
         <a href="index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
           <img src="assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
                class="h-8 w-auto" decoding="async" loading="lazy">
         </a>
-        <span class="text-sm font-semibold text-[var(--ink-55)]">Engineered in Berlin by Alphabees</span>
+        <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
       </div>
 
-      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm font-bold" aria-label="Footer">
-        <a href="features/" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Features</a>
-        <a href="compatibility.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Works with your setup?</a>
-        <a href="pricing.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Pricing</a>
-        <a href="terms.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Terms</a>
-        <a href="withdrawal.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Withdrawal</a>
-        <a href="privacy.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Privacy</a>
-        <a href="#" data-cookie-settings class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Cookie settings</a>
-        <a href="imprint.html" class="text-[var(--ink)] no-underline hover:underline underline-offset-4 decoration-2">Imprint</a>
+      <nav class="site-footer__main" aria-label="Product">
+        <a href="features/">Features</a>
+        <a href="compatibility.html">Works with your setup?</a>
+        <a href="pricing.html">Pricing</a>
       </nav>
+
+      <nav class="site-footer__legal" aria-label="Legal and settings">
+        <a href="terms.html">Terms</a>
+        <a href="withdrawal.html">Withdrawal</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="#" data-cookie-settings>Cookie settings</a>
+        <a href="imprint.html">Imprint</a>
+      </nav>
+
     </div>
   </footer>
 
