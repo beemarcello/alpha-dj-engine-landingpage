@@ -18,11 +18,11 @@
   <link rel="canonical" href="https://alpha-dj-engine.com/knowledgebase/">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="../css/site.css?v=24">
-  <link rel="stylesheet" href="../css/tailwind.css?v=10">
+  <link rel="stylesheet" href="../css/site.css?v=25">
+  <link rel="stylesheet" href="../css/tailwind.css?v=11">
 
   <script src="../js/icons.js?v=4" defer></script>
-  <script src="../js/site.js?v=10" defer></script>
+  <script src="../js/site.js?v=13" defer></script>
 </head>
 
 <body class="antialiased">
@@ -250,6 +250,7 @@
         <ul class="kb-toc__list">
           <li><a href="#track-analysis">Track analysis</a></li>
           <li><a href="#track-selection">Track selection</a></li>
+          <li><a href="#rekordbox-import">rekordbox import</a></li>
           <li><a href="#compose">Compose</a></li>
           <li><a href="#refine">Refine</a></li>
           <li><a href="#local-backups">Local backups</a></li>
@@ -428,6 +429,125 @@
             <dd>Yes. Use <span class="kb-verbatim">+ Tracks</span> to add individual files, and repeat from any folder; every chosen track collects in the same staging list.</dd>
             <dt>How do I remove a track I added by mistake?</dt>
             <dd>Use the remove control on that track in the staging list, or use <span class="kb-verbatim">Clear</span> to remove all of them and start over.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="rekordbox-import"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="analysis"
+               data-kb-platforms="macOS">
+
+        <h2>rekordbox import</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          rekordbox import reads a rekordbox XML export and reuses its BPM, key
+          and beatgrid, so those are not analyzed again. After the import the DJ
+          chooses one of two ways to continue: pick a set of tracks from the
+          library, or write the whole library straight to the USB stick.
+        </p>
+
+        <section class="kb-block">
+          <h3>What rekordbox import does</h3>
+          <p>
+            rekordbox import loads the tracks from a rekordbox XML file, matches
+            them to the DJ's files on disk, and keeps the BPM, key and beatgrid
+            that rekordbox already worked out &mdash; none of that is analyzed
+            again. Tracks whose files cannot be found on disk are reported as
+            missing and skipped. Because a set is a curated selection, the import
+            does not drop a whole library into the Composer; instead it offers two
+            paths: <span class="kb-verbatim">Pick tracks for a set</span>, which
+            opens a filterable browser to choose the tracks for one set, or
+            <span class="kb-verbatim">Write whole library to USB</span>, which
+            skips composing and writes every imported track to the stick in Denon
+            Engine format. Energy (needed for the Composer's arc) is the one value
+            not in the XML; it is computed only for the tracks the DJ actually
+            picks, and not at all for the whole-library write.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use rekordbox import</h3>
+          <ol>
+            <li>In rekordbox, export your collection (or a playlist) as an XML file.</li>
+            <li>In the Analyze step, click <span class="kb-verbatim">+ XML</span> and choose that XML file.</li>
+            <li>Read the summary: how many tracks were found and how many are missing, with the coverage for BPM, key, duration, energy and loudness.</li>
+            <li>To build one set, click <span class="kb-verbatim">Pick tracks for a set</span>, filter by search, key, genre or BPM range, tick the tracks you want, then click <span class="kb-verbatim">Add 0 &#8594; Compose</span> (the number is how many are selected). Energy is computed for the picked tracks and the Composer opens.</li>
+            <li>To transfer everything as-is, click <span class="kb-verbatim">Write whole library to USB</span>; the Export step opens with every imported track ready to write.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>rekordbox import filters (Pick tracks for a set)</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Filter</th><th>What it does</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Search</td><td>Matches the title or artist as the DJ types.</td></tr>
+                <tr><td>Key</td><td>Limits the list to one Camelot key.</td></tr>
+                <tr><td>Genre</td><td>Limits the list to one genre from the imported tags.</td></tr>
+                <tr><td>BPM min / BPM max</td><td>Limits the list to a tempo range.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>rekordbox import tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Analyze, tooltip on the + XML button</td><td><span class="kb-verbatim">Import a rekordbox XML - reuses its BPM, key and beatgrid, so only the energy value is computed (needed for the Composer)</span></td></tr>
+                <tr><td>Import summary, the chooser line</td><td><span class="kb-verbatim">How do you want to continue? Alpha builds sets - pick the tracks you want, or write the whole library to the stick as-is.</span></td></tr>
+                <tr><td>Import, first path button</td><td><span class="kb-verbatim">Pick tracks for a set</span></td></tr>
+                <tr><td>Import, tooltip on the first path button</td><td><span class="kb-verbatim">Filter the library and pick the tracks for one set, then compose the arc</span></td></tr>
+                <tr><td>Import, second path button</td><td><span class="kb-verbatim">Write whole library to USB</span></td></tr>
+                <tr><td>Import, tooltip on the second path button</td><td><span class="kb-verbatim">Skip composing - write every imported track straight to the USB stick in Denon Engine format</span></td></tr>
+                <tr><td>Pick tracks, search box placeholder</td><td><span class="kb-verbatim">Search title or artist...</span></td></tr>
+                <tr><td>Pick tracks, select-all link</td><td><span class="kb-verbatim">Select all shown</span></td></tr>
+                <tr><td>Pick tracks, clear link</td><td><span class="kb-verbatim">Clear</span></td></tr>
+                <tr><td>Pick tracks, confirm button</td><td><span class="kb-verbatim">Add 0 &#8594; Compose</span> (the number is the count selected)</td></tr>
+                <tr><td>Pick tracks, back button</td><td><span class="kb-verbatim">Back</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What rekordbox import does not do</h3>
+          <ul>
+            <li>rekordbox import does not re-analyze BPM, key or beatgrid; it trusts the values from rekordbox.</li>
+            <li>rekordbox import does not import cue points from the XML.</li>
+            <li>rekordbox import does not copy files at import time; files are copied only when the set or library is written in Export.</li>
+            <li>The whole-library path does not compute energy and does not build an arc; it writes the tracks in the imported order.</li>
+            <li>rekordbox import does not change the DJ's rekordbox library or the XML file.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about rekordbox import</h3>
+          <dl class="kb-qa">
+            <dt>My library has over a thousand tracks &mdash; do they all go into the Composer?</dt>
+            <dd>No. A set is a selection, so the import asks how to continue. Use <span class="kb-verbatim">Pick tracks for a set</span> to filter and choose the tracks for one set, or <span class="kb-verbatim">Write whole library to USB</span> to transfer everything without composing.</dd>
+            <dt>Why are some tracks reported as missing?</dt>
+            <dd>Those files could not be found on disk at the paths stored in the XML (moved or renamed since the export). They are skipped; the found tracks import normally.</dd>
+            <dt>Do I lose my BPM and key by importing?</dt>
+            <dd>No. The BPM, key and beatgrid from rekordbox are kept as-is; only energy (and, if needed, loudness) is computed, and only for the tracks you pick.</dd>
+            <dt>Can I match loudness on an imported library?</dt>
+            <dd>Yes, but the loudness is not in the XML, so it is measured first. See Match loudness &mdash; the Export checkbox is locked until the loudness is measured, and clicking it offers to measure and match right away.</dd>
           </dl>
         </section>
 
@@ -751,6 +871,25 @@
         </section>
 
         <section class="kb-block">
+          <h3>Match loudness on an imported library</h3>
+          <p>
+            When a library is imported from rekordbox (see rekordbox import), its
+            loudness is not in the XML, so it has not been measured yet. In that
+            case the <span class="kb-verbatim">Match loudness</span> checkbox in
+            Export is greyed out and cannot be ticked directly. Clicking it opens
+            a short dialog, <span class="kb-verbatim">Match loudness before
+            export?</span>, which explains why and offers to measure the loudness
+            now. The dialog has the same target slider and reference points
+            (Apple Music / Streaming / Club / DJ Master) as Refine. Clicking
+            <span class="kb-verbatim">Analyze &amp; match loudness</span> measures
+            the loudness of exactly the tracks in the set, sets the chosen target,
+            and then ticks the Export checkbox so the matched gain is baked in on
+            write. Sets that were analyzed normally already have their loudness
+            measured, so the checkbox is available without this step.
+          </p>
+        </section>
+
+        <section class="kb-block">
           <h3>Match loudness settings</h3>
           <div class="kb-table-wrap">
             <table class="kb-table">
@@ -843,6 +982,34 @@
                   <td>Export, in the write confirmation when a track could not be matched</td>
                   <td><span class="kb-verbatim">4 not matched (loudness encoder unavailable)</span> (the numbers vary)</td>
                 </tr>
+                <tr>
+                  <td>Export, tooltip on the checkbox when loudness is not measured yet</td>
+                  <td><span class="kb-verbatim">Loudness isn't measured for this library yet - click to analyze and match it before export.</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, title</td>
+                  <td><span class="kb-verbatim">Match loudness before export?</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, explanation</td>
+                  <td><span class="kb-verbatim">Matching loudness needs each track's loudness measured first. These tracks came in with BPM &amp; key from rekordbox, but their loudness wasn't interpreted yet - measure it now, then bake it into the exported files.</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, target label</td>
+                  <td><span class="kb-verbatim">Target loudness</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, cancel button</td>
+                  <td><span class="kb-verbatim">Cancel</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, confirm button</td>
+                  <td><span class="kb-verbatim">Analyze &amp; match loudness</span></td>
+                </tr>
+                <tr>
+                  <td>Import dialog, progress while measuring</td>
+                  <td><span class="kb-verbatim">Measuring loudness... 1/20</span> (the numbers vary)</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -874,6 +1041,8 @@
             <dd>The Refine toggle controls what the DJ hears in the mini-player; the Export checkbox controls what is written to the stick. Tick the Export checkbox to bake the matched loudness into the exported files.</dd>
             <dt>Why is the Match loudness slider in Refine greyed out?</dt>
             <dd>The <span class="kb-verbatim">Match loudness</span> toggle in Refine is off. Tick it to enable the target slider.</dd>
+            <dt>Why is the Match loudness checkbox in Export greyed out?</dt>
+            <dd>The set has no measured loudness &mdash; this happens with a library imported from rekordbox, where loudness is not in the XML. Click the greyed checkbox: the dialog <span class="kb-verbatim">Match loudness before export?</span> offers to measure the loudness and match it right away, then enables the checkbox.</dd>
           </dl>
         </section>
 
@@ -899,6 +1068,11 @@
                   <td>One track plays at a different level than the others in the mini-player</td>
                   <td>That track has no measured loudness because it was not analyzed.</td>
                   <td>Re-analyze the track so Match loudness can measure its loudness.</td>
+                </tr>
+                <tr>
+                  <td>The Match loudness checkbox in Export is greyed out and will not tick</td>
+                  <td>The set has no measured loudness &mdash; typically a library imported from rekordbox, where loudness is not in the XML.</td>
+                  <td>Click the greyed checkbox and confirm <span class="kb-verbatim">Analyze &amp; match loudness</span> in the dialog; the loudness is measured and the checkbox is then enabled.</td>
                 </tr>
               </tbody>
             </table>
