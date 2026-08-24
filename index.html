@@ -29,10 +29,10 @@
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=8">
+  <link rel="stylesheet" href="css/tailwind.css?v=9">
 
 
-  <script src="js/icons.js?v=2" defer></script>
+  <script src="js/icons.js?v=3" defer></script>
   <script src="js/site.js?v=10" defer></script>
 </head>
 
@@ -250,8 +250,9 @@
         <div>
           <span class="step-num">01 Analyze</span>
           <p class="leading-relaxed text-xl font-normal m-0">
-            Point Alpha at your music folder. It reads BPM, key and energy locally —
-            your audio never leaves your machine.
+            Point Alpha at a folder, at several, or at just the tracks you pick. It
+            reads BPM, key, energy and loudness locally — your audio never leaves your
+            machine.
           </p>
         </div>
 
@@ -327,8 +328,19 @@
         <div class="order-1 md:order-2">
           <span class="step-num">02 Compose</span>
           <p class="leading-relaxed text-xl font-normal m-0">
-            Pick an energy arc or draw your own. Alpha reorders your tracks harmonically
-            to match the energy of your future gig.
+            Pick an energy arc or draw your own, and tell Alpha how long the night
+            should run.
+          </p>
+          <!--
+            Set-Laenge und die zwei Regler ergaenzt am 2026-08-22, belegt in
+            /knowledgebase/#compose: Set length (Standard 1h, 10-Minuten-Schritte),
+            Regler "Harmonic <-> Energy arc" und "Key <-> BPM", beide mittig
+            voreingestellt.
+          -->
+          <p class="leading-relaxed text-xl font-normal mt-4 mb-0">
+            Two sliders decide the rest: how hard Alpha leans on harmonic transitions
+            versus following your curve, and whether it matches neighbours more on key
+            or on tempo.
           </p>
         </div>
 
@@ -343,12 +355,19 @@
 
         <div class="order-1">
           <span class="step-num">03 Refine</span>
+          <!--
+            Hier stand bis 2026-08-22: "Alpha keeps your harmonic transitions
+            locked while you experiment." Das war frei erfunden — die
+            Wissensbasis (/knowledgebase/#refine) beschreibt Refine als
+            Vorhoeren, per Drag verschieben und Loeschen. Nichts haelt beim
+            Umsortieren irgendeine Harmonie "locked". Nicht wieder einbauen.
+          -->
           <p class="leading-relaxed text-xl font-normal m-0">
-            Pre-listen, swap tracks and fine-tune your next gig. Alpha keeps your
-            harmonic transitions locked while you experiment.
+            Pre-listen every track, drag the bars to reorder them, and drop
+            anything that doesn't fit.
           </p>
           <!--
-            Match loudness (Marcel, 2026-08-22). Alle Angaben belegt in
+            Match loudness. Alle Angaben belegt in
             /knowledgebase/#match-loudness — Regler und Referenzpunkte sitzen
             laut Doku im Refine-Schritt, deshalb steht es hier und nicht bei 04.
             NICHT schreiben: Limiter, Kompressor, Mastering. Es ist reine
@@ -362,87 +381,99 @@
           </p>
         </div>
 
-        <div class="order-2 demo-panel p-6 min-h-[20rem] flex flex-col justify-between">
-          <div class="flex justify-between items-center mb-4 border-b-2 border-black pb-4">
-            <div class="font-normal text-lg tracking-tight">Setlist editor</div>
-            <i data-lucide="sliders-horizontal" class="w-6 h-6 shrink-0"></i>
-          </div>
+        <!--
+          Nachgebaut nach der echten Refine-Card (Screenshot von Marcel,
+          2026-08-22). Bewusst dieselben Elemente wie in der App: Name der
+          Komposition, die vier Kennzahlen, Match loudness mit Regler und
+          Referenzpunkten, die Energiebalken mit dem Hinweis zum Ziehen, und
+          der Mini-Player mit Loeschen. Wer hier etwas ergaenzt, prueft vorher
+          am Screenshot oder in der App, ob es das wirklich gibt.
 
-          <div class="space-y-3 flex-1 flex flex-col justify-center relative" aria-hidden="true">
-            <div class="relative displace-item flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--paper)]">
-              <div class="flex items-center gap-2">
-                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/30 shrink-0"></i>
-                <span class="w-6 h-6 bg-black border-2 border-black rounded-full flex items-center justify-center shrink-0">
-                  <i data-lucide="play" class="w-3 h-3 text-white fill-white ml-0.5"></i>
-                </span>
-                <span class="text-sm font-light truncate max-w-[120px]">Inner City Life</span>
-              </div>
-              <div class="flex gap-2">
-                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">160</span>
-                <span class="text-xs font-doto bg-[var(--green)] border-2 border-black px-1.5 py-0.5 rounded-sm">8A</span>
-              </div>
+          Die Prozentwerte der Skala sind gerechnet: der Regler laeuft von -20
+          bis -6 LUFS, Position = (Wert + 20) / 14. Streaming -14 -> 42.9%.
+        -->
+        <div class="order-2 demo-panel p-5 flex flex-col gap-4">
+
+          <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-2 border-b-2 border-black pb-3">
+            <div class="min-w-0">
+              <p class="m-0 text-[10px] font-semibold uppercase tracking-widest text-black/50">Composition</p>
+              <p class="m-0 font-medium text-base tracking-tight truncate">Midnight_Banger_01</p>
+              <p class="m-0 mt-1 text-[11px] text-black/60">
+                <span class="font-doto">24</span> tracks ·
+                <span class="font-doto">2:58</span> ·
+                <span class="font-doto">87%</span> harmonic ·
+                Journey arc
+              </p>
             </div>
 
-            <div class="relative drag-item flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--beige-hot)]">
-              <div class="flex items-center gap-2">
-                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/30 shrink-0"></i>
-                <span class="w-6 h-6 bg-white border-2 border-black rounded-full flex items-center justify-center shrink-0">
-                  <i data-lucide="refresh-cw" class="w-3 h-3 text-black"></i>
+            <div class="shrink-0">
+              <span class="flex items-center gap-1.5 text-xs font-semibold">
+                <span class="w-4 h-4 bg-black border-2 border-black rounded-sm inline-flex items-center justify-center shrink-0">
+                  <i data-lucide="check" class="w-3 h-3 text-white stroke-[3]"></i>
                 </span>
-                <span class="text-sm font-light truncate max-w-[120px]">Finding match…</span>
-              </div>
-              <div class="flex gap-2">
-                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">162</span>
-                <span class="text-xs font-doto bg-white border-2 border-black border-dashed px-1.5 py-0.5 rounded-sm">8A</span>
-              </div>
-            </div>
-
-            <div class="relative flex items-center justify-between p-2 border-2 border-black rounded-sm bg-[var(--paper)] opacity-70">
-              <div class="flex items-center gap-2">
-                <i data-lucide="grip-vertical" class="w-4 h-4 text-black/20 shrink-0"></i>
-                <span class="w-6 h-6 bg-white border-2 border-black rounded-full flex items-center justify-center shrink-0">
-                  <i data-lucide="lock" class="w-3 h-3 text-black"></i>
-                </span>
-                <span class="text-sm font-light truncate max-w-[120px]">Timeless</span>
-              </div>
-              <div class="flex gap-2">
-                <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">162</span>
-                <span class="text-xs font-doto bg-[var(--green)] border-2 border-black px-1.5 py-0.5 rounded-sm">9A</span>
-              </div>
+                Match loudness
+              </span>
+              <span class="block mt-1 text-xs font-doto text-right">-14 LUFS</span>
             </div>
           </div>
 
-          <!--
-            Loudness-Skala. Die Prozentwerte sind KEINE Optik, sondern gerechnet:
-            der Regler laeuft in der App von -20 bis -6 LUFS, das sind 14
-            Schritte. Position = (Wert + 20) / 14.
-              Apple Music -16 -> 28.6%   Streaming -14 -> 42.9%
-              Club       -10 -> 71.4%   DJ Master  -6 -> 100%
-            Der Knopf steht auf dem Standardwert -14. Wer die Werte aendert,
-            rechnet die Positionen mit derselben Formel neu — sonst zeigt die
-            Grafik eine Skala, die es in der App nicht gibt.
-          -->
-          <div class="mt-4 pt-4 border-t-2 border-black" aria-hidden="true">
-            <div class="flex items-center justify-between gap-2 mb-3">
-              <span class="text-xs font-semibold">Match loudness</span>
-              <span class="text-xs font-doto bg-white border-2 border-black px-1.5 py-0.5 rounded-sm">-14 LUFS</span>
-            </div>
-
+          <div aria-hidden="true">
             <div class="relative h-4">
               <span class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1.5 bg-white border-2 border-black rounded-full"></span>
               <span class="absolute left-0 top-1/2 -translate-y-1/2 h-1.5 bg-black rounded-full" style="width:42.9%"></span>
-
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:28.6%"></span>
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:71.4%"></span>
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-0.5 h-3 bg-black" style="left:100%"></span>
-
               <span class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-2 border-black rounded-full shadow-[2px_2px_0_0_#000]" style="left:42.9%"></span>
             </div>
-
             <p class="mt-3 mb-0 text-[10px] leading-snug font-medium text-black/60">
-              Apple Music -16 · Streaming -14 · Club -10 · DJ Master -6
+              Apple Music -16 · <span class="text-black font-bold">Streaming -14</span> · Club -10 · DJ Master -6
             </p>
           </div>
+
+          <div aria-hidden="true">
+            <p class="m-0 mb-2 text-[10px] font-semibold uppercase tracking-widest text-black/50">Drag bars to fine-tune</p>
+            <div class="flex items-end gap-[3px] h-24 bg-white border-2 border-black rounded-sm px-2 py-2">
+              <span class="flex-1 bg-[var(--red-hot)] rounded-t-[1px]" style="height:30%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:45%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:47%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:44%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:41%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:58%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:62%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:60%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:68%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:64%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:66%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:57%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:54%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:72%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:78%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:82%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:86%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:70%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:62%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:56%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:50%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:44%"></span>
+              <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 border-2 border-black rounded-sm bg-white px-2.5 py-2" aria-hidden="true">
+            <span class="w-7 h-7 bg-white border-2 border-black rounded-full flex items-center justify-center shrink-0">
+              <i data-lucide="play" class="w-3 h-3 fill-black ml-0.5"></i>
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs font-semibold truncate">Something for Myself</span>
+              <span class="block text-[10px] text-black/55 truncate">Rampa · 119 BPM · 8A · Intro</span>
+            </span>
+            <span class="w-7 h-7 border-2 border-black rounded-full flex items-center justify-center shrink-0 bg-white">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </span>
+          </div>
+
         </div>
 
       </div>
@@ -645,11 +676,12 @@
                 play — analyzed, ordered and plugged in, instead of an evening of prep.
               </p>
               <p>
-                You point Alpha at your music. It reads tempo, key and energy straight
-                out of the audio, on your own machine. You pick the energy arc the night
-                should follow, and Alpha orders the set so neighboring tracks actually
-                mix. Then it writes the playlist onto your drive and builds the Engine OS
-                database your player expects — copying only what isn't on the stick yet.
+                You point Alpha at your music. It reads tempo, key, energy and loudness
+                straight out of the audio, on your own machine. You pick the energy arc
+                the night should follow, and Alpha orders the set so neighboring tracks
+                actually mix. Then it writes the playlist onto your drive and builds the
+                Engine OS database your player expects — copying only what isn't on the
+                stick yet, and levelling the tracks if you asked it to.
               </p>
               <p>
                 What it isn't: a library manager. Alpha doesn't want to own your
@@ -676,9 +708,18 @@
                 them the Prime 2, Prime 4, SC5000 and SC5000M, SC6000 and SC6000M, and
                 Numark's Engine OS gear such as the Mixstream Pro.
               </p>
+              <!--
+                Geaendert am 2026-08-22 von "not supported" auf "not yet" (Marcel).
+                Die App fuehrt das rekordbox-Format als "coming soon", waehrend hier
+                stand, es werde nie kommen — das widersprach sich. "Won't be" ist die
+                staerkstmoegliche Zusage; wer sich deshalb fuer ein Konkurrenzprodukt
+                entscheidet, faehlt sich zu Recht getaeuscht, wenn es doch kommt.
+                Bewusst ohne Datum.
+              -->
               <p>
-                Pioneer hardware is not supported: rekordbox keeps its library in an
-                encrypted database that we deliberately leave alone.
+                Pioneer hardware isn't supported yet. rekordbox keeps its library in an
+                encrypted database, which is a different problem from Engine OS — we're
+                working on other formats, but today Alpha writes Denon Engine OS drives.
               </p>
               <p>
                 Your first 10 tracks are free, so the cheapest way to find out is to
@@ -738,15 +779,52 @@
               I've lost playlists after an Engine update before. Is my library safe?
               <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
             </summary>
+            <!--
+              Korrigiert am 2026-08-22. Hier stand: "keeps the last ten of them ON THE
+              DRIVE". Beides war falsch. Laut /knowledgebase/#local-backups liegt die
+              Sicherung ausdruecklich NICHT auf dem Stick, sondern auf dem Rechner —
+              genau deshalb ueberlebt sie das Loeschen des Sticks, also exakt den Fall,
+              nach dem hier gefragt wird. Die Zahl "zehn" steht nirgends in der Doku.
+              Der Ort ist kein Detail: ein Backup auf dem Stick waere hier wertlos.
+            -->
             <div class="faq-answer">
               <p>
-                Alpha takes a backup of the Engine database before every single write,
-                keeps the last ten of them on the drive, and lets you roll back to any
-                of them from inside the app.
+                Before Alpha writes to a stick, it copies that stick's Engine library
+                <strong>to your own computer</strong> — not to the stick. So when an
+                Engine update wipes the drive, your playlists are still sitting on your
+                Mac.
               </p>
               <p>
-                So the state your stick was in five minutes ago is always one click
-                away — you don't have to remember to back up before you touch anything.
+                To get them back, open the drive's playlists in Alpha and restore an
+                earlier version. It happens on every write, so you don't have to
+                remember to back up before you touch anything.
+              </p>
+              <p>
+                What's saved is the Engine library — your playlists and their order.
+                Your audio files are your own copies and are never touched.
+              </p>
+            </div>
+          </details>
+
+          <!--
+            Playlist-Verwaltung (Marcel, 2026-08-22): bewusst als eigene FAQ statt in
+            die Schritte 01-04, damit die Schritt-Sektionen schlank bleiben.
+            Belegt in /knowledgebase/#playlists-on-device.
+          -->
+          <details class="faq-item">
+            <summary>
+              Can I manage the playlists already on my stick?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Yes. Plug the drive in and Alpha shows what's already on it — you can
+                rename a playlist, delete one, or restore an earlier backed-up version
+                of the whole library.
+              </p>
+              <p>
+                Deleting a playlist removes the playlist; it doesn't necessarily clear
+                every audio file it pointed at off the drive.
               </p>
             </div>
           </details>
@@ -783,8 +861,9 @@
             <div class="faq-answer">
               <p>
                 Alpha isn't a library manager, so it never asks you to load your whole
-                collection into it. You point it at the folder you want to play from,
-                and it builds one gig-ready USB out of that.
+                collection into it. You point it at the folder — or the handful of
+                tracks — you want to play from, and it builds one gig-ready USB out of
+                that.
               </p>
               <!--
                 Hier stand bis 2026-08-19 "Analysis results are cached, so a track is
@@ -796,8 +875,8 @@
               -->
               <p>
                 Your archive stays exactly where it is, across as many drives as you
-                like. Alpha only ever works through the folder you picked, so you wait
-                for the tracks going into this set — not for your whole collection.
+                like. Alpha only ever works through what you picked, so you wait for the
+                tracks going into this set — not for your whole collection.
               </p>
             </div>
           </details>
@@ -828,9 +907,9 @@
             </summary>
             <div class="faq-answer">
               <p>
-                Tempo, musical key in Camelot notation, and an energy value for every
-                track — all computed by Alpha itself from your audio, not read out of
-                someone else's tags.
+                Tempo, musical key in Camelot notation, an energy value and the
+                loudness of every track — all computed by Alpha itself from your audio,
+                not read out of someone else's tags.
               </p>
               <p>
                 Energy isn't a number you have to look at, either: it's what the arc in
@@ -888,8 +967,8 @@
             </summary>
             <div class="faq-answer">
               <p>
-                Your audio never does. Tempo, key and energy are analyzed locally on your
-                own machine, and no audio file is ever uploaded.
+                Your audio never does. Tempo, key, energy and loudness are analyzed
+                locally on your own machine, and no audio file is ever uploaded.
               </p>
               <p>
                 Arranging the set happens on our servers, so the app sends the metadata
