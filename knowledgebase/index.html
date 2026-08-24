@@ -1395,5 +1395,18 @@
     </div>
   </footer>
 
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
 </body>
 </html>

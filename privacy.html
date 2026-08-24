@@ -153,11 +153,32 @@
       </p>
 
       <h2>This website</h2>
+      <!--
+        Geaendert am 2026-08-22 wegen des Chat-Widgets. Hier stand vorher, die
+        Seite lade "nothing from anyone else" — das stimmt seitdem nicht mehr:
+        das Widget kommt von chat.alphalearn.ai. Dieselbe Firma, aber eine
+        andere Domain, also ein echter externer Request. Wird das Widget wieder
+        entfernt, gehoert der alte Satz zurueck.
+      -->
       <p>
-        The site consists of static pages and loads nothing from anyone else — fonts,
-        stylesheets, scripts and icons all come from this domain. No request goes to
-        Google Fonts or to any content delivery network.
+        The site is built from static pages. Fonts, stylesheets, scripts and icons all
+        come from this domain — no request goes to Google Fonts or to any content
+        delivery network.
       </p>
+      <p>
+        There is one exception: the support chat in the corner of the page. It is loaded
+        from <code>chat.alphalearn.ai</code>, which is our own system and not another
+        company's, but it is a different address — so your browser does contact it on
+        every page, and in doing so transmits your IP address.
+      </p>
+      <div class="todo-box">
+        <p><strong>Zu ergänzen, bevor die Seite ohne <code>noindex</code> live geht:</strong>
+        was das Chat-Widget speichert und verarbeitet — Cookies bzw. localStorage,
+        Aufbewahrung der Chatverläufe, Rechtsgrundlage, und ob es beim Laden auf jeder
+        Seite eine Einwilligung braucht (§ 25 TDDDG) oder als von der Nutzerin
+        angeforderte Funktion davon ausgenommen ist. Ich habe hier bewusst nur
+        beschrieben, was sich von aussen belegen lässt.</p>
+      </div>
       <p>
         Hosting is provided by Hetzner Online GmbH, in a data centre in Germany, as our
         processor under a data processing agreement (Art. 28 GDPR). Their servers keep
@@ -328,6 +349,19 @@
       </nav>
     </div>
   </footer>
+
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
 
 </body>
 </html>
