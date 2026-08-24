@@ -34,6 +34,14 @@
     <lastmod>2026-08-22</lastmod>
     <priority>0.6</priority>
   </url>
+  <!-- terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex
+       und gehoert damit in die Sitemap. privacy.html bleibt bis auf Weiteres
+       draussen: dort sind Logfile-Aufbewahrung und Double-Opt-in noch offen. -->
+  <url>
+    <loc>https://alpha-dj-engine.com/terms.html</loc>
+    <lastmod>2026-08-22</lastmod>
+    <priority>0.4</priority>
+  </url>
   <url>
     <loc>https://alpha-dj-engine.com/withdrawal.html</loc>
     <lastmod>2026-08-19</lastmod>
