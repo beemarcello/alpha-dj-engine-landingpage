@@ -23,16 +23,16 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=22">
+  <link rel="stylesheet" href="css/site.css?v=24">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=9">
+  <link rel="stylesheet" href="css/tailwind.css?v=10">
 
 
-  <script src="js/icons.js?v=3" defer></script>
+  <script src="js/icons.js?v=4" defer></script>
   <script src="js/site.js?v=10" defer></script>
 </head>
 
@@ -433,7 +433,7 @@
 
           <div aria-hidden="true">
             <p class="m-0 mb-2 text-[10px] font-semibold uppercase tracking-widest text-black/50">Drag bars to fine-tune</p>
-            <div class="flex items-end gap-[3px] h-24 bg-white border-2 border-black rounded-sm px-2 py-2">
+            <div class="rf-bars flex items-end gap-[3px] h-24 bg-white border-2 border-black rounded-sm px-2 py-2">
               <span class="flex-1 bg-[var(--red-hot)] rounded-t-[1px]" style="height:30%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:45%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
@@ -448,8 +448,8 @@
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:66%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:57%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:54%"></span>
-              <span class="flex-1 bg-black rounded-t-[1px]" style="height:72%"></span>
-              <span class="flex-1 bg-black rounded-t-[1px]" style="height:78%"></span>
+              <span class="rf-bar--drag flex-1 bg-black rounded-t-[1px]" style="height:34%"></span>
+              <span class="rf-bar--shift flex-1 bg-black rounded-t-[1px]" style="height:78%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:82%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:86%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:70%"></span>
@@ -458,6 +458,11 @@
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:50%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:44%"></span>
               <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
+
+              <span class="rf-cursor">
+                <i data-lucide="mouse-pointer-2" class="rf-cursor__arrow"></i>
+                <i data-lucide="grab" class="rf-cursor__hand"></i>
+              </span>
             </div>
           </div>
 

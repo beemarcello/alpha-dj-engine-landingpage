@@ -1199,3 +1199,85 @@ body {
   line-height: 1.5;
   margin: 0 0 18px;
 }
+
+/* --------------------------------------------------------------------------
+   03 Refine — Drag & Drop an den Energiebalken
+
+   Zeigt, was Refine kann: einen Balken greifen und an eine andere Stelle
+   ziehen. Der Zeiger faehrt heran, wird zur Greifhand, zieht den kurzen Balken
+   einen Platz nach rechts, der Nachbar weicht nach links aus — und alles geht
+   denselben Weg zurueck.
+
+   Der Rueckweg ist Absicht, kein Schmuck: ohne ihn muesste die Schleife am Ende
+   zwei Balken zurueckspringen lassen, und dieser Sprung ist sichtbar. So endet
+   der Zyklus dort, wo er begann. Dasselbe Prinzip nutzt bereits @keyframes
+   dragSwap weiter oben.
+
+   Verschoben wird um calc(100% + 3px) — 100% ist die Breite des Balkens selbst,
+   die 3px sind der gap der Leiste. Beides zusammen ist genau ein Platz, und
+   zwar bei jeder Containerbreite. Wer den gap aendert, muss die 3px hier
+   mitziehen.
+   -------------------------------------------------------------------------- */
+.rf-bars { position: relative; }
+
+/* Der Schatten markiert das Aufnehmen: solange gegriffen wird, liegt der
+   Balken sichtbar ueber der Leiste. Gleiches Mittel wie in dragSwap. */
+@keyframes rf-drag {
+  0%, 16%    { transform: translateX(0) translateY(0); box-shadow: 0 0 0 0 var(--ink); }
+  20%        { transform: translateX(0) translateY(-3px); box-shadow: var(--shadow-hard-sm); }
+  36%, 50%   { transform: translateX(calc(100% + 3px)) translateY(-3px); box-shadow: var(--shadow-hard-sm); }
+  66%        { transform: translateX(0) translateY(-3px); box-shadow: var(--shadow-hard-sm); }
+  72%, 100%  { transform: translateX(0) translateY(0); box-shadow: 0 0 0 0 var(--ink); }
+}
+@keyframes rf-shift {
+  0%, 20%    { transform: translateX(0); }
+  36%, 50%   { transform: translateX(calc(-100% - 3px)); }
+  66%, 100%  { transform: translateX(0); }
+}
+
+/* Der gegriffene Balken liegt vorn, damit er beim Tausch ueber dem Nachbarn
+   laeuft und nicht dahinter verschwindet. */
+.rf-bar--drag  { position: relative; z-index: 2; animation: rf-drag 7s infinite ease-in-out; }
+.rf-bar--shift { position: relative; z-index: 1; animation: rf-shift 7s infinite ease-in-out; }
+
+/* Zeiger. left in Prozent, damit die Bewegung an jeder Containerbreite auf
+   demselben Balken landet: ein Platz ist 100/24 = 4.17% der Leiste. */
+@keyframes rf-cursor {
+  0%        { left: 104%; top: 78%; opacity: 0; }
+  8%        { left: 104%; top: 78%; opacity: 1; }
+  16%, 20%  { left: 60%;  top: 40%; opacity: 1; }
+  36%, 50%  { left: 64.2%; top: 40%; opacity: 1; }
+  66%, 72%  { left: 60%;  top: 40%; opacity: 1; }
+  84%       { left: 104%; top: 78%; opacity: 1; }
+  88%, 100% { left: 104%; top: 78%; opacity: 0; }
+}
+.rf-cursor {
+  position: absolute;
+  width: 18px; height: 18px;
+  pointer-events: none;
+  z-index: 3;
+  animation: rf-cursor 7s infinite ease-in-out;
+}
+.rf-cursor svg {
+  position: absolute; inset: 0;
+  width: 18px; height: 18px;
+  /* Weiss gefuellt mit schwarzer Kontur, sonst verschwindet der Zeiger auf den
+     schwarzen Balken. Die CSS-Regel schlaegt das fill="none"-Attribut der
+     Lucide-Icons. */
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 2.2;
+}
+
+/* Pfeil und Greifhand liegen uebereinander und werden gekreuzt geblendet —
+   der Wechsel markiert Zugreifen und Loslassen. */
+@keyframes rf-arrow { 0%, 14% { opacity: 1; } 18%, 68% { opacity: 0; } 74%, 100% { opacity: 1; } }
+@keyframes rf-hand  { 0%, 14% { opacity: 0; } 18%, 68% { opacity: 1; } 74%, 100% { opacity: 0; } }
+.rf-cursor__arrow { animation: rf-arrow 7s infinite steps(1, end); }
+.rf-cursor__hand  { animation: rf-hand  7s infinite steps(1, end); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-bar--drag, .rf-bar--shift, .rf-cursor,
+  .rf-cursor__arrow, .rf-cursor__hand { animation: none; }
+  .rf-cursor { display: none; }
+}
