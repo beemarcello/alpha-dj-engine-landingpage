@@ -23,17 +23,17 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
-  <link rel="stylesheet" href="css/site.css?v=34">
+  <link rel="stylesheet" href="css/site.css?v=35">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
        Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
        Konfiguration in tailwind.config.js. -->
-  <link rel="stylesheet" href="css/tailwind.css?v=16">
+  <link rel="stylesheet" href="css/tailwind.css?v=17">
 
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=15" defer></script>
+  <script src="js/site.js?v=16" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -610,49 +610,87 @@
     </section>
 
     <!-- ====================================================================
-         ERSPARNIS-RECHNER
+         ERSPARNIS-VERGLEICH
 
-         Steht bewusst zwischen 04 Export und dem Download-Band: der Besucher
-         hat gerade den ganzen Ablauf gesehen und fragt sich, was ihn das wert
-         ist — und der naechste Block ist der Knopf. Davor waere zu frueh (er
-         weiss noch nicht, was Alpha kann), danach zu spaet.
+         Statisch, ohne Interaktion (Marcel): keine Haken, keine Zeitraumwahl.
+         Der Besucher soll die Zahl sehen, nicht sie sich zusammenklicken.
 
-         VERGLEICHENDE WERBUNG. Paragraf 6 UWG erlaubt sie, verlangt aber
-         objektive, nachpruefbare und aktuelle Angaben. Die Preise stehen
-         deshalb gebuendelt in js/site.js (CALC_TOOLS), nicht hier im Markup,
-         und darunter steht ein sichtbares Pruefdatum. Wer einen Preis aendert,
-         aendert das Datum mit.
+         Steht zwischen 04 Export und dem Download-Band: der Ablauf ist gerade
+         erklaert, der naechste Block ist der Knopf.
+
+         VERGLEICHENDE WERBUNG — Paragraf 6 UWG erlaubt sie, verlangt aber
+         objektive, nachpruefbare und AKTUELLE Angaben. Die drei Preise stehen
+         deshalb in EINEM Block beisammen, mit Pruefdatum darunter.
+
+         RECHNUNG (erstes Jahr, bei Aenderung neu rechnen):
+           rekordbox  30 x 12 = 360
+           WaveAlign  49 einmalig
+           Mixo        7 x 12 =  84
+                              = 493
+           Alpha                 30  ->  Ersparnis 463
+           Ab dem zweiten Jahr laufen nur die Abos weiter:
+           (30 + 7) x 12 = 444 pro Jahr gegen 0.
          ==================================================================== -->
     <section id="savings" class="calc border-b-2 border-black py-24 px-6">
-      <div class="max-w-[860px] mx-auto">
+      <div class="max-w-[820px] mx-auto">
 
         <span class="step-num">The maths</span>
-        <p class="leading-relaxed text-xl font-normal m-0 mb-8 max-w-[60ch]">
-          Alpha does the job of a small stack of tools. Tick what you pay for
-          today and see what that costs you.
+        <p class="leading-relaxed text-xl font-normal m-0 mb-8 max-w-[58ch]">
+          Alpha does the job of three separate tools. Here is what that stack
+          costs in your first year.
         </p>
 
         <div class="calc__card">
-          <div data-calc-tools></div>
 
-          <div class="calc__period" role="group" aria-label="Time period" data-calc-period></div>
+          <div class="calc__tool">
+            <span class="calc__name">rekordbox
+              <span class="calc__for">Track analysis</span></span>
+            <span class="calc__price">€360<small>€30 per month</small></span>
+          </div>
+
+          <div class="calc__tool">
+            <span class="calc__name">WaveAlign
+              <span class="calc__for">Loudness matching</span></span>
+            <span class="calc__price">€49<small>one time</small></span>
+          </div>
+
+          <div class="calc__tool">
+            <span class="calc__name">Mixo
+              <span class="calc__for">Writing playlists to USB</span></span>
+            <span class="calc__price">€84<small>€7 per month</small></span>
+          </div>
+
+          <div class="calc__sumrow">
+            <span class="calc__name">Together, first year</span>
+            <span class="calc__price">€493</span>
+          </div>
 
           <div class="calc__result">
             <div class="calc__box2 calc__box2--them">
-              <p class="calc__label">Your current stack</p>
-              <p class="calc__sum" data-calc-them>—</p>
-              <p class="calc__note" data-calc-them-note></p>
+              <p class="calc__label">That stack</p>
+              <p class="calc__sum">€493</p>
+              <p class="calc__note">first year — and it keeps running</p>
             </div>
             <div class="calc__box2 calc__box2--us">
               <p class="calc__label">Alpha-DJ-Engine</p>
-              <p class="calc__sum" data-calc-us>—</p>
-              <p class="calc__note">One payment. No renewal, ever.</p>
+              <p class="calc__sum">€30</p>
+              <p class="calc__note">once, incl. VAT. Never again.</p>
             </div>
           </div>
 
-          <p class="calc__save" data-calc-save></p>
+          <p class="calc__save">
+            You save <strong>€463</strong> in your first year.
+            <span class="calc__after">After that it is <strong>€444</strong> a year against nothing —
+              the subscriptions keep billing, Alpha does not.</span>
+          </p>
 
-          <p class="calc__legal" data-calc-legal></p>
+          <p class="calc__legal">
+            Prices as published by rekordbox, WaveAlign and Mixo, checked on 22 August 2026.
+            Monthly tools are counted for twelve months. Those tools do more than the one job
+            listed here — this compares the part Alpha replaces. Please check current prices
+            yourself before deciding.
+          </p>
+
         </div>
 
       </div>

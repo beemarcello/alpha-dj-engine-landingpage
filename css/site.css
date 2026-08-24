@@ -1492,13 +1492,17 @@ body {
 }
 
 /* ==========================================================================
-   Ersparnis-Rechner
+   Ersparnis-Vergleich
 
-   Vergleichende Werbung mit namentlich genannten Wettbewerbern. Nach Paragraf 6
-   UWG zulaessig, aber nur solange die Angaben objektiv, nachpruefbar und
-   AKTUELL sind. Deshalb steht unter dem Rechner ein sichtbares Pruefdatum, und
-   die Preise liegen gebuendelt in einer Tabelle in js/site.js — nicht verstreut
-   im Markup. Wer einen Preis aendert, aendert auch das Datum.
+   Bewusst ohne Interaktion (Marcel, 2026-08-22): keine Haken, keine
+   Zeitraumwahl. Der Besucher soll die Zahl sehen, nicht sie sich
+   zusammenklicken. Deshalb auch kein JavaScript — reines Markup.
+
+   VERGLEICHENDE WERBUNG. Paragraf 6 UWG erlaubt sie, verlangt aber objektive,
+   nachpruefbare und AKTUELLE Angaben; ein falscher Konkurrenzpreis ist ein
+   klassischer Abmahngrund. Die Preise stehen deshalb gebuendelt in EINEM Block
+   im Markup, mit sichtbarem Pruefdatum darunter. Wer einen Preis aendert,
+   aendert das Datum mit und rechnet die Summe neu.
    ========================================================================== */
 .calc { background: var(--paper-2); }
 
@@ -1510,82 +1514,48 @@ body {
   padding: clamp(20px, 4vw, 34px);
 }
 
-/* Werkzeugzeile: Haken, Name, wofuer, Preis. Bricht auf schmalen Schirmen so
-   um, dass der Preis unter dem Namen steht und nicht daneben klemmt. */
 .calc__tool {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 4px 14px;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
   border-bottom: 1px solid var(--ink-40);
-  padding: 13px 2px;
-  font: inherit;
-  cursor: pointer;
 }
-.calc__tool:last-of-type { border-bottom: 0; }
-.calc__tool[aria-checked="false"] { opacity: .45; }
-
-.calc__box {
-  width: 20px; height: 20px;
-  border: var(--stroke);
-  border-radius: var(--r-xs);
-  background: var(--white);
-  display: inline-flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.calc__tool[aria-checked="true"] .calc__box { background: var(--green-hot); }
-.calc__box svg { width: 13px; height: 13px; opacity: 0; }
-.calc__tool[aria-checked="true"] .calc__box svg { opacity: 1; }
-
 .calc__name { font-weight: 600; font-size: 15px; }
 .calc__for  { display: block; font-size: 12.5px; color: var(--ink-55); font-weight: 400; margin-top: 1px; }
-.calc__price { font-family: var(--font-display); font-size: 14px; white-space: nowrap; text-align: right; }
+.calc__price { font-family: var(--font-display); font-size: 15px; white-space: nowrap; text-align: right; }
 .calc__price small { display: block; font-family: var(--font-ui); font-size: 11px; color: var(--ink-55); }
 
-@media (max-width: 520px) {
-  .calc__tool { grid-template-columns: auto 1fr; }
-  .calc__price { grid-column: 2; text-align: left; margin-top: 4px; }
+/* Summenzeile — abgesetzt, damit sie als Ergebnis liest und nicht als viertes
+   Werkzeug. */
+.calc__sumrow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0 0;
+  border-top: var(--stroke);
+  margin-top: 4px;
 }
+.calc__sumrow .calc__name { font-size: 16px; }
 
-/* Zeitraum */
-.calc__period { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
-.calc__period button {
-  border: var(--stroke);
-  border-radius: var(--r-pill);
-  background: var(--white);
-  padding: 7px 16px;
-  font: inherit; font-size: 14px; font-weight: 600;
-  cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out);
-}
-.calc__period button:hover { background: var(--paper-2); }
-.calc__period button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
-
-/* Ergebnis */
 .calc__result {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  margin-top: 24px;
+  margin-top: 22px;
 }
-@media (min-width: 640px) { .calc__result { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 620px) { .calc__result { grid-template-columns: 1fr 1fr; } }
 
-.calc__box2 {
-  border: var(--stroke);
-  border-radius: var(--r-md);
-  padding: 18px 20px;
-}
+.calc__box2 { border: var(--stroke); border-radius: var(--r-md); padding: 18px 20px; }
 .calc__box2--them { background: var(--red); }
 .calc__box2--us   { background: var(--green); }
 .calc__box2 p { margin: 0; }
 .calc__label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
 .calc__sum {
   font-family: var(--font-display);
-  font-size: clamp(30px, 6vw, 42px);
+  font-size: clamp(32px, 7vw, 46px);
   font-weight: 600;
   line-height: 1.05;
   margin: 6px 0 2px !important;
@@ -1594,15 +1564,17 @@ body {
 
 .calc__save {
   margin-top: 18px;
-  padding: 16px 20px;
+  padding: 18px 20px;
   border: var(--stroke);
   border-radius: var(--r-md);
   background: var(--green-hot);
   text-align: center;
-  font-size: clamp(17px, 3.4vw, 22px);
+  font-size: clamp(18px, 3.6vw, 24px);
   font-weight: 600;
+  line-height: 1.35;
 }
 .calc__save strong { font-family: var(--font-display); font-weight: 600; }
+.calc__after { display: block; font-size: 14px; font-weight: 500; margin-top: 6px; color: rgba(0,0,0,.7); }
 
-/* Pruefdatum und Quellenhinweis — nicht wegkuerzen, siehe Kopf dieser Sektion. */
+/* Pruefdatum und Einordnung — nicht wegkuerzen, siehe Kopf dieser Sektion. */
 .calc__legal { font-size: 11.5px; line-height: 1.5; color: var(--ink-55); margin: 16px 0 0; }
