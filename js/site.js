@@ -447,7 +447,7 @@
      uneingeschraenkt erlaubt.
      ------------------------------------------------------------------------ */
   var GA_CFG = {
-    measurementId: '',
+    measurementId: 'G-DQBC6VLYFP',
     adsConversionId: ''
   };
 

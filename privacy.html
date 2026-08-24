@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="css/tailwind.css?v=18">
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=17" defer></script>
+  <script src="js/site.js?v=18" defer></script>
 </head>
 
 <body class="antialiased">
@@ -58,11 +58,16 @@
            gingen am 2026-08-19 an Marcel.
            ================================================================== -->
       <div class="todo-box">
-        <p><strong>Entwurf — inhaltlich vollständig, drei Punkte hängen an der
-        Umsetzung.</strong> Offen sind die Logfile-Aufbewahrungsdauer, das
-        Consent-Banner für Google Analytics und das Double-Opt-in-Backend für das
-        E-Mail-Formular. Bis dahin trägt die Seite <code>noindex</code> — und GA sowie
-        das Formular dürfen nicht scharf geschaltet werden.</p>
+        <p><strong>Entwurf — inhaltlich vollständig, zwei Punkte hängen noch an der
+        Umsetzung.</strong> Offen sind die <strong>Logfile-Aufbewahrungsdauer</strong> bei
+        Hetzner und das <strong>Double-Opt-in-Backend</strong> für das E-Mail-Formular.
+        Bis beides steht, trägt die Seite <code>noindex</code> und das Formular darf nicht
+        scharf geschaltet werden.</p>
+        <p>Erledigt am 2026-08-22: Consent-Banner (zwei gleichrangige Knöpfe, keine
+        Vorauswahl, Widerruf über „Cookie settings" im Footer) und Google Analytics
+        (<code>G-DQBC6VLYFP</code>, lädt ausschließlich nach Einwilligung). Google Ads ist
+        nicht eingebunden — kommt eine Conversion-ID dazu, braucht dieser Abschnitt einen
+        Satz zu Remarketing.</p>
       </div>
 
       <h2>Controller</h2>
@@ -166,10 +171,15 @@
         delivery network.
       </p>
       <p>
-        There is one exception: the support chat in the corner of the page. It is loaded
-        from <code>chat.alphalearn.ai</code>, which is our own system and not another
-        company's, but it is a different address — so your browser does contact it on
-        every page, and in doing so transmits your IP address.
+        Two things come from elsewhere. The support chat in the corner of the page is
+        loaded from <code>chat.alphalearn.ai</code> — our own system, not another
+        company's, but a different address, so your browser contacts it on every page and
+        transmits your IP address in doing so.
+      </p>
+      <p>
+        The second is Google Analytics, and it loads <strong>only if you have agreed to
+        it</strong>. Decline, or simply never answer the cookie question, and no request
+        goes to Google at all. See the next section.
       </p>
       <div class="todo-box">
         <p><strong>Zu ergänzen, bevor die Seite ohne <code>noindex</code> live geht:</strong>
@@ -213,15 +223,11 @@
       <p>
         Legal basis: Art. 6(1)(a) GDPR and § 25(1) TDDDG — your consent.
       </p>
-      <div class="todo-box">
-        <p><strong>Offen: nur noch die GA-Mess-ID.</strong> Der Consent-Banner steht
-        (drei Stufen, Widerruf über „Cookie settings" im Footer) und setzt Google
-        Consent Mode v2 korrekt — Ausgangszustand ist alles <em>denied</em>.
-        Google Analytics selbst ist noch nicht eingebunden: In
-        <code>js/site.js → loadAnalytics()</code> ist der Block markiert, in den die
-        Mess-ID <code>G-XXXXXXX</code> gehört. Erst danach lädt GA, und zwar nur nach
-        Einwilligung.</p>
-      </div>
+      <p>
+        The measurement ID for this site is <code>G-DQBC6VLYFP</code>. Analytics is loaded
+        only after you consent, and only then does any data reach Google; the site sets
+        Google Consent Mode to “denied” for everything before you answer.
+      </p>
 
       <h2>Email addresses you give us</h2>
       <p>
