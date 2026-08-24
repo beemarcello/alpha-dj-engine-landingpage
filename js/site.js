@@ -1035,6 +1035,206 @@
   }
 
   /* ------------------------------------------------------------------------
+     9. 03 Refine — Demo der Bedienung
+
+     Spielt den echten Ablauf durch: Balken anklicken, anhoeren, im Fortschritt
+     vorspulen, den Nachbarn anhoeren, beide tauschen — und dasselbe an einer
+     zweiten Stelle des Sets.
+
+     Warum hier und nicht als CSS-Keyframes: die Choreografie hat rund zwanzig
+     Schritte an zwei Stellen. Als Keyframes muesste jede Zeigerposition als
+     Prozentwert des Containers von Hand gerechnet werden, und jede Aenderung
+     an der Balkenzahl oder am Panel-Layout wuerde sie stillschweigend
+     verschieben. Hier wird stattdessen die tatsaechliche Position der
+     Zielelemente ausgelesen — das stimmt auf jedem Viewport und ueberlebt
+     Layoutaenderungen.
+
+     Der Zeiger bewegt sich ueber die CSS-Variablen --rf-x / --rf-y, nicht ueber
+     transform direkt: die Klick-Stauchung teilt sich dieselbe
+     transform-Eigenschaft und wuerde die Position sonst ueberschreiben.
+     ------------------------------------------------------------------------ */
+  function initRefineDemo() {
+    var panel = document.querySelector('[data-refine-demo]');
+    if (!panel || reduceMotion) return;
+
+    var cursor = panel.querySelector('[data-rf-cursor]');
+    var bars   = panel.querySelectorAll('[data-rf-bar]');
+    var play   = panel.querySelector('[data-rf-play]');
+    var track  = panel.querySelector('[data-rf-progress]');
+    var fill   = panel.querySelector('[data-rf-fill]');
+    var title  = panel.querySelector('[data-rf-title]');
+    var meta   = panel.querySelector('[data-rf-meta]');
+    if (!cursor || !bars.length || !play || !track || !fill) return;
+
+    // Die vier Balken, an denen etwas passiert — je eine Delle neben einem
+    // hohen Nachbarn, damit der Tausch ueberhaupt auffaellt.
+    var A1 = 14, A2 = 15, B1 = 5, B2 = 6;
+
+    var TRACKS = {};
+    TRACKS[A1] = ['Something for Myself', 'Rampa · 119 BPM · 8A · Intro'];
+    TRACKS[A2] = ['Sun Rising', 'Adriatique · 121 BPM · 8A · Peak'];
+    TRACKS[B1] = ['Blue Hour', 'Trikk · 117 BPM · 7A · Warm-up'];
+    TRACKS[B2] = ['Dial Tone', 'Marbs · 120 BPM · 7A · Build'];
+
+    /* Mittelpunkt eines Elements, relativ zum Panel. fy steuert die Hoehe im
+       Element — bei den Balken zielen wir nach oben, weil man dort greift. */
+    function pointOf(el, fx, fy) {
+      var p = panel.getBoundingClientRect(), r = el.getBoundingClientRect();
+      return {
+        x: r.left - p.left + r.width  * (fx == null ? 0.5 : fx),
+        y: r.top  - p.top  + r.height * (fy == null ? 0.5 : fy)
+      };
+    }
+
+    function moveTo(pt, ms) {
+      cursor.style.transitionDuration = ms + 'ms, 250ms';
+      cursor.style.setProperty('--rf-x', pt.x + 'px');
+      cursor.style.setProperty('--rf-y', pt.y + 'px');
+    }
+
+    function click() {
+      cursor.classList.add('is-clicking');
+      setTimeout(function () { cursor.classList.remove('is-clicking'); }, 110);
+    }
+
+    function select(i) {
+      for (var n = 0; n < bars.length; n++) bars[n].classList.remove('is-selected');
+      bars[i].classList.add('is-selected');
+      if (TRACKS[i] && title && meta) {
+        title.textContent = TRACKS[i][0];
+        meta.textContent  = TRACKS[i][1];
+      }
+    }
+
+    /* Abspielen: die Leiste laeuft ueber die angegebene Dauer bis pct. */
+    function playTo(pct, ms) {
+      fill.style.transitionDuration = ms + 'ms';
+      fill.style.width = pct + '%';
+    }
+
+    /* Vorspulen: die Leiste springt OHNE Uebergang, sonst sieht es aus wie
+       normales Abspielen. Der Reflow dazwischen ist noetig, damit der naechste
+       Uebergang wieder greift. */
+    function seekTo(pct) {
+      fill.classList.add('is-seeking');
+      fill.style.width = pct + '%';
+      void fill.offsetWidth;
+      fill.classList.remove('is-seeking');
+    }
+
+    function swap(a, b) {
+      var slot = bars[a].getBoundingClientRect().width + 3;   // Balken + gap
+      bars[a].classList.add('is-lifted');
+      bars[a].style.transform = 'translate(' + slot + 'px, -3px)';
+      bars[b].style.transform = 'translate(' + (-slot) + 'px, 0)';
+    }
+
+    function resetAll() {
+      for (var n = 0; n < bars.length; n++) {
+        bars[n].classList.remove('is-selected', 'is-lifted');
+        bars[n].style.transform = '';
+      }
+      seekTo(0);
+      if (title && meta) {
+        title.textContent = TRACKS[A1][0];
+        meta.textContent  = TRACKS[A1][1];
+      }
+    }
+
+    /* Ein Ort: anklicken, abspielen, zweimal vorspulen, Nachbarn anhoeren,
+       tauschen. Beide Stellen laufen durch dieselbe Beschreibung. */
+    function ortSchritte(i1, i2, seeks) {
+      var s = [];
+      s.push([function () { moveTo(pointOf(bars[i1], 0.5, 0.3), 400); }, 420]);
+      s.push([function () { click(); select(i1); seekTo(0); }, 220]);
+      s.push([function () { moveTo(pointOf(play), 330); }, 350]);
+      s.push([function () { click(); playTo(seeks[0] - 18, 620); }, 660]);
+
+      for (var k = 0; k < seeks.length; k++) {
+        (function (pct) {
+          s.push([function () { moveTo(pointOf(track, pct / 100, 0.5), 300); }, 320]);
+          s.push([function () { click(); seekTo(pct); }, 180]);
+          s.push([function () { playTo(pct + 8, 360); }, 380]);
+        })(seeks[k]);
+      }
+
+      s.push([function () { moveTo(pointOf(bars[i2], 0.5, 0.3), 360); }, 380]);
+      s.push([function () { click(); select(i2); seekTo(0); playTo(32, 620); }, 700]);
+      s.push([function () { moveTo(pointOf(bars[i1], 0.5, 0.25), 340); }, 360]);
+      s.push([function () { cursor.classList.add('is-grabbing'); }, 200]);
+      s.push([function () {
+        swap(i1, i2);
+        // Der Zeiger wandert mit dem gegriffenen Balken.
+        var slot = bars[i1].getBoundingClientRect().width + 3;
+        var pt = pointOf(bars[i1], 0.5, 0.25);
+        moveTo({ x: pt.x + slot, y: pt.y }, 380);
+      }, 430]);
+      s.push([function () { cursor.classList.remove('is-grabbing'); bars[i1].classList.remove('is-lifted'); }, 260]);
+      return s;
+    }
+
+    var sequence = []
+      .concat([[function () { cursor.classList.add('is-on'); }, 260]])
+      .concat(ortSchritte(A1, A2, [58, 84]))
+      .concat(ortSchritte(B1, B2, [62]))
+      .concat([
+        [function () { moveTo({ x: panel.offsetWidth + 30, y: panel.offsetHeight * 0.9 }, 480); }, 500],
+        [function () { cursor.classList.remove('is-on'); }, 320],
+        [function () { resetAll(); }, 900]
+      ]);
+
+    var i = 0, timer = null, laeuft = false;
+
+    function step() {
+      var s = sequence[i];
+      s[0]();
+      i = (i + 1) % sequence.length;
+      timer = setTimeout(step, s[1]);
+    }
+
+    function start() {
+      if (laeuft) return;
+      laeuft = true;
+      i = 0;
+      resetAll();
+      step();
+    }
+    function stop() {
+      laeuft = false;
+      clearTimeout(timer);
+      cursor.classList.remove('is-on', 'is-grabbing', 'is-clicking');
+      resetAll();
+    }
+
+    /* Nur laufen lassen, solange das Panel zu sehen ist — sonst tickt der
+       Timer die ganze Seite lang im Hintergrund weiter. */
+    function imBild() {
+      var r = panel.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries[0].isIntersecting ? start() : stop();
+      /* Schwelle bewusst niedrig: das Panel ist rund 390px hoch. Bei 0.35
+         muessten davon 136px zu sehen sein, was auf einem quer gehaltenen
+         Telefon knapp wird — dort liefe die Demo dann nie an. */
+      }, { threshold: 0.15 }).observe(panel);
+
+      /* Auffangnetz: der Observer ist der einzige Ausloeser, und wenn er nicht
+         meldet, laeuft die Animation NIE. Genau das ist beim Testen passiert.
+         Browser stellen IntersectionObserver-Rueckmeldungen zurueck, wenn das
+         Dokument gerade nicht gerendert wird (Hintergrundtab, ausgeblendetes
+         Fenster) — und in manchen Faellen kommen sie danach nicht nach. Diese
+         eine Nachpruefung kostet nichts und macht das Feature unabhaengig
+         davon. Der Observer bleibt zustaendig fuers Anhalten beim Wegscrollen. */
+      setTimeout(function () { if (!laeuft && imBild()) start(); }, 400);
+    } else {
+      start();
+    }
+  }
+
+  /* ------------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------------ */
   function boot() {
@@ -1045,6 +1245,7 @@
     initEnergyArc();
     initDeviceSearch();
     initDownloadModal();
+    initRefineDemo();
     initConsent();
     if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
