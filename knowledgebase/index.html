@@ -294,6 +294,8 @@
           <li><a href="#usb-export">USB export</a></li>
           <li><a href="#virtualdj-export">VirtualDJ export</a></li>
           <li><a href="#rekordbox-export">rekordbox export</a></li>
+          <li><a href="#serato-export">Serato export</a></li>
+          <li><a href="#traktor-export">Traktor export</a></li>
           <li><a href="#playlists-on-device">Playlists on device</a></li>
         </ul>
       </nav>
@@ -1500,6 +1502,163 @@
             <dd>Alpha writes both the classic library (export.pdb) and the newer encrypted one (exportLibrary.db) that the latest players prefer. It is a new target, so please confirm on your own gear.</dd>
             <dt>Are my cues and beat grid included?</dt>
             <dd>Yes. Each track gets a beat grid (from the interpreted BPM), a waveform and any cues, written into the analysis files the player reads.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="serato-export"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>Serato export</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Serato export writes a portable Serato library on a drive: a
+          <span class="kb-verbatim">_Serato_</span> crate plus the audio, with the beat grid
+          baked into the files' Serato tags. Serato is laptop software, so this is an export
+          to a drive you plug into a Serato laptop &mdash; not a standalone stick.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Serato export does</h3>
+          <p>
+            Serato export copies the audio to the drive, writes a
+            <span class="kb-verbatim">_Serato_/Subcrates/&lt;name&gt;.crate</span> (the ordered
+            playlist) and a <span class="kb-verbatim">_Serato_/neworder.pref</span> at the
+            drive's root, and writes the beat grid (from the interpreted BPM) plus the normal
+            tags (title, artist, album, BPM, key) into each copied file's Serato tags. Serato
+            reads the <span class="kb-verbatim">_Serato_</span> folder from a drive's root, so
+            the crate appears when the drive is plugged into a Mac or Windows laptop running
+            Serato DJ.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Serato export</h3>
+          <ol>
+            <li>Open the target device chooser and pick <span class="kb-verbatim">Serato DJ</span>.</li>
+            <li>Pick a USB or external drive (Serato reads <span class="kb-verbatim">_Serato_</span> from the drive's root).</li>
+            <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
+            <li>Plug the drive into a laptop running Serato DJ; the crate appears in the library.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Serato export tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead><tr><th>Where it appears</th><th>Exact wording in the app</th></tr></thead>
+              <tbody>
+                <tr><td>Device picker, the Serato option</td><td><span class="kb-verbatim">Serato DJ</span> &mdash; <span class="kb-verbatim">_Serato_ crate + beatgrid tags on a drive</span></td></tr>
+                <tr><td>Device picker group</td><td><span class="kb-verbatim">DJ software</span></td></tr>
+                <tr><td>"See how it works" panel</td><td><span class="kb-verbatim">Serato is laptop software, not a standalone player. Alpha writes a _Serato_ folder at the drive's root plus the audio, and bakes the beatgrid into the files' Serato tags. Plug the drive into a Mac or Windows laptop running Serato DJ and the crate appears.</span></td></tr>
+                <tr><td>Panel, note</td><td><span class="kb-verbatim">Export to a USB or an external drive (Serato reads _Serato_ from the drive root). Hot cues / loops are not written yet.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Serato export does not do</h3>
+          <ul>
+            <li>Serato export does not make a standalone stick for CDJ / XDJ hardware; the drive is read by Serato DJ on a computer.</li>
+            <li>Serato export does not write hot cues or loops yet; it writes the beat grid and the normal tags.</li>
+            <li>Serato export does not change the DJ's original files; it copies them to the drive.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Serato export</h3>
+          <dl class="kb-qa">
+            <dt>Can I export Serato to a folder on my laptop's disk?</dt>
+            <dd>Serato reads the <span class="kb-verbatim">_Serato_</span> folder from a drive's root, so export to a USB or external drive. Plug that drive into the Serato laptop and the crate shows up.</dd>
+            <dt>Do my cues transfer?</dt>
+            <dd>Not yet &mdash; Serato export writes the beat grid and tags; hot cues and loops are a later addition.</dd>
+          </dl>
+        </section>
+
+      </article>
+
+      <article class="kb-feature" id="traktor-export"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="export"
+               data-kb-platforms="macOS">
+
+        <h2>Traktor export</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0</span>
+          <span>macOS</span>
+        </p>
+
+        <p class="kb-summary">
+          Traktor export writes a <span class="kb-verbatim">collection.nml</span> (Traktor's
+          NML format) plus the audio. Traktor is laptop software, so the DJ imports the
+          collection into Traktor &mdash; there is no standalone stick.
+        </p>
+
+        <section class="kb-block">
+          <h3>What Traktor export does</h3>
+          <p>
+            Traktor export copies the audio into a <span class="kb-verbatim">Traktor</span>
+            folder on the drive and writes a <span class="kb-verbatim">collection.nml</span>
+            describing every track with its tempo, key and a beat grid, plus the playlist in
+            set order. The DJ then imports it into Traktor Pro. Traktor does not auto-scan a
+            drive, so the import step is required.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to use Traktor export</h3>
+          <ol>
+            <li>Open the target device chooser and pick <span class="kb-verbatim">Traktor Pro</span>.</li>
+            <li>Pick a destination drive and click <span class="kb-verbatim">Write to USB</span>.</li>
+            <li>In Traktor Pro (Mac or Windows): <span class="kb-verbatim">File -> Import Collection</span> and pick this <span class="kb-verbatim">collection.nml</span>.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Traktor export tooltips and on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead><tr><th>Where it appears</th><th>Exact wording in the app</th></tr></thead>
+              <tbody>
+                <tr><td>Device picker, the Traktor option</td><td><span class="kb-verbatim">Traktor Pro</span> &mdash; <span class="kb-verbatim">collection.nml - import into Traktor</span></td></tr>
+                <tr><td>Device picker group</td><td><span class="kb-verbatim">DJ software</span></td></tr>
+                <tr><td>"See how it works" panel</td><td><span class="kb-verbatim">Traktor is laptop software. Alpha writes a collection.nml (Traktor NML) plus the audio into a Traktor folder on the drive. In Traktor Pro (Mac / Windows): File -> Import Collection and pick this collection.nml.</span></td></tr>
+                <tr><td>Panel, note</td><td><span class="kb-verbatim">Tempo, key and a beat grid are included. Traktor does not auto-scan a drive - the import step is required.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What Traktor export does not do</h3>
+          <ul>
+            <li>Traktor export does not make a standalone stick; the DJ imports the collection into Traktor on a computer.</li>
+            <li>Traktor export writes one constant beat grid per track from the BPM; it does not model tempo changes within a track.</li>
+            <li>Traktor export does not change the DJ's original files; it copies them to the drive.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about Traktor export</h3>
+          <dl class="kb-qa">
+            <dt>Why doesn't the playlist appear when I plug the drive in?</dt>
+            <dd>Traktor does not auto-scan drives. Open Traktor Pro and use <span class="kb-verbatim">File -> Import Collection</span>, then select the <span class="kb-verbatim">collection.nml</span> Alpha wrote.</dd>
+            <dt>Does my key come across?</dt>
+            <dd>Yes. The key is written as Traktor's own musical-key value, along with the tempo and a beat grid.</dd>
           </dl>
         </section>
 
