@@ -1351,7 +1351,8 @@
             on the stick and writes a <span class="kb-verbatim">VirtualDJ/database.xml</span>
             describing every track (artist, title, album, year, BPM, key, length) plus an
             ordered playlist under <span class="kb-verbatim">MyLists</span>. VirtualDJ reads
-            the key as its own Camelot notation (8A becomes 8m, 8B becomes 8d). Cover art is
+            the key in Open Key notation, so Alpha converts each track's Camelot key to Open
+            Key (for example A minor, Camelot 8A, is written 1m). Cover art is
             read from each file's tags, so it is not copied separately.
           </p>
         </section>
@@ -1404,7 +1405,7 @@
           <h3>Common questions about VirtualDJ export</h3>
           <dl class="kb-qa">
             <dt>Does my key survive the export?</dt>
-            <dd>Yes. The Camelot key is written in VirtualDJ's own notation (a number plus d for major or m for minor, so 8A becomes 8m and 8B becomes 8d).</dd>
+            <dd>Yes. VirtualDJ uses Open Key notation (a number plus d for major or m for minor), so Alpha converts each track's Camelot key to Open Key &mdash; for example A minor (Camelot 8A) is written 1m.</dd>
             <dt>VirtualDJ shows the set on a laptop but my CDJ does not &mdash; why?</dt>
             <dd>VirtualDJ is computer software. For a stick that plays directly on Pioneer / AlphaTheta hardware, use the rekordbox export instead.</dd>
           </dl>
