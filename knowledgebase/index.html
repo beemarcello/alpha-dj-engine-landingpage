@@ -1362,7 +1362,7 @@
         <section class="kb-block">
           <h3>How to use VirtualDJ export</h3>
           <ol>
-            <li>Open the target device chooser and pick <span class="kb-verbatim">VirtualDJ</span>.</li>
+            <li>Open the target device chooser, click <span class="kb-verbatim">+ Also export for DJ software (laptop)</span> to reveal the software targets, then pick <span class="kb-verbatim">VirtualDJ</span>.</li>
             <li>Check the playlist name, track count and duration.</li>
             <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
             <li>Eject the stick, plug it into a computer running VirtualDJ, and load the library.</li>
@@ -1545,8 +1545,8 @@
         <section class="kb-block">
           <h3>How to use Serato export</h3>
           <ol>
-            <li>Open the target device chooser and pick <span class="kb-verbatim">Serato DJ</span>.</li>
-            <li>Pick a USB or external drive (Serato reads <span class="kb-verbatim">_Serato_</span> from the drive's root).</li>
+            <li>Open the target device chooser, click <span class="kb-verbatim">+ Also export for DJ software (laptop)</span> to reveal the software targets, then pick <span class="kb-verbatim">Serato DJ</span>.</li>
+            <li>Export to the USB, or click <span class="kb-verbatim">choose another folder</span> for a different destination &mdash; but Serato only reads <span class="kb-verbatim">_Serato_</span> from a drive's <b>root</b>, so pick a USB or drive root (Alpha warns you if a subfolder is chosen).</li>
             <li>Click <span class="kb-verbatim">Write to USB</span> and wait for the confirmation.</li>
             <li>Plug the drive into a laptop running Serato DJ; the crate appears in the library.</li>
           </ol>
@@ -1562,6 +1562,9 @@
                 <tr><td>Device picker group</td><td><span class="kb-verbatim">DJ software</span></td></tr>
                 <tr><td>"See how it works" panel</td><td><span class="kb-verbatim">Serato is laptop software, not a standalone player. Alpha writes a _Serato_ folder at the drive's root plus the audio, and bakes the beatgrid into the files' Serato tags. Plug the drive into a Mac or Windows laptop running Serato DJ and the crate appears.</span></td></tr>
                 <tr><td>Panel, note</td><td><span class="kb-verbatim">Export to a USB or an external drive (Serato reads _Serato_ from the drive root). Hot cues / loops are not written yet.</span></td></tr>
+                <tr><td>Device picker, reveal-software toggle</td><td><span class="kb-verbatim">+ Also export for DJ software (laptop)</span></td></tr>
+                <tr><td>Export step, destination note (software targets)</td><td><span class="kb-verbatim">DJ software reads from a folder - export to the USB, or choose another folder.</span></td></tr>
+                <tr><td>Export step, Serato non-root warning</td><td><span class="kb-verbatim">Serato reads _Serato_ from a drive's root - this folder is inside a drive, so Serato won't auto-scan it. Pick a USB or drive root instead.</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1580,7 +1583,7 @@
           <h3>Common questions about Serato export</h3>
           <dl class="kb-qa">
             <dt>Can I export Serato to a folder on my laptop's disk?</dt>
-            <dd>Serato reads the <span class="kb-verbatim">_Serato_</span> folder from a drive's root, so export to a USB or external drive. Plug that drive into the Serato laptop and the crate shows up.</dd>
+            <dd>You can pick any destination folder, but Serato only auto-scans a <span class="kb-verbatim">_Serato_</span> folder at a drive's <b>root</b> &mdash; so export to a USB or drive root. If you choose a subfolder, Alpha warns you and Serato won't find the crate.</dd>
             <dt>Do my cues transfer?</dt>
             <dd>Not yet &mdash; Serato export writes the beat grid and tags; hot cues and loops are a later addition.</dd>
           </dl>
@@ -1622,8 +1625,8 @@
         <section class="kb-block">
           <h3>How to use Traktor export</h3>
           <ol>
-            <li>Open the target device chooser and pick <span class="kb-verbatim">Traktor Pro</span>.</li>
-            <li>Pick a destination drive and click <span class="kb-verbatim">Write to USB</span>.</li>
+            <li>Open the target device chooser, click <span class="kb-verbatim">+ Also export for DJ software (laptop)</span> to reveal the software targets, then pick <span class="kb-verbatim">Traktor Pro</span>.</li>
+            <li>Export to the USB, or click <span class="kb-verbatim">choose another folder</span> for a different destination (Traktor accepts any folder), then click <span class="kb-verbatim">Write to USB</span>.</li>
             <li>In Traktor Pro (Mac or Windows): <span class="kb-verbatim">File -> Import Collection</span> and pick this <span class="kb-verbatim">collection.nml</span>.</li>
           </ol>
         </section>
