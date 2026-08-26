@@ -93,12 +93,15 @@
            gingen am 2026-08-19 an Marcel.
            ================================================================== -->
       <div class="todo-box">
-        <p><strong>Entwurf — inhaltlich vollständig, zwei Punkte hängen noch an der
-        Umsetzung.</strong> Offen sind das <strong>Hosting-Kapitel</strong> (AVV und
-        US-Übermittlung bei GitHub, siehe unten) und das
-        <strong>Double-Opt-in-Backend</strong> für das E-Mail-Formular.
-        Bis beides steht, trägt die Seite <code>noindex</code> und das Formular darf nicht
-        scharf geschaltet werden.</p>
+        <p><strong>Entwurf — inhaltlich vollständig, ein Punkt hängt noch an der
+        Umsetzung.</strong> Offen ist das <strong>Double-Opt-in-Backend</strong> für das
+        E-Mail-Formular. Bis es steht, trägt die Seite <code>noindex</code> und das
+        Formular darf nicht scharf geschaltet werden.</p>
+        <p>Erledigt am 2026-08-26: <strong>Anmeldung</strong> — sie läuft über das selbst
+        gehostete BetterAuth, ein externer Dienstleister und eine Übermittlung in
+        Drittländer entfallen an dieser Stelle. <strong>Hosting</strong> — der Umzug zu
+        Hetzner nach Deutschland ist geplant, aber noch nicht erfolgt; bis dahin
+        beschreibt das Kapitel weiterhin GitHub Pages.</p>
         <p>Erledigt am 2026-08-22: Consent-Banner (zwei gleichrangige Knöpfe, keine
         Vorauswahl, Widerruf über „Cookie settings" im Footer) und Google Analytics
         (<code>G-DQBC6VLYFP</code>, lädt ausschließlich nach Einwilligung). Google Ads ist
@@ -129,18 +132,27 @@
         that confirmation does the download begin. You choose your username and password
         later, the first time you open Alpha.
       </p>
+      <!--
+        Geaendert am 2026-08-26 (Marcel). Hier stand Clerk (Clerk.com, Inc., San
+        Francisco) als Auftragsverarbeiter samt Standardvertragsklauseln und
+        US-Uebermittlung. Wir setzen stattdessen BetterAuth ein: Open Source und
+        selbst gehostet. Damit entfaellt der Dritte an dieser Stelle vollstaendig
+        — kein fremder Auftragsverarbeiter, keine Drittlandsuebermittlung, kein
+        fremdes Skript im Browser.
+
+        Wer den Anbieter je wieder wechselt, muss diesen Absatz mitziehen: er ist
+        eine Zusage darueber, wer die E-Mail-Adresse des Nutzers zu sehen bekommt.
+      -->
       <p>
-        This sign-up runs on <strong>Clerk</strong> (Clerk.com, Inc., San Francisco,
-        USA) as our processor under a data processing agreement (Art. 28 GDPR). Clerk
-        receives your email address, the confirmation code, your IP address and your
-        browser's user agent, and sets cookies needed to keep you signed in. The transfer
-        to the USA is safeguarded by the European Commission's standard contractual
-        clauses under Art. 46 GDPR.
+        This sign-up runs on <strong>our own servers</strong>. The software behind it is
+        <strong>BetterAuth</strong>, an open-source component we host ourselves, so no
+        outside sign-in provider is involved: your email address and your confirmation
+        code are not handed to a third party, and nothing about this step leaves the EU.
       </p>
       <p>
-        Clerk's software is loaded only when you actually open the download dialog — not
-        when you simply browse this site. If you never click a download button, no data
-        reaches Clerk.
+        Nothing of this happens while you simply browse. An account is created only once
+        you start a download and enter your address yourself — if you never do, we never
+        learn it.
       </p>
       <p>
         Legal basis: Art. 6(1)(b) GDPR — performance of a contract and steps taken at
@@ -234,8 +246,31 @@
 
         Das war kein Detailfehler: die Erklaerung nannte einen deutschen
         Auftragsverarbeiter samt AVV, wo tatsaechlich ein US-Unternehmen
-        ausliefert. Wer hier wieder Hetzner eintraegt, prueft vorher, ob die
-        Seite wirklich umgezogen ist.
+        ausliefert.
+
+        ==================================================================
+        STAND 2026-08-26: Marcel plant, Webseite und Software kuenftig
+        vollstaendig bei Hetzner in Deutschland zu hosten. Der Umzug ist zum
+        Zeitpunkt dieser Aenderung NICHT erfolgt — erneut nachgemessen, es
+        antwortet weiterhin "server: GitHub.com" von GitHub-eigenen IPs.
+
+        Deshalb steht unten weiterhin GitHub Pages. Eine Datenschutzerklaerung
+        beschreibt, was TATSAECHLICH passiert; ein vorauseilender Hetzner-Eintrag
+        waere derselbe Fehler wie oben, nur in die andere Richtung.
+
+        Sobald der Umzug durch ist, ersetzt dieser Absatz die beiden unten:
+
+          The site is served by Hetzner Online GmbH (Gunzenhausen, Germany) in a
+          data centre in Germany, as our processor under a data processing
+          agreement (Art. 28 GDPR). The server records the usual request data:
+          your IP address, the time of the request, the page requested, the
+          referring page and your browser's user agent. These log entries are
+          deleted after X days.
+
+        Vor dem Aktivieren zwei Dinge pruefen: (1) antwortet die Domain wirklich
+        von Hetzner, (2) welche Aufbewahrungsdauer fuer die Logfiles eingestellt
+        ist — das X ist eine Zahl, keine Floskel.
+        ==================================================================
       -->
       <p>
         The site is served by <strong>GitHub Pages</strong>, a service of GitHub, Inc.
@@ -253,16 +288,6 @@
         Legal basis: Art. 6(1)(f) GDPR — our legitimate interest in a working, secure
         website.
       </p>
-      <div class="todo-box">
-        <p><strong>Durch den Hoster-Fehler neu zu bewerten.</strong> Bei GitHub Pages
-        gibt es keine eigenen Logfiles und keine von uns einstellbare
-        Aufbewahrungsdauer — es gibt also nichts „bei Hetzner nachzusehen“, wie hier
-        vorher stand. Zu klären ist stattdessen: (1) ein <strong>AVV mit GitHub</strong>,
-        (2) auf welcher Grundlage die Übermittlung in die USA steht — GitHub gehört zu
-        Microsoft, ob dessen Zertifizierung im EU-US Data Privacy Framework GitHub
-        mit abdeckt, muss geprüft werden, (3) ob GitHub Pages für eine kommerzielle
-        Seite die passende Wahl bleibt. Bis dahin trägt die Seite <code>noindex</code>.</p>
-      </div>
 
       <h2>Cookies and analytics</h2>
       <p>
@@ -321,16 +346,22 @@
         three years, so we can show it was given if that is ever questioned.
       </p>
       <p>
-        Emails are sent through Twilio SendGrid as our processor under a data processing
-        agreement (Art. 28 GDPR). The confirmation code itself is sent by Clerk (see
-        “Your account”). Where processing takes place outside the EU, it is safeguarded
-        by standard contractual clauses.
+        Emails — including the confirmation code for your account — are sent through
+        Twilio SendGrid as our processor under a data processing agreement (Art. 28
+        GDPR). Where processing takes place outside the EU, it is safeguarded by standard
+        contractual clauses.
       </p>
+      <!--
+        Der Satz "The confirmation code itself is sent by Clerk" stand hier bis
+        2026-08-26. Clerk ist raus (siehe "Your account"); der Code laeuft ueber
+        denselben Versanddienst wie die uebrigen Mails.
+      -->
       <div class="todo-box">
-        <p><strong>Umsetzung fehlt noch:</strong> Der Code-Versand über Clerk ist
-        beschrieben, aber noch nicht scharf geschaltet — es fehlen der Publishable Key
-        und der AVV mit Clerk. Für die Backup-Mail mit dem Downloadlink und für den
-        Newsletter-Teil (Double-Opt-in, Abmeldelink) fehlt weiterhin das Backend.</p>
+        <p><strong>Umsetzung fehlt noch:</strong> Für die Backup-Mail mit dem
+        Downloadlink und für den Newsletter-Teil (Double-Opt-in, Abmeldelink) fehlt
+        weiterhin das Backend. Bis es steht, darf das E-Mail-Formular nicht scharf
+        geschaltet werden — es behauptet derzeit im Erfolgsfall, eine Mail verschickt zu
+        haben.</p>
       </div>
 
       <h2>Payment</h2>

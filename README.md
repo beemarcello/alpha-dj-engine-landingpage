@@ -291,48 +291,53 @@ Details, die leicht kaputtgehen:
 
 #### Registrierung im Download-Modal — WARTET AUF LASSE
 
-> **Blockiert, Stand 2026-08-20.** Marcel wartet darauf, dass **Lasse** die
-> Authentifizierung aufsetzt; erst danach werden die Buttons angeschlossen.
-> **Hier bitte nicht weiterbauen** — insbesondere `DL_CFG.publishableKey` nicht
-> setzen und keinen AVV anstoßen.
+> **Blockiert, Stand 2026-08-26.** Marcel wartet darauf, dass **Lasse** den
+> BetterAuth-Endpunkt aufsetzt; erst danach werden die Buttons angeschlossen.
+> **Hier bitte nicht weiterbauen**, solange der Endpunkt nicht steht.
 >
-> **Der Anbieter ist offen.** Das Modal ist gegen **Clerk** gebaut, Marcel
-> vermutet aber, dass Lasse **better-auth** einsetzt. Das ist kein Austausch
+> **Der Anbieter steht fest: BetterAuth** (Marcel, 2026-08-26). Open Source und
+> selbst gehostet — kein Drittanbieter, kein AVV, keine Drittlandsübermittlung.
+> Clerk ist damit vom Tisch.
+>
+> Das Modal ist aber noch gegen Clerk gebaut, und das ist kein Austausch
 > gleicher Teile:
 >
-> | | Clerk | better-auth |
+> | | Clerk (verworfen) | BetterAuth (gesetzt) |
 > |---|---|---|
 > | Art | gehosteter Dienst | TypeScript-Bibliothek |
-> | Braucht Backend | nein | **ja**, eigener Server |
-> | Auf GitHub Pages | läuft | läuft nicht — Seite spricht gegen Lasses Endpunkt |
-> | Datenschutz | US-Auftragsverarbeiter, AVV + SCC nötig | selbst gehostet, kein Drittanbieter |
+> | Braucht Backend | nein | **ja**, eigener Server (baut Lasse) |
+> | Frontend | SDK von Clerks Domain nachladen | `fetch` gegen den eigenen Endpunkt, CORS nötig |
+> | Datenschutz | US-Auftragsverarbeiter, AVV + SCC | selbst gehostet, kein Drittanbieter |
 >
-> Wird es better-auth, **sinkt** der Frontend-Aufwand: statt des SDK nur ein
-> `fetch` auf den eigenen Endpunkt, und der ganze Drittanbieter-Teil entfällt.
-> Dann muss der **Clerk-Abschnitt in `privacy.html` („Your account") wieder
-> raus** — er beschreibt sonst eine Verarbeitung, die es nicht gibt.
+> Der Frontend-Aufwand **sinkt** dadurch: statt des SDK nur ein `fetch`, der
+> ganze Drittanbieter-Teil entfällt. Die drei Schritte im Modal
+> (E-Mail → Code → Download) bleiben gleich, ebenso Markup und CSS.
+> Auszutauschen sind nur `loadClerk`, `sendCode` und `verifyCode` in `js/site.js`.
 >
-> Die drei Schritte im Modal (E-Mail → Code → Download) bleiben in beiden
-> Fällen gleich, ebenso das gesamte Markup und CSS. Auszutauschen sind nur
-> `loadClerk`, `sendCode` und `verifyCode` in `js/site.js`.
+> Dass die Seite auf GitHub Pages statisch liegt, steht dem nicht im Weg — sie
+> ruft Lasses Endpunkt per `fetch` auf, egal wo sie selbst liegt. Nötig ist
+> lediglich, dass der Endpunkt die Origin per CORS zulässt.
+>
+> **Erledigt am 2026-08-26:** Der Clerk-Abschnitt in `privacy.html` („Your
+> account") ist bereits auf BetterAuth umgeschrieben — er beschrieb sonst eine
+> Verarbeitung, die es gar nicht gibt. Der Clerk-Code in `js/site.js` steht noch
+> unverändert drin; er ist dormant, solange `DL_CFG.publishableKey` leer ist,
+> und wird beim Anschließen ersetzt.
 
 Zum Hintergrund: Seit 2026-08-20 registriert und verifiziert der Nutzer direkt
 im Modal, statt einen Link aus der Inbox zu holen (siehe „Download-Flow" weiter
 unten). Offen ist — sobald der Anbieter feststeht:
 
-- [ ] **Publishable Key** aus dem Clerk-Dashboard → `js/site.js` → `DL_CFG.publishableKey`
-      (`pk_live_…`). Der Key ist öffentlich und gehört ins Frontend. **Ohne Key
-      bleibt das Modal beim alten „wir mailen dir einen Link"-Verhalten** — die
-      Live-Seite geht durch das Ausrollen also nicht kaputt.
-- [ ] **Clerk-Instanz konfigurieren:** Sign-up-Strategie auf **E-Mail + Code**
-      (nicht Link, nicht Passwort). Passwort und Nickname legt der Nutzer weiterhin
-      erst in der Desktop-App an.
-- [ ] **Eigene Domain für Clerk** (`clerk.alpha-dj-engine.com`) statt der
-      `*.clerk.accounts.dev`-Adresse. Der Host steckt base64-kodiert im Key, das
-      Skript folgt automatisch.
-- [ ] **AVV mit Clerk** (Art. 28 DSGVO) abschließen — Clerk.com, Inc. sitzt in den
-      USA. `privacy.html` → „Your account" beschreibt die Verarbeitung bereits,
-      der Vertrag muss aber existieren, bevor der Key scharf geschaltet wird.
+- [ ] **Endpunkt-URL von Lasse** → `js/site.js` → `DL_CFG`. **Solange dort nichts
+      steht, bleibt das Modal beim alten „wir mailen dir einen Link"-Verhalten** —
+      die Live-Seite geht durch das Ausrollen also nicht kaputt.
+- [ ] **`loadClerk` / `sendCode` / `verifyCode` ersetzen** durch `fetch`-Aufrufe
+      gegen den BetterAuth-Endpunkt. Markup, CSS und die drei Schritte bleiben.
+- [ ] **CORS am Endpunkt** für die Origin der Live-Seite freigeben (heute
+      `https://alpha-dj-engine.com`, nach dem Hetzner-Umzug unverändert, solange
+      die Domain bleibt).
+- [ ] **Sign-up-Strategie E-Mail + Code** (nicht Link, nicht Passwort). Passwort
+      und Nickname legt der Nutzer weiterhin erst in der Desktop-App an.
 - [ ] **Backup-Mail** mit dem Downloadlink → `DL_CFG.notifyEndpoint`. Bekommt
       `{ email }` gePOSTet. Leer lassen = keine Backup-Mail, der Flow funktioniert
       trotzdem.
