@@ -1300,7 +1300,7 @@
           <h3>Common questions about USB export</h3>
           <dl class="kb-qa">
             <dt>Which gear does USB export work with?</dt>
-            <dd>The Export step writes three formats: Denon (Engine OS 3.x, validated on the Prime Go), VirtualDJ, and Pioneer / AlphaTheta (rekordbox). Pick the format at the top of the step; this entry covers the Denon write.</dd>
+            <dd>The Export step writes two standalone-stick formats — Denon (Engine OS 3.x, validated on the Prime Go) and Pioneer / AlphaTheta (rekordbox) — plus three DJ-software targets that appear after clicking <span class="kb-verbatim">+ Also export for DJ software (laptop)</span>: VirtualDJ, Serato DJ and Traktor Pro. Pick the format at the top of the step; this entry covers the Denon write.</dd>
             <dt>Does USB export erase what is already on my stick?</dt>
             <dd>No. USB export adds the new set and makes a local backup of the stick's existing library first.</dd>
             <dt>Can I remove the stick as soon as writing finishes?</dt>
@@ -1342,8 +1342,9 @@
         <p class="kb-summary">
           VirtualDJ export writes the finished set as a VirtualDJ library on the USB stick:
           a <span class="kb-verbatim">database.xml</span> with every track's tags, BPM and
-          key, plus an ordered playlist. It is one of the three formats in the 04 Export
-          target picker.
+          key, plus an ordered playlist. It is one of the DJ-software targets in the 04
+          Export step, revealed by
+          <span class="kb-verbatim">+ Also export for DJ software (laptop)</span>.
         </p>
 
         <section class="kb-block">
@@ -1431,8 +1432,8 @@
 
         <p class="kb-summary">
           rekordbox export writes a Pioneer / AlphaTheta USB that CDJ and XDJ players read
-          directly, with no rekordbox software needed. It is one of the three formats in the
-          04 Export target picker.
+          directly, with no rekordbox software needed. It is one of the two standalone-stick
+          formats in the 04 Export target picker, alongside the Denon (Engine OS) write.
         </p>
 
         <section class="kb-block">
