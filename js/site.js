@@ -29,9 +29,105 @@
   }
 
   /* ------------------------------------------------------------------------
-     2. E-Mail-Capture — Platzhalter bis ein Backend/Provider angebunden ist.
-     TODO: an den echten Endpoint hängen (siehe README "Offene Punkte").
+     2. E-Mail-Capture → Portal-API (/api/leads)
+     Die Seite bleibt statisch; das Portal macht die eigentliche Arbeit:
+     Turnstile-Siteverify, Rate-Limits, download_lead-Zeile, SES-Mail mit dem
+     48-h-Link, Discord-Ping. Hier passiert nur: Token holen, POSTen, ehrlich
+     berichten.
+
+     dev/prod: Die Live-Domain spricht mit dem Prod-Portal. Jeder andere Host
+     (localhost, Preview-Deploys) trifft dev — inklusive Cloudflare-Testkey,
+     der ohne Interaktion besteht, damit E2E-Tests nicht am Captcha hängen.
      ------------------------------------------------------------------------ */
+  var LEAD_ENV = (function () {
+    var live = /^(www\.)?alpha-dj-engine\.com$/.test(location.hostname);
+    return live
+      ? { api: 'https://app.alpha-dj-engine.com',     sitekey: '0x4AAAAAAEXfqaR-gVyJvf1t' }
+      : { api: 'https://dev.app.alpha-dj-engine.com', sitekey: '1x00000000000000000000AA' };
+  })();
+
+  var turnstilePromise = null;
+  function loadTurnstile() {
+    if (turnstilePromise) return turnstilePromise;
+    turnstilePromise = new Promise(function (resolve, reject) {
+      window.__amcTurnstileReady = function () { resolve(window.turnstile); };
+      var s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js' +
+              '?render=explicit&onload=__amcTurnstileReady';
+      s.async = true;
+      s.onerror = function () {
+        turnstilePromise = null;
+        reject(new Error("We couldn't reach the human check. Reload the page and try again."));
+      };
+      document.head.appendChild(s);
+    });
+    return turnstilePromise;
+  }
+
+  /* Pro Absenden ein frisches Widget: ein Token gilt genau einmal, und
+     "interaction-only" bleibt unsichtbar, solange Cloudflare nichts sehen will. */
+  function turnstileToken(mount) {
+    return loadTurnstile().then(function (ts) {
+      return new Promise(function (resolve, reject) {
+        var fail = function () {
+          reject(new Error("We couldn't confirm you're human. Reload the page and try again."));
+        };
+        mount.innerHTML = '';
+        var timer = window.setTimeout(fail, 20000);
+        try {
+          ts.render(mount, {
+            sitekey: LEAD_ENV.sitekey,
+            appearance: 'interaction-only',
+            callback: function (token) { window.clearTimeout(timer); resolve(token); },
+            'error-callback': function () { window.clearTimeout(timer); fail(); }
+          });
+        } catch (e) { window.clearTimeout(timer); fail(); }
+      });
+    });
+  }
+
+  function utmParams() {
+    var q = new URLSearchParams(location.search);
+    var out = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(function (k) {
+      if (q.get(k)) out[k] = q.get(k);
+    });
+    return out;
+  }
+
+  var LEAD_ERRORS = {
+    invalid_email: "That email address doesn't look right.",
+    personal_email_required: 'Please use a personal email address — disposable inboxes are not accepted.',
+    rate_limited: 'Too many requests right now — please try again in an hour.',
+    captcha_failed: "We couldn't confirm you're human. Reload the page and try again.",
+    mail_failed: 'The mail could not be sent. Please try again in a minute.'
+  };
+
+  /* Wirft immer einen Error mit nutzertauglicher message — der Aufrufer darf
+     sie unbesehen anzeigen. */
+  function submitLead(email, mount) {
+    return turnstileToken(mount).then(function (token) {
+      var body = Object.assign({
+        email: email,
+        turnstileToken: token,
+        referrer: document.referrer || undefined,
+        landing_path: location.pathname
+      }, utmParams());
+      return fetch(LEAD_ENV.api + '/api/leads', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(body)
+      }).catch(function () {
+        throw new Error('No connection to the download service — please try again.');
+      });
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (response.ok && data.ok) return;
+        throw new Error(LEAD_ERRORS[data.error] || 'Something went wrong — please try again.');
+      });
+    });
+  }
+
   function initLeadForms() {
     document.querySelectorAll('[data-lead-form]').forEach(function (form) {
       // Die Gerätesuche rendert Formulare nach und ruft diese Funktion erneut auf —
@@ -39,17 +135,36 @@
       if (form.dataset.leadWired) return;
       form.dataset.leadWired = '1';
 
+      // Anker für das Turnstile-Widget; nimmt nur Platz ein, wenn Cloudflare
+      // wirklich eine Interaktion verlangt.
+      var mount = document.createElement('div');
+      mount.setAttribute('data-lead-turnstile', '');
+      form.appendChild(mount);
+
       form.addEventListener('submit', function (event) {
         event.preventDefault();
+        var input = form.querySelector('input[type="email"]');
         var status = form.parentElement.querySelector('[data-lead-status]');
         var button = form.querySelector('button[type="submit"]');
-        if (button) {
-          button.disabled = true;
-          button.textContent = 'Thanks — link on its way';
+        if (!input || !input.checkValidity()) {
+          if (input) input.reportValidity();
+          return;
         }
-        if (status) {
-          status.textContent = 'Check your inbox — we just sent you the download link.';
-        }
+
+        var label = button ? button.textContent : '';
+        if (button) { button.disabled = true; button.textContent = 'Sending…'; }
+        if (status) status.textContent = 'One moment…';
+
+        submitLead(input.value.trim(), mount).then(function () {
+          if (button) button.textContent = 'Link sent ✓';
+          if (status) {
+            status.textContent =
+              'Check your inbox — we just sent you the download link. It is valid for 48 hours.';
+          }
+        }).catch(function (error) {
+          if (button) { button.disabled = false; button.textContent = label; }
+          if (status) status.textContent = error.message;
+        });
       });
     });
   }
@@ -716,6 +831,7 @@
               'Continue</span>' +
             '</button>' +
           '</form>' +
+          '<div data-dl-turnstile></div>' +
         '</div>' +
 
         /* ---- Schritt 2: Code ---- */
@@ -990,17 +1106,26 @@
       email = emailIn.value.trim();
       clearError();
 
-      // Ohne Clerk-Key bleibt es beim alten Verhalten, damit die Live-Seite
-      // durch das Ausrollen nicht kaputtgeht.
+      // Ohne Clerk-Key übernimmt der Lead-Flow: dieselbe /api/leads-Route wie
+      // die Formulare — echte SES-Mail mit dem 48-h-Link statt vorgetäuschtem
+      // Erfolg.
       if (!CONFIGURED) {
-        var t = dlg.querySelector('[data-dl-done-title]');
-        var p = dlg.querySelector('[data-dl-done-text]');
-        t.textContent = 'Check your inbox';
-        p.textContent = 'We sent a confirmation link to ' + email + '. Click it, ' +
-                        'download Alpha, and set your nickname and password when it ' +
-                        'first opens.';
-        setStep('done', 'Check your email');
-        dlg.querySelector('[data-dl-close]').focus();
+        busy(this, true);
+        try {
+          await submitLead(email, dlg.querySelector('[data-dl-turnstile]'));
+          var t = dlg.querySelector('[data-dl-done-title]');
+          var p = dlg.querySelector('[data-dl-done-text]');
+          t.textContent = 'Check your inbox';
+          p.textContent = 'We sent the download link to ' + email + '. It is valid ' +
+                          'for 48 hours. Set your nickname and password when Alpha ' +
+                          'first opens.';
+          setStep('done', 'Check your email');
+          dlg.querySelector('[data-dl-close]').focus();
+        } catch (error) {
+          showError(error.message);
+        } finally {
+          busy(this, false);
+        }
         return;
       }
 
