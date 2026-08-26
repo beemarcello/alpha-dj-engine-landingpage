@@ -62,7 +62,7 @@
   </script>
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=21" defer></script>
+  <script src="js/site.js?v=22" defer></script>
 </head>
 
 <body class="antialiased">
@@ -105,10 +105,17 @@
       <div data-device-results aria-live="polite"></div>
 
       <h2>The short version</h2>
+      <!--
+        Reihenfolge ist Absicht: erst die Sticks, die direkt ins Geraet gehen,
+        danach die Laptop-Software. Alpha ist ein Werkzeug fuer USB-Sticks; dass
+        VirtualDJ, Serato und Traktor inzwischen auch bedient werden, ist eine
+        Zugabe und keine Neupositionierung (Marcel, 2026-08-25).
+      -->
       <p>
-        Alpha writes three drive formats, and you pick one right before it writes:
-        <strong>Denon Engine OS</strong>, <strong>rekordbox</strong> for Pioneer DJ and
-        AlphaTheta players, and <strong>VirtualDJ</strong>.
+        Alpha builds a <strong>USB stick that goes straight into your gear</strong> — no
+        laptop in the chain. Two formats do that: <strong>Denon Engine OS</strong> and
+        <strong>rekordbox</strong> for Pioneer DJ and AlphaTheta players. You pick one
+        right before it writes.
       </p>
       <p>
         For <strong>Engine DJ / Engine OS</strong> we built and tested Alpha on the Denon DJ
@@ -130,10 +137,19 @@
         XDJ-RX3 and RX2, XDJ-XZ, XDJ-1000MK2 and XDJ-700, plus the OPUS-QUAD and XDJ-AZ.
         This target is new, so please confirm it on your own gear.
       </p>
+      <h2>Playing from a laptop?</h2>
       <p>
-        Playing from <strong>VirtualDJ</strong>? Alpha writes a VirtualDJ library onto the
-        stick as well, with your tags, BPM and key and the playlist in order. That one is
-        loaded by the VirtualDJ app on your Mac or PC rather than by the hardware itself.
+        Then Alpha writes for that too, though it's not what the tool is built around.
+        <strong>VirtualDJ</strong> gets a full library with your tags, BPM and key.
+        <strong>Serato DJ</strong> gets a crate with the beat grid baked into the copied
+        files — export to the drive's root, because that's the only place Serato looks.
+        <strong>Traktor Pro</strong> gets a <span class="whitespace-nowrap">collection.nml</span>
+        you import once via File → Import Collection.
+      </p>
+      <p>
+        In all three cases a computer running the software reads the drive; none of them
+        produce a stick that plays on its own. In Alpha you'll find them behind
+        <em>+ Also export for DJ software (laptop)</em> in the target picker.
       </p>
       <p>
         Missing something? <a href="#device-q">Search for it above</a> and leave us your

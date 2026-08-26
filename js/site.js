@@ -261,9 +261,16 @@
      Leute wirklich tippen (ohne Leerzeichen, ohne Marke, Spitznamen).
 
      status:
-       'yes'    → Alpha schreibt einen Stick, den das Gerät liest
-       'never'  → anderes Ökosystem, bewusst nicht unterstützt (Serato)
+       'yes'    → Alpha schreibt etwas, das dieses Setup liest
+       'never'  → bewusst nicht unterstützt. Aktuell hat KEIN Eintrag mehr
+                  diesen Status; der Zweig bleibt fuer kuenftige Faelle drin.
        (kein Treffer) → "Not supported yet" + Gerät melden
+
+     Zwei Klassen von Treffern, sichtbar an der meta-Zeile:
+       "Fully compatible · …"  → eigenstaendiger Stick, geht direkt ins Geraet
+       "Compatible · via … on a laptop" → Alpha schreibt die Bibliothek, gelesen
+                  wird sie von Software auf einem Rechner. Diese Unterscheidung
+                  ist das Produktversprechen — nicht einebnen.
 
      Geaendert am 2026-08-25 (Marcel): CDJ/XDJ standen hier auf 'never' mit der
      Begruendung, rekordbox sei eine verschluesselte Datenbank, die wir bewusst
@@ -315,13 +322,21 @@
     { name: 'AlphaTheta XDJ-AZ', status: 'yes', meta: REKORDBOX,
       aliases: ['xdjaz', 'xdj az'].concat(RB), note: RB_NOTE },
 
-    { name: 'VirtualDJ (any controller)', status: 'yes', meta: 'Fully compatible · VirtualDJ library',
+    /* Laptop-Software. Bewusst eine eigene meta-Zeile ("via …"): das Ergebnis
+       ist gruen, weil Alpha wirklich schreibt, aber der Nutzer muss sofort
+       sehen, dass hier ein Rechner im Spiel ist und kein eigenstaendiger Stick.
+       Serato stand hier bis 2026-08-25 auf 'never' mit der Begruendung, es gebe
+       "nothing for Alpha to write" — das ist seit /knowledgebase/#serato-export
+       falsch. */
+    { name: 'VirtualDJ', status: 'yes', meta: 'Compatible · via VirtualDJ on a laptop',
       aliases: ['virtualdj', 'virtual dj', 'vdj'],
-      note: 'Alpha writes a VirtualDJ library onto the stick. It is loaded by the VirtualDJ app on a Mac or PC, so any controller VirtualDJ supports will play the set — it is not a standalone stick for the gear itself.' },
-
-    { name: 'Serato hardware', status: 'never', meta: 'Not supported — Serato ecosystem',
-      aliases: ['serato', 'rane'],
-      note: 'Serato runs from a laptop rather than a self-contained USB drive, so there is nothing for Alpha to write.' }
+      note: 'Alpha writes a VirtualDJ library onto the drive, which the VirtualDJ app on a Mac or PC then loads — so any controller VirtualDJ supports will play the set. It is not a standalone stick for the gear itself.' },
+    { name: 'Serato DJ', status: 'yes', meta: 'Compatible · via Serato on a laptop',
+      aliases: ['serato', 'rane', 'crate'],
+      note: 'Alpha writes a Serato crate plus the beat grid onto the drive; plug it into a laptop running Serato DJ and the crate appears. Serato only scans a drive\'s root, so export to the root rather than a subfolder. Hot cues and loops are not written yet.' },
+    { name: 'Traktor Pro', status: 'yes', meta: 'Compatible · via Traktor on a laptop',
+      aliases: ['traktor', 'nativeinstruments', 'native instruments', 'nml'],
+      note: 'Alpha writes a collection.nml alongside the audio. Traktor does not scan drives by itself — import it once via File → Import Collection.' }
   ];
 
   function normalize(s) {

@@ -4,8 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Alpha-DJ-Engine — Gig-ready Denon USB in seconds</title>
-  <meta name="description" content="Alpha analyzes your own music locally, builds a harmonically sequenced DJ set and writes it straight to your Denon Engine DJ USB. First 10 tracks free, then €30 incl. VAT, once. macOS.">
+  <!--
+    Titel geaendert am 2026-08-25 (Marcel). Vorher: "Gig-ready Denon USB in
+    seconds". Seit dem rekordbox-Export ist der Stick fuer CDJ/XDJ ein
+    gleichwertiges Ziel, und "Denon" im Titel hat die halbe Zielgruppe schon in
+    der Google-Trefferliste ausgeschlossen. "DJ USB" haelt den Stick im
+    Vordergrund — das ist und bleibt das Produktversprechen — nennt aber keine
+    Marke mehr. Description und og:* tragen dieselbe Aussage und wurden
+    mitgezogen; sie duerfen nicht auseinanderlaufen.
+  -->
+  <title>Alpha-DJ-Engine — Gig-ready DJ USB in seconds</title>
+  <meta name="description" content="Alpha analyzes your music locally, builds a harmonically sequenced DJ set and writes a gig-ready USB stick for Denon or Pioneer gear. First 10 tracks free, then €30 incl. VAT, once. macOS.">
 
   <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="assets/icons/favicon.png">
@@ -13,8 +22,8 @@
 
   <!-- Open Graph / social -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Alpha-DJ-Engine — Gig-ready Denon USB in seconds">
-  <meta property="og:description" content="Analyze your music, build a harmonically sequenced set, write it straight to your Denon Engine DJ USB.">
+  <meta property="og:title" content="Alpha-DJ-Engine — Gig-ready DJ USB in seconds">
+  <meta property="og:description" content="Analyze your music, build a harmonically sequenced set, write it straight to a gig-ready USB stick for Denon or Pioneer gear.">
   <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
   <meta property="og:url" content="https://alpha-dj-engine.com/">
   <meta property="og:locale" content="en">
@@ -68,7 +77,7 @@
   </script>
 
   <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=21" defer></script>
+  <script src="js/site.js?v=22" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -123,13 +132,18 @@
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 xl:px-24 pt-32 pb-16 order-2">
           <div class="max-w-xl mx-auto lg:mx-0">
             <!--
-              Geaendert am 2026-08-25 (Marcel). Hier stand "For Denon DJ hardware".
-              Seit rekordbox- und VirtualDJ-Export stimmt das nicht mehr, und es
-              war die erste Zeile, die ein Pioneer-Nutzer im Hero gelesen hat —
-              danach war er weg. Wer hier ein Oekosystem ergaenzt oder streicht,
-              zieht Titel, og:title und die FAQ "Which DJ hardware" mit.
+              Geaendert am 2026-08-25 (Marcel), zweimal am selben Tag:
+              "For Denon DJ hardware" war seit dem rekordbox-Export falsch. Der
+              Zwischenstand "For Denon, Pioneer and VirtualDJ" war zwar richtig,
+              stellte aber Laptop-Software neben die Hardware — und Alpha soll
+              primaer ein Werkzeug fuer USB-Sticks bleiben, die direkt ins Geraet
+              gehen. Deshalb nennt der Hero nur die beiden Hardware-Oekosysteme.
+
+              Dass VirtualDJ, Serato und Traktor ebenfalls gehen, steht in der FAQ
+              weiter unten, auf /features/ und auf compatibility.html — verschwiegen
+              wird es nirgends, nur nicht nach vorne gestellt.
             -->
-            <p class="eyebrow mb-4">For Denon, Pioneer and VirtualDJ</p>
+            <p class="eyebrow mb-4">For Denon and Pioneer DJ gear</p>
 
             <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1] reveal">
               Gig-ready USB<br>in seconds.
@@ -638,10 +652,10 @@
         <div class="order-1 md:order-2">
           <span class="step-num">04 Export</span>
           <p class="leading-relaxed text-xl font-normal m-0">
-            Write directly to your USB drive. Pick your format — <strong>Denon Engine OS</strong>,
-            <strong>rekordbox</strong> for CDJ and XDJ players, or <strong>VirtualDJ</strong> — and
-            Alpha formats the metadata and builds the library your gear expects, so the set is
-            gig-ready the moment you plug in.
+            Write directly to your USB drive. Pick your format — <strong>Denon Engine OS</strong>
+            or <strong>rekordbox</strong> for CDJ and XDJ players — and Alpha formats the
+            metadata and builds the library your gear expects, so the set is gig-ready the
+            moment you plug in. No laptop in the chain.
           </p>
           <p class="leading-relaxed text-xl font-normal mt-4 mb-0">
             It backs up the database before it touches anything, and tracks already on
@@ -839,9 +853,8 @@
                 straight out of the audio, on your own machine. You pick the energy arc
                 the night should follow, and Alpha orders the set so neighboring tracks
                 actually mix. Then it writes the playlist onto your drive and builds the
-                library your player expects — Engine OS, rekordbox or VirtualDJ — copying
-                only what isn't on the stick yet, and levelling the tracks if you asked it
-                to.
+                library your player expects — Engine OS or rekordbox — copying only what
+                isn't on the stick yet, and levelling the tracks if you asked it to.
               </p>
               <p>
                 What it isn't: a library manager. Alpha doesn't want to own your
@@ -858,8 +871,9 @@
             </summary>
             <div class="faq-answer">
               <p>
-                Alpha writes three drive formats, and you pick one right before it writes:
-                Denon Engine OS, rekordbox, and VirtualDJ.
+                Alpha builds a stick that plays <strong>straight from your gear</strong>, with
+                no laptop in the chain. Two formats do that, and you pick one right before it
+                writes: <strong>Denon Engine OS</strong> and <strong>rekordbox</strong>.
               </p>
               <p>
                 For Engine OS we built and tested Alpha specifically for the
@@ -889,10 +903,18 @@
                 XDJ-700, plus the OPUS-QUAD and XDJ-AZ. It's a new target, so please
                 confirm it on your own gear.
               </p>
+              <!--
+                Laptop-Software bewusst als EIN kurzer Absatz am Ende der Antwort,
+                nicht als eigene FAQ-Frage: es soll auffindbar sein, ohne dass die
+                Landingpage zum Serato-/Traktor-Werkzeug wird (Marcel, 2026-08-25).
+                Details stehen auf /features/ und compatibility.html.
+              -->
               <p>
-                Playing from <strong>VirtualDJ</strong>? Alpha writes a VirtualDJ library
-                onto the stick as well — that one is loaded by the VirtualDJ app on your
-                computer rather than by the hardware itself.
+                Playing from a laptop instead? Alpha also writes libraries for
+                <strong>VirtualDJ</strong>, <strong>Serato DJ</strong> and
+                <strong>Traktor Pro</strong> — read by the software on your computer rather
+                than by the gear itself. That's a side door, not what Alpha is built around;
+                <a href="compatibility.html" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">the details are here</a>.
               </p>
               <p>
                 Your first 10 tracks are free, so the cheapest way to find out is to

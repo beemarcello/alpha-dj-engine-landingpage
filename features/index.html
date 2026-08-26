@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Features — Alpha-DJ-Engine</title>
-  <meta name="description" content="Everything Alpha-DJ-Engine does: analyze your own music, import a rekordbox library, compose a harmonic set along an energy arc, match loudness, and write a gig-ready USB for Denon Engine OS, Pioneer rekordbox or VirtualDJ.">
+  <meta name="description" content="Everything Alpha-DJ-Engine does: analyze your own music, compose a harmonic set along an energy arc, match loudness, and write a gig-ready USB stick for Denon Engine OS or Pioneer rekordbox — plus libraries for VirtualDJ, Serato and Traktor.">
 
   <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
@@ -13,7 +13,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Features — Alpha-DJ-Engine">
-  <meta property="og:description" content="Analyze, compose, level and write a gig-ready drive for Denon, Pioneer or VirtualDJ. Everything Alpha does, in one place.">
+  <meta property="og:description" content="Analyze, compose, level and write a gig-ready USB stick for Denon or Pioneer gear. Everything Alpha does, in one place.">
   <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
   <meta property="og:url" content="https://alpha-dj-engine.com/features/">
   <meta name="theme-color" content="#d5d5d4">
@@ -57,7 +57,7 @@
   </script>
 
   <script src="../js/icons.js?v=6" defer></script>
-  <script src="../js/site.js?v=21" defer></script>
+  <script src="../js/site.js?v=22" defer></script>
 </head>
 
 <body class="antialiased">
@@ -66,9 +66,10 @@
 ================================================================================
   Feature-Uebersicht — abgeleitet aus /knowledgebase/
 
-  Beide Seiten beschreiben dieselben zehn Funktionen, aber fuer verschiedene
-  Leser. Die Wissensbasis ist dicht und vollstaendig fuer den AI-Support-Agent;
-  diese Seite ist zum Ueberfliegen durch Kunden.
+  Beide Seiten beschreiben denselben Funktionsumfang (Stand 2026-08-25: vierzehn
+  Eintraege), aber fuer verschiedene Leser. Die Wissensbasis ist dicht und
+  vollstaendig fuer den AI-Support-Agent; diese Seite ist zum Ueberfliegen durch
+  Kunden.
 
   REGELN, wenn hier etwas geaendert wird:
 
@@ -208,15 +209,19 @@
         <div class="feat-grid">
 
           <!--
-            Drei Export-Ziele, drei Karten — bewusst in dieser Reihenfolge:
-            Engine OS ist das aelteste und getestete Ziel, rekordbox das
-            wichtigste neue (es oeffnet die gesamte Pioneer-Installationsbasis),
-            VirtualDJ das Nischenziel. Quelle jeweils /knowledgebase/#usb-export,
-            #rekordbox-export und #virtualdj-export.
+            HIER stehen nur die Ziele, die einen eigenstaendigen Stick ergeben:
+            der Stick geht direkt ins Geraet, kein Laptop dazwischen. Das ist das
+            Versprechen des Produkts und darf nicht verwaessert werden.
 
-            Hier stand bis 2026-08-25 als Limit "Writing a rekordbox drive isn't
-            supported yet". Das ist ueberholt und war die falscheste Aussage auf
-            der Seite — wer als CDJ-Nutzer hier landete, ging wieder.
+            Die Laptop-Software-Ziele (VirtualDJ, Serato, Traktor) stehen bewusst
+            in einer eigenen, nachgestellten Gruppe am Seitenende. Das ist keine
+            Kosmetik: die App selbst versteckt sie hinter dem Toggle
+            "+ Also export for DJ software (laptop)", waehrend Denon und rekordbox
+            sofort sichtbar sind. Seite und Produkt sollen dieselbe Hierarchie
+            erzaehlen (Marcel, 2026-08-25). Wer eine Software-Karte hierher
+            hochzieht, kippt die Positionierung.
+
+            Quellen: /knowledgebase/#usb-export und #rekordbox-export.
           -->
           <article class="feat-card">
             <h3>Denon Engine OS export</h3>
@@ -250,21 +255,6 @@
             </ul>
           </article>
 
-          <article class="feat-card">
-            <h3>VirtualDJ export</h3>
-            <p class="feat-card__lead">
-              Writes a VirtualDJ library onto the stick: every track's tags, BPM
-              and key, plus the playlist in the order you built it.
-            </p>
-            <ul>
-              <li><i data-lucide="check" class="w-4 h-4"></i>Audio, artist, title, album, year, BPM, key and length</li>
-              <li><i data-lucide="check" class="w-4 h-4"></i>Your key arrives in VirtualDJ's own notation — 8A becomes 8m, 8B becomes 8d</li>
-              <li><i data-lucide="check" class="w-4 h-4"></i>The set lands as a ready-made playlist, not a loose pile of files</li>
-              <!-- Wichtige Abgrenzung, steht in /knowledgebase/#virtualdj-export
-                   unter "does not do" und ist dort sogar eine eigene FAQ-Frage. -->
-              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Loaded by the VirtualDJ app on a computer — not a standalone stick for CDJ or XDJ</li>
-            </ul>
-          </article>
 
           <article class="feat-card">
             <h3>Match loudness</h3>
@@ -328,6 +318,84 @@
               <li><i data-lucide="check" class="w-4 h-4"></i>See every playlist on the connected stick</li>
               <li><i data-lucide="check" class="w-4 h-4"></i>Rename or delete them</li>
               <li><i data-lucide="check" class="w-4 h-4"></i>Roll the library back to an earlier backup</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- =========== Nachgestellt: Laptop-Software ===========
+        Bewusst OHNE Nummer und bewusst hinter "04 Manage your sticks": Alpha ist
+        ein Werkzeug fuer USB-Sticks, die direkt ins Geraet gehen. VirtualDJ,
+        Serato und Traktor laufen alle auf einem Laptop — das kann Alpha jetzt
+        auch, soll aber nicht die Positionierung uebernehmen (Marcel, 2026-08-25).
+
+        Dieselbe Rangfolge steckt in der App: die drei stehen dort hinter dem
+        Toggle "+ Also export for DJ software (laptop)". Die Formulierung unten
+        ist absichtlich woertlich uebernommen, damit der Kunde sie im Programm
+        wiedererkennt.
+      -->
+      <section class="feat-group">
+        <div class="feat-group__head">
+          <span class="feat-group__num">+</span>
+          <h2 class="feat-group__title">Also: DJ software on a laptop</h2>
+        </div>
+        <p style="font-size:16px;line-height:1.65;max-width:64ch;margin:0 0 22px">
+          Alpha is built for sticks that go straight into the gear. If you play
+          from a laptop instead, it writes those libraries too — in the app they
+          sit behind <em>+ Also export for DJ software (laptop)</em> in the target
+          picker. None of these produce a standalone stick: a computer running the
+          software reads the drive.
+        </p>
+
+        <div class="feat-grid">
+
+          <article class="feat-card">
+            <h3>VirtualDJ export</h3>
+            <p class="feat-card__lead">
+              Writes a VirtualDJ library onto the drive: every track's tags, BPM
+              and key, plus the playlist in the order you built it.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Audio, artist, title, album, year, BPM, key and length</li>
+              <!-- Korrigiert am 2026-08-25: hier stand "8A becomes 8m, 8B becomes 8d".
+                   VirtualDJ nutzt Open Key, nicht Camelot — siehe KB-Commit d01e319
+                   und /knowledgebase/#virtualdj-export. Camelot 8A ist 1m, nicht 8m. -->
+              <li><i data-lucide="check" class="w-4 h-4"></i>Your key is converted to Open Key, the notation VirtualDJ uses — Camelot 8A is written 1m</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>The set arrives as a ready-made playlist, not a loose pile of files</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Serato export</h3>
+            <p class="feat-card__lead">
+              Writes a portable Serato crate onto the drive, with the beat grid
+              baked into the copied files' own Serato tags.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>The crate shows up in your library the moment you plug the drive into the laptop</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Beat grid plus title, artist, album, BPM and key written into every copied file</li>
+              <!-- Beides steht in /knowledgebase/#serato-export. Der Root-Hinweis
+                   ist der haeufigste Support-Fall bei diesem Ziel — nicht kuerzen. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Serato only scans a drive's root — Alpha warns you if you pick a subfolder</li>
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Hot cues and loops aren't written yet</li>
+            </ul>
+          </article>
+
+          <article class="feat-card">
+            <h3>Traktor export</h3>
+            <p class="feat-card__lead">
+              Writes a <span class="whitespace-nowrap">collection.nml</span> —
+              Traktor's own library format — alongside the audio, ready to pull
+              into Traktor Pro.
+            </p>
+            <ul>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Every track with its tempo, key and beat grid, plus the playlist in set order</li>
+              <li><i data-lucide="check" class="w-4 h-4"></i>Any destination folder works — Traktor isn't fussy about where it sits</li>
+              <!-- /knowledgebase/#traktor-export: Traktor scannt Laufwerke nicht
+                   selbst. Wer das nicht weiss, haelt den Export fuer kaputt. -->
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>Traktor doesn't scan drives — you import it once via File → Import Collection</li>
+              <li class="is-limit"><i data-lucide="minus" class="w-4 h-4"></i>One constant beat grid per track — tempo changes inside a track aren't modelled</li>
             </ul>
           </article>
 
