@@ -318,26 +318,24 @@ Details, die leicht kaputtgehen:
 > ruft Lasses Endpunkt per `fetch` auf, egal wo sie selbst liegt. Nötig ist
 > lediglich, dass der Endpunkt die Origin per CORS zulässt.
 >
-> **Erledigt am 2026-08-26:** Der Clerk-Abschnitt in `privacy.html` („Your
-> account") ist bereits auf BetterAuth umgeschrieben — er beschrieb sonst eine
-> Verarbeitung, die es gar nicht gibt. Der Clerk-Code in `js/site.js` steht noch
-> unverändert drin; er ist dormant, solange `DL_CFG.publishableKey` leer ist,
-> und wird beim Anschließen ersetzt.
+> **Erledigt am 2026-08-27:** Der Clerk-Code ist VOLLSTÄNDIG aus `js/site.js`
+> entfernt — Marcel: „Es gibt keinen Clerk flow mehr." Das Modal ist seither ein
+> reiner Ein-Schritt-Lead-Flow über `/api/leads` (E-Mail → SES-Mail mit dem
+> 48-h-Link). Der Portal-Login hängt als Icon in der Nav jeder Seite
+> (app.alpha-dj-engine.com/sign-in). `privacy.html` („Your account") war schon
+> am 26.08. auf BetterAuth umgeschrieben; am 27.08. wurde dort auch der
+> 6-stellige Code aus dem Clerk-Entwurf durch den echten Link-Ablauf ersetzt.
 
 Zum Hintergrund: Seit 2026-08-20 registriert und verifiziert der Nutzer direkt
 im Modal, statt einen Link aus der Inbox zu holen (siehe „Download-Flow" weiter
 unten). Offen ist — sobald der Anbieter feststeht:
 
-- [ ] **Endpunkt-URL von Lasse** → `js/site.js` → `DL_CFG`. **Solange dort nichts
-      steht, bleibt das Modal beim alten „wir mailen dir einen Link"-Verhalten** —
-      die Live-Seite geht durch das Ausrollen also nicht kaputt.
-- [ ] **`loadClerk` / `sendCode` / `verifyCode` ersetzen** durch `fetch`-Aufrufe
-      gegen den BetterAuth-Endpunkt. Markup, CSS und die drei Schritte bleiben.
-- [ ] **CORS am Endpunkt** für die Origin der Live-Seite freigeben (heute
-      `https://alpha-dj-engine.com`, nach dem Hetzner-Umzug unverändert, solange
-      die Domain bleibt).
-- [ ] **Sign-up-Strategie E-Mail + Code** (nicht Link, nicht Passwort). Passwort
-      und Nickname legt der Nutzer weiterhin erst in der Desktop-App an.
+- [x] ~~Endpunkt anschließen / Clerk-Funktionen ersetzen / CORS~~ — **obsolet
+      seit 2026-08-27**: Die Website braucht keinen eigenen Auth-Endpunkt mehr.
+      Das Modal ist ein reiner Lead-Flow (`/api/leads`, von Lasse in PR #1
+      verdrahtet), `DL_CFG` existiert nicht mehr. Kontoanlage (Nickname,
+      Passwort) passiert in der Desktop-App gegen das selbst gehostete
+      BetterAuth; die Website verlinkt nur noch dorthin (Nav-Icon → sign-in).
 - [ ] **Backup-Mail** mit dem Downloadlink → `DL_CFG.notifyEndpoint`. Bekommt
       `{ email }` gePOSTet. Leer lassen = keine Backup-Mail, der Flow funktioniert
       trotzdem.

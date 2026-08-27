@@ -58,8 +58,8 @@
     gtag('config', 'G-DQBC6VLYFP');
   </script>
 
-  <script src="js/icons.js?v=6" defer></script>
-  <script src="js/site.js?v=24" defer></script>
+  <script src="js/icons.js?v=7" defer></script>
+  <script src="js/site.js?v=25" defer></script>
 </head>
 
 <body class="antialiased">
@@ -72,7 +72,11 @@
         <img src="assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
              class="h-9 sm:h-10 w-auto" decoding="async">
       </a>
-      <a data-download href="index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+      <div class="flex items-center gap-3">
+        <a data-download href="index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        <!-- Login zum Portal (Marcel, 2026-08-27) -->
+        <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
+      </div>
     </div>
   </nav>
 
@@ -119,11 +123,16 @@
         your password. The username does not have to be your real name — pick whatever
         you like. Passwords are never stored in plain text; we keep only a salted hash.
       </p>
+      <!--
+        Geaendert am 2026-08-27: hier stand der 6-stellige Bestaetigungscode aus
+        dem Clerk-Entwurf. Der echte Ablauf ist der Lead-Flow: E-Mail eingeben →
+        Downloadlink per Mail (48 h gueltig). Der Klick auf den Link IST die
+        Bestaetigung der Adresse.
+      -->
       <p>
-        The account starts on this website: when you click a download button, you enter
-        your email address and confirm it with a six-digit code we send you. Only after
-        that confirmation does the download begin. You choose your username and password
-        later, the first time you open Alpha.
+        It starts on this website: when you click a download button, you enter your
+        email address and we email you the download link — it is valid for 48 hours.
+        You choose your username and password later, the first time you open Alpha.
       </p>
       <!--
         Geaendert am 2026-08-26 (Marcel). Hier stand Clerk (Clerk.com, Inc., San
@@ -322,13 +331,14 @@
         There are two different reasons we might have your address, and they follow
         different rules.
       </p>
+      <!-- 2026-08-27: zweite Clerk-Aera-Stelle ("six-digit code") an den echten
+           Lead-Flow angepasst — Mail mit 48-h-Link, kein Code. -->
       <p>
         <strong>To download Alpha.</strong> Your address becomes your account name, so we
-        need it to give you the software and your free tracks. We confirm it with a
-        six-digit code before the download starts, and we send you the download link
-        afterwards as a backup in case the download fails or you switch machines. This is
-        not marketing, and it does not depend on your consent — it is what you asked us
-        to do. Legal basis: Art. 6(1)(b) GDPR.
+        need it to give you the software and your free tracks. We email you the download
+        link — using it confirms the address is really yours. This is not marketing, and
+        it does not depend on your consent — it is what you asked us to do. Legal basis:
+        Art. 6(1)(b) GDPR.
       </p>
       <p>
         <strong>To tell you about Alpha.</strong> If you ask to hear about new releases,
