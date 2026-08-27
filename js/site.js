@@ -798,18 +798,19 @@
     dlg.setAttribute('aria-labelledby', 'dl-title');
     dlg.setAttribute('data-step', 'email');
     dlg.innerHTML = '' +
+      /* Radikal entschlackt am 2026-08-27 (Marcel): "viel weniger Text —
+         nur E-Mail-Feld und darunter der Button". Rausgeflogen sind die
+         Perks-Liste und der Erklaer-Absatz (der beschrieb zudem den
+         Code-Flow, den es im Lead-Modus gar nicht gibt). Der Titel bleibt
+         einzeilig — er traegt aria-labelledby und den Schliessen-Button.
+         Wer hier wieder Text ergaenzt, macht das Modal wieder zu dem, was
+         Marcel ausdruecklich nicht wollte. */
       '<div class="dl-modal__inner">' +
         '<div class="dl-modal__head">' +
-          '<h2 class="dl-modal__title" id="dl-title">Create your account</h2>' +
+          '<h2 class="dl-modal__title" id="dl-title">Download for free</h2>' +
           '<button type="button" class="dl-modal__close" data-dl-close aria-label="Close">' +
             '<i data-lucide="x" class="w-5 h-5"></i></button>' +
         '</div>' +
-
-        '<ul class="dl-modal__perks">' +
-          '<li><i data-lucide="check" class="w-4 h-4"></i>First 10 tracks free</li>' +
-          '<li><i data-lucide="check" class="w-4 h-4"></i>No payment details</li>' +
-          '<li><i data-lucide="check" class="w-4 h-4"></i>macOS</li>' +
-        '</ul>' +
 
         '<p class="dl-modal__error" data-dl-error role="alert" aria-live="assertive">' +
           '<i data-lucide="triangle-alert" class="w-4 h-4"></i>' +
@@ -818,17 +819,13 @@
 
         /* ---- Schritt 1: E-Mail ---- */
         '<div class="dl-step" data-for="email">' +
-          '<p class="dl-modal__lead">' +
-            'Enter your email, confirm the code we send, and the download starts ' +
-            'right here.' +
-          '</p>' +
           '<form class="dl-modal__form" data-dl-email-form novalidate>' +
             '<label class="sr-only" for="dl-email">Email address</label>' +
             '<input id="dl-email" name="email" type="email" autocomplete="email" required ' +
                    'placeholder="you@example.com" class="input">' +
             '<button type="submit" class="btn btn-primary">' +
               '<span><i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>' +
-              'Continue</span>' +
+              'Get Downloadlink via Mail</span>' +
             '</button>' +
           '</form>' +
           '<div data-dl-turnstile></div>' +
@@ -881,7 +878,7 @@
     var codeIn   = dlg.querySelector('#dl-code');
 
     var TITLES = {
-      email: 'Create your account',
+      email: 'Download for free',
       code:  'Check your email',
       done:  'You\'re in'
     };
@@ -1117,8 +1114,7 @@
           var p = dlg.querySelector('[data-dl-done-text]');
           t.textContent = 'Check your inbox';
           p.textContent = 'We sent the download link to ' + email + '. It is valid ' +
-                          'for 48 hours. Set your nickname and password when Alpha ' +
-                          'first opens.';
+                          'for 48 hours.';
           setStep('done', 'Check your email');
           dlg.querySelector('[data-dl-close]').focus();
         } catch (error) {
