@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Feature Knowledge Base — Alpha-DJ-Engine</title>
+  <title>Knowledge Base — Alpha-DJ-Engine</title>
   <meta name="description" content="Complete reference of every Alpha-DJ-Engine feature: what it does, how to use it, its settings, its in-app tooltips, its limits, and the questions customers ask about it.">
 
   <!-- INDEXIERBAR — bewusst KEIN noindex.
@@ -76,9 +76,18 @@
   DIE ZEHN REGELN
   ========================================================================
 
-  1.  EIN FEATURE = EIN <article class="kb-feature">.
+  1.  EIN EINTRAG = EIN <article class="kb-feature">.
       Kopiere die Vorlage unten unverändert und fülle sie. Erfinde keine
       eigenen Klassen und keine eigene Reihenfolge der Blöcke.
+
+      SEIT 2026-08-27 (Marcel): Eintraege sind nicht nur Features. Auch
+      Tipps & Tricks, Best Practices, Setup- und Login-Flows sowie bekannte
+      Probleme samt Loesung ("wie oeffne ich die blockierte App") gehoeren
+      hierher — der Support-Agent soll ALLES beantworten koennen, was
+      Kunden fragen. Dieselbe Vorlage, dieselben Regeln; "Feature-Name"
+      heisst dann eben "Eintrags-Name". Der Block "does not do" wird bei
+      solchen Eintraegen zu "was X NICHT bedeutet / nicht abdeckt" — er
+      bleibt Pflicht.
 
   2.  JEDE <h3> WIEDERHOLT DEN FEATURE-NAMEN.
       Also "Loudness Leveler settings", nicht "Settings". Das ist die
@@ -265,25 +274,26 @@
   <main id="main" class="kb">
     <div class="kb__inner">
 
-      <h1>Feature knowledge base</h1>
+      <h1>Knowledge base</h1>
       <p class="kb__lead">
-        Every feature of Alpha-DJ-Engine: what it does, how to use it, what it
-        cannot do, the exact wording shown in the app, and the questions
-        customers actually ask.
+        Everything support needs to know about Alpha-DJ-Engine: every feature —
+        what it does, how to use it, what it cannot do, the exact wording shown
+        in the app — plus tips, best practices, setup flows and known issues
+        with their fixes, and the questions customers actually ask.
       </p>
 
       <div class="kb-note">
         <p><strong>What this page is.</strong> A complete, structured reference
-        for Alpha-DJ-Engine support. Each feature is one self-contained entry
-        with a stable link, so an answer can always point at the exact
-        section.</p>
+        for Alpha-DJ-Engine support. Each entry — a feature, a how-to, or a
+        known issue with its fix — is self-contained with a stable link, so an
+        answer can always point at the exact section.</p>
         <p><strong>Keeping it current.</strong> Every released feature is
         documented here, and every change to a feature is reflected here.
-        A feature that is not on this page cannot be supported.</p>
+        What is not on this page cannot be supported.</p>
       </div>
 
       <nav class="kb-toc" aria-label="Features">
-        <h2>All features</h2>
+        <h2>All entries</h2>
         <!-- AGENT: hier je Feature EINE Zeile ergaenzen, alphabetisch innerhalb
              der Kategorie. Der Linktext ist exakt der Feature-Name. -->
         <ul class="kb-toc__list">
@@ -301,6 +311,7 @@
           <li><a href="#serato-export">Serato export</a></li>
           <li><a href="#traktor-export">Traktor export</a></li>
           <li><a href="#playlists-on-device">Playlists on device</a></li>
+          <li><a href="#macos-blocked">macOS blocked Alpha</a></li>
         </ul>
       </nav>
 
@@ -1754,7 +1765,115 @@
       </article>
 
       <!-- <h2 class="kb-category">Licensing and account</h2> -->
-      <!-- <h2 class="kb-category">The app itself</h2> -->
+
+      <h2 class="kb-category">The app itself</h2>
+
+      <article class="kb-feature" id="macos-blocked"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="app"
+               data-kb-platforms="macOS">
+
+        <h2>macOS blocked Alpha</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Applies to every install</span>
+          <span>Since 1.0.0</span>
+          <span>macOS 15 and later</span>
+        </p>
+
+        <p class="kb-summary">
+          The first time Alpha DJ Engine is opened, macOS may block it with a
+          warning that Apple could not verify the app; this is macOS protecting
+          against software from outside the App Store, not a defect, and the fix
+          takes under a minute in System Settings.
+        </p>
+
+        <section class="kb-block">
+          <h3>Why macOS blocked Alpha</h3>
+          <p>
+            macOS checks every app downloaded outside the App Store. Because
+            Alpha DJ Engine is not distributed through the App Store, the first
+            launch can show a dialog saying the app was blocked. This is a
+            standard macOS safeguard (Gatekeeper) that many apps from smaller
+            developers trigger — it does not mean anything is wrong with the
+            download.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to open Alpha after macOS blocked it (macOS 15 / 26)</h3>
+          <p>
+            The old right-click &rarr; Open trick is no longer enough on current
+            macOS. The official way:
+          </p>
+          <ol>
+            <li>Close the error dialog — click <span class="kb-verbatim">Done</span>.
+            Do <strong>not</strong> click <span class="kb-verbatim">Move to Trash</span>.</li>
+            <li>Open <span class="kb-verbatim">System Settings</span> &rarr;
+            <span class="kb-verbatim">Privacy &amp; Security</span> and scroll all
+            the way down.</li>
+            <li>There it now says <span class="kb-verbatim">&ldquo;Alpha DJ Engine&rdquo; was
+            blocked&hellip;</span> &rarr; click
+            <span class="kb-verbatim">Open Anyway</span> and confirm with the Mac&rsquo;s
+            admin password (or Touch&nbsp;ID).</li>
+          </ol>
+          <p>
+            After that, macOS remembers the decision for this copy of the app and
+            the warning does not come back on later launches.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>macOS blocked Alpha — the exact wording on screen</h3>
+          <p>
+            These are Apple&rsquo;s dialogs, so the wording follows the Mac&rsquo;s system
+            language and can vary slightly between macOS versions.
+          </p>
+          <div class="kb-table-wrap"><table class="kb-table">
+            <tr><th>Where</th><th>English macOS</th><th>German macOS</th></tr>
+            <tr><td>First-launch dialog</td>
+                <td><span class="kb-verbatim">Apple could not verify &ldquo;Alpha DJ Engine&rdquo; is free of malware that may harm your Mac or compromise your privacy.</span></td>
+                <td><span class="kb-verbatim">&bdquo;Alpha DJ Engine&ldquo; wurde blockiert&hellip;</span></td></tr>
+            <tr><td>Dialog buttons</td>
+                <td><span class="kb-verbatim">Done</span> / <span class="kb-verbatim">Move to Trash</span></td>
+                <td><span class="kb-verbatim">Fertig</span> / <span class="kb-verbatim">In den Papierkorb legen</span></td></tr>
+            <tr><td>Privacy &amp; Security</td>
+                <td><span class="kb-verbatim">&ldquo;Alpha DJ Engine&rdquo; was blocked to protect your Mac.</span> &rarr; <span class="kb-verbatim">Open Anyway</span></td>
+                <td><span class="kb-verbatim">Datenschutz &amp; Sicherheit</span> &rarr; <span class="kb-verbatim">Dennoch &ouml;ffnen</span></td></tr>
+          </table></div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What the macOS block does not mean</h3>
+          <ul>
+            <li>The macOS block does not mean Alpha carries malware — it means
+            Apple has not verified the app, which macOS reports for software
+            distributed outside the App Store.</li>
+            <li>The macOS block does not require changing any security setting.
+            Do not lower the Mac&rsquo;s security globally; the steps above are
+            enough.</li>
+            <li>The macOS block does not return on every launch. It can appear
+            once more after downloading a new copy of the app (for example an
+            update installed from a fresh download) — the same steps apply.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about the macOS block</h3>
+          <dl class="kb-qa">
+            <dt>The dialog only offers &ldquo;Done&rdquo; and &ldquo;Move to Trash&rdquo; — should I move Alpha to the trash?</dt>
+            <dd>No. Click <span class="kb-verbatim">Done</span> and follow the three steps above; the option to open the app is in System Settings, not in the dialog.</dd>
+            <dt>Does right-click &rarr; Open still work?</dt>
+            <dd>Not on current macOS. Since macOS&nbsp;15 the bypass moved to System Settings &rarr; Privacy &amp; Security &rarr; <span class="kb-verbatim">Open Anyway</span>.</dd>
+            <dt>Do I have to do this after every update?</dt>
+            <dd>No — only when a freshly downloaded copy of Alpha is opened for the first time. A copy that was opened once stays approved.</dd>
+            <dt>It asks for an admin password I don&rsquo;t have — what now?</dt>
+            <dd>The confirmation needs an administrator of that Mac. Ask the person who manages the machine to click <span class="kb-verbatim">Open Anyway</span> once; afterwards Alpha opens normally for every user.</dd>
+          </dl>
+        </section>
+
+      </article>
 
     </div>
   </main>

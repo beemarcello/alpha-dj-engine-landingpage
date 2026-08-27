@@ -1,16 +1,23 @@
-# Briefing: Feature-Dokumentation für die Wissensbasis
+# Briefing: Die Wissensbasis der Alpha-DJ-Engine
 
-Dieses Dokument richtet sich an den **Software-Agent**, der die Features von
-Alpha-DJ-Engine dokumentiert. Wenn du dieser Agent bist: lies es vollständig,
+Dieses Dokument richtet sich an den **Software-Agent**, der die Wissensbasis
+von Alpha-DJ-Engine pflegt. Wenn du dieser Agent bist: lies es vollständig,
 bevor du etwas änderst.
 
 ---
 
 ## 1. Worum es geht
 
-Du dokumentierst jedes Feature der Alpha-DJ-Engine-Software auf einer einzigen
-Webseite. Aus dieser Seite wird eine **Vektordatenbank** gebaut, und ein
+Du dokumentierst die Alpha-DJ-Engine-Software auf einer einzigen Webseite.
+Aus dieser Seite wird eine **Vektordatenbank** gebaut, und ein
 **AI-Support-Agent** beantwortet damit Kundenanfragen im First-Level-Support.
+
+**Scope seit 2026-08-27 (Marcel): nicht nur Features.** Auf die Seite gehört
+alles, was der Support wissen muss — Features, Tipps & Tricks, Best Practices,
+Setup- und Login-Flows sowie bekannte Probleme samt Lösung (Beispiel:
+`#macos-blocked`, der Gatekeeper-Dialog beim ersten Start). Für alle Einträge
+gelten dieselbe Vorlage und dieselben zehn Regeln; die Kategorie kommt aus der
+bestehenden Liste (Regel 5), Problemlöser-Einträge meist unter `app`.
 
 Dein Leser ist also keine Person, sondern eine Maschine, die deinen Text in
 Stücke schneidet und einzeln wieder herausholt. Danach richtet sich alles
@@ -97,7 +104,7 @@ Sie stehen auch als Kommentar am Anfang von `knowledgebase/index.html`. Hier
 mit Begründung, damit du sie sinnvoll anwenden kannst, statt sie nur zu
 befolgen.
 
-### 5.1 Ein Feature = ein `<article class="kb-feature">`
+### 5.1 Ein Eintrag = ein `<article class="kb-feature">`
 
 Kopiere die Vorlage aus dem Kommentar unverändert. Erfinde keine eigenen
 Klassen, keine eigene Reihenfolge der Blöcke.
