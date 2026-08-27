@@ -6,7 +6,9 @@
 
   <title>Privacy — Alpha-DJ-Engine</title>
   <meta name="description" content="How Alpha-DJ-Engine handles your data. Your audio is analyzed locally and never uploaded.">
-  <meta name="robots" content="noindex">
+  <!-- noindex entfernt am 2026-08-27: Erklaerung finalisiert (minimales Setup),
+       Formular-Backend angeschlossen. Bei Wiederaufnahme in den Entwurfszustand
+       noindex zuerst zurueckstellen. -->
 
   <link rel="icon" href="assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="assets/icons/favicon.png">
@@ -89,25 +91,16 @@
            Chatverläufe, Learner Profile, Datei-Uploads nach S3, Neon-Datenbank,
            Contabo-Embeddings, EU-AI-Act-Transparenz.
 
-           Noch offene Blöcke sind als todo-box markiert — die Fragen dazu
-           gingen am 2026-08-19 an Marcel.
+           Seit 2026-08-27 finalisiert — keine todo-Boxen mehr auf der Seite.
            ================================================================== -->
-      <div class="todo-box">
-        <p><strong>Entwurf — inhaltlich vollständig, ein Punkt hängt noch an der
-        Umsetzung.</strong> Offen ist das <strong>Double-Opt-in-Backend</strong> für das
-        E-Mail-Formular. Bis es steht, trägt die Seite <code>noindex</code> und das
-        Formular darf nicht scharf geschaltet werden.</p>
-        <p>Erledigt am 2026-08-26: <strong>Anmeldung</strong> — sie läuft über das selbst
-        gehostete BetterAuth, ein externer Dienstleister und eine Übermittlung in
-        Drittländer entfallen an dieser Stelle. <strong>Hosting</strong> — der Umzug zu
-        Hetzner nach Deutschland ist geplant, aber noch nicht erfolgt; bis dahin
-        beschreibt das Kapitel weiterhin GitHub Pages.</p>
-        <p>Erledigt am 2026-08-22: Consent-Banner (zwei gleichrangige Knöpfe, keine
-        Vorauswahl, Widerruf über „Cookie settings" im Footer) und Google Analytics
-        (<code>G-DQBC6VLYFP</code>, lädt ausschließlich nach Einwilligung). Google Ads ist
-        nicht eingebunden — kommt eine Conversion-ID dazu, braucht dieser Abschnitt einen
-        Satz zu Remarketing.</p>
-      </div>
+      <!--
+        Finalisiert am 2026-08-27 (Marcel): minimales Setup, alle todo-Kaesten
+        entfernt, noindex raus. Was frueher hier als offen stand, ist erledigt:
+        Consent-Banner + GA (2026-08-22), BetterAuth statt Clerk (2026-08-26),
+        Formular-Backend ueber die Lead-API der Plattform (PR #1, 2026-08-27).
+        Einzig das Hosting-Kapitel wechselt noch auf Hetzner, sobald der Umzug
+        wirklich erfolgt ist — fertiger Absatz liegt dort als Kommentar bereit.
+      -->
 
       <h2>Controller</h2>
       <p>
@@ -230,14 +223,19 @@
         in a switched-off state: until you agree, it sets <strong>no cookies</strong> and
         cannot recognise you. Declining keeps it that way. See the next section.
       </p>
-      <div class="todo-box">
-        <p><strong>Zu ergänzen, bevor die Seite ohne <code>noindex</code> live geht:</strong>
-        was das Chat-Widget speichert und verarbeitet — Cookies bzw. localStorage,
-        Aufbewahrung der Chatverläufe, Rechtsgrundlage, und ob es beim Laden auf jeder
-        Seite eine Einwilligung braucht (§ 25 TDDDG) oder als von der Nutzerin
-        angeforderte Funktion davon ausgenommen ist. Ich habe hier bewusst nur
-        beschrieben, was sich von aussen belegen lässt.</p>
-      </div>
+      <!--
+        Geaendert am 2026-08-27 (Marcel): Der Support-Chat ist eigene Software
+        (AlphaLearn-Plattform von Alphabees); fuer die Details verweisen wir auf
+        deren Datenschutzerklaerung, statt sie hier zu duplizieren — eine Kopie
+        wuerde bei jeder Plattform-Aenderung veralten.
+      -->
+      <p>
+        When you write in that chat, your messages are processed on our AlphaLearn
+        platform — Alphabees software, running for Alphabees — to answer your question.
+        The details are in the
+        <a href="https://alphalearn.ai/en/privacy.html" target="_blank" rel="noopener">AlphaLearn
+        privacy policy</a>.
+      </p>
       <!--
         Korrigiert am 2026-08-22. Hier stand "Hetzner Online GmbH, in a data centre
         in Germany" samt AVV. Das war falsch: die Seite wird von GitHub Pages
@@ -346,24 +344,21 @@
         until you unsubscribe. After that we retain the record of your consent for up to
         three years, so we can show it was given if that is ever questioned.
       </p>
-      <p>
-        Emails — including the confirmation code for your account — are sent through
-        Twilio SendGrid as our processor under a data processing agreement (Art. 28
-        GDPR). Where processing takes place outside the EU, it is safeguarded by standard
-        contractual clauses.
-      </p>
       <!--
-        Der Satz "The confirmation code itself is sent by Clerk" stand hier bis
-        2026-08-26. Clerk ist raus (siehe "Your account"); der Code laeuft ueber
-        denselben Versanddienst wie die uebrigen Mails.
+        Geaendert am 2026-08-27 (Marcel, minimales Setup): vorher stand hier
+        Twilio SendGrid "as our processor under a data processing agreement
+        (Art. 28 GDPR)". Der Versand laeuft ueber die eigene Alphabees-Plattform;
+        dass darunter ein Zustelldienst arbeiten kann, bleibt als ehrlicher
+        Halbsatz stehen — ganz verschweigen waere eine falsche Zusage.
+        Der todo-Kasten zum fehlenden Formular-Backend ist raus: die Formulare
+        sind seit dem Lead-API-Anschluss (PR #1, Lasse) an die Plattform
+        angebunden.
       -->
-      <div class="todo-box">
-        <p><strong>Umsetzung fehlt noch:</strong> Für die Backup-Mail mit dem
-        Downloadlink und für den Newsletter-Teil (Double-Opt-in, Abmeldelink) fehlt
-        weiterhin das Backend. Bis es steht, darf das E-Mail-Formular nicht scharf
-        geschaltet werden — es behauptet derzeit im Erfolgsfall, eine Mail verschickt zu
-        haben.</p>
-      </div>
+      <p>
+        Emails — including the confirmation code for your account — are sent through our
+        own Alphabees platform. Where a specialised delivery service helps transport
+        them, it acts only on our instructions.
+      </p>
 
       <h2>Payment</h2>
       <p>
@@ -377,9 +372,15 @@
 
       <h2>How we share data</h2>
       <p>
-        We do not sell your data. We share it only with processors bound by a data
-        processing agreement under Art. 28 GDPR, with public authorities where we are
-        legally required to, and otherwise only with your explicit consent.
+        We do not sell your data. We share it only with service providers that act on
+        our instructions, with public authorities where we are legally required to, and
+        otherwise only with your explicit consent.
+      </p>
+      <!-- AVV nur auf Anfrage (Marcel, 2026-08-27) — kein Angebot auf der Seite. -->
+      <p>
+        If you are a business customer and need a data processing agreement for your own
+        records, write to <a href="mailto:info@alphabees.de">info@alphabees.de</a> — we
+        provide one on request.
       </p>
 
       <h2>Transfers outside the EU</h2>
