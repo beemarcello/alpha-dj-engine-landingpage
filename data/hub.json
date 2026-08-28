@@ -1,0 +1,18 @@
+{
+  "_comment": "Meta und Gruppentexte der Hub-Seite /usb/. Die Geraeteliste je Gruppe kommt automatisch aus devices.json (pathway + page:true, in Array-Reihenfolge).",
+  "title": "Prepare a USB for your DJ player — CDJ, XDJ, Prime — Alpha-DJ-Engine",
+  "description": "Prepare a USB for CDJ, XDJ, Prime and more: Alpha-DJ-Engine analyzes your music, builds a harmonic set and writes the library your player reads natively. Pick your device for the exact guide.",
+  "canonical": "https://alpha-dj-engine.com/usb/",
+  "groups": [
+    {
+      "pathway": "engineos",
+      "title": "Denon DJ & Numark — Engine DJ USB",
+      "blurb": "Alpha writes a standard Engine OS 3.x library straight to the stick — the whole Engine DJ family reads it natively, no Engine desktop session needed."
+    },
+    {
+      "pathway": "rekordbox",
+      "title": "Pioneer DJ & AlphaTheta — rekordbox USB",
+      "blurb": "Alpha writes both rekordbox libraries plus beat grids, waveforms and artwork directly — the stick plugs straight into the player, no rekordbox software anywhere. A new target: please confirm it on your own gear."
+    }
+  ]
+}

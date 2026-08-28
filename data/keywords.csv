@@ -1,0 +1,148 @@
+query,language,intent,volume_class,page_type,target_slug,role,priority,status,notes
+prepare usb for cdj,en,informational,high,hub,hub,title-driver,P1,mapped,many dedicated guides + YouTube tutorials; head term of the niche
+usb stick for cdj,en,transactional,high,hub,hub,body,P1,mapped,mixed intent (buying + prep); Crossfader and Ghost Production rank for it
+how to make a dj set usb,en,informational,mid,hub,hub,faq,P1,mapped,Digital DJ Tips organise-music-on-usb Q&A; recurring beginner question
+dj usb format fat32 or exfat,en,informational,high,hub,hub,faq,P1,mapped,huge thread density Pioneer forums + best-format-for-djing listicles
+how to organize music on usb for dj,en,informational,mid,hub,hub,body,P2,mapped,Digital DJ Tips reader question article
+cdj usb not reading,en,informational,mid,hub,hub,faq,P1,mapped,multiple Pioneer forum threads across models
+prepare usb for denon prime go,en,informational,low,device,denon-prime-go,title-driver,P2,mapped,model-qualified prep query; Engine DJ community activity
+denon prime go rekordbox usb,en,informational,mid,device,denon-prime-go,faq,P1,mapped,enginedj community thread how-to-load-rekordbox-collection-to-prime-go 2024
+prime go without engine dj,en,informational,low,device,denon-prime-go,faq,P2,mapped,onboard analysis discussed in forums; speculative phrasing
+denon prime go usb format,en,informational,low,device,denon-prime-go,faq,P2,mapped,FAT32/exFAT question generalises to all Engine gear
+rekordbox to prime go,en,transactional,low,device,denon-prime-go,body,P2,mapped,justanswer + community threads show workflow demand
+prime go rekordbox beatgrids change,en,informational,low,device,denon-prime-go,faq,P3,mapped,verbatim enginedj community thread 51169
+prime go sd card or usb,en,informational,low,device,denon-prime-go,body,P3,mapped,speculative; SD slot is a differentiator
+denon prime 2 usb export,en,informational,low,device,denon-prime-2,title-driver,P2,mapped,community threads on export + FAQ pages exist
+prime 2 usb stick format,en,informational,low,device,denon-prime-2,faq,P2,mapped,verbatim enginedj community thread 40742 fat32 vs exfat
+rekordbox usb to prime 2 import,en,informational,low,device,denon-prime-2,faq,P2,mapped,verbatim community thread 36635 import stalls at 7k tracks
+prime 2 without engine dj desktop,en,informational,low,device,denon-prime-2,body,P3,mapped,speculative; pattern proven on other models
+denon prime 2 internal drive music,en,informational,low,device,denon-prime-2,body,P3,mapped,inMusic FAQ covers controller-mode drive access
+prime 2 rekordbox import stuck,en,informational,low,device,denon-prime-2,faq,P3,mapped,pain query from thread 36635
+denon prime 4 usb export,en,informational,mid,device,denon-prime-4,title-driver,P1,mapped,best-selling Engine unit; many guides + FAQ pages
+prepare usb for prime 4,en,informational,mid,device,denon-prime-4,h1-driver,P1,mapped,Crossfader getting-started guide targets this
+prime 4 internal drive music transfer,en,informational,mid,device,denon-prime-4,faq,P2,mapped,verbatim community threads 14050 and 36183
+prime 4 rekordbox to engine dj,en,transactional,mid,device,denon-prime-4,body,P1,mapped,pairs with converter intent; Lexicon ranks here
+prime 4 usb format,en,informational,low,device,denon-prime-4,faq,P2,mapped,FAT32 preferred per Denon docs
+denon prime 4 without laptop,en,informational,low,device,denon-prime-4,body,P2,mapped,standalone positioning query; speculative phrasing
+engine dj export playlist to usb,en,informational,mid,device,denon-prime-4,body,P2,mapped,generic Engine workflow; YouTube tutorial evidence
+sc5000 rekordbox usb,en,informational,mid,device,denon-sc5000-prime,title-driver,P2,mapped,firmware 1.0.3 news covered by DJWorx DJTechTools DJTechZone
+denon sc5000 usb export,en,informational,low,device,denon-sc5000-prime,body,P3,mapped,standard Engine export query
+sc5000 rekordbox import limitations,en,informational,low,device,denon-sc5000-prime,faq,P3,mapped,flat playlist + bpm/cue-only limits documented in reviews
+prepare usb for sc5000,en,informational,low,device,denon-sc5000-prime,body,P3,mapped,low search but coherent for page body
+sc5000 usb format,en,informational,low,device,denon-sc5000-prime,faq,P3,mapped,exFAT/FAT32 per Denon support
+sc5000 without engine prime,en,informational,low,device,denon-sc5000-prime,body,P3,mapped,speculative; onboard analysis exists
+sc5000m rekordbox usb,en,informational,low,device,denon-sc5000m-prime,title-driver,P3,mapped,mirrors SC5000; smaller install base
+denon sc5000m usb export,en,informational,low,device,denon-sc5000m-prime,body,P3,mapped,speculative; model rarely searched separately
+prepare usb for sc5000m,en,informational,low,device,denon-sc5000m-prime,body,P3,mapped,speculative
+sc5000m usb format,en,informational,low,device,denon-sc5000m-prime,faq,P3,mapped,inherits Engine format answer
+sc5000m engine dj analysis,en,informational,low,device,denon-sc5000m-prime,faq,P3,mapped,speculative; analysis pain generalises
+sc6000 rekordbox usb,en,informational,mid,device,denon-sc6000-prime,title-driver,P1,mapped,verbatim enginedj community thread 51713 + 29776
+denon sc6000 usb export,en,informational,low,device,denon-sc6000-prime,body,P2,mapped,standard Engine export query
+sc6000 rekordbox import slow,en,informational,low,device,denon-sc6000-prime,faq,P2,mapped,thread 51713 reports slow blocking import
+sc6000 internal ssd format,en,informational,low,device,denon-sc6000-prime,faq,P2,mapped,verbatim community thread 45513 exfat-or-fat32
+prepare usb for sc6000,en,informational,low,device,denon-sc6000-prime,body,P2,mapped,coherent prep query for club players
+sc6000 without engine dj desktop,en,informational,low,device,denon-sc6000-prime,body,P3,mapped,speculative; strong product fit
+rekordbox playlist updates on sc6000,en,informational,low,device,denon-sc6000-prime,faq,P3,mapped,verbatim community thread 29776
+sc6000m rekordbox usb,en,informational,low,device,denon-sc6000m-prime,title-driver,P3,mapped,mirrors SC6000 evidence; motorized variant lower volume
+sc6000m usb format exfat,en,informational,low,device,denon-sc6000m-prime,faq,P3,mapped,Denon support recommends exFAT for large drives
+denon sc6000m usb export,en,informational,low,device,denon-sc6000m-prime,body,P3,mapped,speculative
+prepare usb for sc6000m,en,informational,low,device,denon-sc6000m-prime,body,P3,mapped,speculative
+sc6000m engine dj sync,en,informational,low,device,denon-sc6000m-prime,faq,P3,mapped,sync manager pain threads generalise
+numark mixstream pro usb,en,informational,mid,device,numark-mixstream-pro,title-driver,P1,mapped,popular budget standalone; retailer + KB content dense
+mixstream pro without laptop,en,informational,mid,device,numark-mixstream-pro,faq,P1,mapped,core buying question; Numark markets laptop-free
+mixstream pro rekordbox,en,informational,mid,device,numark-mixstream-pro,faq,P1,mapped,Engine KB documents rekordbox prep path
+mixstream pro serato,en,informational,low,device,numark-mixstream-pro,faq,P2,mapped,Engine KB article does-mixstream-pro-work-with-virtual-dj pattern
+mixstream pro usb format,en,informational,low,device,numark-mixstream-pro,faq,P2,mapped,FAT32/exFAT standard answer
+prepare usb for mixstream pro,en,informational,low,device,numark-mixstream-pro,body,P2,mapped,beginner-heavy audience
+mixstream pro engine dj export,en,informational,low,device,numark-mixstream-pro,body,P2,mapped,prep-then-export flow in official copy
+prepare usb for cdj 3000,en,informational,high,device,pioneer-cdj-3000,title-driver,P1,mapped,club-standard player; prep guides everywhere
+cdj 3000 usb format,en,informational,mid,device,pioneer-cdj-3000,faq,P1,mapped,pioneer forum thread on exfat problems live performing
+cdj 3000 usb not reading,en,informational,mid,device,pioneer-cdj-3000,faq,P1,mapped,pioneer community thread wont-read-usb-after-ejecting 2024
+cdj 3000 exfat,en,informational,mid,device,pioneer-cdj-3000,faq,P2,mapped,3000 reads exFAT unlike NXS2; frequent confusion
+cdj 3000 without rekordbox,en,informational,mid,device,pioneer-cdj-3000,faq,P1,mapped,recurring question; our export.pdb answer is unique
+rekordbox export to cdj 3000,en,informational,mid,device,pioneer-cdj-3000,body,P2,mapped,standard workflow queries + official guides
+usb stick for cdj 3000,en,transactional,mid,device,pioneer-cdj-3000,body,P2,mapped,buying + prep mixed intent
+cdj 3000 usb requirements,en,informational,low,device,pioneer-cdj-3000,body,P3,mapped,size/speed questions in forums
+cdj 2000 nxs2 usb format,en,informational,mid,device,pioneer-cdj-2000nxs2,title-driver,P1,mapped,FAT32-only limitation drives many threads
+cdj 2000 nxs2 exfat,en,informational,mid,device,pioneer-cdj-2000nxs2,faq,P1,mapped,verbatim pioneer forum thread is-exfat-compatible-yet
+cdj 2000 nxs2 format usb error,en,informational,low,device,pioneer-cdj-2000nxs2,faq,P2,mapped,forum thread keeps-telling-format-usb 2023
+prepare usb for cdj 2000 nxs2,en,informational,mid,device,pioneer-cdj-2000nxs2,body,P2,mapped,still ubiquitous in clubs
+cdj 2000 nxs2 without rekordbox,en,informational,low,device,pioneer-cdj-2000nxs2,body,P3,mapped,pattern proven on sibling models
+cdj 2000 nxs2 hfs+ mac,en,informational,low,device,pioneer-cdj-2000nxs2,faq,P3,mapped,mac-only DJs advised HFS+ in forums
+xdj rx3 usb export,en,informational,mid,device,pioneer-xdj-rx3,title-driver,P1,mapped,best-selling all-in-one; Crossfader guide + justanswer threads
+prepare usb for xdj rx3,en,informational,mid,device,pioneer-xdj-rx3,body,P1,mapped,beginner-heavy audience
+xdj rx3 without rekordbox,en,informational,mid,device,pioneer-xdj-rx3,faq,P1,mapped,recurring question pattern from XDJ-RR thread family
+xdj rx3 usb format,en,informational,mid,device,pioneer-xdj-rx3,faq,P2,mapped,justanswer + guide coverage
+rekordbox export to xdj rx3,en,informational,mid,device,pioneer-xdj-rx3,body,P2,mapped,standard workflow query
+xdj rx3 record set to usb,en,informational,low,device,pioneer-xdj-rx3,body,P3,mapped,adjacent intent (recording); answer briefly
+xdj rx3 serato,en,informational,low,device,pioneer-xdj-rx3,body,P3,mapped,RX3 works as Serato controller; clarify laptop needed
+xdj rx2 usb export,en,informational,mid,device,pioneer-xdj-rx2,title-driver,P2,mapped,large used install base; forum threads persist
+xdj rx2 e-306 no file,en,informational,low,device,pioneer-xdj-rx2,faq,P2,mapped,verbatim pioneer forum error thread
+xdj rx2 usb format,en,informational,low,device,pioneer-xdj-rx2,faq,P2,mapped,FAT32/HFS+ MBR answer
+prepare usb for xdj rx2,en,informational,low,device,pioneer-xdj-rx2,body,P2,mapped,coherent prep query
+xdj rx2 without rekordbox,en,informational,low,device,pioneer-xdj-rx2,body,P3,mapped,pattern proven on siblings
+xdj rx2 recordings from usb,en,informational,low,device,pioneer-xdj-rx2,body,P3,mapped,verbatim forum thread; adjacent intent
+xdj xz usb export,en,informational,mid,device,pioneer-xdj-xz,title-driver,P2,mapped,4ch flagship all-in-one; active forums
+xdj xz rekordbox export problems,en,informational,low,device,pioneer-xdj-xz,faq,P2,mapped,multiple pioneer forum threads on broken export link
+xdj xz usb format,en,informational,low,device,pioneer-xdj-xz,faq,P2,mapped,exFAT supported; frequent question
+prepare usb for xdj xz,en,informational,low,device,pioneer-xdj-xz,body,P2,mapped,coherent prep query
+xdj xz without rekordbox,en,informational,low,device,pioneer-xdj-xz,faq,P3,mapped,pattern query; speculative volume
+xdj xz link export not working,en,informational,low,device,pioneer-xdj-xz,faq,P3,mapped,verbatim forum threads 2021-2023
+xdj 1000mk2 without rekordbox,en,informational,mid,device,pioneer-xdj-1000mk2,title-driver,P2,mapped,three verbatim pioneer forum threads + djtechtools thread
+xdj 1000mk2 usb format,en,informational,low,device,pioneer-xdj-1000mk2,faq,P3,mapped,standard FAT32 answer
+xdj 1000mk2 usb mp3,en,informational,low,device,pioneer-xdj-1000mk2,body,P3,mapped,forum-documented raw-mp3 half-waveform limits
+prepare usb for xdj 1000mk2,en,informational,low,device,pioneer-xdj-1000mk2,body,P3,mapped,coherent prep query
+rekordbox export to xdj 1000mk2,en,informational,low,device,pioneer-xdj-1000mk2,body,P3,mapped,standard workflow query
+xdj 700 usb export,en,informational,low,device,pioneer-xdj-700,title-driver,P2,mapped,budget player; beginner forum threads
+xdj 700 rekordbox setup,en,informational,low,device,pioneer-xdj-700,faq,P2,mapped,pioneer forum help-setting-up threads
+xdj 700 without rekordbox,en,informational,low,device,pioneer-xdj-700,faq,P3,mapped,pattern proven on XDJ-RR/1000MK2
+prepare usb for xdj 700,en,informational,low,device,pioneer-xdj-700,body,P3,mapped,coherent prep query
+xdj 700 usb format,en,informational,low,device,pioneer-xdj-700,faq,P3,mapped,standard FAT32 answer
+opus quad usb export,en,informational,mid,device,alphatheta-opus-quad,title-driver,P1,mapped,DLP change created fresh confusion + content wave
+opus quad device library plus,en,informational,mid,device,alphatheta-opus-quad,faq,P1,mapped,DDJT + Lexicon explainers; rekordbox 6.8.1 forced DLP
+opus quad rekordbox database not found,en,informational,mid,device,alphatheta-opus-quad,faq,P1,mapped,official alphatheta support article exists for this error
+prepare usb for opus quad,en,informational,low,device,alphatheta-opus-quad,body,P2,mapped,coherent prep query
+opus quad without rekordbox,en,informational,low,device,alphatheta-opus-quad,faq,P2,mapped,our DLP-compatible export is a unique answer
+opus quad usb format,en,informational,low,device,alphatheta-opus-quad,faq,P2,mapped,standard answer + DLP caveat
+xdj az usb export,en,informational,mid,device,alphatheta-xdj-az,title-driver,P1,mapped,new 2024 flagship; Sweetwater + Pirate quickstart guides
+prepare usb for xdj az,en,informational,mid,device,alphatheta-xdj-az,body,P1,mapped,fresh model = winnable SERP
+xdj az usb format,en,informational,low,device,alphatheta-xdj-az,faq,P2,mapped,FAT32 recommended in guides
+xdj az without rekordbox,en,informational,low,device,alphatheta-xdj-az,faq,P2,mapped,speculative but pattern-consistent
+xdj az device library plus,en,informational,low,device,alphatheta-xdj-az,faq,P2,mapped,speculative; DLP applies to new AlphaTheta gear
+rekordbox export to xdj az,en,informational,low,device,alphatheta-xdj-az,body,P2,mapped,standard workflow query
+rekordbox to engine dj,en,transactional,high,pair,rekordbox-to-engine-dj,title-driver,P1,gap,Lexicon landing page + official Denon KB + many threads
+convert rekordbox to engine dj,en,transactional,mid,pair,rekordbox-to-engine-dj,body,P1,gap,converter phrasing; commercial intent
+rekordbox to engine dj converter,en,transactional,mid,pair,rekordbox-to-engine-dj,body,P1,gap,tool-seeking query; DeCU/Lexicon/MIXO compete
+import rekordbox collection into engine dj,en,informational,mid,pair,rekordbox-to-engine-dj,faq,P2,gap,verbatim official Denon support article title
+rekordbox xml engine dj,en,informational,mid,pair,rekordbox-to-engine-dj,faq,P2,gap,xml export path returned in rekordbox 6.3 widely discussed
+engine dj to rekordbox,en,transactional,mid,pair,engine-dj-to-rekordbox,title-driver,P2,gap,pioneer forum migrating-from-engine-dj thread; reverse direction
+rekordbox to serato,en,transactional,mid,pair,rekordbox-to-serato,title-driver,P1,gap,Lexicon + Serato forum + MusConv all target it
+rekordbox to serato crates cues,en,informational,mid,pair,rekordbox-to-serato,faq,P2,gap,8-hot-cue limit and crate mapping questions recur
+rekordbox to traktor,en,transactional,mid,pair,rekordbox-to-traktor,title-driver,P1,gap,DJCU/Rekord Buddy history + NI community threads
+rekordbox to traktor cue points,en,informational,low,pair,rekordbox-to-traktor,faq,P2,gap,cue-type mismatch is documented pain
+rekordbox to virtualdj,en,transactional,mid,pair,rekordbox-to-virtualdj,title-driver,P1,gap,Lexicon + MIXO + VDJ forum threads
+rekordbox xml virtualdj,en,informational,low,pair,rekordbox-to-virtualdj,faq,P3,gap,xml import path discussed on VDJ forums
+export rekordbox usb without rekordbox,en,transactional,mid,pair,rekordbox-usb-without-rekordbox,title-driver,P1,gap,no good answer exists today; our core differentiator
+cdj usb without rekordbox,en,informational,mid,pair,rekordbox-usb-without-rekordbox,body,P1,gap,djtechtools + deejayplaza articles; raw-mp3 limits push users to us
+rekordbox alternative mac,en,transactional,mid,pair,rekordbox-usb-without-rekordbox,body,P2,gap,alternativeto listing activity; speculative fit
+lexicon dj alternative,en,transactional,low,pair,rekordbox-usb-without-rekordbox,body,P3,gap,competitor comparison query; speculative
+serato to engine dj,en,transactional,low,pair,serato-to-engine-dj,title-driver,P2,gap,Engine DJ imports Serato natively; converter queries exist
+traktor to engine dj,en,transactional,low,pair,traktor-to-engine-dj,title-driver,P2,gap,Engine DJ imports Traktor collections; smaller demand
+usb stick fuer cdj vorbereiten,de,informational,mid,hub,de-usb-stick-fuer-cdj,title-driver,P2,gap,Bonedo guide + German YouTube tutorial exist
+rekordbox usb stick vorbereiten,de,informational,mid,hub,de-usb-stick-fuer-cdj,body,P2,gap,German rekordbox tutorial video with traction
+usb stick formatieren fat32 dj,de,informational,low,hub,de-usb-stick-fuer-cdj,faq,P3,gap,format questions mirror EN pattern
+musik fuer cdj vorbereiten,de,informational,low,hub,de-usb-stick-fuer-cdj,body,P3,gap,Bonedo track-vorbereitung article
+dj set vorbereiten usb,de,informational,low,hub,de-usb-stick-fuer-cdj,body,P3,gap,speculative
+rekordbox zu engine dj,de,transactional,low,pair,de-rekordbox-zu-engine-dj,title-driver,P2,gap,deejay-basics covers DeCU; MIXO covered by Bonedo
+rekordbox bibliothek zu engine dj uebertragen,de,informational,low,pair,de-rekordbox-zu-engine-dj,body,P3,gap,long-tail of the above
+rekordbox export usb anleitung,de,informational,low,hub,de-rekordbox-usb-export,title-driver,P3,gap,official DE manuals + tutorials exist
+rekordbox playlist auf usb exportieren,de,informational,mid,hub,de-rekordbox-usb-export,body,P2,gap,tutorial demand visible on YouTube/deejayforum
+cue punkte auf usb stick rekordbox,de,informational,low,hub,de-rekordbox-usb-export,faq,P3,gap,rewerb.com article targets this
+denon prime 4 usb vorbereiten,de,informational,low,device,denon-prime-4,body,P3,gap,speculative DE long-tail on EN device page
+cdj 3000 usb formatieren,de,informational,low,device,pioneer-cdj-3000,faq,P3,gap,speculative DE long-tail on EN device page
+rekordbox zu serato deutsch,de,transactional,low,pair,rekordbox-to-serato,body,P3,gap,speculative; serve via pair page hreflang later
+serato dj usb stick standalone,en,informational,mid,none,,none,P3,rejected,Serato has no standalone USB playback; laptop required
+virtualdj usb stick standalone,en,informational,low,none,,none,P3,rejected,VirtualDJ needs laptop except licensed hardware modes
+engine dj download,en,transactional,mid,none,,none,P3,rejected,navigational to enginedj.com; unwinnable and wrong intent
+rekordbox free download,en,transactional,high,none,,none,P3,rejected,navigational to rekordbox.com; wrong intent
+cdj 3000 price,en,transactional,high,none,,none,P3,rejected,shopping intent; retailer SERP

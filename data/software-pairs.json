@@ -1,0 +1,26 @@
+{
+  "_comment": "Stufe 2 (noch NICHT gebaut): Konvertierungs-Seiten unter /convert/<slug>/. Schema steht, Inhalte folgen, wenn die Seiten beauftragt sind. Kandidaten und Prioritaeten kommen aus data/keywords.csv (status=gap, page_type=pair). Der Generator ueberspringt Eintraege mit page:false. Vor dem Bau jedes Eintrags pruefen, ob die App die Richtung wirklich kann (z. B. gibt es KEINEN Engine-DJ-nach-rekordbox-Export in der App — nicht erfinden).",
+  "pairs": [
+    {
+      "slug": "rekordbox-to-engine-dj",
+      "page": false,
+      "source": "rekordbox",
+      "target": "Engine DJ",
+      "primaryKeyword": "rekordbox to engine dj",
+      "title": "",
+      "h1": "",
+      "description": "",
+      "intro": "",
+      "whatCarriesOver": [],
+      "whatDoesNot": [],
+      "steps": [],
+      "faq": [],
+      "targetDevices": ["denon-prime-go", "denon-prime-2", "denon-prime-4", "denon-sc5000-prime", "denon-sc6000-prime", "numark-mixstream-pro"],
+      "lang": "en"
+    },
+    { "slug": "rekordbox-usb-without-rekordbox", "page": false, "source": "rekordbox", "target": "CDJ/XDJ USB", "primaryKeyword": "export rekordbox usb without rekordbox", "targetDevices": ["pioneer-cdj-3000", "pioneer-cdj-2000nxs2", "pioneer-xdj-rx3"], "lang": "en" },
+    { "slug": "rekordbox-to-virtualdj", "page": false, "source": "rekordbox", "target": "VirtualDJ", "primaryKeyword": "rekordbox to virtualdj", "targetDevices": [], "lang": "en" },
+    { "slug": "rekordbox-to-serato", "page": false, "source": "rekordbox", "target": "Serato DJ", "primaryKeyword": "rekordbox to serato", "targetDevices": [], "lang": "en" },
+    { "slug": "rekordbox-to-traktor", "page": false, "source": "rekordbox", "target": "Traktor Pro", "primaryKeyword": "rekordbox to traktor", "targetDevices": [], "lang": "en" }
+  ]
+}

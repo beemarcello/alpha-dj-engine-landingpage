@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine</title>
+  <meta name="description" content="Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.">
+
+  <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-prime-go/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine">
+  <meta property="og:description" content="Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-prime-go/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../../css/site.css?v=39">
+  <link rel="stylesheet" href="../../css/tailwind.css?v=18">
+
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
+  <script src="../../js/icons.js?v=7" defer></script>
+  <script src="../../js/site.js?v=26" defer></script>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime Go","item":"https://alpha-dj-engine.com/usb/denon-prime-go/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need the Engine DJ desktop app to prepare a stick for the Prime Go?","acceptedAnswer":{"@type":"Answer","text":"No. Alpha writes the Engine OS 3.x library directly onto the drive — the Prime Go mounts it exactly like a stick prepared by Engine DJ itself, with playlists, BPM and key in place."}},{"@type":"Question","name":"I'm coming from rekordbox — can the Prime Go use my rekordbox USB?","acceptedAnswer":{"@type":"Answer","text":"Engine OS can import a rekordbox stick on the device, but that import is slow and beatgrids can shift. The cleaner way: export your collection as a rekordbox XML, let Alpha keep the BPM, key and beatgrid rekordbox worked out, and write a native Engine library to the stick instead."}},{"@type":"Question","name":"Can I use the Prime Go's SD card slot instead of a USB stick?","acceptedAnswer":{"@type":"Answer","text":"Yes. Point Alpha's export at the mounted SD card — the on-disk format is identical, so the Prime Go reads either the same way."}},{"@type":"Question","name":"How should the stick be formatted for the Prime Go?","acceptedAnswer":{"@type":"Answer","text":"exFAT (Denon's recommendation) or FAT32 — Engine OS does not read NTFS. Alpha writes onto the stick's existing filesystem; it never reformats your drive."}}]}</script>
+
+  <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
+       in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
+       gepflegten Seiten angefasst werden. Aenderungen hier gelten nach dem
+       naechsten `npm run build:pages` fuer alle generierten Seiten. -->
+  <style>
+    .crumbs { font-size: 13px; color: var(--ink-55); margin: 0 0 18px; }
+    .crumbs a { color: var(--ink-55); text-decoration: underline; text-underline-offset: 2px; }
+    .crumbs span[aria-current] { color: var(--ink); }
+    .crumbs .sep { margin: 0 6px; }
+    .device-facts { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 8px; max-width: none; }
+    .device-facts li { border: 2px solid var(--ink); background: var(--white); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--ink); margin: 0; }
+    .hub-group { margin-top: 34px; }
+    .hub-list { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .hub-list li { margin: 0; }
+    .subpage a.hub-card { text-decoration: none; }
+    .hub-card { display: block; border: 2px solid var(--ink); background: var(--white); border-radius: 12px; padding: 14px 16px; text-decoration: none; box-shadow: var(--shadow-hard); }
+    .hub-card:hover { background: var(--green); }
+    .hub-card--soon { box-shadow: none; border-style: dashed; }
+    .hub-card--soon:hover { background: var(--white); }
+    .hub-card__name { font-weight: 600; font-size: 16px; color: var(--ink); margin: 0; }
+    .hub-card__meta { font-size: 13px; color: var(--ink-55); margin: 4px 0 0; }
+    .related-list { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; max-width: none; }
+    .related-list li { margin: 0; }
+    .subpage .related-list a { text-decoration: none; }
+    .related-list a { display: inline-block; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--ink); }
+    .related-list a:hover { background: var(--green); }
+    .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
+  </style>
+
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  AUTOMATISCH ERZEUGT von src/build-pages.mjs — NICHT von Hand editieren.
+
+  Inhalt aendern:
+    - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
+    - fuer eine Export-Familie:  data/pathways.json
+    - fuer DIESES Geraet:        data/devices.json (slug: denon-prime-go)
+  danach: npm run build:pages && npm run build:css && npm run build:icons
+
+  Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
+================================================================================
+-->
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="fixed z-50 w-full top-0" id="navbar">
+  <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+    <a href="../../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+      <img src="../../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+           class="h-9 sm:h-10 w-auto" decoding="async">
+    </a>
+    <div class="flex items-center gap-3">
+      <a data-download href="../../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+      <!-- Login zum Portal (Marcel, 2026-08-27) -->
+      <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
+    </div>
+  </div>
+</nav>
+
+
+<main id="main" class="subpage">
+  <div class="subpage__inner">
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Prime Go</span>
+</nav>
+
+
+    <h1>A gig-ready USB stick for your Denon Prime Go</h1>
+    <p class="subpage__lead">The Prime Go is our reference device — every Alpha release is tested on one before it ships. Point Alpha at a folder of tracks, pick the energy arc your night should follow, and the stick comes out analyzed, harmonically ordered and ready to play the moment it clicks into the Prime Go&#39;s USB port.</p>
+
+    
+    <ul class="device-facts">
+      
+      <li>2 decks</li>
+      
+      <li>7-inch touchscreen</li>
+      
+      <li>USB + SD card</li>
+      
+      <li>battery-powered</li>
+      
+      <li>Engine OS 3.x</li>
+      
+    </ul>
+    
+
+    <h2>What Alpha writes for the Prime Go</h2>
+    <p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>
+    <p>The Prime Go is a battery-powered two-deck standalone, and that is exactly the setup Alpha is built around: no laptop in the booth, just the unit and a prepared drive. It takes both USB sticks and SD cards, and the on-disk format Alpha writes is identical for either — point the export at whichever is mounted.</p>
+
+    <h2>From folder to Prime Go in four steps</h2>
+    <ol>
+      
+      <li>Point Alpha at your music — whole folders or hand-picked files. It reads BPM, key, energy and loudness out of the audio, locally on your Mac, without modifying your files.</li>
+      
+      <li>Pick the energy arc your night should follow — Journey, Wave, Build, Peak-time or Cooldown, or drag the curve yourself — set the length, and Alpha orders the tracks so neighboring songs actually mix.</li>
+      
+      <li>Audition the set in the built-in player and drag any track to a new position until the order feels right.</li>
+      
+      <li>Plug in your stick and click Write to USB. Alpha backs up the stick&#39;s existing Engine library, writes the set, matches loudness if you asked it to, validates the result — then eject and go straight into the Prime Go.</li>
+      
+    </ol>
+
+    <h2>Good to know on the Prime Go</h2>
+    <ul>
+      
+      <li>This is the device every Alpha release is validated on — if something works anywhere, it works here first.</li>
+      
+      <li>The Prime Go re-analyzes nothing: Alpha&#39;s BPM, key and beatgrid are read as-is from the Engine library, so tracks are ready the moment they load.</li>
+      
+      <li>If a playlist shows up without waveforms at first, that&#39;s normal — the Prime Go draws its own waveform the first time it loads a track.</li>
+      
+      <li>Playing outdoors on battery? Prepare several playlists on one stick — Alpha adds to the Engine library on the drive, it never wipes it.</li>
+      
+    </ul>
+
+    <h2>Common questions about the Prime Go</h2>
+<div class="page-faq">
+
+  <details class="faq-item">
+    <summary>
+      Do I need the Engine DJ desktop app to prepare a stick for the Prime Go?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>No. Alpha writes the Engine OS 3.x library directly onto the drive — the Prime Go mounts it exactly like a stick prepared by Engine DJ itself, with playlists, BPM and key in place.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      I&#39;m coming from rekordbox — can the Prime Go use my rekordbox USB?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>Engine OS can import a rekordbox stick on the device, but that import is slow and beatgrids can shift. The cleaner way: export your collection as a rekordbox XML, let Alpha keep the BPM, key and beatgrid rekordbox worked out, and write a native Engine library to the stick instead.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      Can I use the Prime Go&#39;s SD card slot instead of a USB stick?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>Yes. Point Alpha&#39;s export at the mounted SD card — the on-disk format is identical, so the Prime Go reads either the same way.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      How should the stick be formatted for the Prime Go?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>exFAT (Denon&#39;s recommendation) or FAT32 — Engine OS does not read NTFS. Alpha writes onto the stick&#39;s existing filesystem; it never reformats your drive.</p>
+    </div>
+  </details>
+
+</div>
+
+
+    <h2>Try it with your own Prime Go</h2>
+    <p>
+      Every feature is in the free download — analysis, harmonic sequencing,
+      loudness matching and the Engine DJ write. It stops after
+      10 tracks, which is enough for one real set on your own stick. After
+      that it's €30 including VAT, once. No subscription.
+    </p>
+    <p>
+      <a data-download href="../../index.html#download" class="btn btn-primary">
+        <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+      </a>
+    </p>
+
+    
+
+    <p>
+      Different setup? <a href="../../compatibility.html">Check your own gear</a> —
+      or read the full technical reference in the
+      <a href="../../knowledgebase/#usb-export">knowledge base</a>.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__brand">
+      <a href="../../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+        <img src="../../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-8 w-auto" decoding="async" loading="lazy">
+      </a>
+      <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
+    </div>
+
+    <nav class="site-footer__main" aria-label="Product">
+      <a href="../../features/">Features</a>
+      <a href="../../compatibility.html">Works with your setup?</a>
+      <a href="../../usb/">USB guides</a>
+      <a href="../../pricing.html">Pricing</a>
+    </nav>
+
+    <nav class="site-footer__legal" aria-label="Legal and settings">
+      <a href="../../terms.html">Terms</a>
+      <a href="../../withdrawal.html">Withdrawal</a>
+      <a href="../../privacy.html">Privacy</a>
+      <a href="#" data-cookie-settings>Cookie settings</a>
+      <a href="../../imprint.html">Imprint</a>
+    </nav>
+
+  </div>
+</footer>
+
+<!--
+  Chat-Widget (Marcel, 2026-08-22).
+
+  Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+  Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+  in privacy.html ("loads nothing from anyone else") wurde entsprechend
+  angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+  Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+  document.body.appendChild ein und braucht den Body deshalb bereits.
+-->
+<script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
+
+</body>
+</html>

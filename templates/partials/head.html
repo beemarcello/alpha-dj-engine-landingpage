@@ -1,0 +1,88 @@
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{page.title}}</title>
+  <meta name="description" content="{{page.description}}">
+
+  <link rel="icon" href="{{root}}assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="{{root}}assets/icons/favicon.png">
+  <link rel="canonical" href="{{page.canonical}}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{page.title}}">
+  <meta property="og:description" content="{{page.description}}">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="{{page.canonical}}">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="{{root}}css/site.css?v={{v.siteCss}}">
+  <link rel="stylesheet" href="{{root}}css/tailwind.css?v={{v.tailwindCss}}">
+
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
+  <script src="{{root}}js/icons.js?v={{v.iconsJs}}" defer></script>
+  <script src="{{root}}js/site.js?v={{v.siteJs}}" defer></script>
+
+  {{{page.jsonld}}}
+
+  <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
+       in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
+       gepflegten Seiten angefasst werden. Aenderungen hier gelten nach dem
+       naechsten `npm run build:pages` fuer alle generierten Seiten. -->
+  <style>
+    .crumbs { font-size: 13px; color: var(--ink-55); margin: 0 0 18px; }
+    .crumbs a { color: var(--ink-55); text-decoration: underline; text-underline-offset: 2px; }
+    .crumbs span[aria-current] { color: var(--ink); }
+    .crumbs .sep { margin: 0 6px; }
+    .device-facts { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 8px; max-width: none; }
+    .device-facts li { border: 2px solid var(--ink); background: var(--white); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--ink); margin: 0; }
+    .hub-group { margin-top: 34px; }
+    .hub-list { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .hub-list li { margin: 0; }
+    .subpage a.hub-card { text-decoration: none; }
+    .hub-card { display: block; border: 2px solid var(--ink); background: var(--white); border-radius: 12px; padding: 14px 16px; text-decoration: none; box-shadow: var(--shadow-hard); }
+    .hub-card:hover { background: var(--green); }
+    .hub-card--soon { box-shadow: none; border-style: dashed; }
+    .hub-card--soon:hover { background: var(--white); }
+    .hub-card__name { font-weight: 600; font-size: 16px; color: var(--ink); margin: 0; }
+    .hub-card__meta { font-size: 13px; color: var(--ink-55); margin: 4px 0 0; }
+    .related-list { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; max-width: none; }
+    .related-list li { margin: 0; }
+    .subpage .related-list a { text-decoration: none; }
+    .related-list a { display: inline-block; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--ink); }
+    .related-list a:hover { background: var(--green); }
+    .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
+  </style>

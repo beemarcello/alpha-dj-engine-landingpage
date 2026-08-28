@@ -372,8 +372,12 @@
   /* ------------------------------------------------------------------------
      6. Geräte-Kompatibilitätssuche (compatibility.html)
 
-     Pflege: neue Hardware hier eintragen. `aliases` fängt Schreibweisen ab, die
-     Leute wirklich tippen (ohne Leerzeichen, ohne Marke, Spitznamen).
+     Pflege: NICHT mehr hier editieren. Die Geraeteliste kommt aus
+     data/devices.json und wird von src/build-pages.mjs in den markierten
+     Block unten generiert (`npm run build:pages`). `aliases` fängt
+     Schreibweisen ab, die Leute wirklich tippen (ohne Leerzeichen, ohne
+     Marke, Spitznamen). `url` zeigt auf die generierte Geraeteseite
+     unter usb/<slug>/.
 
      status:
        'yes'    → Alpha schreibt etwas, das dieses Setup liest
@@ -395,64 +399,110 @@
      Der Vorbehalt aus der Wissensbasis ("neues Ziel, bitte am eigenen Player
      bestaetigen") steht bewusst im note-Feld und darf nicht wegfallen.
      ------------------------------------------------------------------------ */
-  var ENGINE = 'Fully compatible · Engine DJ';
-  var REKORDBOX = 'Fully compatible · rekordbox USB';
-
-  /* Marken- und Formatnamen, die Leute statt des Modells tippen. Wer
-     "pioneer", "alphatheta" oder "rekordbox" sucht, soll alle Player sehen. */
-  var RB = ['pioneer', 'alphatheta', 'rekordbox'];
-  var RB_NOTE = 'Alpha writes the rekordbox library itself, so the stick plays ' +
-                'straight on the player — no rekordbox software needed. This ' +
-                'target is new: please confirm it on your own gear.';
+  /* BEGIN GENERATED DEVICES (aus data/devices.json — dort aendern, dann `npm run build:pages`) */
   var DEVICES = [
-    { name: 'Denon DJ Prime Go',   status: 'yes', meta: ENGINE, aliases: ['primego', 'prime go', 'go'],
-      note: 'Our reference device — every release is tested on it.' },
-    { name: 'Denon DJ Prime 2',    status: 'yes', meta: ENGINE, aliases: ['prime2', 'prime 2'] },
-    { name: 'Denon DJ Prime 4',    status: 'yes', meta: ENGINE, aliases: ['prime4', 'prime 4'] },
-    { name: 'Denon DJ SC5000 Prime',  status: 'yes', meta: ENGINE, aliases: ['sc5000'] },
-    { name: 'Denon DJ SC5000M Prime', status: 'yes', meta: ENGINE, aliases: ['sc5000m'] },
-    { name: 'Denon DJ SC6000 Prime',  status: 'yes', meta: ENGINE, aliases: ['sc6000'] },
-    { name: 'Denon DJ SC6000M Prime', status: 'yes', meta: ENGINE, aliases: ['sc6000m'] },
-    { name: 'Numark Mixstream Pro',   status: 'yes', meta: ENGINE, aliases: ['mixstream', 'mixstreampro'] },
-    { name: 'Denon DJ LC6000 Prime',  status: 'yes', meta: 'Engine DJ · expansion controller',
+    { name: 'Denon DJ Prime Go',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['primego', 'prime go', 'go'],
+      note: 'Our reference device — every release is tested on it.',
+      url: 'usb/denon-prime-go/' },
+    { name: 'Denon DJ Prime 2',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['prime2', 'prime 2'] },
+    { name: 'Denon DJ Prime 4',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['prime4', 'prime 4'] },
+    { name: 'Denon DJ SC5000 Prime',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['sc5000'] },
+    { name: 'Denon DJ SC5000M Prime',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['sc5000m'] },
+    { name: 'Denon DJ SC6000 Prime',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['sc6000'] },
+    { name: 'Denon DJ SC6000M Prime',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['sc6000m'] },
+    { name: 'Numark Mixstream Pro',
+      status: 'yes',
+      meta: 'Fully compatible · Engine DJ',
+      aliases: ['mixstream', 'mixstreampro'] },
+    { name: 'Denon DJ LC6000 Prime',
+      status: 'yes',
+      meta: 'Engine DJ · expansion controller',
       aliases: ['lc6000'],
       note: 'An expansion controller — it has no drive of its own. Write the USB for the SC5000 or SC6000 it is paired with.' },
-
-    { name: 'Pioneer DJ CDJ-3000', status: 'yes', meta: REKORDBOX,
-      aliases: ['cdj3000', 'cdj 3000'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ CDJ-2000NXS2', status: 'yes', meta: REKORDBOX,
-      aliases: ['cdj2000', 'cdj 2000', 'nxs2', 'nexus'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ XDJ-RX3', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdjrx3', 'xdj rx3', 'rx3'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ XDJ-RX2', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdjrx2', 'xdj rx2', 'rx2'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ XDJ-XZ', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdjxz', 'xdj xz', 'xz'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ XDJ-1000MK2', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdj1000', 'xdj 1000', '1000mk2'].concat(RB), note: RB_NOTE },
-    { name: 'Pioneer DJ XDJ-700', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdj700', 'xdj 700'].concat(RB), note: RB_NOTE },
-    { name: 'AlphaTheta OPUS-QUAD', status: 'yes', meta: REKORDBOX,
-      aliases: ['opus', 'opusquad', 'opus quad'].concat(RB), note: RB_NOTE },
-    { name: 'AlphaTheta XDJ-AZ', status: 'yes', meta: REKORDBOX,
-      aliases: ['xdjaz', 'xdj az'].concat(RB), note: RB_NOTE },
-
-    /* Laptop-Software. Bewusst eine eigene meta-Zeile ("via …"): das Ergebnis
-       ist gruen, weil Alpha wirklich schreibt, aber der Nutzer muss sofort
-       sehen, dass hier ein Rechner im Spiel ist und kein eigenstaendiger Stick.
-       Serato stand hier bis 2026-08-25 auf 'never' mit der Begruendung, es gebe
-       "nothing for Alpha to write" — das ist seit /knowledgebase/#serato-export
-       falsch. */
-    { name: 'VirtualDJ', status: 'yes', meta: 'Compatible · via VirtualDJ on a laptop',
+    { name: 'Pioneer DJ CDJ-3000',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['cdj3000', 'cdj 3000', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.',
+      url: 'usb/pioneer-cdj-3000/' },
+    { name: 'Pioneer DJ CDJ-2000NXS2',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['cdj2000', 'cdj 2000', 'nxs2', 'nexus', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'Pioneer DJ XDJ-RX3',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdjrx3', 'xdj rx3', 'rx3', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'Pioneer DJ XDJ-RX2',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdjrx2', 'xdj rx2', 'rx2', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'Pioneer DJ XDJ-XZ',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdjxz', 'xdj xz', 'xz', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'Pioneer DJ XDJ-1000MK2',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdj1000', 'xdj 1000', '1000mk2', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'Pioneer DJ XDJ-700',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdj700', 'xdj 700', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'AlphaTheta OPUS-QUAD',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['opus', 'opusquad', 'opus quad', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'AlphaTheta XDJ-AZ',
+      status: 'yes',
+      meta: 'Fully compatible · rekordbox USB',
+      aliases: ['xdjaz', 'xdj az', 'pioneer', 'alphatheta', 'rekordbox'],
+      note: 'Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.' },
+    { name: 'VirtualDJ',
+      status: 'yes',
+      meta: 'Compatible · via VirtualDJ on a laptop',
       aliases: ['virtualdj', 'virtual dj', 'vdj'],
       note: 'Alpha writes a VirtualDJ library onto the drive, which the VirtualDJ app on a Mac or PC then loads — so any controller VirtualDJ supports will play the set. It is not a standalone stick for the gear itself.' },
-    { name: 'Serato DJ', status: 'yes', meta: 'Compatible · via Serato on a laptop',
+    { name: 'Serato DJ',
+      status: 'yes',
+      meta: 'Compatible · via Serato on a laptop',
       aliases: ['serato', 'rane', 'crate'],
       note: 'Alpha writes a Serato crate plus the beat grid onto the drive; plug it into a laptop running Serato DJ and the crate appears. Serato only scans a drive\'s root, so export to the root rather than a subfolder. Hot cues and loops are not written yet.' },
-    { name: 'Traktor Pro', status: 'yes', meta: 'Compatible · via Traktor on a laptop',
+    { name: 'Traktor Pro',
+      status: 'yes',
+      meta: 'Compatible · via Traktor on a laptop',
       aliases: ['traktor', 'nativeinstruments', 'native instruments', 'nml'],
-      note: 'Alpha writes a collection.nml alongside the audio. Traktor does not scan drives by itself — import it once via File → Import Collection.' }
+      note: 'Alpha writes a collection.nml alongside the audio. Traktor does not scan drives by itself — import it once via File → Import Collection.' },
   ];
+  /* END GENERATED DEVICES */
 
   function normalize(s) {
     return String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -477,6 +527,7 @@
           '<p class="dev-card__name">' + d.name + '</p>' +
           '<p class="dev-card__meta">' + d.meta + '</p>' +
           (d.note ? '<p class="dev-card__note">' + d.note + '</p>' : '') +
+          (d.url ? '<p class="dev-card__note"><a href="' + d.url + '">Device guide &rarr;</a></p>' : '') +
         '</span>' +
       '</li>';
   }

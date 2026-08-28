@@ -55,6 +55,11 @@ Nichts sonst. Konkret bedeutet das:
 - **Kein** `npm install`, **kein** Build-Schritt. Du brauchst keine Toolchain.
 - **Keine** Änderung an `css/`, `js/`, `assets/`, den anderen `.html`-Dateien,
   `sitemap.xml` oder `robots.txt`.
+- **Keine** Änderung an `data/`, `templates/`, `src/` oder `usb/`. Das ist das
+  Programmatic-SEO-System (siehe README): die Seiten unter `usb/` und die
+  `sitemap.xml` werden aus `data/*.json` **generiert** — eine Hand-Änderung
+  dort wird beim nächsten `npm run build:pages` kommentarlos überschrieben.
+  Auch der `DEVICES`-Block in `js/site.js` ist generiert (Marker-Kommentare).
 - **Keine** Änderung an den `?v=`-Nummern in den Script- und Style-Tags. Die
   gelten nur für CSS und JavaScript; HTML wird nicht zwischengespeichert.
 

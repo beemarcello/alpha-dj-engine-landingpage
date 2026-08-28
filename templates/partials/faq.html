@@ -1,0 +1,14 @@
+<h2>Common questions about the {{device.model}}</h2>
+<div class="page-faq">
+{{#each device.faq}}
+  <details class="faq-item">
+    <summary>
+      {{q}}
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>{{a}}</p>
+    </div>
+  </details>
+{{/each}}
+</div>

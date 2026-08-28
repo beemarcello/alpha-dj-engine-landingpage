@@ -30,14 +30,17 @@ AMC_Landingpage_2026/
 ├── withdrawal.html         Widerrufsbelehrung EN + DE — geprüft
 ├── privacy.html            Datenschutz — Entwurf, trägt noindex
 ├── imprint.html            Impressum — vollständig
-├── robots.txt · sitemap.xml
+├── robots.txt · sitemap.xml   (sitemap ERZEUGT — npm run build:sitemap)
+├── usb/                    ERZEUGT — Programmatic-SEO-Seiten (npm run build:pages)
+├── data/                   Geraete, Export-Pfade, Keywords (Quelle der usb/-Seiten)
+├── templates/              Master-Templates + Partials fuer usb/-Seiten
 ├── css/
 │   ├── site.css            Design-Tokens + Komponenten + Animationen
 │   └── tailwind.css        ERZEUGT — npm run build:css
 ├── js/
 │   ├── site.js             CTA, Nav, Energy-Arc, Gerätesuche, Consent, Modal
 │   └── icons.js            ERZEUGT — npm run build:icons
-├── src/                    Build-Eingaben (tailwind.css, build-icons.mjs)
+├── src/                    Build-Eingaben (tailwind.css, build-icons.mjs, build-pages.mjs, build-sitemap.mjs)
 ├── assets/
 │   ├── fonts/              Space Grotesk + Doto (selbst gehostet, SIL OFL)
 │   ├── logo/               Logo_Alpha_DJ_Engine.png ← aktuelle Wortmarke
@@ -59,20 +62,27 @@ AMC_Landingpage_2026/
 
 ## Build
 
-Die Seite ist statisch und läuft ohne Build. Zwei erzeugte Dateien gibt es trotzdem —
-beide sind eingecheckt, du musst also nur bauen, wenn du HTML/JS geändert hast.
+Die Seite ist statisch und läuft ohne Build. Erzeugte Dateien gibt es trotzdem —
+alle sind eingecheckt, du musst also nur bauen, wenn du HTML/JS/Daten geändert hast.
 
 ```bash
 npm install     # einmalig
-npm run build   # baut css/tailwind.css und js/icons.js
+npm run build   # baut usb/-Seiten, css/tailwind.css, js/icons.js und sitemap.xml
 ```
 
 | Datei | Erzeugt aus | Wann neu bauen |
 |-------|-------------|----------------|
+| `usb/**/index.html` | `templates/` + `data/devices.json` + `data/pathways.json` (`src/build-pages.mjs`) | wenn du Templates oder Geraetedaten aenderst — siehe Abschnitt "Programmatic SEO" |
+| `DEVICES`-Block in `js/site.js` | `data/devices.json` (`src/build-pages.mjs`) | mit den Seiten zusammen; danach `site.js?v=` auf den 9 Handseiten bumpen |
+| `sitemap.xml` | `src/build-sitemap.mjs` (lastmod aus git) | nach jeder Seiten-Aenderung; laeuft im `npm run build` als letzter Schritt |
 | `css/tailwind.css` | `src/tailwind.css` + `tailwind.config.js` | wenn du **neue Tailwind-Klassen** in HTML oder JS verwendest — sonst fehlen sie im gepurgten Build |
 | `js/icons.js` | `src/build-icons.mjs` + `lucide-static` | wenn du ein **neues `data-lucide`-Icon** verwendest |
 
-Einzeln: `npm run build:css` · `npm run build:icons` · `npm run watch:css`
+Einzeln: `npm run build:pages` · `npm run build:css` · `npm run build:icons` · `npm run build:sitemap` · `npm run watch:css`
+
+Die Reihenfolge im `build`-Script ist Absicht: erst Seiten (Tailwind-Purge und
+Icon-Scan muessen die neuen HTML-Dateien sehen), Sitemap zuletzt (sie liest das
+Dateisystem).
 
 **Warum lokal statt CDN:** `cdn.tailwindcss.com` und `unpkg.com` hätten die IP-Adresse
 jedes Besuchers an Dritte übertragen — ohne Einwilligung derselbe Fehlertyp wie
@@ -87,6 +97,80 @@ vorher, `js/site.js` musste dafür nicht angefasst werden.
 
 > Zwei Icons wurden in neueren Lucide-Versionen umbenannt und im Markup nachgezogen:
 > `check-circle-2` → `circle-check-big`, `help-circle` → `circle-help`.
+
+---
+
+## Programmatic SEO (`/usb/`)
+
+Pro kompatiblem Standalone-Geraet existiert eine generierte Landingpage unter
+`usb/<slug>/` (z. B. `/usb/denon-prime-go/`), plus die Hub-Seite `/usb/`, die
+alle Geraete verlinkt. Ziel: Long-Tail-Suchen wie "prepare usb for cdj 3000"
+oder "xdj 1000mk2 without rekordbox" treffen eine Seite mit exakt diesem
+Wording. Die Keyword-Basis liegt in `data/keywords.csv`.
+
+**Generierte Dateien NIE von Hand editieren** (Kopfkommentar in jeder Datei).
+Aenderungen laufen ueber genau eine von drei Ebenen:
+
+| Was du aendern willst | Wo | Wirkung |
+|---|---|---|
+| Layout, CTA, Preiszeile, Footer aller Seiten | `templates/device.html`, `templates/hub.html`, `templates/partials/` | alle Seiten |
+| Inhalte einer Export-Familie (Engine/rekordbox) | `data/pathways.json` | alle Seiten dieser Familie |
+| Ein Geraet (Titel, FAQ, Quirks, Facts) | `data/devices.json` | eine Seite |
+
+Danach immer:
+
+```bash
+npm run build && git diff
+```
+
+Den kompletten Diff **vor dem Push lesen** — es gibt kein Staging, jeder Push
+ist in ~60 s live. Der Generator validiert hart (Pflichtfelder, min. 2 FAQs,
+min. 1 Quirk, eindeutige Intros, aufloesbare related-Slugs) und bricht bei
+Verstoss ab, ohne etwas zu schreiben: Duenne Near-Duplicate-Seiten sind ein
+SEO-Risiko (Doorway-Pages), die handgeschriebenen Felder pro Geraet sind der
+Schutz dagegen. Warnungen zeigen, wenn ein P1/P2-title-driver-Keyword aus
+`data/keywords.csv` nicht in title/h1/description der Zielseite vorkommt.
+
+### Gestaffelter Rollout (`released`-Flag)
+
+Aus schlechter Erfahrung mit einer frueheren Seite (GSC-Abstrafung nach viel
+neuem Content auf einmal) gehen die Seiten **bewusst in kleinen Wellen** live,
+nicht alle 17 auf einmal. Steuerung: das Feld `released` pro Geraet in
+`data/devices.json`.
+
+- `released: true` → Seite wird generiert, im Hub verlinkt, steht in der
+  Sitemap, Trefferkarte der Geraetesuche bekommt den "Device guide →"-Link.
+- `released: false` → Seite **existiert nicht auf dem Server** (kein
+  noindex-Trick noetig, es gibt schlicht nichts zu crawlen). Im Hub erscheint
+  das Geraet als unverlinkte "guide coming soon"-Karte, die Related-Links
+  anderer Seiten lassen es aus.
+
+**Welle freigeben:** Flags umstellen → `npm run build` → `git diff` lesen →
+push → in der GSC die neuen URLs per URL-Inspection anstossen (nicht mehr als
+die Welle selbst). **Zwischen den Wellen 10–14 Tage warten** und in der GSC
+pruefen: Werden die Seiten indexiert? Gibt es "Duplicate, Google chose
+different canonical" oder "Crawled – currently not indexed"? Kommen erste
+Impressionen? Erst wenn die letzte Welle sauber indexiert, kommt die naechste.
+Empfohlene Wellengroesse: 2–4 Seiten.
+
+Welle 1 (freigegeben): `denon-prime-go`, `pioneer-cdj-3000`.
+
+**Neues Geraet:** Datensatz in `data/devices.json` anlegen (`page: true`,
+Pathway, Aliases fuer die Suche, handgeschriebene title/h1/description/intro/
+quirks/faq), Keyword-Zeilen in `data/keywords.csv` ergaenzen, `npm run build`.
+Die Kompatibilitaetssuche (`DEVICES` in `js/site.js`) und die Sitemap ziehen
+automatisch mit. **Geraet entfernen:** Datensatz loeschen — der Generator
+raeumt das verwaiste `usb/<slug>/`-Verzeichnis ab.
+
+Cache-Buster: Die generierten Seiten lesen die `?v=`-Nummern aus `index.html`.
+Wer dort bumpt, muss danach `npm run build:pages` laufen lassen. Umgekehrt gilt:
+Aendert der Build den `DEVICES`-Block in `js/site.js`, muss `site.js?v=` auf
+den 9 handgepflegten Seiten von Hand hochgezaehlt werden.
+
+Spaetere Ausbaustufen (Datenmodell liegt bereit): Konvertierungs-Seiten unter
+`/convert/` aus `data/software-pairs.json` (rekordbox→Engine DJ usw.) und
+deutsche Seiten mit hreflang. Kandidaten und Prioritaeten stehen als
+`status=gap`-Zeilen in `data/keywords.csv`.
 
 ---
 

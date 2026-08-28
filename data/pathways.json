@@ -1,0 +1,61 @@
+{
+  "_comment": "Geteilte Inhalte pro Export-Pfad. Jede Geraeteseite rendert den formatBlock und die steps ihres Pfads — Aenderungen hier gelten fuer die ganze Familie. Der Token {model} in steps wird von src/build-pages.mjs durch den Modellnamen des Geraets ersetzt. Fachliche Quelle: /knowledgebase/ (#usb-export, #rekordbox-export). caveats werden ueber caveatFlags in devices.json referenziert; der Text 'confirm on your own gear' ist eine bewusste Zusage an den Kunden und darf nicht wegfallen, solange er in der Wissensbasis steht.",
+  "engineos": {
+    "label": "Denon Engine OS export",
+    "shortLabel": "Engine DJ",
+    "metaLine": "Fully compatible · Engine DJ",
+    "kbAnchor": "knowledgebase/#usb-export",
+    "formatBlock": "<p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>",
+    "steps": [
+      "Point Alpha at your music — whole folders or hand-picked files. It reads BPM, key, energy and loudness out of the audio, locally on your Mac, without modifying your files.",
+      "Pick the energy arc your night should follow — Journey, Wave, Build, Peak-time or Cooldown, or drag the curve yourself — set the length, and Alpha orders the tracks so neighboring songs actually mix.",
+      "Audition the set in the built-in player and drag any track to a new position until the order feels right.",
+      "Plug in your stick and click Write to USB. Alpha backs up the stick's existing Engine library, writes the set, matches loudness if you asked it to, validates the result — then eject and go straight into the {model}."
+    ],
+    "caveats": {}
+  },
+  "rekordbox": {
+    "label": "rekordbox export",
+    "shortLabel": "rekordbox USB",
+    "metaLine": "Fully compatible · rekordbox USB",
+    "kbAnchor": "knowledgebase/#rekordbox-export",
+    "formatBlock": "<p>Alpha writes a full rekordbox USB the player reads directly: the classic <code>export.pdb</code> library every CDJ and XDJ has read for years, the newer encrypted <code>exportLibrary.db</code> the latest players prefer, the per-track analysis files with beat grid, cues and waveforms, album artwork, and the audio under <code>Contents/&lt;Artist&gt;/&lt;Album&gt;</code>. No rekordbox software is needed anywhere in the chain — the stick plugs straight into the gear.</p><p>The beat grid is built from the interpreted BPM, so tracks arrive beat-ready and the player does not re-analyze anything. One limit to know: Alpha writes one constant beat grid per track, so tempo changes inside a track are not modelled.</p>",
+    "steps": [
+      "Point Alpha at your music — whole folders, hand-picked files, or a rekordbox XML export if you want to keep the BPM, key and beatgrid rekordbox already worked out.",
+      "Pick the energy arc your night should follow — Journey, Wave, Build, Peak-time or Cooldown, or drag the curve yourself — set the length, and Alpha orders the tracks so neighboring songs actually mix.",
+      "Audition the set in the built-in player and drag any track to a new position until the order feels right.",
+      "Plug in your stick, choose Pioneer DJ / AlphaTheta as the target and click Write to USB. Alpha writes both rekordbox libraries plus the analysis files, validates the result — then eject and load the playlist on the {model}."
+    ],
+    "caveats": {
+      "new-target-confirm-on-gear": "rekordbox export is a new target — please confirm it on your own gear before a gig."
+    },
+    "searchNote": "Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear."
+  },
+  "virtualdj": {
+    "label": "VirtualDJ export",
+    "shortLabel": "VirtualDJ",
+    "metaLine": "Compatible · via VirtualDJ on a laptop",
+    "kbAnchor": "knowledgebase/#virtualdj-export",
+    "formatBlock": "",
+    "steps": [],
+    "caveats": {}
+  },
+  "serato": {
+    "label": "Serato export",
+    "shortLabel": "Serato",
+    "metaLine": "Compatible · via Serato on a laptop",
+    "kbAnchor": "knowledgebase/#serato-export",
+    "formatBlock": "",
+    "steps": [],
+    "caveats": {}
+  },
+  "traktor": {
+    "label": "Traktor export",
+    "shortLabel": "Traktor",
+    "metaLine": "Compatible · via Traktor on a laptop",
+    "kbAnchor": "knowledgebase/#traktor-export",
+    "formatBlock": "",
+    "steps": [],
+    "caveats": {}
+  }
+}

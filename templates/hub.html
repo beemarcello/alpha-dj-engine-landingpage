@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  AUTOMATISCH ERZEUGT von src/build-pages.mjs — NICHT von Hand editieren.
+
+  Inhalt aendern: templates/hub.html bzw. data/devices.json,
+  danach: npm run build:pages && npm run build:css && npm run build:icons
+
+  Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
+================================================================================
+-->
+
+{{> nav}}
+
+<main id="main" class="subpage">
+  <div class="subpage__inner subpage__inner--wide">
+
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{root}}index.html">Home</a><span class="sep">/</span><span aria-current="page">USB guides</span>
+    </nav>
+
+    <h1>Prepare a USB for your player</h1>
+    <p class="subpage__lead">
+      Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set
+      and writes the library your player actually reads — Engine DJ for Denon
+      and Numark, a rekordbox USB for Pioneer DJ and AlphaTheta. Pick your
+      device for the exact walkthrough, formats and quirks.
+    </p>
+
+    {{#each groups}}
+    <section class="hub-group">
+      <h2>{{title}}</h2>
+      <p>{{blurb}}</p>
+      <ul class="hub-list">
+        {{#each devices}}
+        <li>
+          <a class="hub-card" href="{{root}}usb/{{slug}}/">
+            <p class="hub-card__name">{{fullName}}</p>
+            <p class="hub-card__meta">{{hubMeta}}</p>
+          </a>
+        </li>
+        {{/each}}
+        {{#each comingSoon}}
+        <li>
+          <div class="hub-card hub-card--soon">
+            <p class="hub-card__name">{{fullName}}</p>
+            <p class="hub-card__meta">{{hubMeta}} · guide coming soon</p>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/each}}
+
+    <section class="hub-group">
+      <h2>Play from a laptop instead?</h2>
+      <p>
+        Alpha also writes libraries for VirtualDJ, Serato DJ and Traktor Pro —
+        a computer running the software reads the drive, so any controller those
+        apps support will play the set. The details live on the
+        <a href="{{root}}features/">features page</a>.
+      </p>
+    </section>
+
+    <section class="hub-group">
+      <h2>Don't see your device?</h2>
+      <p>
+        <a href="{{root}}compatibility.html">Search your gear on the compatibility
+        page</a> — and if it's not covered yet, tell us there. That's how this
+        list grows.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+{{> footer}}
+
+</body>
+</html>

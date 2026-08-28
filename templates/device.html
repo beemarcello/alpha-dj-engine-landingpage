@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  AUTOMATISCH ERZEUGT von src/build-pages.mjs — NICHT von Hand editieren.
+
+  Inhalt aendern:
+    - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
+    - fuer eine Export-Familie:  data/pathways.json
+    - fuer DIESES Geraet:        data/devices.json (slug: {{device.slug}})
+  danach: npm run build:pages && npm run build:css && npm run build:icons
+
+  Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
+================================================================================
+-->
+
+{{> nav}}
+
+<main id="main" class="subpage">
+  <div class="subpage__inner">
+
+    {{> breadcrumbs}}
+
+    <h1>{{device.h1}}</h1>
+    <p class="subpage__lead">{{device.intro}}</p>
+
+    {{#if device.facts}}
+    <ul class="device-facts">
+      {{#each device.facts}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+    {{/if}}
+
+    <h2>What Alpha writes for the {{device.model}}</h2>
+    {{{pathway.formatBlock}}}
+    <p>{{device.deviceDetail}}</p>
+
+    <h2>From folder to {{device.model}} in four steps</h2>
+    <ol>
+      {{#each stepsResolved}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ol>
+
+    <h2>Good to know on the {{device.model}}</h2>
+    <ul>
+      {{#each device.quirks}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+
+    {{> faq}}
+
+    <h2>Try it with your own {{device.model}}</h2>
+    <p>
+      Every feature is in the free download — analysis, harmonic sequencing,
+      loudness matching and the {{pathway.shortLabel}} write. It stops after
+      10 tracks, which is enough for one real set on your own stick. After
+      that it's €30 including VAT, once. No subscription.
+    </p>
+    <p>
+      <a data-download href="{{root}}index.html#download" class="btn btn-primary">
+        <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+      </a>
+    </p>
+
+    {{#if relatedResolved}}
+    <h2>Related players</h2>
+    <ul class="related-list">
+      {{#each relatedResolved}}
+      <li><a href="{{root}}usb/{{slug}}/">{{fullName}}</a></li>
+      {{/each}}
+    </ul>
+    {{/if}}
+
+    <p>
+      Different setup? <a href="{{root}}compatibility.html">Check your own gear</a> —
+      or read the full technical reference in the
+      <a href="{{root}}{{pathway.kbAnchor}}">knowledge base</a>.
+    </p>
+
+  </div>
+</main>
+
+{{> footer}}
+
+</body>
+</html>

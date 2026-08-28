@@ -32,6 +32,24 @@
 
   <!-- ?v= bei jeder Änderung an site.css / site.js hochzählen, sonst liefert der
        Browser die alte Datei aus dem Cache (kein Build-Step = kein Hashing). -->
+  <!-- Strukturierte Daten: die App als Ganzes, bewusst NUR hier auf der
+       Startseite. Die generierten Geraeteseiten (usb/) tragen stattdessen
+       BreadcrumbList + FAQPage — app-weites Schema auf 20 URLs zu wiederholen
+       waere Rauschen. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Alpha-DJ-Engine",
+    "operatingSystem": "macOS",
+    "applicationCategory": "MultimediaApplication",
+    "description": "Alpha-DJ-Engine analyzes your music locally, builds a harmonically sequenced DJ set and writes it straight to a USB stick — as an Engine DJ or rekordbox library the player reads natively, plus VirtualDJ, Serato and Traktor.",
+    "url": "https://alpha-dj-engine.com/",
+    "offers": { "@type": "Offer", "price": "30", "priceCurrency": "EUR", "description": "Lifetime licence, one person on one device. First 10 tracks free." },
+    "publisher": { "@type": "Organization", "name": "Alphabees", "url": "https://alpha-dj-engine.com/imprint.html" }
+  }
+  </script>
+
   <link rel="stylesheet" href="css/site.css?v=39">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
@@ -77,7 +95,7 @@
   </script>
 
   <script src="js/icons.js?v=7" defer></script>
-  <script src="js/site.js?v=25" defer></script>
+  <script src="js/site.js?v=26" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -1331,6 +1349,7 @@
       <nav class="site-footer__main" aria-label="Product">
         <a href="features/">Features</a>
         <a href="compatibility.html">Works with your setup?</a>
+        <a href="usb/">USB guides</a>
         <a href="pricing.html">Pricing</a>
       </nav>
 
