@@ -595,7 +595,7 @@
           <h3>Common questions about rekordbox import</h3>
           <dl class="kb-qa">
             <dt>My library has over a thousand tracks &mdash; do they all go into the Composer?</dt>
-            <dd>No. A set is a selection, so the import asks how to continue. Use <span class="kb-verbatim">Pick tracks for a set</span> to filter and choose the tracks for one set, or <span class="kb-verbatim">Write whole library to USB</span> to transfer everything without composing.</dd>
+            <dd>No. A set is a selection, so the import asks how to continue. Use <span class="kb-verbatim">Pick tracks for a set</span> to filter and choose the tracks for one set, or <span class="kb-verbatim">Write whole library to USB</span> to transfer everything without composing. Since 1.0.3, writing the whole library requires being signed in and online &mdash; the export sign-off comes from the Alpha cloud, the same as for a composed set.</dd>
             <dt>Why are some tracks reported as missing?</dt>
             <dd>Those files could not be found on disk at the paths stored in the XML (moved or renamed since the export). They are skipped; the found tracks import normally.</dd>
             <dt>Do I lose my BPM and key by importing?</dt>
@@ -653,6 +653,29 @@
         </section>
 
         <section class="kb-block">
+          <h3>Send to Export without composing (since 1.0.3)</h3>
+          <p>
+            DJs whose playlist is already in the exact order they want can skip
+            the sequencing engine entirely: the link
+            <span class="kb-verbatim">Send to Export without composing &#8594;</span>
+            at the top right of the Compose step sends all analyzed tracks
+            straight to Export in their current order. The set is still signed
+            off by the Alpha cloud (this requires being signed in and online),
+            so the free-version song count and device registration apply exactly
+            as for a composed set. The Refine step stays available afterwards
+            for manual reordering or deletions.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>Limits and performance</h3>
+          <ul>
+            <li>Compose accepts up to 1000 tracks per set.</li>
+            <li>Since 1.0.3, large sets (150+ tracks) compose in seconds. In earlier versions such sets could time out with a generic connection error.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
           <h3>Compose settings</h3>
           <div class="kb-table-wrap">
             <table class="kb-table">
@@ -684,6 +707,7 @@
                 <tr><td>Tooltip on Fit all tracks</td><td><span class="kb-verbatim">Set the length to include all imported tracks (back-to-back total)</span></td></tr>
                 <tr><td>Tooltip on the length minus/plus buttons</td><td><span class="kb-verbatim">10 minutes shorter</span> / <span class="kb-verbatim">10 minutes longer</span></td></tr>
                 <tr><td>Tooltip on the Generate button</td><td><span class="kb-verbatim">Generate an ordered set that follows the energy arc</span></td></tr>
+                <tr><td>Tooltip on the skip link (top right, since 1.0.3)</td><td><span class="kb-verbatim">Skip composing - all analyzed tracks go to Export in their current order</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -753,6 +777,27 @@
             <li>Use the remove control in the player to delete the selected track.</li>
             <li>Click <span class="kb-verbatim">Send to Export</span> when the set is ready.</li>
           </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Zooming into large sets (since 1.0.3)</h3>
+          <p>
+            With very large sets (roughly 150 tracks and more) the energy bars
+            become too thin to grab. Whenever that happens, a
+            <span class="kb-verbatim">&#8722; / Fit / +</span> control appears at
+            the top right of the bar strip:
+          </p>
+          <ul>
+            <li><span class="kb-verbatim">+</span> zooms in &mdash; bars become wide and grabbable, and the strip scrolls sideways (scrollbar under the strip, or a horizontal trackpad swipe).</li>
+            <li><span class="kb-verbatim">&#8722;</span> zooms back out step by step.</li>
+            <li><span class="kb-verbatim">Fit</span> shows the whole arc at once again (the default view).</li>
+          </ul>
+          <p>
+            While zoomed, the view follows the playing track, and dragging a bar
+            against the left or right edge scrolls the strip along, so a track
+            can be dropped anywhere in the set in one gesture. Composing a new
+            set always starts back in the Fit overview.
+          </p>
         </section>
 
         <section class="kb-block">
