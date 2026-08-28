@@ -10,11 +10,13 @@
    keines: Google lernt daraus, dass die Angabe unzuverlaessig ist, und
    ignoriert sie kuenftig.
 
-   Die 8 Bestandsseiten stehen hier fest verdrahtet, mitsamt der Gruende fuer
-   Sonderfaelle (siehe Kommentare im XML). NICHT enthalten: privacy.html —
-   die Seite traegt noch noindex; eine noindex-Seite in der Sitemap meldet
-   die Search Console als Widerspruch. Die generierten Seiten unter usb/
-   kommen automatisch aus dem Dateisystem dazu.
+   Die Bestandsseiten stehen hier fest verdrahtet, mitsamt der Gruende fuer
+   Sonderfaelle (siehe Kommentare im XML). privacy.html ist seit 2026-08-28
+   dabei: das noindex fiel am 27.08. mit der Finalisierung der Erklaerung
+   (Commit 907b4c6). Wer eine Seite wieder auf noindex stellt, nimmt sie HIER
+   raus — eine noindex-Seite in der Sitemap meldet die Search Console als
+   Widerspruch. Die generierten Seiten unter usb/ kommen automatisch aus dem
+   Dateisystem dazu.
    ========================================================================== */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
@@ -49,9 +51,13 @@ const STATIC_PAGES = [
   },
   {
     loc: '/terms.html', file: 'terms.html', priority: '0.4',
-    comment: 'terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex\n       und gehoert damit in die Sitemap. privacy.html bleibt bis auf Weiteres\n       draussen: dort sind Logfile-Aufbewahrung und Double-Opt-in noch offen.',
+    comment: 'terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex\n       und gehoert damit in die Sitemap.',
   },
   { loc: '/withdrawal.html', file: 'withdrawal.html', priority: '0.4' },
+  {
+    loc: '/privacy.html', file: 'privacy.html', priority: '0.4',
+    comment: 'privacy.html ist seit 2026-08-27 ohne noindex (Erklaerung finalisiert,\n       minimales Setup) und gehoert seither in die Sitemap.',
+  },
 ];
 
 /* Generierte Seiten: Hub 0.7, Geraeteseiten 0.6. */
