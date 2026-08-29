@@ -63,6 +63,11 @@
        gepflegten Seiten angefasst werden. Aenderungen hier gelten nach dem
        naechsten `npm run build:pages` fuer alle generierten Seiten. -->
   <style>
+    /* H1 auf den generierten Seiten in Space Grotesk statt Doto (Marcel,
+       2026-08-29). --font-ui = "Space Grotesk" aus css/site.css; das engere
+       Tracking gleicht aus, dass die Doto-Laufweite (.03em) fuer die dotted
+       Schrift gedacht war. */
+    .subpage h1 { font-family: var(--font-ui); letter-spacing: -0.01em; }
     .crumbs { font-size: 13px; color: var(--ink-55); margin: 0 0 18px; }
     .crumbs a { color: var(--ink-55); text-decoration: underline; text-underline-offset: 2px; }
     .crumbs span[aria-current] { color: var(--ink); }
