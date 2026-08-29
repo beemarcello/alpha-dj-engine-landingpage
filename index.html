@@ -948,7 +948,12 @@
 
           <!-- Gatekeeper-Eintrag (Marcel, 2026-08-27). Ausfuehrliche Fassung mit
                woertlichen Dialogtexten: /knowledgebase/#macos-blocked. Beide
-               Stellen bei macOS-Aenderungen gemeinsam pflegen. -->
+               Stellen bei macOS-Aenderungen gemeinsam pflegen.
+
+               Nachgezogen am 2026-08-29 (KB-Commit bb6f838): seit 1.0.3 ist die
+               App mit Apple Developer ID signiert und von Apple notarisiert —
+               aktuelle Downloads sehen den Dialog gar nicht mehr. Die Schritte
+               bleiben fuer Nutzer aelterer Builds (1.0.2 und frueher) stehen. -->
           <details class="faq-item">
             <summary>
               macOS blocked Alpha the first time you opened it?
@@ -956,9 +961,18 @@
             </summary>
             <div class="faq-answer">
               <p>
-                That's macOS being cautious with apps from outside the App Store —
-                nothing is wrong with your download. The old right-click → Open
-                trick isn't enough on current macOS; the official way:
+                <strong>The current version doesn't do this.</strong> Since 1.0.3,
+                Alpha is signed with our Apple Developer ID and notarized by
+                Apple, so it opens with a normal double-click. If you see the
+                block, you're running an older download (1.0.2 or earlier) — the
+                permanent fix is grabbing the
+                <a href="#download" class="underline underline-offset-2 decoration-2 text-[var(--ink)] font-medium">current version</a>.
+              </p>
+              <p>
+                Want to keep the older build anyway? macOS is just being cautious
+                with apps from outside the App Store — nothing is wrong with your
+                download. The old right-click → Open trick isn't enough on
+                current macOS; the official way:
               </p>
               <!-- Inline statt Utility-Klassen: list-decimal/pl-5/my-3 stehen
                    nicht im gepurgten Tailwind-Build, und Preflight nimmt Listen
