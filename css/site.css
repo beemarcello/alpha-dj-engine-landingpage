@@ -298,9 +298,14 @@ body {
   border: var(--stroke);
   border-radius: var(--r-xs);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
-.demo-modal__close:hover { background: var(--green-hot); }
+/* Schliessen hovert ROT, nicht gruen (Marcel, 2026-08-28): gruen ist auf
+   dieser Seite die Zusage-Farbe, Schliessen ist eine Abbruch-Geste. Das X
+   wird dabei weiss — auf dem dunklen --red-hot waere Schwarz kaum lesbar,
+   dieselbe Kombi (weisses Icon auf red-hot) nutzt schon der Pain-Block. */
+.demo-modal__close:hover { background: var(--red-hot); color: var(--white); }
 
 /* 16:9-Bühne — der Platzhalter bzw. später das iframe füllt sie komplett */
 .demo-modal__frame {
@@ -361,9 +366,11 @@ body {
   border: var(--stroke);
   border-radius: var(--r-xs);
   cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
-.dl-modal__close:hover { background: var(--green-hot); }
+/* Rot statt gruen, weisses X — Begruendung siehe .demo-modal__close. */
+.dl-modal__close:hover { background: var(--red-hot); color: var(--white); }
 
 .dl-modal__lead { font-size: 15px; color: var(--ink-55); line-height: 1.55; margin: 0 0 20px; }
 
