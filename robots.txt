@@ -2,11 +2,15 @@
 User-agent: *
 Allow: /
 
-# Stand 2026-08-31: keine Seite traegt mehr ein noindex, alle stehen in der
-# Sitemap — auch die Rechtstexte. Wer eine Seite wieder auf noindex setzt,
-# nimmt sie aus STATIC_PAGES in src/build-sitemap.mjs raus; noindex + Sitemap
-# ist ein Widerspruch, den die Search Console meldet. Kein Disallow: alles
-# soll erreichbar und crawlbar bleiben.
+# Alle KUNDENSEITEN sind indexierbar und stehen in der Sitemap — auch die
+# Rechtstexte. Wer eine davon auf noindex setzt, nimmt sie aus STATIC_PAGES in
+# src/build-sitemap.mjs raus; noindex + Sitemap ist ein Widerspruch, den die
+# Search Console meldet.
+#
+# Ausnahme: /_brand/preview.html ist eine interne Design-Vorschau. Sie traegt
+# noindex und steht nicht in der Sitemap. Absichtlich KEIN Disallow: das wuerde
+# nur das Crawlen verhindern, nicht das Indexieren — und ein nicht gecrawltes
+# noindex wird nie gelesen.
 
 # /knowledgebase/ ist die Wissensbasis des AI-Support-Agents und MUSS crawlbar
 # und indexierbar bleiben — der Agent kann nur indexierbare Seiten lesen.

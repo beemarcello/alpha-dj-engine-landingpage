@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Alpha-DJ-Engine — Marken-Animationen</title>
+<!-- Interne Vorschau, kein Kundeninhalt — aber GitHub Pages liefert sie aus
+     (.nojekyll deployt auch Ordner mit Unterstrich), sie ist unter
+     /_brand/preview.html oeffentlich mit HTTP 200 erreichbar. Ohne noindex
+     kann Google sie indexieren, sobald irgendwo ein Link darauf zeigt — eine
+     deutschsprachige Design-Werkbank im Suchergebnis einer englischen
+     Produktseite. Sie steht bewusst NICHT in der Sitemap; noindex ist die
+     Absicherung fuer den Fall, dass sie doch jemand verlinkt.
+     robots.txt Disallow waere hier das falsche Mittel: es verhindert das
+     Crawlen, nicht das Indexieren — und ohne Crawlen wird das noindex nie
+     gelesen. -->
+<meta name="robots" content="noindex">
 <style>
   /* Bewusst ohne externe Abhängigkeiten — die Datei läuft per Doppelklick,
      auch ohne Server und ohne den Rest des Projekts. */
