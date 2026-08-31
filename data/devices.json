@@ -29,6 +29,10 @@
       "hubMeta": "Engine DJ USB · our reference device",
       "primaryKeyword": "prepare usb for denon prime go",
       "title": "Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine",
+      "image": {
+        "src": "assets/img/Denon-DJ-Prime-Go-gebraucht-3-768x768.webp",
+        "alt": "A Denon DJ Prime Go controller, shown from above at an angle"
+      },
       "h1": "A gig-ready USB stick for your Denon Prime Go",
       "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.",
       "intro": "The Prime Go is our reference device — every Alpha release is tested on one before it ships. Point Alpha at a folder of tracks, pick the energy arc your night should follow, and the stick comes out analyzed, harmonically ordered and ready to play the moment it clicks into the Prime Go's USB port.",

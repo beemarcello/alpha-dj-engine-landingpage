@@ -359,6 +359,21 @@ body {
   letter-spacing: .03em;
   margin: 0;
 }
+/* Geraetefoto oben auf den generierten /usb/-Seiten. Gerendert nur, wenn
+   data/devices.json fuer das Geraet ein "image"-Feld hat (templates/device.html,
+   {{#if device.image}}). Quadratische Produktfotos werden auf 16/10 beschnitten
+   — gleicher object-cover-Ansatz wie das Hero-Panel der Landingpage. */
+.device-hero {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: var(--stroke);
+  border-radius: var(--r-sm, var(--r-xs));
+  box-shadow: 4px 4px 0 0 #000;
+  margin: 10px 0 26px;
+}
+
 .dl-modal__close {
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; flex-shrink: 0;

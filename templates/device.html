@@ -38,6 +38,12 @@
     </ul>
     {{/if}}
 
+    {{#if device.image}}
+    <img class="device-hero" src="{{root}}{{device.image.src}}"
+         alt="{{device.image.alt}}" width="768" height="768"
+         loading="lazy" decoding="async">
+    {{/if}}
+
     <h2>What Alpha writes for the {{device.model}}</h2>
     {{{pathway.formatBlock}}}
     <p>{{device.deviceDetail}}</p>
