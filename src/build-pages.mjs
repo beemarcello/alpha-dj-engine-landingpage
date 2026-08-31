@@ -307,6 +307,14 @@ const heroDirFiles = existsSync(join(ROOT, 'assets/img/usb'))
   : [];
 
 function findHero(name) {
+  /* Mehrere Endungen zum selben Slug: gewinnen wuerde stillschweigend die
+     erste aus HERO_EXTS — beim Bildtausch (neue Endung, alte Datei bleibt
+     liegen) waere das die ALTE. Deshalb hier melden statt raten. */
+  const dupes = HERO_EXTS.map((e) => name + '.' + e).filter((f) => heroDirFiles.includes(f));
+  if (dupes.length > 1) {
+    warnings.push('assets/img/usb/: mehrere Bilder fuer "' + name + '" (' + dupes.join(', ') +
+      ') — verwendet wird ' + dupes[0] + '. Ueberfluessige Datei loeschen.');
+  }
   for (const ext of HERO_EXTS) {
     const file = name + '.' + ext;
     const rel = 'assets/img/usb/' + file;
