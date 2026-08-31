@@ -9,8 +9,9 @@
     "build:icons": "node src/build-icons.mjs",
     "build:pages": "node src/build-pages.mjs",
     "build:sitemap": "node src/build-sitemap.mjs",
-    "build": "npm run build:pages && npm run build:css && npm run build:icons && npm run build:horse && npm run build:sitemap",
-    "build:horse": "node src/build-horse.mjs"
+    "build": "npm run build:pages && npm run build:css && npm run build:icons && npm run build:horse && npm run build:sitemap && npm run build:check",
+    "build:horse": "node src/build-horse.mjs",
+    "build:check": "node src/check-versions.mjs"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0",
