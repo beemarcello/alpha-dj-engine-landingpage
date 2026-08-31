@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prepare a USB for the Denon DJ Prime 4 — Alpha-DJ-Engine</title>
-  <meta name="description" content="Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set and writes the Engine DJ USB the Prime 4 reads natively — no laptop, no Engine desktop. First 10 tracks free, then €30 once.">
+  <title>Denon DJ Prime 2 USB export — Alpha-DJ-Engine</title>
+  <meta name="description" content="Alpha-DJ-Engine turns a folder of tracks into an Engine DJ USB export the Prime 2 reads natively: analyzed, harmonically ordered, loudness-matched. First 10 tracks free, then €30 once. macOS.">
 
   <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
-  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-prime-4/">
+  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-prime-2/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Prepare a USB for the Denon DJ Prime 4 — Alpha-DJ-Engine">
-  <meta property="og:description" content="Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set and writes the Engine DJ USB the Prime 4 reads natively — no laptop, no Engine desktop. First 10 tracks free, then €30 once.">
-  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/denon-prime-4.png">
-  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-prime-4/">
+  <meta property="og:title" content="Denon DJ Prime 2 USB export — Alpha-DJ-Engine">
+  <meta property="og:description" content="Alpha-DJ-Engine turns a folder of tracks into an Engine DJ USB export the Prime 2 reads natively: analyzed, harmonically ordered, loudness-matched. First 10 tracks free, then €30 once. macOS.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/denon-prime-2.jpg">
+  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-prime-2/">
   <meta name="theme-color" content="#d5d5d4">
 
   <link rel="stylesheet" href="../../css/site.css?v=40">
@@ -59,8 +59,8 @@
   <script src="../../js/icons.js?v=8" defer></script>
   <script src="../../js/site.js?v=31" defer></script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime 4","item":"https://alpha-dj-engine.com/usb/denon-prime-4/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Alpha write to the Prime 4's internal drive?","acceptedAnswer":{"@type":"Answer","text":"No — Alpha writes to removable USB sticks and SD cards you plug into your Mac. The internal bay stays managed by the Prime 4 itself; play Alpha's set from the stick or migrate it with the device's own tools."}},{"@type":"Question","name":"I want to move from rekordbox to Engine DJ on the Prime 4 — how?","acceptedAnswer":{"@type":"Answer","text":"Export your collection as a rekordbox XML. Alpha imports it, keeps the BPM, key and beatgrid rekordbox already worked out, and writes a native Engine OS library to the stick — no slow on-device rekordbox import, no shifting beatgrids."}},{"@type":"Question","name":"Will my existing library on the stick survive a new export?","acceptedAnswer":{"@type":"Answer","text":"Yes. Alpha backs up the stick's Engine library to your computer before every write, then adds the new set. Duplicate tracks are linked instead of copied again."}},{"@type":"Question","name":"What format should the stick be for the Prime 4?","acceptedAnswer":{"@type":"Answer","text":"exFAT or FAT32 — Engine OS does not read NTFS. Alpha never reformats your drive."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime 2","item":"https://alpha-dj-engine.com/usb/denon-prime-2/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the Prime 2 need Engine DJ on a computer to read Alpha's stick?","acceptedAnswer":{"@type":"Answer","text":"No. Alpha writes the Engine OS 3.x library directly, so the Prime 2 treats the stick exactly like one prepared in Engine DJ — playlists, keys and BPM included."}},{"@type":"Question","name":"Importing a rekordbox USB on the Prime 2 is slow — is there a better way?","acceptedAnswer":{"@type":"Answer","text":"Yes. Instead of letting the device chew through a rekordbox stick, export your collection as a rekordbox XML and have Alpha write a native Engine library: the BPM, key and beatgrid rekordbox worked out are kept, and there's no on-device import at all."}},{"@type":"Question","name":"Can I keep my existing playlists on the stick?","acceptedAnswer":{"@type":"Answer","text":"Yes. Alpha adds the new set to the Engine library on the drive and backs the previous library up to your computer first. Nothing is erased."}},{"@type":"Question","name":"What drive format should I use with the Prime 2?","acceptedAnswer":{"@type":"Answer","text":"exFAT or FAT32 — Engine OS does not read NTFS. Alpha writes onto the existing filesystem and never reformats the drive."}}]}</script>
 
   <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
        in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
@@ -176,7 +176,7 @@
   Inhalt aendern:
     - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
     - fuer eine Export-Familie:  data/pathways.json
-    - fuer DIESES Geraet:        data/devices.json (slug: denon-prime-4)
+    - fuer DIESES Geraet:        data/devices.json (slug: denon-prime-2)
   danach: npm run build:pages && npm run build:css && npm run build:icons
 
   Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
@@ -204,27 +204,27 @@
   <div class="subpage__inner">
 
     <nav class="crumbs" aria-label="Breadcrumb">
-  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Prime 4</span>
+  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Prime 2</span>
 </nav>
 
 
-    <h1>A four-deck-ready USB export for your Denon Prime 4</h1>
-    <p class="subpage__lead">Four decks deserve a library that&#39;s actually prepared. Alpha reads BPM, key, energy and loudness out of your audio, orders the set so neighboring tracks mix, and writes the Engine OS drive the Prime 4 picks up the second you plug it in.</p>
+    <h1>Your set, exported and ready to play on the Denon Prime 2</h1>
+    <p class="subpage__lead">The Prime 2 does everything from the unit itself — two decks, a mixer, and media slots waiting for a prepared drive. Alpha covers the part before the gig: it analyzes your tracks, sequences them harmonically along the energy arc you choose, and writes the Engine library the Prime 2 expects.</p>
 
     
     <figure class="page-hero">
-      <img src="../../assets/img/usb/denon-prime-4.png" alt="Denon DJ Prime 4" width="1280" height="657" decoding="async">
+      <img src="../../assets/img/usb/denon-prime-2.jpg" alt="Denon DJ Prime 2" width="1024" height="614" decoding="async">
     </figure>
     
 
     
     <ul class="device-facts">
       
-      <li>4 decks</li>
+      <li>2 decks</li>
       
-      <li>10-inch touchscreen</li>
+      <li>7-inch touchscreen</li>
       
-      <li>4 USB ports + SD card</li>
+      <li>3 USB ports + SD card</li>
       
       <li>internal drive bay</li>
       
@@ -233,11 +233,11 @@
     </ul>
     
 
-    <h2>What Alpha writes for the Prime 4</h2>
+    <h2>What Alpha writes for the Prime 2</h2>
     <p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>
-    <p>The Prime 4 is the four-deck flagship of the Prime family, with four USB ports, an SD slot and an internal drive bay. Alpha writes to the removable media — the USB stick or SD card you plug into your Mac — and leaves the internal bay alone; that drive stays managed by the device itself.</p>
+    <p>As a two-deck standalone the Prime 2 lives or dies by how well the drive is prepared — there is no laptop to bail you out mid-set. Alpha writes the full Engine OS 3.x library with BPM, Camelot key and playlist order to your USB stick or SD card; the Prime 2&#39;s internal drive bay stays device-managed and untouched.</p>
 
-    <h2>From folder to Prime 4 in four steps</h2>
+    <h2>From folder to Prime 2 in four steps</h2>
     <!-- Prozess-Schaufenster: links die vier Demo-Panels (kompakte Fassungen der
      Landingpage-Steps; 02 Compose nutzt die ECHTE Energy-Arc-Animation aus
      js/site.js via data-energy-arc), rechts die vier Steps mit Highlight.
@@ -483,64 +483,66 @@
 </script>
 
 
-    <h2>Good to know on the Prime 4</h2>
+    <h2>Good to know on the Prime 2</h2>
     <ul class="page-quirks">
       
-      <li>Alpha prepares USB sticks and SD cards; the Prime 4&#39;s internal drive bay is not touched — it stays exactly as the device manages it.</li>
+      <li>The Prime 2 reads Alpha&#39;s BPM, key and beatgrid straight from the Engine library — no on-device re-analysis, no waiting after you plug in.</li>
       
-      <li>The unit re-analyzes nothing: Alpha&#39;s BPM, key and beatgrid load as-is from the Engine library on the stick.</li>
+      <li>Three USB ports plus an SD slot all read the same Engine library format — prepare whichever medium you prefer.</li>
       
-      <li>With four decks it&#39;s worth exporting more than one playlist to the same stick — Alpha adds each set to the library without duplicating tracks that are already on the drive.</li>
+      <li>Alpha writes removable media only; the internal 2.5-inch drive bay stays exactly as the device manages it.</li>
+      
+      <li>Waveforms are drawn by the unit the first time a track loads; a fresh playlist without waveforms is normal, not broken.</li>
       
     </ul>
 
-    <h2>Common questions about the Prime 4</h2>
+    <h2>Common questions about the Prime 2</h2>
 <div class="page-faq">
 
   <details class="faq-item">
     <summary>
-      Can Alpha write to the Prime 4&#39;s internal drive?
+      Does the Prime 2 need Engine DJ on a computer to read Alpha&#39;s stick?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>No — Alpha writes to removable USB sticks and SD cards you plug into your Mac. The internal bay stays managed by the Prime 4 itself; play Alpha&#39;s set from the stick or migrate it with the device&#39;s own tools.</p>
+      <p>No. Alpha writes the Engine OS 3.x library directly, so the Prime 2 treats the stick exactly like one prepared in Engine DJ — playlists, keys and BPM included.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      I want to move from rekordbox to Engine DJ on the Prime 4 — how?
+      Importing a rekordbox USB on the Prime 2 is slow — is there a better way?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Export your collection as a rekordbox XML. Alpha imports it, keeps the BPM, key and beatgrid rekordbox already worked out, and writes a native Engine OS library to the stick — no slow on-device rekordbox import, no shifting beatgrids.</p>
+      <p>Yes. Instead of letting the device chew through a rekordbox stick, export your collection as a rekordbox XML and have Alpha write a native Engine library: the BPM, key and beatgrid rekordbox worked out are kept, and there&#39;s no on-device import at all.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      Will my existing library on the stick survive a new export?
+      Can I keep my existing playlists on the stick?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Yes. Alpha backs up the stick&#39;s Engine library to your computer before every write, then adds the new set. Duplicate tracks are linked instead of copied again.</p>
+      <p>Yes. Alpha adds the new set to the Engine library on the drive and backs the previous library up to your computer first. Nothing is erased.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      What format should the stick be for the Prime 4?
+      What drive format should I use with the Prime 2?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>exFAT or FAT32 — Engine OS does not read NTFS. Alpha never reformats your drive.</p>
+      <p>exFAT or FAT32 — Engine OS does not read NTFS. Alpha writes onto the existing filesystem and never reformats the drive.</p>
     </div>
   </details>
 
 </div>
 
 
-    <h2>Try it with your own Prime 4</h2>
+    <h2>Try it with your own Prime 2</h2>
     <p>
       Every feature is in the free download — analysis, harmonic sequencing,
       loudness matching and the Engine DJ write. It stops after
@@ -559,9 +561,9 @@
       
       <li><a href="../../usb/denon-prime-go/">Denon DJ Prime Go</a></li>
       
-      <li><a href="../../usb/denon-sc6000-prime/">Denon DJ SC6000 Prime</a></li>
+      <li><a href="../../usb/denon-prime-4/">Denon DJ Prime 4</a></li>
       
-      <li><a href="../../usb/denon-prime-2/">Denon DJ Prime 2</a></li>
+      <li><a href="../../usb/denon-sc5000-prime/">Denon DJ SC5000 Prime</a></li>
       
     </ul>
     

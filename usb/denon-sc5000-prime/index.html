@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prepare a USB for the Denon DJ Prime 4 — Alpha-DJ-Engine</title>
-  <meta name="description" content="Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set and writes the Engine DJ USB the Prime 4 reads natively — no laptop, no Engine desktop. First 10 tracks free, then €30 once.">
+  <title>Write a USB stick for the Denon DJ SC5000 Prime — Alpha-DJ-Engine</title>
+  <meta name="description" content="Coming from a rekordbox USB? Alpha-DJ-Engine analyzes your tracks, sequences them harmonically and writes a native Engine DJ USB the SC5000 Prime reads instantly — BPM, key and playlists in place. First 10 tracks free, then €30 once.">
 
   <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
-  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-prime-4/">
+  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-sc5000-prime/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Prepare a USB for the Denon DJ Prime 4 — Alpha-DJ-Engine">
-  <meta property="og:description" content="Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set and writes the Engine DJ USB the Prime 4 reads natively — no laptop, no Engine desktop. First 10 tracks free, then €30 once.">
-  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/denon-prime-4.png">
-  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-prime-4/">
+  <meta property="og:title" content="Write a USB stick for the Denon DJ SC5000 Prime — Alpha-DJ-Engine">
+  <meta property="og:description" content="Coming from a rekordbox USB? Alpha-DJ-Engine analyzes your tracks, sequences them harmonically and writes a native Engine DJ USB the SC5000 Prime reads instantly — BPM, key and playlists in place. First 10 tracks free, then €30 once.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/denon-sc5000-prime.webp">
+  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-sc5000-prime/">
   <meta name="theme-color" content="#d5d5d4">
 
   <link rel="stylesheet" href="../../css/site.css?v=40">
@@ -59,8 +59,8 @@
   <script src="../../js/icons.js?v=8" defer></script>
   <script src="../../js/site.js?v=31" defer></script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime 4","item":"https://alpha-dj-engine.com/usb/denon-prime-4/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can Alpha write to the Prime 4's internal drive?","acceptedAnswer":{"@type":"Answer","text":"No — Alpha writes to removable USB sticks and SD cards you plug into your Mac. The internal bay stays managed by the Prime 4 itself; play Alpha's set from the stick or migrate it with the device's own tools."}},{"@type":"Question","name":"I want to move from rekordbox to Engine DJ on the Prime 4 — how?","acceptedAnswer":{"@type":"Answer","text":"Export your collection as a rekordbox XML. Alpha imports it, keeps the BPM, key and beatgrid rekordbox already worked out, and writes a native Engine OS library to the stick — no slow on-device rekordbox import, no shifting beatgrids."}},{"@type":"Question","name":"Will my existing library on the stick survive a new export?","acceptedAnswer":{"@type":"Answer","text":"Yes. Alpha backs up the stick's Engine library to your computer before every write, then adds the new set. Duplicate tracks are linked instead of copied again."}},{"@type":"Question","name":"What format should the stick be for the Prime 4?","acceptedAnswer":{"@type":"Answer","text":"exFAT or FAT32 — Engine OS does not read NTFS. Alpha never reformats your drive."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ SC5000 Prime","item":"https://alpha-dj-engine.com/usb/denon-sc5000-prime/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"The SC5000 can read a rekordbox USB — why prepare an Engine stick instead?","acceptedAnswer":{"@type":"Answer","text":"The on-device rekordbox import is slow and only carries part of the data. Alpha takes your rekordbox XML on the Mac, keeps the BPM, key and beatgrid, and writes a native Engine library — the SC5000 loads it instantly with nothing to convert."}},{"@type":"Question","name":"Does the SC5000 Prime re-analyze Alpha's tracks?","acceptedAnswer":{"@type":"Answer","text":"No. BPM, key and beatgrid come from the Engine library Alpha writes, so tracks are ready as soon as they load."}},{"@type":"Question","name":"Can two SC5000s play from one stick?","acceptedAnswer":{"@type":"Answer","text":"Yes — linked players can browse the same source, so one prepared drive in one player's slot covers both."}},{"@type":"Question","name":"Will Alpha erase the library that's already on my drive?","acceptedAnswer":{"@type":"Answer","text":"No. It backs the existing Engine library up to your computer first, then adds the new set without duplicating tracks."}}]}</script>
 
   <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
        in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
@@ -176,7 +176,7 @@
   Inhalt aendern:
     - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
     - fuer eine Export-Familie:  data/pathways.json
-    - fuer DIESES Geraet:        data/devices.json (slug: denon-prime-4)
+    - fuer DIESES Geraet:        data/devices.json (slug: denon-sc5000-prime)
   danach: npm run build:pages && npm run build:css && npm run build:icons
 
   Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
@@ -204,40 +204,38 @@
   <div class="subpage__inner">
 
     <nav class="crumbs" aria-label="Breadcrumb">
-  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Prime 4</span>
+  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">SC5000 Prime</span>
 </nav>
 
 
-    <h1>A four-deck-ready USB export for your Denon Prime 4</h1>
-    <p class="subpage__lead">Four decks deserve a library that&#39;s actually prepared. Alpha reads BPM, key, energy and loudness out of your audio, orders the set so neighboring tracks mix, and writes the Engine OS drive the Prime 4 picks up the second you plug it in.</p>
+    <h1>A prepared USB for your Denon SC5000 Prime</h1>
+    <p class="subpage__lead">The SC5000 Prime is a booth player: it expects a drive that&#39;s already done its homework. Alpha does that homework — analysis, harmonic order, loudness — and writes the Engine library so the SC5000 shows a finished set instead of a folder of raw files.</p>
 
     
     <figure class="page-hero">
-      <img src="../../assets/img/usb/denon-prime-4.png" alt="Denon DJ Prime 4" width="1280" height="657" decoding="async">
+      <img src="../../assets/img/usb/denon-sc5000-prime.webp" alt="Denon DJ SC5000 Prime" width="1280" height="1280" decoding="async">
     </figure>
     
 
     
     <ul class="device-facts">
       
-      <li>4 decks</li>
+      <li>dual-layer media player</li>
       
-      <li>10-inch touchscreen</li>
+      <li>7-inch touchscreen</li>
       
-      <li>4 USB ports + SD card</li>
-      
-      <li>internal drive bay</li>
+      <li>3 USB ports + SD card</li>
       
       <li>Engine OS 3.x</li>
       
     </ul>
     
 
-    <h2>What Alpha writes for the Prime 4</h2>
+    <h2>What Alpha writes for the SC5000 Prime</h2>
     <p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>
-    <p>The Prime 4 is the four-deck flagship of the Prime family, with four USB ports, an SD slot and an internal drive bay. Alpha writes to the removable media — the USB stick or SD card you plug into your Mac — and leaves the internal bay alone; that drive stays managed by the device itself.</p>
+    <p>As a dual-layer media player the SC5000 Prime plays two tracks from one unit, which makes the quality of the library on the stick matter twice. Alpha writes BPM, Camelot key and the playlist order into the Engine OS 3.x database, and a pair of linked SC5000s can browse the same drive from one player&#39;s slot.</p>
 
-    <h2>From folder to Prime 4 in four steps</h2>
+    <h2>From folder to SC5000 Prime in four steps</h2>
     <!-- Prozess-Schaufenster: links die vier Demo-Panels (kompakte Fassungen der
      Landingpage-Steps; 02 Compose nutzt die ECHTE Energy-Arc-Animation aus
      js/site.js via data-energy-arc), rechts die vier Steps mit Highlight.
@@ -483,64 +481,64 @@
 </script>
 
 
-    <h2>Good to know on the Prime 4</h2>
+    <h2>Good to know on the SC5000 Prime</h2>
     <ul class="page-quirks">
       
-      <li>Alpha prepares USB sticks and SD cards; the Prime 4&#39;s internal drive bay is not touched — it stays exactly as the device manages it.</li>
+      <li>Dual-layer playback means one SC5000 acts as two decks — a harmonically ordered playlist from Alpha keeps both layers mixable.</li>
       
-      <li>The unit re-analyzes nothing: Alpha&#39;s BPM, key and beatgrid load as-is from the Engine library on the stick.</li>
+      <li>Linked players share a source: plug Alpha&#39;s stick into one SC5000 and a networked second player can browse the same library.</li>
       
-      <li>With four decks it&#39;s worth exporting more than one playlist to the same stick — Alpha adds each set to the library without duplicating tracks that are already on the drive.</li>
+      <li>The player draws its own waveform the first time a track loads — a fresh playlist without waveforms is expected.</li>
       
     </ul>
 
-    <h2>Common questions about the Prime 4</h2>
+    <h2>Common questions about the SC5000 Prime</h2>
 <div class="page-faq">
 
   <details class="faq-item">
     <summary>
-      Can Alpha write to the Prime 4&#39;s internal drive?
+      The SC5000 can read a rekordbox USB — why prepare an Engine stick instead?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>No — Alpha writes to removable USB sticks and SD cards you plug into your Mac. The internal bay stays managed by the Prime 4 itself; play Alpha&#39;s set from the stick or migrate it with the device&#39;s own tools.</p>
+      <p>The on-device rekordbox import is slow and only carries part of the data. Alpha takes your rekordbox XML on the Mac, keeps the BPM, key and beatgrid, and writes a native Engine library — the SC5000 loads it instantly with nothing to convert.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      I want to move from rekordbox to Engine DJ on the Prime 4 — how?
+      Does the SC5000 Prime re-analyze Alpha&#39;s tracks?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Export your collection as a rekordbox XML. Alpha imports it, keeps the BPM, key and beatgrid rekordbox already worked out, and writes a native Engine OS library to the stick — no slow on-device rekordbox import, no shifting beatgrids.</p>
+      <p>No. BPM, key and beatgrid come from the Engine library Alpha writes, so tracks are ready as soon as they load.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      Will my existing library on the stick survive a new export?
+      Can two SC5000s play from one stick?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Yes. Alpha backs up the stick&#39;s Engine library to your computer before every write, then adds the new set. Duplicate tracks are linked instead of copied again.</p>
+      <p>Yes — linked players can browse the same source, so one prepared drive in one player&#39;s slot covers both.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      What format should the stick be for the Prime 4?
+      Will Alpha erase the library that&#39;s already on my drive?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>exFAT or FAT32 — Engine OS does not read NTFS. Alpha never reformats your drive.</p>
+      <p>No. It backs the existing Engine library up to your computer first, then adds the new set without duplicating tracks.</p>
     </div>
   </details>
 
 </div>
 
 
-    <h2>Try it with your own Prime 4</h2>
+    <h2>Try it with your own SC5000 Prime</h2>
     <p>
       Every feature is in the free download — analysis, harmonic sequencing,
       loudness matching and the Engine DJ write. It stops after
@@ -557,11 +555,11 @@
     <h2>Related players</h2>
     <ul class="related-list">
       
-      <li><a href="../../usb/denon-prime-go/">Denon DJ Prime Go</a></li>
+      <li><a href="../../usb/denon-sc5000m-prime/">Denon DJ SC5000M Prime</a></li>
       
       <li><a href="../../usb/denon-sc6000-prime/">Denon DJ SC6000 Prime</a></li>
       
-      <li><a href="../../usb/denon-prime-2/">Denon DJ Prime 2</a></li>
+      <li><a href="../../usb/denon-prime-4/">Denon DJ Prime 4</a></li>
       
     </ul>
     

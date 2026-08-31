@@ -78,12 +78,37 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-prime-2/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-4/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-go/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-sc5000-prime/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-sc5000m-prime/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-sc6000-prime/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-sc6000m-prime/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
