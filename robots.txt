@@ -2,8 +2,11 @@
 User-agent: *
 Allow: /
 
-# Rechtstexte mit noindex im <head> stehen bewusst nicht in der Sitemap.
-# Kein Disallow: sie sollen erreichbar und crawlbar bleiben, nur nicht ranken.
+# Stand 2026-08-31: keine Seite traegt mehr ein noindex, alle stehen in der
+# Sitemap — auch die Rechtstexte. Wer eine Seite wieder auf noindex setzt,
+# nimmt sie aus STATIC_PAGES in src/build-sitemap.mjs raus; noindex + Sitemap
+# ist ein Widerspruch, den die Search Console meldet. Kein Disallow: alles
+# soll erreichbar und crawlbar bleiben.
 
 # /knowledgebase/ ist die Wissensbasis des AI-Support-Agents und MUSS crawlbar
 # und indexierbar bleiben — der Agent kann nur indexierbare Seiten lesen.

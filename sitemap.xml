@@ -7,25 +7,24 @@
   Diese Datei wird in der Google Search Console unter "Sitemaps" eingereicht:
   https://alpha-dj-engine.com/sitemap.xml
 
-  lastmod aus der git-Historie (letzter Commit je Datei); uncommittete
-  Aenderungen bekommen das heutige Datum. Ein falsches lastmod ist schlechter
-  als keines: Google lernt daraus, dass die Angabe unzuverlaessig ist, und
-  ignoriert sie kuenftig.
+  lastmod ist der letzte Commit, der den INHALT der jeweiligen Seite geaendert
+  hat; reine Cache-Buster-Bumps (?v=NN) zaehlen nicht mit. Uncommittete
+  Aenderungen bekommen das heutige Datum.
 
-  NICHT enthalten: privacy.html. Die Seite traegt noch noindex, solange
-  Hosting-AVV und Double-Opt-in offen sind. Eine Seite mit noindex in die
-  Sitemap zu schreiben, ist ein Widerspruch, den die Search Console als Fehler
-  meldet.
+  Enthalten sind alle indexierbaren Seiten — aktuell traegt keine mehr ein
+  noindex. Kaeme wieder eines dazu, muesste die Seite aus STATIC_PAGES in
+  src/build-sitemap.mjs raus: eine noindex-Seite in der Sitemap meldet die
+  Search Console als Widerspruch.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alpha-dj-engine.com/compatibility.html</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/imprint.html</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
@@ -35,12 +34,12 @@
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/features/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/pricing.html</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.8</priority>
   </url>
   <!-- Wissensbasis des AI-Support-Agents. Steht hier drin, weil sie von keiner
@@ -49,23 +48,19 @@
        lesen (Marcel, 2026-08-22). -->
   <url>
     <loc>https://alpha-dj-engine.com/knowledgebase/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-29</lastmod>
     <priority>0.6</priority>
   </url>
-  <!-- terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex
-       und gehoert damit in die Sitemap. -->
   <url>
     <loc>https://alpha-dj-engine.com/terms.html</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/withdrawal.html</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-08-28</lastmod>
     <priority>0.4</priority>
   </url>
-  <!-- privacy.html ist seit 2026-08-27 ohne noindex (Erklaerung finalisiert,
-       minimales Setup) und gehoert seither in die Sitemap. -->
   <url>
     <loc>https://alpha-dj-engine.com/privacy.html</loc>
     <lastmod>2026-08-31</lastmod>

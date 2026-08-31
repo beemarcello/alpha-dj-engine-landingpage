@@ -4,19 +4,21 @@
    Aufruf:  npm run build:sitemap   (im `npm run build` als LETZTER Schritt,
    damit alle generierten Seiten existieren)
 
-   lastmod je Datei aus der git-Historie (letzter Commit). Eine Datei mit
-   uncommitteten Aenderungen bekommt das heutige Datum — sie wird ja gleich
-   committet, das Datum stimmt dann. Ein falsches lastmod ist schlechter als
-   keines: Google lernt daraus, dass die Angabe unzuverlaessig ist, und
-   ignoriert sie kuenftig.
+   lastmod je Datei aus der git-Historie — aber aus dem letzten Commit, der
+   den INHALT der Seite geaendert hat. Commits, die an einer Seite nur den
+   Cache-Buster (?v=NN auf css/site.css oder js/site.js) hochzaehlen, werden
+   uebersprungen. Warum das noetig ist: jede Aenderung an CSS oder JS bumpt den
+   Buster auf ALLEN 15 Handseiten. Ohne diesen Filter trugen alle 20 Eintraege
+   dasselbe Datum, obwohl z.B. imprint.html seit dem 24.08. inhaltlich
+   unveraendert ist. Ein falsches lastmod ist schlechter als keines: Google
+   lernt daraus, dass die Angabe unzuverlaessig ist, und ignoriert sie kuenftig
+   — und dann auch dort, wo sich wirklich etwas geaendert hat.
 
-   Die Bestandsseiten stehen hier fest verdrahtet, mitsamt der Gruende fuer
-   Sonderfaelle (siehe Kommentare im XML). privacy.html ist seit 2026-08-28
-   dabei: das noindex fiel am 27.08. mit der Finalisierung der Erklaerung
-   (Commit 907b4c6). Wer eine Seite wieder auf noindex stellt, nimmt sie HIER
-   raus — eine noindex-Seite in der Sitemap meldet die Search Console als
-   Widerspruch. Die generierten Seiten unter usb/ kommen automatisch aus dem
-   Dateisystem dazu.
+   Die Bestandsseiten stehen hier fest verdrahtet. Wer eine Seite auf noindex
+   stellt, nimmt sie HIER raus — eine noindex-Seite in der Sitemap meldet die
+   Search Console als Widerspruch. Aktuell traegt keine Seite noindex, alle
+   Bestandsseiten stehen drin. Die generierten Seiten unter usb/ kommen
+   automatisch aus dem Dateisystem dazu.
    ========================================================================== */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
@@ -27,18 +29,42 @@ import { execFileSync } from 'node:child_process';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ORIGIN = 'https://alpha-dj-engine.com';
 
+const HEUTE = () => new Date().toISOString().slice(0, 10);
+const git = (args) => execFileSync('git', args, { cwd: ROOT }).toString();
+
+/* Eine geaenderte Diff-Zeile, die NUR den Cache-Buster hochzaehlt, z.B.
+     -  <script src="js/site.js?v=30" defer></script>
+     +  <script src="js/site.js?v=31" defer></script>
+   Solche Zeilen sind keine inhaltliche Aenderung der Seite. */
+const NUR_CACHE_BUSTER = /(?:css|js)\/[\w.-]+\?v=\d+/;
+
 function lastmod(relPath) {
   try {
-    const dirty = execFileSync('git', ['status', '--porcelain', '--', relPath], { cwd: ROOT }).toString().trim();
-    if (dirty) return new Date().toISOString().slice(0, 10);
-    const date = execFileSync('git', ['log', '-1', '--format=%cs', '--', relPath], { cwd: ROOT }).toString().trim();
-    if (date) return date;
+    if (git(['status', '--porcelain', '--', relPath]).trim()) return HEUTE();
+
+    const commits = git(['log', '--format=%H %cs', '-40', '--', relPath])
+      .trim().split('\n').filter(Boolean)
+      .map((z) => { const i = z.indexOf(' '); return { hash: z.slice(0, i), datum: z.slice(i + 1) }; });
+    if (!commits.length) return HEUTE();
+
+    for (const c of commits) {
+      const geaendert = git(['show', '--unified=0', '--format=', c.hash, '--', relPath])
+        .split('\n').filter((z) => /^[+-][^+-]/.test(z));
+      // Keine Diff-Zeilen (z.B. reiner Rename) oder mindestens eine echte
+      // Inhaltszeile => dieser Commit hat die Seite wirklich veraendert.
+      if (!geaendert.length || geaendert.some((z) => !NUR_CACHE_BUSTER.test(z))) return c.datum;
+    }
+    // Seit dem Anlegen ausschliesslich Cache-Buster-Bumps: aeltester Commit.
+    return commits[commits.length - 1].datum;
   } catch { /* kein git verfuegbar → heutiges Datum */ }
-  return new Date().toISOString().slice(0, 10);
+  return HEUTE();
 }
 
-/* Bestandsseiten: Reihenfolge und Prioritaeten wie in der bisherigen
-   handgepflegten sitemap.xml. */
+/* Bestandsseiten in fester Reihenfolge.
+   priority ist bewusst konservativ gestaffelt, aber niemand sollte Zeit in die
+   Feinjustierung stecken: Google ignoriert priority (und changefreq) seit
+   Jahren. Die Werte stehen hier nur, weil sie das Protokoll erlaubt und andere
+   Crawler sie gelegentlich lesen. */
 const STATIC_PAGES = [
   { loc: '/compatibility.html', file: 'compatibility.html', priority: '0.8' },
   { loc: '/imprint.html', file: 'imprint.html', priority: '0.4' },
@@ -51,12 +77,12 @@ const STATIC_PAGES = [
   },
   {
     loc: '/terms.html', file: 'terms.html', priority: '0.4',
-    comment: 'terms.html ist seit der juristischen Freigabe (2026-08-22) ohne noindex\n       und gehoert damit in die Sitemap.',
+
   },
   { loc: '/withdrawal.html', file: 'withdrawal.html', priority: '0.4' },
   {
     loc: '/privacy.html', file: 'privacy.html', priority: '0.4',
-    comment: 'privacy.html ist seit 2026-08-27 ohne noindex (Erklaerung finalisiert,\n       minimales Setup) und gehoert seither in die Sitemap.',
+
   },
 ];
 
@@ -88,15 +114,14 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
   Diese Datei wird in der Google Search Console unter "Sitemaps" eingereicht:
   ${ORIGIN}/sitemap.xml
 
-  lastmod aus der git-Historie (letzter Commit je Datei); uncommittete
-  Aenderungen bekommen das heutige Datum. Ein falsches lastmod ist schlechter
-  als keines: Google lernt daraus, dass die Angabe unzuverlaessig ist, und
-  ignoriert sie kuenftig.
+  lastmod ist der letzte Commit, der den INHALT der jeweiligen Seite geaendert
+  hat; reine Cache-Buster-Bumps (?v=NN) zaehlen nicht mit. Uncommittete
+  Aenderungen bekommen das heutige Datum.
 
-  NICHT enthalten: privacy.html. Die Seite traegt noch noindex, solange
-  Hosting-AVV und Double-Opt-in offen sind. Eine Seite mit noindex in die
-  Sitemap zu schreiben, ist ein Widerspruch, den die Search Console als Fehler
-  meldet.
+  Enthalten sind alle indexierbaren Seiten — aktuell traegt keine mehr ein
+  noindex. Kaeme wieder eines dazu, muesste die Seite aus STATIC_PAGES in
+  src/build-sitemap.mjs raus: eine noindex-Seite in der Sitemap meldet die
+  Search Console als Widerspruch.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${STATIC_PAGES.map(entryXml).join('\n')}
