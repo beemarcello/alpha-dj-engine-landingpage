@@ -57,7 +57,7 @@
   </script>
 
   <script src="../../js/icons.js?v=7" defer></script>
-  <script src="../../js/site.js?v=26" defer></script>
+  <script src="../../js/site.js?v=27" defer></script>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Pioneer DJ CDJ-3000","item":"https://alpha-dj-engine.com/usb/pioneer-cdj-3000/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need rekordbox or a subscription to play Alpha's stick on a CDJ-3000?","acceptedAnswer":{"@type":"Answer","text":"No. The CDJ-3000 reads the rekordbox database from the stick itself, and Alpha writes that database directly — no rekordbox software, account or subscription anywhere in the chain."}},{"@type":"Question","name":"Will the CDJ-3000 re-analyze my tracks?","acceptedAnswer":{"@type":"Answer","text":"No — BPM, beat grid, waveforms and cues are in the ANLZ analysis files Alpha writes, so tracks are ready the moment they load."}},{"@type":"Question","name":"Can I use the CDJ-3000's SD card slot?","acceptedAnswer":{"@type":"Answer","text":"Yes — the CDJ-3000 reads the same rekordbox library from USB stick or SD card. Point Alpha's export at whichever is mounted on your Mac."}},{"@type":"Question","name":"Which filesystem should the stick use — FAT32 or exFAT?","acceptedAnswer":{"@type":"Answer","text":"Both work on the CDJ-3000: it reads FAT32 and HFS+, and exFAT since firmware 1.20. If the same stick must also play on older players like the CDJ-2000NXS2, stay on FAT32. Alpha never reformats your drive."}}]}</script>
@@ -112,14 +112,23 @@
        hier ist die Spalte schmaler, deshalb kompakt erzwingen. */
     .proc-panel--02 [data-arc-buttons] { flex-wrap: wrap !important; }
     .proc-panel--02 [data-arc-buttons] button { flex: 0 0 auto !important; padding: 4px 10px !important; font-size: 11px !important; }
-    /* Dezente EQ-Bewegung der Refine-Bars (nur ohne reduced motion). */
+    /* Refine-Demo: der rote Balken wird "gezogen" — anheben, nach rechts
+       schieben, absetzen, zurueck. Nur Translation, die Balkenhoehen bleiben
+       konstant (bewusst KEINE Equalizer-Optik; Marcel, 2026-08-31). */
     @media (prefers-reduced-motion: no-preference) {
-      .proc-eqbar { transform-origin: bottom; animation: proc-eq 2.2s ease-in-out infinite alternate; }
-      .proc-eqbar:nth-child(2n) { animation-delay: .35s; }
-      .proc-eqbar:nth-child(3n) { animation-delay: .7s; }
-      .proc-eqbar:nth-child(5n) { animation-delay: 1.05s; }
+      .proc-dragbar { position: relative; z-index: 2; animation: proc-drag 5.5s ease-in-out infinite; box-shadow: 0 0 0 0 rgba(0,0,0,0); }
     }
-    @keyframes proc-eq { from { transform: scaleY(.82); } to { transform: scaleY(1.06); } }
+    @keyframes proc-drag {
+      0%   { transform: translate(0, 0); }
+      10%  { transform: translate(0, -7px); }
+      28%  { transform: translate(38px, -7px); }
+      38%  { transform: translate(38px, 0); }
+      58%  { transform: translate(38px, 0); }
+      68%  { transform: translate(38px, -7px); }
+      86%  { transform: translate(0, -7px); }
+      96%  { transform: translate(0, 0); }
+      100% { transform: translate(0, 0); }
+    }
     .proc-steps { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
     .proc-step { display: block; width: 100%; text-align: left; background: none; border: 0; border-left: 3px solid transparent; padding: 8px 0 8px 16px; cursor: pointer; opacity: .38; transition: opacity .3s, border-color .3s; font: inherit; color: inherit; }
     .proc-step.is-active { opacity: 1; border-left-color: var(--ink); }
@@ -235,7 +244,7 @@
 
     <!-- 02 Compose: echte Energy-Arc aus js/site.js (initEnergyArc) -->
     <div class="proc-panel proc-panel--02" data-process-panel>
-      <div class="demo-panel p-5 flex flex-col w-full" data-energy-arc>
+      <div class="demo-panel p-5 flex flex-col w-full" data-energy-arc data-arc-interval="1800">
         <div class="mb-3">
           <div class="font-semibold text-base text-black tracking-tight">Energy arc</div>
           <span class="text-[10px] font-semibold text-[var(--ink-55)] uppercase tracking-widest">Pick a shape</span>
@@ -267,20 +276,20 @@
         <div>
           <p class="m-0 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-black/50">Drag bars to fine-tune</p>
           <div class="flex items-end gap-[3px] h-20 bg-white border-2 border-black rounded-sm px-2 py-2">
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:30%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:45%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:47%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:58%"></span>
-            <span class="proc-eqbar flex-1 bg-[var(--red-hot)] rounded-t-[1px]" style="height:66%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:62%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:68%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:78%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:86%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:70%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:56%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:44%"></span>
-            <span class="proc-eqbar flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:30%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:45%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:47%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:58%"></span>
+            <span class="proc-dragbar flex-1 bg-[var(--red-hot)] rounded-t-[1px]" style="height:66%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:62%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:68%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:78%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:86%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:70%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:56%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:44%"></span>
+            <span class="flex-1 bg-black rounded-t-[1px]" style="height:38%"></span>
           </div>
         </div>
         <div class="border-2 border-black rounded-sm bg-white px-2.5 py-2">

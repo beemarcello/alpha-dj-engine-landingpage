@@ -344,6 +344,11 @@
       });
     }
 
+    // Optionaler Takt-Override pro Instanz: data-arc-interval="1800" auf dem
+    // [data-energy-arc]-Element. Die generierten usb/-Seiten nutzen das fuer
+    // eine schnellere Preset-Rotation; ohne Attribut gilt ARC_ROTATE_MS.
+    var rotateMs = parseInt(root.getAttribute('data-arc-interval'), 10) || ARC_ROTATE_MS;
+
     function startRotation() {
       if (reduceMotion) return;
       clearInterval(rotateTimer);
@@ -351,7 +356,7 @@
         activeTab = tabs[(tabs.indexOf(activeTab) + 1) % tabs.length];
         renderButtons();
         render();
-      }, ARC_ROTATE_MS);
+      }, rotateMs);
     }
 
     // Rotation pausieren, solange die Sektion nicht sichtbar ist.
