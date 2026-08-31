@@ -78,8 +78,11 @@
     .crumbs a { color: var(--ink-55); text-decoration: underline; text-underline-offset: 2px; }
     .crumbs span[aria-current] { color: var(--ink); }
     .crumbs .sep { margin: 0 6px; }
-    .device-facts { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 8px; max-width: none; }
-    .device-facts li { border: 2px solid var(--ink); background: var(--white); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--ink); margin: 0; }
+    /* Geraete-Fakten als unauffaellige Meta-Zeile mit Punkt-Trennern —
+       bewusst KEINE Pill-Optik, das saehe klickbar aus (Marcel, 2026-08-31). */
+    .device-facts { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-wrap: wrap; gap: 4px 8px; max-width: none; }
+    .device-facts li { font-size: 14px; color: var(--ink-55); margin: 0; }
+    .device-facts li:not(:first-child)::before { content: "·"; margin-right: 8px; }
     .hub-group { margin-top: 34px; }
     .hub-list { list-style: none; margin: 0; padding: 0; max-width: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
     .hub-list li { margin: 0; }
