@@ -7,10 +7,23 @@ Allow: /
 # src/build-sitemap.mjs raus; noindex + Sitemap ist ein Widerspruch, den die
 # Search Console meldet.
 #
-# Ausnahme: /_brand/preview.html ist eine interne Design-Vorschau. Sie traegt
-# noindex und steht nicht in der Sitemap. Absichtlich KEIN Disallow: das wuerde
-# nur das Crawlen verhindern, nicht das Indexieren — und ein nicht gecrawltes
-# noindex wird nie gelesen.
+# Ausnahmen sind zwei interne Seiten: /_brand/preview.html (Design-Vorschau)
+# und /_drafts/generated-page-18.html (Original-Export des Website-Builders,
+# inhaltlich eine Beinahe-Dublette der Startseite unter dem alten
+# Produktnamen). Beide tragen noindex und stehen nicht in der Sitemap.
+# Absichtlich KEIN Disallow: das wuerde nur das Crawlen verhindern, nicht das
+# Indexieren — und ein nicht gecrawltes noindex wird nie gelesen.
+
+# Arbeitsordner des Programmatic-SEO-Systems. Sie liegen oeffentlich auf der
+# Domain, weil .nojekyll GitHub Pages alles ausliefern laesst, gehoeren aber
+# nicht in den Index: templates/ enthaelt Roh-Templates mit sichtbaren
+# {{platzhaltern}}, data/ und src/ sind Datenquellen und Build-Skripte.
+# Hier ist Disallow das richtige Mittel — anders als oben gibt es dort keine
+# Seite, die ein noindex tragen koennte (JSON/JS), bzw. wuerde das Tag aus
+# templates/ in JEDE generierte Seite durchschlagen.
+Disallow: /templates/
+Disallow: /data/
+Disallow: /src/
 
 # /knowledgebase/ ist die Wissensbasis des AI-Support-Agents und MUSS crawlbar
 # und indexierbar bleiben — der Agent kann nur indexierbare Seiten lesen.
