@@ -297,10 +297,20 @@ const hubJsonld = ldScript({
 import { execFileSync } from 'node:child_process';
 const HERO_EXTS = ['webp', 'avif', 'jpg', 'jpeg', 'png'];
 
+/* Exakter Dateinamen-Abgleich ueber das Verzeichnis-Listing statt
+   existsSync: macOS findet "Numark-Mixstream-Pro.jpg" auch bei Anfrage nach
+   "numark-mixstream-pro.jpg" (case-insensitives Dateisystem), GitHub Pages
+   aber NICHT — das Bild waere live ein 404. Deshalb: nur exakte Treffer
+   zaehlen, Beinahe-Treffer bekommen unten einen Umbenennungs-Hinweis. */
+const heroDirFiles = existsSync(join(ROOT, 'assets/img/usb'))
+  ? readdirSync(join(ROOT, 'assets/img/usb'))
+  : [];
+
 function findHero(name) {
   for (const ext of HERO_EXTS) {
-    const rel = 'assets/img/usb/' + name + '.' + ext;
-    if (existsSync(join(ROOT, rel))) {
+    const file = name + '.' + ext;
+    const rel = 'assets/img/usb/' + file;
+    if (heroDirFiles.includes(file)) {
       let width = '', height = '';
       try {
         const out = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', join(ROOT, rel)]).toString();
@@ -462,6 +472,13 @@ const missingHero = releasedDevices.filter((d) => !findHero(d.slug)).map((d) => 
 if (!findHero('hub')) missingHero.unshift('hub');
 if (missingHero.length) {
   console.log('  Ohne Hero-Bild (assets/img/usb/<name>.webp|jpg|png ablegen): ' + missingHero.join(', '));
+}
+/* Beinahe-Treffer melden: gleiche Buchstaben, falscher Name/Case. */
+for (const slug of [...missingHero]) {
+  const near = heroDirFiles.find((f) => f.toLowerCase().replace(/[^a-z0-9.]/g, '-').includes(slug.replace(/[^a-z0-9]/g, '-')) || f.toLowerCase().startsWith(slug.split('-')[0]));
+  if (near && !near.startsWith('.')) {
+    console.log('  ⚠ "' + near + '" sieht nach ' + slug + ' aus — bitte exakt in "' + slug + '.<ext>" umbenennen (GitHub Pages ist case-sensitiv).');
+  }
 }
 console.log('  Cache-Buster aus index.html: site.css v' + v.siteCss + ', tailwind v' + v.tailwindCss + ', icons v' + v.iconsJs + ', site.js v' + v.siteJs);
 if (warnings.length) {
