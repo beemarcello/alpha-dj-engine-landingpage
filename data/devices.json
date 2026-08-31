@@ -588,7 +588,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "cdj2000",
@@ -719,7 +719,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdjrx2",
@@ -780,7 +780,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdjxz",
@@ -841,7 +841,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdj1000",
@@ -902,7 +902,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdj700",
@@ -962,7 +962,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "opus",
@@ -1023,7 +1023,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdjaz",

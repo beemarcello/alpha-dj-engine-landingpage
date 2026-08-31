@@ -4,18 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine</title>
-  <meta name="description" content="Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.">
+  <title>XDJ-RX2 USB export — prepared without rekordbox — Alpha-DJ-Engine</title>
+  <meta name="description" content="Alpha-DJ-Engine writes the rekordbox USB export the XDJ-RX2 reads natively — analyzed tracks, beat grids and your set in order, no rekordbox software involved. First 10 tracks free, then €30 once.">
 
   <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
   <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
-  <link rel="canonical" href="https://alpha-dj-engine.com/usb/denon-prime-go/">
+  <link rel="canonical" href="https://alpha-dj-engine.com/usb/pioneer-xdj-rx2/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine">
-  <meta property="og:description" content="Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.">
-  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/denon-prime-go.webp">
-  <meta property="og:url" content="https://alpha-dj-engine.com/usb/denon-prime-go/">
+  <meta property="og:title" content="XDJ-RX2 USB export — prepared without rekordbox — Alpha-DJ-Engine">
+  <meta property="og:description" content="Alpha-DJ-Engine writes the rekordbox USB export the XDJ-RX2 reads natively — analyzed tracks, beat grids and your set in order, no rekordbox software involved. First 10 tracks free, then €30 once.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/usb/pioneer-xdj-rx2.jpg">
+  <meta property="og:url" content="https://alpha-dj-engine.com/usb/pioneer-xdj-rx2/">
   <meta name="theme-color" content="#d5d5d4">
 
   <link rel="stylesheet" href="../../css/site.css?v=40">
@@ -59,8 +59,8 @@
   <script src="../../js/icons.js?v=8" defer></script>
   <script src="../../js/site.js?v=32" defer></script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime Go","item":"https://alpha-dj-engine.com/usb/denon-prime-go/"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need the Engine DJ desktop app to prepare a stick for the Prime Go?","acceptedAnswer":{"@type":"Answer","text":"No. Alpha writes the Engine OS 3.x library directly onto the drive — the Prime Go mounts it exactly like a stick prepared by Engine DJ itself, with playlists, BPM and key in place."}},{"@type":"Question","name":"I'm coming from rekordbox — can the Prime Go use my rekordbox USB?","acceptedAnswer":{"@type":"Answer","text":"Engine OS can import a rekordbox stick on the device, but that import is slow and beatgrids can shift. The cleaner way: export your collection as a rekordbox XML, let Alpha keep the BPM, key and beatgrid rekordbox worked out, and write a native Engine library to the stick instead."}},{"@type":"Question","name":"Can I use the Prime Go's SD card slot instead of a USB stick?","acceptedAnswer":{"@type":"Answer","text":"Yes. Point Alpha's export at the mounted SD card — the on-disk format is identical, so the Prime Go reads either the same way."}},{"@type":"Question","name":"How should the stick be formatted for the Prime Go?","acceptedAnswer":{"@type":"Answer","text":"exFAT (Denon's recommendation) or FAT32 — Engine OS does not read NTFS. Alpha writes onto the stick's existing filesystem; it never reformats your drive."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Pioneer DJ XDJ-RX2","item":"https://alpha-dj-engine.com/usb/pioneer-xdj-rx2/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the XDJ-RX2 need rekordbox to read Alpha's stick?","acceptedAnswer":{"@type":"Answer","text":"No. Alpha writes the rekordbox database and analysis files directly, so the RX2 reads the stick natively — playlists, grids and waveforms included."}},{"@type":"Question","name":"How should I format the stick for the RX2?","acceptedAnswer":{"@type":"Answer","text":"FAT32 (or HFS+ on Mac) — the RX2 generation doesn't read exFAT or NTFS. Alpha never reformats your drive; it writes onto what's there."}},{"@type":"Question","name":"Will my stick from the RX2 also work on newer players?","acceptedAnswer":{"@type":"Answer","text":"Yes — Alpha writes both the classic and the newer encrypted library, so the same FAT32 stick plays on an RX3 or CDJ-3000 as well."}}]}</script>
 
   <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
        in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
@@ -176,7 +176,7 @@
   Inhalt aendern:
     - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
     - fuer eine Export-Familie:  data/pathways.json
-    - fuer DIESES Geraet:        data/devices.json (slug: denon-prime-go)
+    - fuer DIESES Geraet:        data/devices.json (slug: pioneer-xdj-rx2)
   danach: npm run build:pages && npm run build:css && npm run build:icons
 
   Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
@@ -204,16 +204,16 @@
   <div class="subpage__inner">
 
     <nav class="crumbs" aria-label="Breadcrumb">
-  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Prime Go</span>
+  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">XDJ-RX2</span>
 </nav>
 
 
-    <h1>A gig-ready USB stick for your Denon Prime Go</h1>
-    <p class="subpage__lead">The Prime Go is our reference device — every Alpha release is tested on one before it ships. Point Alpha at a folder of tracks, pick the energy arc your night should follow, and the stick comes out analyzed, harmonically ordered and ready to play the moment it clicks into the Prime Go&#39;s USB port.</p>
+    <h1>A prepared rekordbox USB for your XDJ-RX2</h1>
+    <p class="subpage__lead">The XDJ-RX2 has been the working DJ&#39;s all-in-one for years, and it still does one thing without compromise: play a properly prepared rekordbox USB. Alpha prepares that USB from a plain folder of tracks — analyzed, harmonically ordered and written in the format the RX2 expects.</p>
 
     
     <figure class="page-hero">
-      <img src="../../assets/img/usb/denon-prime-go.webp" alt="Denon DJ Prime Go" width="768" height="768" decoding="async">
+      <img src="../../assets/img/usb/pioneer-xdj-rx2.jpg" alt="Pioneer DJ XDJ-RX2" width="1600" height="949" decoding="async">
     </figure>
     
 
@@ -224,20 +224,18 @@
       
       <li>7-inch touchscreen</li>
       
-      <li>USB + SD card</li>
+      <li>2 USB ports</li>
       
-      <li>battery-powered</li>
-      
-      <li>Engine OS 3.x</li>
+      <li>rekordbox USB</li>
       
     </ul>
     
 
-    <h2>What Alpha writes for the Prime Go</h2>
-    <p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>
-    <p>The Prime Go is a battery-powered two-deck standalone, and that is exactly the setup Alpha is built around: no laptop in the booth, just the unit and a prepared drive. It takes both USB sticks and SD cards, and the on-disk format Alpha writes is identical for either — point the export at whichever is mounted.</p>
+    <h2>What Alpha writes for the XDJ-RX2</h2>
+    <p>Alpha writes a full rekordbox USB the player reads directly: the classic <code>export.pdb</code> library every CDJ and XDJ has read for years, the newer encrypted <code>exportLibrary.db</code> the latest players prefer, the per-track analysis files with beat grid, cues and waveforms, album artwork, and the audio under <code>Contents/&lt;Artist&gt;/&lt;Album&gt;</code>. No rekordbox software is needed anywhere in the chain — the stick plugs straight into the gear.</p><p>The beat grid is built from the interpreted BPM, so tracks arrive beat-ready and the player does not re-analyze anything. One limit to know: Alpha writes one constant beat grid per track, so tempo changes inside a track are not modelled.</p>
+    <p>The RX2 reads the classic rekordbox library, which Alpha writes together with the newer encrypted format — so the stick you prepare tonight also works when the venue upgrades. Beat grids and waveforms are in the analysis files; the RX2 loads them as-is.</p>
 
-    <h2>From folder to Prime Go in four steps</h2>
+    <h2>From folder to XDJ-RX2 in four steps</h2>
     <!-- Prozess-Schaufenster: links die vier Demo-Panels (kompakte Fassungen der
      Landingpage-Steps; 02 Compose nutzt die ECHTE Energy-Arc-Animation aus
      js/site.js via data-energy-arc), rechts die vier Steps mit Highlight.
@@ -350,7 +348,7 @@
         </div>
         <div class="mt-3 flex items-center gap-2 flex-wrap">
           <i data-lucide="usb" class="w-4 h-4 shrink-0"></i>
-          <span class="font-doto text-sm tracking-tight">DENON_DJ</span>
+          <span class="font-doto text-sm tracking-tight">PIONEER_DJ</span>
           <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 text-black/40"></i>
           <span class="exp-row inline-flex items-center gap-1.5 border-2 border-black rounded-full px-2.5 py-0.5 bg-[var(--beige)]" style="animation-delay:.2s">
             <i data-lucide="list-music" class="w-3.5 h-3.5 shrink-0"></i>
@@ -383,12 +381,12 @@
           </div>
           <div class="relative h-10 mt-2 text-xs">
             <div class="exp-writing absolute inset-0 text-[var(--ink-55)]">
-              Writing playlist to DENON_DJ<span class="loading-dots"></span>
+              Writing playlist to PIONEER_DJ<span class="loading-dots"></span>
             </div>
             <div class="exp-done absolute inset-0 flex flex-col gap-0.5">
               <span class="flex items-center gap-1.5 font-medium">
                 <i data-lucide="circle-check-big" class="w-3.5 h-3.5 shrink-0"></i>
-                Playlist written — Engine OS database updated
+                Playlist written — rekordbox library on the stick
               </span>
               <span class="text-[var(--ink-55)]">Existing tracks re-linked · <span class="font-doto">0</span> duplicates written</span>
             </div>
@@ -483,69 +481,59 @@
 </script>
 
 
-    <h2>Good to know on the Prime Go</h2>
+    <h2>Good to know on the XDJ-RX2</h2>
     <ul class="page-quirks">
       
-      <li>This is the device every Alpha release is validated on — if something works anywhere, it works here first.</li>
+      <li>The RX2 reads FAT32 and HFS+ — no exFAT. A stick that triggers &quot;E-306 NO FILE&quot; or won&#39;t mount is usually formatted wrong.</li>
       
-      <li>The Prime Go re-analyzes nothing: Alpha&#39;s BPM, key and beatgrid are read as-is from the Engine library, so tracks are ready the moment they load.</li>
+      <li>Two USB ports allow a two-stick handover between DJs.</li>
       
-      <li>If a playlist shows up without waveforms at first, that&#39;s normal — the Prime Go draws its own waveform the first time it loads a track.</li>
+      <li>One constant beat grid per track; in-track tempo changes aren&#39;t modelled.</li>
       
-      <li>Playing outdoors on battery? Prepare several playlists on one stick — Alpha adds to the Engine library on the drive, it never wipes it.</li>
+      <li>rekordbox export is a new target — please confirm it on your own gear before a gig.</li>
       
     </ul>
 
-    <h2>Common questions about the Prime Go</h2>
+    <h2>Common questions about the XDJ-RX2</h2>
 <div class="page-faq">
 
   <details class="faq-item">
     <summary>
-      Do I need the Engine DJ desktop app to prepare a stick for the Prime Go?
+      Does the XDJ-RX2 need rekordbox to read Alpha&#39;s stick?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>No. Alpha writes the Engine OS 3.x library directly onto the drive — the Prime Go mounts it exactly like a stick prepared by Engine DJ itself, with playlists, BPM and key in place.</p>
+      <p>No. Alpha writes the rekordbox database and analysis files directly, so the RX2 reads the stick natively — playlists, grids and waveforms included.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      I&#39;m coming from rekordbox — can the Prime Go use my rekordbox USB?
+      How should I format the stick for the RX2?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Engine OS can import a rekordbox stick on the device, but that import is slow and beatgrids can shift. The cleaner way: export your collection as a rekordbox XML, let Alpha keep the BPM, key and beatgrid rekordbox worked out, and write a native Engine library to the stick instead.</p>
+      <p>FAT32 (or HFS+ on Mac) — the RX2 generation doesn&#39;t read exFAT or NTFS. Alpha never reformats your drive; it writes onto what&#39;s there.</p>
     </div>
   </details>
 
   <details class="faq-item">
     <summary>
-      Can I use the Prime Go&#39;s SD card slot instead of a USB stick?
+      Will my stick from the RX2 also work on newer players?
       <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
     </summary>
     <div class="faq-answer">
-      <p>Yes. Point Alpha&#39;s export at the mounted SD card — the on-disk format is identical, so the Prime Go reads either the same way.</p>
-    </div>
-  </details>
-
-  <details class="faq-item">
-    <summary>
-      How should the stick be formatted for the Prime Go?
-      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
-    </summary>
-    <div class="faq-answer">
-      <p>exFAT (Denon&#39;s recommendation) or FAT32 — Engine OS does not read NTFS. Alpha writes onto the stick&#39;s existing filesystem; it never reformats your drive.</p>
+      <p>Yes — Alpha writes both the classic and the newer encrypted library, so the same FAT32 stick plays on an RX3 or CDJ-3000 as well.</p>
     </div>
   </details>
 
 </div>
 
 
-    <h2>Try it with your own Prime Go</h2>
+    <h2>Try it with your own XDJ-RX2</h2>
     <p>
       Every feature is in the free download — analysis, harmonic sequencing,
-      loudness matching and the Engine DJ write. It stops after
+      loudness matching and the rekordbox USB write. It stops after
       10 tracks, which is enough for one real set on your own stick. After
       that it's €30 including VAT, once. No subscription.
     </p>
@@ -559,11 +547,11 @@
     <h2>Related players</h2>
     <ul class="related-list">
       
-      <li><a href="../../usb/denon-prime-2/">Denon DJ Prime 2</a></li>
+      <li><a href="../../usb/pioneer-xdj-rx3/">Pioneer DJ XDJ-RX3</a></li>
       
-      <li><a href="../../usb/denon-prime-4/">Denon DJ Prime 4</a></li>
+      <li><a href="../../usb/pioneer-xdj-700/">Pioneer DJ XDJ-700</a></li>
       
-      <li><a href="../../usb/numark-mixstream-pro/">Numark Mixstream Pro</a></li>
+      <li><a href="../../usb/pioneer-cdj-2000nxs2/">Pioneer DJ CDJ-2000NXS2</a></li>
       
     </ul>
     
@@ -571,7 +559,7 @@
     <p>
       Different setup? <a href="../../compatibility.html">Check your own gear</a> —
       or read the full technical reference in the
-      <a href="../../knowledgebase/#usb-export">knowledge base</a>.
+      <a href="../../knowledgebase/#rekordbox-export">knowledge base</a>.
     </p>
 
   </div>

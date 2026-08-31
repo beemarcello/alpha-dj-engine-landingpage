@@ -73,6 +73,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/alphatheta-opus-quad/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/alphatheta-xdj-az/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-2/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
@@ -113,12 +123,37 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-cdj-2000nxs2/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-cdj-3000/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-1000mk2/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-700/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-rx2/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-rx3/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-xz/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>

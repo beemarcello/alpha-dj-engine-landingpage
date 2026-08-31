@@ -483,8 +483,12 @@ if (missingHero.length) {
 }
 /* Beinahe-Treffer melden: gleiche Buchstaben, falscher Name/Case. */
 for (const slug of [...missingHero]) {
-  const near = heroDirFiles.find((f) => f.toLowerCase().replace(/[^a-z0-9.]/g, '-').includes(slug.replace(/[^a-z0-9]/g, '-')) || f.toLowerCase().startsWith(slug.split('-')[0]));
-  if (near && !near.startsWith('.')) {
+  /* Nur echte Schreibweisen-Varianten melden (Gross-/Kleinschreibung,
+     Trennzeichen, Marken-Praefix) — NICHT jede Datei derselben Marke, sonst
+     schlaegt die Warnung bei einem Alternativ-Foto faelschlich an. */
+  const key = (x) => x.toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[^a-z0-9]/g, '');
+  const near = heroDirFiles.find((f) => !f.startsWith('.') && key(f) === key(slug));
+  if (near) {
     console.log('  ⚠ "' + near + '" sieht nach ' + slug + ' aus — bitte exakt in "' + slug + '.<ext>" umbenennen (GitHub Pages ist case-sensitiv).');
   }
 }
