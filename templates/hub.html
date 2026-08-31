@@ -34,6 +34,12 @@
       device for the exact walkthrough, formats and quirks.
     </p>
 
+    {{#if hero}}
+    <figure class="page-hero">
+      <img src="{{hero.src}}" alt="{{hero.alt}}"{{#if hero.width}} width="{{hero.width}}" height="{{hero.height}}"{{/if}} decoding="async">
+    </figure>
+    {{/if}}
+
     {{#each groups}}
     <section class="hub-group">
       <h2>{{title}}</h2>

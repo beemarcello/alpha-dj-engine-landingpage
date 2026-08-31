@@ -162,6 +162,14 @@ Die Kompatibilitaetssuche (`DEVICES` in `js/site.js`) und die Sitemap ziehen
 automatisch mit. **Geraet entfernen:** Datensatz loeschen — der Generator
 raeumt das verwaiste `usb/<slug>/`-Verzeichnis ab.
 
+**Hero-Bilder:** Bilddatei unter `assets/img/usb/` ablegen, benannt nach dem
+Seiten-Slug (`denon-prime-go.webp`, `pioneer-cdj-3000.jpg`, `hub.jpg` fuer die
+Uebersicht; webp/avif/jpg/jpeg/png). `npm run build:pages` baut sie automatisch
+als Hero unter dem Intro ein, misst Breite/Hoehe per `sips` (kein CLS) und
+nutzt sie als og:image. Fehlt die Datei, rendert die Seite ohne Bild; der
+Build listet fehlende Bilder auf. Nur lizenzrechtlich saubere Bilder verwenden
+(Hersteller-Pressebereiche oder eigene Fotos).
+
 Cache-Buster: Die generierten Seiten lesen die `?v=`-Nummern aus `index.html`.
 Wer dort bumpt, muss danach `npm run build:pages` laufen lassen. Umgekehrt gilt:
 Aendert der Build den `DEVICES`-Block in `js/site.js`, muss `site.js?v=` auf

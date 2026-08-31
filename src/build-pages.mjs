@@ -284,6 +284,35 @@ const hubJsonld = ldScript({
   ],
 });
 
+/* ---------------- Hero-Bilder (assets/img/usb/<slug>.*) ----------------
+   Marcel legt Bilder unter assets/img/usb/ ab, benannt nach dem Seiten-Slug
+   (z. B. denon-prime-go.webp) bzw. hub.* fuer die Uebersichtsseite. Liegt
+   eine Datei da, baut die Seite sie automatisch als Hero unter dem Intro ein
+   und nutzt sie als og:image. Fehlt sie, rendert die Seite ohne Bild.
+   Breite/Hoehe kommen per `sips` (macOS-Bordmittel) ins Markup, damit das
+   Layout beim Laden nicht springt (CLS); schlaegt sips fehl, bleiben die
+   Attribute einfach weg. Alt-Text: optionales Feld heroAlt in devices.json,
+   sonst der volle Geraetename. */
+
+import { execFileSync } from 'node:child_process';
+const HERO_EXTS = ['webp', 'avif', 'jpg', 'jpeg', 'png'];
+
+function findHero(name) {
+  for (const ext of HERO_EXTS) {
+    const rel = 'assets/img/usb/' + name + '.' + ext;
+    if (existsSync(join(ROOT, rel))) {
+      let width = '', height = '';
+      try {
+        const out = execFileSync('sips', ['-g', 'pixelWidth', '-g', 'pixelHeight', join(ROOT, rel)]).toString();
+        width = (out.match(/pixelWidth: (\d+)/) || [])[1] || '';
+        height = (out.match(/pixelHeight: (\d+)/) || [])[1] || '';
+      } catch { /* ohne Masse weiterrendern */ }
+      return { rel, width, height };
+    }
+  }
+  return null;
+}
+
 /* ---------------- Seiten rendern ---------------- */
 
 const deviceTpl = readFileSync(join(ROOT, 'templates/device.html'), 'utf8');
@@ -296,9 +325,17 @@ for (const d of releasedDevices) {
      "confirm on your own gear"-Vorbehalt garantiert auf jeder Seite, die
      ihn braucht, und ist trotzdem nur einmal definiert. */
   const quirks = [...d.quirks, ...(d.caveatFlags || []).map((f) => pw.caveats[f])];
+  const heroFile = findHero(d.slug);
+  const hero = heroFile ? {
+    src: '../../' + heroFile.rel,
+    width: heroFile.width,
+    height: heroFile.height,
+    alt: d.heroAlt || d.fullName,
+  } : null;
   const ctx = {
     root: '../../',
     v,
+    hero,
     device: { ...d, quirks },
     pathway: pw,
     stepsResolved: pw.steps.map((s) => s.replace(/\{model\}/g, d.model)),
@@ -313,6 +350,7 @@ for (const d of releasedDevices) {
       description: d.description,
       canonical: SITE_ORIGIN + '/usb/' + d.slug + '/',
       crumbLeaf: d.model,
+      ogImage: heroFile ? SITE_ORIGIN + '/' + heroFile.rel : SITE_ORIGIN + '/assets/img/og-image.png',
       jsonld: deviceJsonld({ ...d, faq: d.faq }),
     },
   };
@@ -325,9 +363,16 @@ for (const d of releasedDevices) {
 
 /* Hub-Seite */
 {
+  const hubHeroFile = findHero('hub');
   const ctx = {
     root: '../',
     v,
+    hero: hubHeroFile ? {
+      src: '../' + hubHeroFile.rel,
+      width: hubHeroFile.width,
+      height: hubHeroFile.height,
+      alt: 'DJ players Alpha-DJ-Engine prepares USB drives for',
+    } : null,
     groups: hub.groups.map((g) => ({
       ...g,
       /* Freigegebene Geraete als Links, der Rest als unverlinkte
@@ -344,6 +389,7 @@ for (const d of releasedDevices) {
       title: hub.title,
       description: hub.description,
       canonical: hub.canonical,
+      ogImage: hubHeroFile ? SITE_ORIGIN + '/' + hubHeroFile.rel : SITE_ORIGIN + '/assets/img/og-image.png',
       jsonld: hubJsonld,
     },
   };
@@ -399,6 +445,11 @@ console.log('✓ ' + written + ' Seiten geschrieben (' + releasedDevices.length 
 const unreleased = pageDevices.filter((d) => d.released !== true);
 if (unreleased.length) {
   console.log('  Noch nicht freigegeben (released:false): ' + unreleased.map((d) => d.slug).join(', '));
+}
+const missingHero = releasedDevices.filter((d) => !findHero(d.slug)).map((d) => d.slug);
+if (!findHero('hub')) missingHero.unshift('hub');
+if (missingHero.length) {
+  console.log('  Ohne Hero-Bild (assets/img/usb/<name>.webp|jpg|png ablegen): ' + missingHero.join(', '));
 }
 console.log('  Cache-Buster aus index.html: site.css v' + v.siteCss + ', tailwind v' + v.tailwindCss + ', icons v' + v.iconsJs + ', site.js v' + v.siteJs);
 if (warnings.length) {

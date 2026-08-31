@@ -30,6 +30,12 @@
     <h1>{{device.h1}}</h1>
     <p class="subpage__lead">{{device.intro}}</p>
 
+    {{#if hero}}
+    <figure class="page-hero">
+      <img src="{{hero.src}}" alt="{{hero.alt}}"{{#if hero.width}} width="{{hero.width}}" height="{{hero.height}}"{{/if}} decoding="async">
+    </figure>
+    {{/if}}
+
     {{#if device.facts}}
     <ul class="device-facts">
       {{#each device.facts}}
