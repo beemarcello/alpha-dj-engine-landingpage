@@ -160,6 +160,7 @@
   </div>
 
   <div class="proc-steps" role="list">
+    <span class="proc-pill" data-process-pill aria-hidden="true"></span>
     {{#each processSteps}}
     <button type="button" class="proc-step" data-process-step role="listitem">
       <span class="proc-step__num step-num">{{num}} {{title}}</span>
@@ -181,11 +182,28 @@
   var index = 0;
   var timer = null;
 
+  var pill = root.querySelector('[data-process-pill]');
+  var stepsBox = pill ? pill.parentElement : null;
+
+  function movePill(n) {
+    if (!pill) return;
+    var span = steps[n].querySelector('.proc-step__num');
+    var boxRect = stepsBox.getBoundingClientRect();
+    var rect = span.getBoundingClientRect();
+    var padX = 16, padY = 5;
+    pill.style.width = (rect.width + padX * 2) + 'px';
+    pill.style.height = (rect.height + padY * 2) + 'px';
+    pill.style.transform = 'translate(' + (rect.left - boxRect.left - padX) + 'px, ' + (rect.top - boxRect.top - padY) + 'px)';
+  }
+
   function show(n) {
     index = n;
     steps.forEach(function (s, k) { s.classList.toggle('is-active', k === n); });
     panels.forEach(function (p, k) { p.classList.toggle('is-active', k === n); });
+    movePill(n);
   }
+
+  window.addEventListener('resize', function () { movePill(index); });
 
   function start() {
     if (reduce) return;

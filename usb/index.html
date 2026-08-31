@@ -19,7 +19,7 @@
   <meta name="theme-color" content="#d5d5d4">
 
   <link rel="stylesheet" href="../css/site.css?v=40">
-  <link rel="stylesheet" href="../css/tailwind.css?v=21">
+  <link rel="stylesheet" href="../css/tailwind.css?v=22">
 
   <!-- ====================================================================
        Google-Tag mit Consent Mode
@@ -145,10 +145,15 @@
       74%  { transform: translateX(0); }
       100% { transform: translateX(0); }
     }
-    .proc-steps { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
-    .proc-step { display: block; width: 100%; text-align: left; background: none; border: 0; border-left: 3px solid transparent; padding: 8px 0 8px 16px; cursor: pointer; opacity: .38; transition: opacity .3s, border-color .3s; font: inherit; color: inherit; }
-    .proc-step.is-active { opacity: 1; border-left-color: var(--ink); }
-    .proc-step__num { font-size: clamp(22px, 3vw, 30px); margin-bottom: 0; }
+    .proc-steps { display: flex; flex-direction: column; justify-content: center; gap: 2px; position: relative; }
+    /* Weisser Pill hinter dem aktiven Titel; gleitet per JS (movePill) zur
+       jeweils aktiven Position. Erster Aufruf passiert vor dem ersten Paint,
+       deshalb kein Einflug von (0,0). */
+    .proc-pill { position: absolute; top: 0; left: 0; background: var(--white); border: 2px solid var(--ink); border-radius: 999px; box-shadow: var(--shadow-hard); transition: transform .35s ease, width .35s ease, height .35s ease; will-change: transform; }
+    @media (prefers-reduced-motion: reduce) { .proc-pill { transition: none; } }
+    .proc-step { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 8px 0 8px 16px; cursor: pointer; opacity: .38; transition: opacity .3s; font: inherit; color: inherit; position: relative; z-index: 1; }
+    .proc-step.is-active { opacity: 1; }
+    .proc-step__num { display: inline-block; font-size: clamp(22px, 3vw, 30px); margin-bottom: 0; }
   </style>
 
 </head>
@@ -364,6 +369,7 @@
   </div>
 
   <div class="proc-steps" role="list">
+    <span class="proc-pill" data-process-pill aria-hidden="true"></span>
     
     <button type="button" class="proc-step" data-process-step role="listitem">
       <span class="proc-step__num step-num">01 Analyze</span>
@@ -397,11 +403,28 @@
   var index = 0;
   var timer = null;
 
+  var pill = root.querySelector('[data-process-pill]');
+  var stepsBox = pill ? pill.parentElement : null;
+
+  function movePill(n) {
+    if (!pill) return;
+    var span = steps[n].querySelector('.proc-step__num');
+    var boxRect = stepsBox.getBoundingClientRect();
+    var rect = span.getBoundingClientRect();
+    var padX = 16, padY = 5;
+    pill.style.width = (rect.width + padX * 2) + 'px';
+    pill.style.height = (rect.height + padY * 2) + 'px';
+    pill.style.transform = 'translate(' + (rect.left - boxRect.left - padX) + 'px, ' + (rect.top - boxRect.top - padY) + 'px)';
+  }
+
   function show(n) {
     index = n;
     steps.forEach(function (s, k) { s.classList.toggle('is-active', k === n); });
     panels.forEach(function (p, k) { p.classList.toggle('is-active', k === n); });
+    movePill(n);
   }
+
+  window.addEventListener('resize', function () { movePill(index); });
 
   function start() {
     if (reduce) return;
