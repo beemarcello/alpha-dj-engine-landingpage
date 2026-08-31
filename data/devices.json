@@ -425,7 +425,6 @@
       "aliases": [
         "mixstream",
         "mixstreampro",
-        "mixstream pro go",
         "mixstream pro plus",
         "mixstream pro +"
       ],
@@ -479,6 +478,25 @@
         "denon-prime-4"
       ],
       "heroAlt": "Numark Mixstream Pro Go — same Engine OS family as the Mixstream Pro"
+    },
+    {
+      "slug": "numark-mixstream-pro-go",
+      "brand": "Numark",
+      "model": "Mixstream Pro Go",
+      "fullName": "Numark Mixstream Pro Go",
+      "type": "all-in-one",
+      "status": "yes",
+      "standalone": true,
+      "page": false,
+      "released": false,
+      "pathway": "engineos",
+      "aliases": [
+        "mixstream pro go",
+        "mixstreamprogo",
+        "pro go",
+        "progo"
+      ],
+      "compatNote": "The battery-powered member of the Mixstream family — it runs the same Engine OS as the Mixstream Pro, so the stick Alpha writes plays on it identically."
     },
     {
       "slug": "denon-lc6000-prime",
