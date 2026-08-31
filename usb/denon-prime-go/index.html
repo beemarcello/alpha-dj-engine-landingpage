@@ -19,7 +19,7 @@
   <meta name="theme-color" content="#d5d5d4">
 
   <link rel="stylesheet" href="../../css/site.css?v=40">
-  <link rel="stylesheet" href="../../css/tailwind.css?v=20">
+  <link rel="stylesheet" href="../../css/tailwind.css?v=21">
 
   <!-- ====================================================================
        Google-Tag mit Consent Mode
@@ -108,6 +108,11 @@
     .proc-panel--03 { background: var(--red); }
     .proc-panel--04 { background: var(--beige); }
     .proc-panel .demo-panel { box-shadow: none; min-width: 0; }
+    /* Abstand Stick-Zeile -> Track-Boxen im Export-Panel. Bewusst hier im
+       Inline-Style statt als Tailwind-Utility: der Style-Block steckt im HTML
+       der Seite und kann nicht wie tailwind.css im Browser-Cache veralten
+       (genau das hat diesen Abstand zweimal verschluckt). */
+    .proc-export-list { margin-top: 30px !important; }
     /* Arc-Preset-Buttons: js/site.js rendert sie fuer die breite Landing-Spalte;
        hier ist die Spalte schmaler, deshalb kompakt erzwingen. */
     .proc-panel--02 [data-arc-buttons] { flex-wrap: wrap !important; }
@@ -339,7 +344,7 @@
             <span class="text-xs font-semibold whitespace-nowrap">Sunset Set</span>
           </span>
         </div>
-        <ul class="mt-8 space-y-2 flex-1 list-none p-0 m-0">
+        <ul class="proc-export-list space-y-2 flex-1 list-none p-0 m-0">
           <li class="exp-row flex items-center justify-between gap-2 border-2 border-black rounded-sm bg-white px-2 py-1.5" style="animation-delay:1s">
             <span class="flex items-center gap-2 min-w-0">
               <i data-lucide="music" class="w-3.5 h-3.5 shrink-0"></i>
