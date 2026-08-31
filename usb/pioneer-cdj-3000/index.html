@@ -99,6 +99,11 @@
     .related-list a { display: inline-block; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--ink); }
     .related-list a:hover { background: var(--green); }
     .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
+    /* Quirks buendig ohne Bullets — die Standard-Listeneinrueckung der
+       Subpage wirkte hier neben den buendigen Absaetzen verrutscht
+       (Marcel, 2026-08-31). */
+    .subpage ul.page-quirks { list-style: none; padding-left: 0; }
+    .subpage .page-quirks li { margin-bottom: 10px; }
     /* Prozess-Schaufenster (templates/partials/process.html) */
     .proc-grid { display: grid; gap: 20px; margin: 0 0 18px; }
     @media (min-width: 720px) { .proc-grid { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: stretch; } }
@@ -477,7 +482,7 @@
 
 
     <h2>Good to know on the CDJ-3000</h2>
-    <ul>
+    <ul class="page-quirks">
       
       <li>Alpha writes both rekordbox libraries — the classic export.pdb and the newer encrypted exportLibrary.db the CDJ-3000 prefers — so one stick serves new and old players alike.</li>
       
