@@ -146,3 +146,5 @@ virtualdj usb stick standalone,en,informational,low,none,,none,P3,rejected,Virtu
 engine dj download,en,transactional,mid,none,,none,P3,rejected,navigational to enginedj.com; unwinnable and wrong intent
 rekordbox free download,en,transactional,high,none,,none,P3,rejected,navigational to rekordbox.com; wrong intent
 cdj 3000 price,en,transactional,high,none,,none,P3,rejected,shopping intent; retailer SERP
+mixstream pro go usb,en,informational,low,device,numark-mixstream-pro,faq,P2,mapped,Familien-FAQ auf der Mixstream-Pro-Seite; eigene Seite waere Near-Duplicate
+mixstream pro plus usb,en,informational,low,device,numark-mixstream-pro,faq,P3,mapped,Familien-FAQ auf der Mixstream-Pro-Seite

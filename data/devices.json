@@ -424,9 +424,12 @@
       "pathway": "engineos",
       "aliases": [
         "mixstream",
-        "mixstreampro"
+        "mixstreampro",
+        "mixstream pro go",
+        "mixstream pro plus",
+        "mixstream pro +"
       ],
-      "compatNote": "",
+      "compatNote": "Covers the whole Mixstream family — the Pro, the Pro + and the battery-powered Pro Go all run Engine OS and read the same stick.",
       "caveatFlags": [],
       "facts": [
         "2 decks",
@@ -441,11 +444,12 @@
       "h1": "A prepared USB for your Numark Mixstream Pro",
       "description": "Alpha-DJ-Engine analyzes your local tracks, builds a harmonic set and writes the Engine DJ USB the Mixstream Pro reads natively — no laptop, no WiFi dependency. First 10 tracks free, then €30 once.",
       "intro": "The Mixstream Pro is the friendliest way into standalone DJing — speakers built in, streaming on tap. But streaming needs WiFi, and gigs don't always have it. Alpha writes your own tracks onto a stick as a finished, harmonically ordered Engine set that plays anywhere, connection or not.",
-      "deviceDetail": "The Mixstream Pro runs the same Engine OS 3.x format as Denon's Prime family, and that's what Alpha writes: your audio with interpreted BPM, Camelot key and the playlist in set order, onto a USB stick or SD card. Prepared local files beat a venue's WiFi every time — the stick doesn't buffer.",
+      "deviceDetail": "The Mixstream Pro runs the same Engine OS 3.x format as Denon's Prime family, and that's what Alpha writes: your audio with interpreted BPM, Camelot key and the playlist in set order, onto a USB stick or SD card. Prepared local files beat a venue's WiFi every time — the stick doesn't buffer. And it isn't just one device: the Mixstream Pro +, and the battery-powered Mixstream Pro Go run the same Engine OS, so the stick Alpha prepares plays on the whole family.",
       "quirks": [
         "Streaming tracks live in the cloud and can't go on a stick — Alpha prepares your own local files, so the set plays with zero connectivity.",
         "The Mixstream Pro reads Alpha's BPM, key and beatgrid straight from the Engine library — no on-device re-analysis.",
-        "Waveforms are drawn by the unit the first time a track loads; a fresh playlist without them is normal."
+        "Waveforms are drawn by the unit the first time a track loads; a fresh playlist without them is normal.",
+        "Same stick, whole family: Mixstream Pro, Pro + and the battery-powered Pro Go all read the identical Engine library."
       ],
       "faq": [
         {
@@ -463,13 +467,18 @@
         {
           "q": "Can Alpha put my streaming playlists on the stick?",
           "a": "No — and nothing can: streamed tracks are DRM-protected and live in the cloud. Alpha prepares the music you own as local files, which is exactly what plays when the WiFi doesn't."
+        },
+        {
+          "q": "Does the same stick work on the Mixstream Pro Go or Pro +?",
+          "a": "Yes. The whole Mixstream family runs Engine OS and reads the same Engine library — prepare one stick with Alpha and it plays on the Pro, the Pro + and the battery-powered Pro Go alike."
         }
       ],
       "related": [
         "denon-prime-go",
         "denon-prime-2",
         "denon-prime-4"
-      ]
+      ],
+      "heroAlt": "Numark Mixstream Pro Go — same Engine OS family as the Mixstream Pro"
     },
     {
       "slug": "denon-lc6000-prime",
