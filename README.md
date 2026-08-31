@@ -351,7 +351,9 @@ Details, die leicht kaputtgehen:
 - [ ] **Bildrechte klären.** Die Fotos in `assets/img/` sehen nach Händler-/Stock-
       Produktbildern aus (Dateinamen „gebraucht"; `denon-dj-prime-go_1_DJE0007380-000.webp`
       trägt ein sichtbares „MUSIC STORE professional"-Wasserzeichen). Das eingebundene
-      `Denon-DJ-Prime-Go-gebraucht-3-768x768.webp` ist wasserzeichenfrei, die Herkunft offen.
+      `denon-prime-go.webp` (bis 2026-08-31 unter dem Namen
+      `Denon-DJ-Prime-Go-gebraucht-3-768x768.webp`, byte-identisch — beide liegen
+      noch in assets/img/) ist wasserzeichenfrei, die Herkunft offen.
 - [ ] **Hero-Bild ab ~1600 px.** Aktuell 768×768, wird per `object-cover` ~1.25×
       hochskaliert. Nicht die 1280er-Variante nehmen — Wasserzeichen.
 - [ ] **Release-URL** für den Download → `js/site.js` → `DL_CFG.downloadUrl`.
