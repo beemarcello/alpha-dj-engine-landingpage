@@ -49,11 +49,7 @@
     <p>{{device.deviceDetail}}</p>
 
     <h2>From folder to {{device.model}} in four steps</h2>
-    <ol>
-      {{#each stepsResolved}}
-      <li>{{this}}</li>
-      {{/each}}
-    </ol>
+    {{> process}}
 
     <h2>Good to know on the {{device.model}}</h2>
     <ul>

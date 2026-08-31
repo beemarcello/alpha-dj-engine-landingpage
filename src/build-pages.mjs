@@ -332,13 +332,21 @@ for (const d of releasedDevices) {
     height: heroFile.height,
     alt: d.heroAlt || d.fullName,
   } : null;
+  const stepsResolved = pw.steps.map((s) => s.replace(/\{model\}/g, d.model));
   const ctx = {
     root: '../../',
     v,
     hero,
     device: { ...d, quirks },
     pathway: pw,
-    stepsResolved: pw.steps.map((s) => s.replace(/\{model\}/g, d.model)),
+    stepsResolved,
+    /* Prozess-Schaufenster: Titel fix, Texte = die pfadspezifischen Steps
+       (bereits mit Modellnamen aufgeloest) — so bleibt der SEO-Text pro
+       Geraet einzigartig und die Grafiken erklaeren ihn. */
+    processSteps: ['Analyze', 'Compose', 'Refine', 'Export'].map((title, k) => ({
+      num: '0' + (k + 1), title, text: stepsResolved[k],
+    })),
+    processExport: { stick: pw.processStick, done: pw.processDone },
     /* Related nur auf freigegebene Seiten verlinken — ein Link auf eine noch
        nicht existierende Seite waere ein 404. */
     relatedResolved: (d.related || [])
@@ -373,6 +381,10 @@ for (const d of releasedDevices) {
       height: hubHeroFile.height,
       alt: 'DJ players Alpha-DJ-Engine prepares USB drives for',
     } : null,
+    processSteps: ['Analyze', 'Compose', 'Refine', 'Export'].map((title, k) => ({
+      num: '0' + (k + 1), title, text: hub.processSteps[k],
+    })),
+    processExport: hub.processExport,
     groups: hub.groups.map((g) => ({
       ...g,
       /* Freigegebene Geraete als Links, der Rest als unverlinkte

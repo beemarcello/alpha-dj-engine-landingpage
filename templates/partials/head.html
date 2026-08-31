@@ -92,4 +92,21 @@
     .related-list a { display: inline-block; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--ink); }
     .related-list a:hover { background: var(--green); }
     .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
+    /* Prozess-Schaufenster (templates/partials/process.html) */
+    .proc-grid { display: grid; gap: 20px; margin: 0 0 18px; }
+    @media (min-width: 720px) { .proc-grid { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+    .proc-grid > * { min-width: 0; }
+    .proc-stage { position: relative; min-height: 24rem; }
+    .proc-panel { display: none; height: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-hard); }
+    .proc-panel.is-active { display: flex; }
+    .proc-panel--01 { background: var(--green); }
+    .proc-panel--02 { background: var(--purple); }
+    .proc-panel--03 { background: var(--red); }
+    .proc-panel--04 { background: var(--beige); }
+    .proc-panel .demo-panel { box-shadow: none; }
+    .proc-steps { display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+    .proc-step { display: block; width: 100%; text-align: left; background: none; border: 0; border-left: 3px solid transparent; padding: 10px 0 10px 16px; cursor: pointer; opacity: .38; transition: opacity .3s, border-color .3s; font: inherit; color: inherit; }
+    .proc-step.is-active { opacity: 1; border-left-color: var(--ink); }
+    .proc-step__num { font-size: clamp(20px, 2.6vw, 26px); margin-bottom: 4px; }
+    .proc-step__text { display: block; color: var(--ink-55); font-size: 14px; line-height: 1.55; }
   </style>

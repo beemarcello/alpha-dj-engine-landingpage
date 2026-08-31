@@ -12,7 +12,9 @@
       "Audition the set in the built-in player and drag any track to a new position until the order feels right.",
       "Plug in your stick and click Write to USB. Alpha backs up the stick's existing Engine library, writes the set, matches loudness if you asked it to, validates the result — then eject and go straight into the {model}."
     ],
-    "caveats": {}
+    "caveats": {},
+    "processStick": "DENON_DJ",
+    "processDone": "Playlist written — Engine OS database updated"
   },
   "rekordbox": {
     "label": "rekordbox export",
@@ -29,7 +31,9 @@
     "caveats": {
       "new-target-confirm-on-gear": "rekordbox export is a new target — please confirm it on your own gear before a gig."
     },
-    "searchNote": "Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear."
+    "searchNote": "Alpha writes the rekordbox library itself, so the stick plays straight on the player — no rekordbox software needed. This target is new: please confirm it on your own gear.",
+    "processStick": "PIONEER_DJ",
+    "processDone": "Playlist written — rekordbox library on the stick"
   },
   "virtualdj": {
     "label": "VirtualDJ export",
