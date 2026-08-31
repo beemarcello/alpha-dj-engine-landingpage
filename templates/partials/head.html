@@ -94,7 +94,7 @@
     .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
     /* Prozess-Schaufenster (templates/partials/process.html) */
     .proc-grid { display: grid; gap: 20px; margin: 0 0 18px; }
-    @media (min-width: 720px) { .proc-grid { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+    @media (min-width: 720px) { .proc-grid { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: stretch; } }
     .proc-grid > * { min-width: 0; }
     .proc-stage { position: relative; min-height: 19rem; }
     .proc-panel { display: none; height: 100%; border: 2px solid var(--ink); border-radius: 14px; padding: 16px; box-shadow: var(--shadow-hard); }
@@ -103,7 +103,19 @@
     .proc-panel--02 { background: var(--purple); }
     .proc-panel--03 { background: var(--red); }
     .proc-panel--04 { background: var(--beige); }
-    .proc-panel .demo-panel { box-shadow: none; }
+    .proc-panel .demo-panel { box-shadow: none; min-width: 0; }
+    /* Arc-Preset-Buttons: js/site.js rendert sie fuer die breite Landing-Spalte;
+       hier ist die Spalte schmaler, deshalb kompakt erzwingen. */
+    .proc-panel--02 [data-arc-buttons] { flex-wrap: wrap !important; }
+    .proc-panel--02 [data-arc-buttons] button { flex: 0 0 auto !important; padding: 4px 10px !important; font-size: 11px !important; }
+    /* Dezente EQ-Bewegung der Refine-Bars (nur ohne reduced motion). */
+    @media (prefers-reduced-motion: no-preference) {
+      .proc-eqbar { transform-origin: bottom; animation: proc-eq 2.2s ease-in-out infinite alternate; }
+      .proc-eqbar:nth-child(2n) { animation-delay: .35s; }
+      .proc-eqbar:nth-child(3n) { animation-delay: .7s; }
+      .proc-eqbar:nth-child(5n) { animation-delay: 1.05s; }
+    }
+    @keyframes proc-eq { from { transform: scaleY(.82); } to { transform: scaleY(1.06); } }
     .proc-steps { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
     .proc-step { display: block; width: 100%; text-align: left; background: none; border: 0; border-left: 3px solid transparent; padding: 8px 0 8px 16px; cursor: pointer; opacity: .38; transition: opacity .3s, border-color .3s; font: inherit; color: inherit; }
     .proc-step.is-active { opacity: 1; border-left-color: var(--ink); }
