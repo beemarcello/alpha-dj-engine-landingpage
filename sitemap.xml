@@ -78,12 +78,27 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/denon-prime-4/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-go/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://alpha-dj-engine.com/usb/numark-mixstream-pro/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-cdj-3000/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-rx3/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>

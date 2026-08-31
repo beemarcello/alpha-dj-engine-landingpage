@@ -133,7 +133,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "engineos",
       "aliases": [
         "prime4",
@@ -420,7 +420,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "engineos",
       "aliases": [
         "mixstream",
@@ -627,7 +627,7 @@
       "status": "yes",
       "standalone": true,
       "page": true,
-      "released": false,
+      "released": true,
       "pathway": "rekordbox",
       "aliases": [
         "xdjrx3",

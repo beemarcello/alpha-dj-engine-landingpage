@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Prepare a USB for your DJ player — CDJ, XDJ, Prime — Alpha-DJ-Engine</title>
-  <meta name="description" content="Prepare a USB for CDJ, XDJ, Prime and more: Alpha-DJ-Engine analyzes your music, builds a harmonic set and writes the library your player reads natively. Pick your device for the exact guide.">
+  <title>Write a USB stick for the Numark Mixstream Pro — Alpha-DJ-Engine</title>
+  <meta name="description" content="Alpha-DJ-Engine analyzes your local tracks, builds a harmonic set and writes the Engine DJ USB the Mixstream Pro reads natively — no laptop, no WiFi dependency. First 10 tracks free, then €30 once.">
 
-  <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
-  <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
-  <link rel="canonical" href="https://alpha-dj-engine.com/usb/">
+  <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/usb/numark-mixstream-pro/">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Prepare a USB for your DJ player — CDJ, XDJ, Prime — Alpha-DJ-Engine">
-  <meta property="og:description" content="Prepare a USB for CDJ, XDJ, Prime and more: Alpha-DJ-Engine analyzes your music, builds a harmonic set and writes the library your player reads natively. Pick your device for the exact guide.">
+  <meta property="og:title" content="Write a USB stick for the Numark Mixstream Pro — Alpha-DJ-Engine">
+  <meta property="og:description" content="Alpha-DJ-Engine analyzes your local tracks, builds a harmonic set and writes the Engine DJ USB the Mixstream Pro reads natively — no laptop, no WiFi dependency. First 10 tracks free, then €30 once.">
   <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
-  <meta property="og:url" content="https://alpha-dj-engine.com/usb/">
+  <meta property="og:url" content="https://alpha-dj-engine.com/usb/numark-mixstream-pro/">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="../css/site.css?v=40">
-  <link rel="stylesheet" href="../css/tailwind.css?v=22">
+  <link rel="stylesheet" href="../../css/site.css?v=40">
+  <link rel="stylesheet" href="../../css/tailwind.css?v=22">
 
   <!-- ====================================================================
        Google-Tag mit Consent Mode
@@ -56,10 +56,11 @@
     gtag('config', 'G-DQBC6VLYFP');
   </script>
 
-  <script src="../js/icons.js?v=7" defer></script>
-  <script src="../js/site.js?v=28" defer></script>
+  <script src="../../js/icons.js?v=7" defer></script>
+  <script src="../../js/site.js?v=28" defer></script>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Numark Mixstream Pro","item":"https://alpha-dj-engine.com/usb/numark-mixstream-pro/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the Mixstream Pro work without a laptop?","acceptedAnswer":{"@type":"Answer","text":"Yes — that's the point of it, and of Alpha: the stick is prepared on your Mac at home, and at the gig it's just the Mixstream Pro and the drive. No laptop, no Engine desktop, no WiFi needed."}},{"@type":"Question","name":"Does the Mixstream Pro read Alpha's stick like a Denon Prime device?","acceptedAnswer":{"@type":"Answer","text":"Yes — it runs the same Engine OS 3.x format. Alpha writes one library and the whole Engine family reads it, Mixstream Pro included."}},{"@type":"Question","name":"Can Alpha put my rekordbox collection on the Mixstream Pro?","acceptedAnswer":{"@type":"Answer","text":"Yes — export it as a rekordbox XML and Alpha writes a native Engine library from it, keeping the BPM, key and beatgrid rekordbox worked out."}},{"@type":"Question","name":"Can Alpha put my streaming playlists on the stick?","acceptedAnswer":{"@type":"Answer","text":"No — and nothing can: streamed tracks are DRM-protected and live in the cloud. Alpha prepares the music you own as local files, which is exactly what plays when the WiFi doesn't."}}]}</script>
 
   <!-- Kleine Zusatzstile nur fuer die generierten Seiten. Bewusst inline statt
        in css/site.css: so muss beim Regenerieren kein ?v= auf den 9 von Hand
@@ -172,7 +173,10 @@
 ================================================================================
   AUTOMATISCH ERZEUGT von src/build-pages.mjs — NICHT von Hand editieren.
 
-  Inhalt aendern: templates/hub.html bzw. data/devices.json,
+  Inhalt aendern:
+    - fuer ALLE Geraeteseiten:   templates/device.html bzw. templates/partials/
+    - fuer eine Export-Familie:  data/pathways.json
+    - fuer DIESES Geraet:        data/devices.json (slug: numark-mixstream-pro)
   danach: npm run build:pages && npm run build:css && npm run build:icons
 
   Jede Hand-Aenderung hier wird beim naechsten Build ueberschrieben.
@@ -183,12 +187,12 @@
 
 <nav class="fixed z-50 w-full top-0" id="navbar">
   <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
-    <a href="../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
-      <img src="../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+    <a href="../../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+      <img src="../../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
            class="h-9 sm:h-10 w-auto" decoding="async">
     </a>
     <div class="flex items-center gap-3">
-      <a data-download href="../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+      <a data-download href="../../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
       <!-- Login zum Portal (Marcel, 2026-08-27) -->
       <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
     </div>
@@ -197,25 +201,40 @@
 
 
 <main id="main" class="subpage">
-  <div class="subpage__inner subpage__inner--wide">
+  <div class="subpage__inner">
 
     <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="../index.html">Home</a><span class="sep">/</span><span aria-current="page">USB guides</span>
-    </nav>
+  <a href="../../index.html">Home</a><span class="sep">/</span><a href="../../usb/">USB guides</a><span class="sep">/</span><span aria-current="page">Mixstream Pro</span>
+</nav>
 
-    <h1>Prepare a USB for your player</h1>
-    <p class="subpage__lead">
-      Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set
-      and writes the library your player actually reads — Engine DJ for Denon
-      and Numark, a rekordbox USB for Pioneer DJ and AlphaTheta. Pick your
-      device for the exact walkthrough, formats and quirks.
-    </p>
+
+    <h1>A prepared USB for your Numark Mixstream Pro</h1>
+    <p class="subpage__lead">The Mixstream Pro is the friendliest way into standalone DJing — speakers built in, streaming on tap. But streaming needs WiFi, and gigs don&#39;t always have it. Alpha writes your own tracks onto a stick as a finished, harmonically ordered Engine set that plays anywhere, connection or not.</p>
 
     
 
-    <section class="hub-group">
-      <h2>This is how Alpha works</h2>
-      <!-- Prozess-Schaufenster: links die vier Demo-Panels (kompakte Fassungen der
+    
+    <ul class="device-facts">
+      
+      <li>2 decks</li>
+      
+      <li>7-inch touchscreen</li>
+      
+      <li>built-in speakers</li>
+      
+      <li>2 USB ports + SD card</li>
+      
+      <li>Engine OS 3.x</li>
+      
+    </ul>
+    
+
+    <h2>What Alpha writes for the Mixstream Pro</h2>
+    <p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>
+    <p>The Mixstream Pro runs the same Engine OS 3.x format as Denon&#39;s Prime family, and that&#39;s what Alpha writes: your audio with interpreted BPM, Camelot key and the playlist in set order, onto a USB stick or SD card. Prepared local files beat a venue&#39;s WiFi every time — the stick doesn&#39;t buffer.</p>
+
+    <h2>From folder to Mixstream Pro in four steps</h2>
+    <!-- Prozess-Schaufenster: links die vier Demo-Panels (kompakte Fassungen der
      Landingpage-Steps; 02 Compose nutzt die ECHTE Energy-Arc-Animation aus
      js/site.js via data-energy-arc), rechts die vier Steps mit Highlight.
      Wechselt automatisch alle 4 s (pausiert ausserhalb des Viewports und bei
@@ -327,7 +346,7 @@
         </div>
         <div class="mt-3 flex items-center gap-2 flex-wrap">
           <i data-lucide="usb" class="w-4 h-4 shrink-0"></i>
-          <span class="font-doto text-sm tracking-tight">DJ_USB</span>
+          <span class="font-doto text-sm tracking-tight">DENON_DJ</span>
           <i data-lucide="chevron-right" class="w-3.5 h-3.5 shrink-0 text-black/40"></i>
           <span class="exp-row inline-flex items-center gap-1.5 border-2 border-black rounded-full px-2.5 py-0.5 bg-[var(--beige)]" style="animation-delay:.2s">
             <i data-lucide="list-music" class="w-3.5 h-3.5 shrink-0"></i>
@@ -360,12 +379,12 @@
           </div>
           <div class="relative h-10 mt-2 text-xs">
             <div class="exp-writing absolute inset-0 text-[var(--ink-55)]">
-              Writing playlist to DJ_USB<span class="loading-dots"></span>
+              Writing playlist to DENON_DJ<span class="loading-dots"></span>
             </div>
             <div class="exp-done absolute inset-0 flex flex-col gap-0.5">
               <span class="flex items-center gap-1.5 font-medium">
                 <i data-lucide="circle-check-big" class="w-3.5 h-3.5 shrink-0"></i>
-                Playlist written — device library updated
+                Playlist written — Engine OS database updated
               </span>
               <span class="text-[var(--ink-55)]">Existing tracks re-linked · <span class="font-doto">0</span> duplicates written</span>
             </div>
@@ -459,165 +478,93 @@
 })();
 </script>
 
-    </section>
+
+    <h2>Good to know on the Mixstream Pro</h2>
+    <ul class="page-quirks">
+      
+      <li>Streaming tracks live in the cloud and can&#39;t go on a stick — Alpha prepares your own local files, so the set plays with zero connectivity.</li>
+      
+      <li>The Mixstream Pro reads Alpha&#39;s BPM, key and beatgrid straight from the Engine library — no on-device re-analysis.</li>
+      
+      <li>Waveforms are drawn by the unit the first time a track loads; a fresh playlist without them is normal.</li>
+      
+    </ul>
+
+    <h2>Common questions about the Mixstream Pro</h2>
+<div class="page-faq">
+
+  <details class="faq-item">
+    <summary>
+      Does the Mixstream Pro work without a laptop?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>Yes — that&#39;s the point of it, and of Alpha: the stick is prepared on your Mac at home, and at the gig it&#39;s just the Mixstream Pro and the drive. No laptop, no Engine desktop, no WiFi needed.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      Does the Mixstream Pro read Alpha&#39;s stick like a Denon Prime device?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>Yes — it runs the same Engine OS 3.x format. Alpha writes one library and the whole Engine family reads it, Mixstream Pro included.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      Can Alpha put my rekordbox collection on the Mixstream Pro?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>Yes — export it as a rekordbox XML and Alpha writes a native Engine library from it, keeping the BPM, key and beatgrid rekordbox worked out.</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>
+      Can Alpha put my streaming playlists on the stick?
+      <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+    </summary>
+    <div class="faq-answer">
+      <p>No — and nothing can: streamed tracks are DRM-protected and live in the cloud. Alpha prepares the music you own as local files, which is exactly what plays when the WiFi doesn&#39;t.</p>
+    </div>
+  </details>
+
+</div>
+
+
+    <h2>Try it with your own Mixstream Pro</h2>
+    <p>
+      Every feature is in the free download — analysis, harmonic sequencing,
+      loudness matching and the Engine DJ write. It stops after
+      10 tracks, which is enough for one real set on your own stick. After
+      that it's €30 including VAT, once. No subscription.
+    </p>
+    <p>
+      <a data-download href="../../index.html#download" class="btn btn-primary">
+        <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+      </a>
+    </p>
 
     
-    <section class="hub-group">
-      <h2>Denon DJ &amp; Numark — Engine DJ USB</h2>
-      <p>Alpha writes a standard Engine OS 3.x library straight to the stick — the whole Engine DJ family reads it natively, no Engine desktop session needed.</p>
-      <ul class="hub-list">
-        
-        <li>
-          <a class="hub-card" href="../usb/denon-prime-go/">
-            <p class="hub-card__name">Denon DJ Prime Go</p>
-            <p class="hub-card__meta">Engine DJ USB · our reference device</p>
-          </a>
-        </li>
-        
-        <li>
-          <a class="hub-card" href="../usb/denon-prime-4/">
-            <p class="hub-card__name">Denon DJ Prime 4</p>
-            <p class="hub-card__meta">Engine DJ USB · four-deck flagship</p>
-          </a>
-        </li>
-        
-        <li>
-          <a class="hub-card" href="../usb/numark-mixstream-pro/">
-            <p class="hub-card__name">Numark Mixstream Pro</p>
-            <p class="hub-card__meta">Engine DJ USB · streaming all-in-one</p>
-          </a>
-        </li>
-        
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Denon DJ Prime 2</p>
-            <p class="hub-card__meta">Engine DJ USB · two-deck standalone · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Denon DJ SC5000 Prime</p>
-            <p class="hub-card__meta">Engine DJ USB · club media player · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Denon DJ SC5000M Prime</p>
-            <p class="hub-card__meta">Engine DJ USB · motorized platter · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Denon DJ SC6000 Prime</p>
-            <p class="hub-card__meta">Engine DJ USB · flagship media player · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Denon DJ SC6000M Prime</p>
-            <p class="hub-card__meta">Engine DJ USB · motorized flagship · guide coming soon</p>
-          </div>
-        </li>
-        
-      </ul>
-    </section>
-    
-    <section class="hub-group">
-      <h2>Pioneer DJ &amp; AlphaTheta — rekordbox USB</h2>
-      <p>Alpha writes both rekordbox libraries plus beat grids, waveforms and artwork directly — the stick plugs straight into the player, no rekordbox software anywhere. A new target: please confirm it on your own gear.</p>
-      <ul class="hub-list">
-        
-        <li>
-          <a class="hub-card" href="../usb/pioneer-cdj-3000/">
-            <p class="hub-card__name">Pioneer DJ CDJ-3000</p>
-            <p class="hub-card__meta">rekordbox USB · the club standard</p>
-          </a>
-        </li>
-        
-        <li>
-          <a class="hub-card" href="../usb/pioneer-xdj-rx3/">
-            <p class="hub-card__name">Pioneer DJ XDJ-RX3</p>
-            <p class="hub-card__meta">rekordbox USB · all-in-one standard</p>
-          </a>
-        </li>
-        
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Pioneer DJ CDJ-2000NXS2</p>
-            <p class="hub-card__meta">rekordbox USB · the long-serving club workhorse · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Pioneer DJ XDJ-RX2</p>
-            <p class="hub-card__meta">rekordbox USB · proven all-in-one · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Pioneer DJ XDJ-XZ</p>
-            <p class="hub-card__meta">rekordbox USB · four-channel flagship · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Pioneer DJ XDJ-1000MK2</p>
-            <p class="hub-card__meta">rekordbox USB · install-booth player · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">Pioneer DJ XDJ-700</p>
-            <p class="hub-card__meta">rekordbox USB · compact player · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">AlphaTheta OPUS-QUAD</p>
-            <p class="hub-card__meta">rekordbox USB · premium four-deck · guide coming soon</p>
-          </div>
-        </li>
-        
-        <li>
-          <div class="hub-card hub-card--soon">
-            <p class="hub-card__name">AlphaTheta XDJ-AZ</p>
-            <p class="hub-card__meta">rekordbox USB · newest flagship all-in-one · guide coming soon</p>
-          </div>
-        </li>
-        
-      </ul>
-    </section>
+    <h2>Related players</h2>
+    <ul class="related-list">
+      
+      <li><a href="../../usb/denon-prime-go/">Denon DJ Prime Go</a></li>
+      
+      <li><a href="../../usb/denon-prime-4/">Denon DJ Prime 4</a></li>
+      
+    </ul>
     
 
-    <section class="hub-group">
-      <h2>Play from a laptop instead?</h2>
-      <p>
-        Alpha also writes libraries for VirtualDJ, Serato DJ and Traktor Pro —
-        a computer running the software reads the drive, so any controller those
-        apps support will play the set. The details live on the
-        <a href="../features/">features page</a>.
-      </p>
-    </section>
-
-    <section class="hub-group">
-      <h2>Don't see your device?</h2>
-      <p>
-        <a href="../compatibility.html">Search your gear on the compatibility
-        page</a> — and if it's not covered yet, tell us there. That's how this
-        list grows.
-      </p>
-    </section>
+    <p>
+      Different setup? <a href="../../compatibility.html">Check your own gear</a> —
+      or read the full technical reference in the
+      <a href="../../knowledgebase/#usb-export">knowledge base</a>.
+    </p>
 
   </div>
 </main>
@@ -626,26 +573,26 @@
   <div class="site-footer__inner">
 
     <div class="site-footer__brand">
-      <a href="../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
-        <img src="../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+      <a href="../../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+        <img src="../../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
              class="h-8 w-auto" decoding="async" loading="lazy">
       </a>
       <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
     </div>
 
     <nav class="site-footer__main" aria-label="Product">
-      <a href="../features/">Features</a>
-      <a href="../compatibility.html">Works with your setup?</a>
-      <a href="../usb/">USB guides</a>
-      <a href="../pricing.html">Pricing</a>
+      <a href="../../features/">Features</a>
+      <a href="../../compatibility.html">Works with your setup?</a>
+      <a href="../../usb/">USB guides</a>
+      <a href="../../pricing.html">Pricing</a>
     </nav>
 
     <nav class="site-footer__legal" aria-label="Legal and settings">
-      <a href="../terms.html">Terms</a>
-      <a href="../withdrawal.html">Withdrawal</a>
-      <a href="../privacy.html">Privacy</a>
+      <a href="../../terms.html">Terms</a>
+      <a href="../../withdrawal.html">Withdrawal</a>
+      <a href="../../privacy.html">Privacy</a>
       <a href="#" data-cookie-settings>Cookie settings</a>
-      <a href="../imprint.html">Imprint</a>
+      <a href="../../imprint.html">Imprint</a>
     </nav>
 
   </div>
