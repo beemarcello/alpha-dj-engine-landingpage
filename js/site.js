@@ -178,8 +178,19 @@
     var dialog = document.getElementById('demo-modal');
     if (!dialog || typeof dialog.showModal !== 'function') return;
 
+    /* Click-to-load (2026-08-31): das YouTube-iframe traegt nur data-src.
+       Erst der Klick auf "Watch demo" setzt src — vorher geht kein einziger
+       Request an Google. Beim Schliessen wird src wieder entfernt; das
+       stoppt Video UND Ton (das alte "frame.src = frame.src" haette nur neu
+       geladen). removeAttribute statt src='' vermeidet einen Request auf
+       die eigene Seiten-URL, den ein leeres src in manchen Browsern ausloest. */
+    var video = dialog.querySelector('[data-demo-video]');
+
     document.querySelectorAll('[data-demo-open]').forEach(function (btn) {
-      btn.addEventListener('click', function () { dialog.showModal(); });
+      btn.addEventListener('click', function () {
+        if (video && !video.src) video.src = video.dataset.src;
+        dialog.showModal();
+      });
     });
 
     document.querySelectorAll('[data-demo-close]').forEach(function (btn) {
@@ -208,10 +219,7 @@
     });
 
     dialog.addEventListener('close', function () {
-      // ► Beim Einbau des YouTube-iframes diese Zeilen aktivieren, sonst läuft
-      //   das Video im geschlossenen Modal weiter:
-      // var frame = dialog.querySelector('iframe');
-      // if (frame) frame.src = frame.src;
+      if (video) video.removeAttribute('src');
     });
   }
 

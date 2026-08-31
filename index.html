@@ -95,7 +95,7 @@
   </script>
 
   <script src="js/icons.js?v=7" defer></script>
-  <script src="js/site.js?v=28" defer></script>
+  <script src="js/site.js?v=29" defer></script>
 </head>
 
 <body class="antialiased selection:bg-[var(--green-hot)] selection:text-black">
@@ -1311,14 +1311,9 @@
   <!-- ======================================================================
        DEMO-MODAL
        Natives <dialog>: Escape, Fokusfalle und Backdrop kommen vom Browser.
-
-       ► YOUTUBE EINBAUEN: den Platzhalter-<div data-demo-placeholder> ersetzen durch
-         <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
-                 title="Alpha-DJ-Engine demo" frameborder="0" allowfullscreen
-                 allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"></iframe>
-         Dann in js/site.js die markierte Zeile aktivieren, die beim Schliessen
-         das src zurücksetzt — sonst läuft der Ton im Hintergrund weiter.
-         Hinweis: youtube-nocookie.com statt youtube.com wegen DSGVO.
+       YouTube-Video seit 2026-08-31 eingebaut — Details im Kommentar am
+       iframe unten. privacy.html § "This website" beschreibt das Embed;
+       wer das Video wechselt oder entfernt, zieht beide Stellen mit.
        ====================================================================== -->
   <dialog id="demo-modal" class="demo-modal" aria-labelledby="demo-modal-title">
     <div class="demo-modal__head">
@@ -1328,15 +1323,28 @@
       </button>
     </div>
 
+    <!--
+      Eingebaut am 2026-08-31 (Marcel): YouTube EogNHxLcbFs. Zwei bewusste
+      Abweichungen von Marcels Embed-Schnipsel:
+      (1) youtube-nocookie.com statt youtube.com — Privacy-Enhanced Mode,
+          wie im Einbau-Hinweis oben vorgesehen. Der si=-Tracking-Parameter
+          aus dem Share-Dialog ist weggelassen.
+      (2) CLICK-TO-LOAD: das src steckt in data-src und wird erst beim
+          Oeffnen des Modals gesetzt (js/site.js, initDemoModal), beim
+          Schliessen wieder entfernt. Vorher kontaktiert die Seite YouTube
+          ueberhaupt nicht — die statische Variante haette bei jedem
+          Seitenaufruf die IP jedes Besuchers an Google uebertragen, ohne
+          Einwilligung und ohne dass jemand das Video will. Der Klick auf
+          "Watch demo" IST die Anforderung (§ 25 Abs. 2 TDDDG).
+      Wer hier ein src-Attribut direkt eintraegt, hebelt (2) aus.
+    -->
     <div class="demo-modal__frame">
-      <div data-demo-placeholder class="demo-modal__placeholder">
-        <i data-lucide="clapperboard" class="w-10 h-10"></i>
-        <p class="font-semibold m-0">Demo video coming soon</p>
-        <p class="text-sm m-0 text-[var(--ink-55)]">
-          In the meantime, the four steps below walk through the whole flow.
-        </p>
-        <a href="#how-it-works" class="btn btn-primary" data-demo-close>See how it works</a>
-      </div>
+      <iframe data-demo-video
+              data-src="https://www.youtube-nocookie.com/embed/EogNHxLcbFs?autoplay=1&amp;rel=0"
+              title="Alpha-DJ-Engine demo — from folder to gig-ready USB"
+              frameborder="0" allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
   </dialog>
 
