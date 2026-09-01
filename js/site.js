@@ -128,6 +128,33 @@
     });
   }
 
+  /* Erfolgsmeldung nach dem Absenden — EINE Quelle fuer das Download-Modal und
+     die Inline-Formulare, damit beide Fassungen nicht auseinanderlaufen.
+
+     Der Spam-Hinweis steht fett und VOR der Gueltigkeitsdauer (Marcel,
+     2026-09-01): "ich habe keine Mail bekommen" ist die haeufigste
+     Support-Frage bei Double-Opt-in-Mails, und die Antwort ist fast immer der
+     Spam-Ordner. Wer die Reihenfolge dreht, verschiebt den wichtigsten Satz
+     ans Ende, wo ihn niemand liest.
+
+     Bewusst per DOM-Knoten statt innerHTML: die Adresse kommt aus einem
+     Eingabefeld: mit innerHTML wuerde ein Nutzer sich selbst HTML in die Seite
+     schreiben koennen. */
+  function renderLeadSuccess(el, email) {
+    el.textContent = '';
+    if (email) {
+      el.append('We sent the download link to ');
+      var adresse = document.createElement('strong');
+      adresse.textContent = email;
+      el.append(adresse, '. ');
+    } else {
+      el.append('We sent you the download link. ');
+    }
+    var spam = document.createElement('strong');
+    spam.textContent = 'Please check your spam folder too';
+    el.append(spam, ' — it sometimes ends up there. The link is valid for 48 hours.');
+  }
+
   function initLeadForms() {
     document.querySelectorAll('[data-lead-form]').forEach(function (form) {
       // Die Gerätesuche rendert Formulare nach und ruft diese Funktion erneut auf —
@@ -155,12 +182,10 @@
         if (button) { button.disabled = true; button.textContent = 'Sending…'; }
         if (status) status.textContent = 'One moment…';
 
-        submitLead(input.value.trim(), mount).then(function () {
+        var adresse = input.value.trim();
+        submitLead(adresse, mount).then(function () {
           if (button) button.textContent = 'Link sent ✓';
-          if (status) {
-            status.textContent =
-              'Check your inbox — we just sent you the download link. It is valid for 48 hours.';
-          }
+          if (status) renderLeadSuccess(status, adresse);
         }).catch(function (error) {
           if (button) { button.disabled = false; button.textContent = label; }
           if (status) status.textContent = error.message;
@@ -980,8 +1005,7 @@
         var t = dlg.querySelector('[data-dl-done-title]');
         var p = dlg.querySelector('[data-dl-done-text]');
         t.textContent = 'Check your inbox';
-        p.textContent = 'We sent the download link to ' + email + '. It is valid ' +
-                        'for 48 hours.';
+        renderLeadSuccess(p, email);
         setStep('done', 'Check your email');
         dlg.querySelector('[data-dl-close]').focus();
       } catch (error) {
