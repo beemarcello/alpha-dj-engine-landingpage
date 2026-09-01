@@ -67,14 +67,14 @@
       10 tracks, which is enough for one real set on your own stick. After
       that it's €30 including VAT, once. No subscription.
     </p>
-    <p>
-      <a data-download href="{{root}}index.html#download" class="btn btn-primary">
-        <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+    <p class="page-cta">
+      <a data-download href="{{root}}index.html#download" class="btn btn-primary page-cta__btn">
+        <i data-lucide="arrow-down-to-line" class="w-6 h-6"></i>Download for free
       </a>
     </p>
 
     {{#if relatedResolved}}
-    <h2>Related players</h2>
+    <h3 class="related-kopf">Related players</h3>
     <ul class="related-list">
       {{#each relatedResolved}}
       <li><a href="{{root}}usb/{{slug}}/">{{fullName}}</a></li>

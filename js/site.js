@@ -105,7 +105,7 @@
 
   /* Wirft immer einen Error mit nutzertauglicher message — der Aufrufer darf
      sie unbesehen anzeigen. */
-  function submitLead(email, mount) {
+  function submitLead(email, mount, quelle) {
     return turnstileToken(mount).then(function (token) {
       var body = Object.assign({
         email: email,
@@ -122,7 +122,11 @@
       });
     }).then(function (response) {
       return response.json().catch(function () { return {}; }).then(function (data) {
-        if (response.ok && data.ok) return;
+        if (response.ok && data.ok) {
+          // Erst hier ist die Mail wirklich raus — vorher waere es eine Luege.
+          track('generate_lead', { method: quelle || 'inline_form' });
+          return;
+        }
         throw new Error(LEAD_ERRORS[data.error] || 'Something went wrong — please try again.');
       });
     });
@@ -191,7 +195,7 @@
         if (status) status.textContent = 'One moment…';
 
         var adresse = input.value.trim();
-        submitLead(adresse, mount).then(function () {
+        submitLead(adresse, mount, 'inline_form').then(function () {
           if (button) button.textContent = 'Link sent ✓';
           if (status) renderLeadSuccess(status, adresse);
         }).catch(function (error) {
@@ -1008,7 +1012,7 @@
 
       busy(this, true);
       try {
-        await submitLead(email, dlg.querySelector('[data-dl-turnstile]'));
+        await submitLead(email, dlg.querySelector('[data-dl-turnstile]'), 'download_modal');
         renderLeadSuccess(dlg.querySelector('[data-dl-done-text]'), email);
         setStep('done');
         dlg.querySelector('[data-dl-close]').focus();
@@ -1221,9 +1225,86 @@
   }
 
   /* ------------------------------------------------------------------------
+     10. Ereignis-Tracking (GA4)
+
+     Bis hierher sah GA nur page_view und Enhanced Measurement — also Bewegung,
+     aber kein Ergebnis. Hier kommen die Ereignisse dazu, an denen der Funnel
+     wirklich haengt.
+
+     Zwei Entscheidungen:
+
+     - Ein Ort, keine verstreuten Aufrufe. Die Klicks laufen ueber Delegation
+       auf document, damit kein bestehender Handler angefasst werden muss.
+       Einzige Ausnahme ist generate_lead: das meldet submitLead() selbst, denn
+       nur dort weiss die Seite, dass die Mail tatsaechlich raus ist. Ein Event
+       beim Absenden waere geschoent — Turnstile und Rate-Limit koennen danach
+       noch abbrechen.
+
+     - Kein Consent-Sonderweg. gtag.js steht im <head> mit default "denied";
+       ohne Einwilligung verwirft Google diese Ereignisse von selbst. Wir
+       brauchen hier also keine zweite Pruefung, die irgendwann auseinander
+       laeuft.
+
+     ACHTUNG: cta_location, cta_text und method sind eigene Parameter. In den
+     GA4-Berichten tauchen sie erst auf, nachdem sie unter
+     Verwaltung → Benutzerdefinierte Definitionen als Custom Dimensions
+     angelegt wurden. Das Ereignis selbst wird auch vorher schon gezaehlt.
+     ------------------------------------------------------------------------ */
+
+  function track(name, params) {
+    gtagPush('event', name, params || {});
+  }
+
+  /* Welcher Abschnitt der Seite hat den Klick ausgeloest? Das ist die
+     eigentliche Information — der Knopftext ist ueberall fast derselbe. */
+  function ctaLocation(el) {
+    if (el.closest('nav')) return 'nav';
+    if (el.closest('.dl-modal')) return 'download_modal';
+    if (el.closest('footer')) return 'footer';
+    var sec = el.closest('section[id]');
+    if (sec && sec.id) return sec.id;
+    // Nicht jeder CTA sitzt in einer <section> — der naechste benannte
+    // Vorfahr ist immer noch aussagekraeftiger als "other".
+    var benannt = el.closest('[id]');
+    if (benannt && benannt.id) return benannt.id;
+    return 'other';
+  }
+
+  function initTracking() {
+    /* Capture-Phase: das Download-Modal ruft preventDefault und oeffnet sich
+       selbst. In der Bubble-Phase haengt das Event zwar nicht fest, aber die
+       Reihenfolge waere dem Zufall ueberlassen. So messen wir zuerst. */
+    document.addEventListener('click', function (event) {
+      var ziel = event.target;
+      if (!ziel || typeof ziel.closest !== 'function') return;
+      var el = ziel.closest('a, button');
+      if (!el) return;
+
+      if (el.hasAttribute('data-download')) {
+        track('download_click', {
+          cta_location: ctaLocation(el),
+          cta_text: (el.textContent || '').trim().slice(0, 60)
+        });
+        return;
+      }
+
+      if (el.hasAttribute('data-demo-open')) {
+        track('demo_open', { cta_location: ctaLocation(el) });
+        return;
+      }
+
+      var href = el.getAttribute('href') || '';
+      if (href.indexOf('app.alpha-dj-engine.com') !== -1) {
+        track('signin_click', { cta_location: ctaLocation(el) });
+      }
+    }, true);
+  }
+
+  /* ------------------------------------------------------------------------
      Boot
      ------------------------------------------------------------------------ */
   function boot() {
+    initTracking();
     initAdaptiveCta();
     initLeadForms();
     initDemoModal();

@@ -57,7 +57,7 @@
   </script>
 
   <script src="../../js/icons.js?v=8" defer></script>
-  <script src="../../js/site.js?v=34" defer></script>
+  <script src="../../js/site.js?v=35" defer></script>
 
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alpha-dj-engine.com/"},{"@type":"ListItem","position":2,"name":"USB guides","item":"https://alpha-dj-engine.com/usb/"},{"@type":"ListItem","position":3,"name":"Denon DJ Prime 2","item":"https://alpha-dj-engine.com/usb/denon-prime-2/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the Prime 2 need Engine DJ on a computer to read Alpha's stick?","acceptedAnswer":{"@type":"Answer","text":"No. Alpha writes the Engine OS 3.x library directly, so the Prime 2 treats the stick exactly like one prepared in Engine DJ — playlists, keys and BPM included."}},{"@type":"Question","name":"Importing a rekordbox USB on the Prime 2 is slow — is there a better way?","acceptedAnswer":{"@type":"Answer","text":"Yes. Instead of letting the device chew through a rekordbox stick, export your collection as a rekordbox XML and have Alpha write a native Engine library: the BPM, key and beatgrid rekordbox worked out are kept, and there's no on-device import at all."}},{"@type":"Question","name":"Can I keep my existing playlists on the stick?","acceptedAnswer":{"@type":"Answer","text":"Yes. Alpha adds the new set to the Engine library on the drive and backs the previous library up to your computer first. Nothing is erased."}},{"@type":"Question","name":"What drive format should I use with the Prime 2?","acceptedAnswer":{"@type":"Answer","text":"exFAT or FAT32 — Engine OS does not read NTFS. Alpha writes onto the existing filesystem and never reformats the drive."}}]}</script>
@@ -93,11 +93,23 @@
     .hub-card--soon:hover { background: var(--white); }
     .hub-card__name { font-weight: 600; font-size: 16px; color: var(--ink); margin: 0; }
     .hub-card__meta { font-size: 13px; color: var(--ink-55); margin: 4px 0 0; }
-    .related-list { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; max-width: none; }
-    .related-list li { margin: 0; }
-    .subpage .related-list a { text-decoration: none; }
-    .related-list a { display: inline-block; border: 2px solid var(--ink); border-radius: 999px; background: var(--white); padding: 6px 14px; font-size: 14px; text-decoration: none; color: var(--ink); }
-    .related-list a:hover { background: var(--green); }
+    /* Der Download-Knopf ist der einzige echte Handlungsaufruf der Seite:
+       zentriert und groesser als jeder andere anklickbare Punkt. */
+    .page-cta { text-align: center; margin: 26px 0 10px; max-width: none; }
+    .subpage .page-cta__btn { font-size: 18px; padding: 16px 34px; min-height: 60px; gap: 10px;
+      white-space: nowrap; flex-wrap: nowrap; }
+
+    /* Related players sind bewusst KEINE Knoepfe mehr: als Pillen standen sie
+       optisch in Konkurrenz zum CTA. Jetzt schlichte Textlinks (Marcel, 2026-09-01). */
+    .related-kopf { font-size: 13px !important; text-transform: uppercase; letter-spacing: .09em;
+      color: var(--ink-55); font-weight: 600; margin: 30px 0 8px !important; }
+    .subpage ul.related-list { list-style: none; margin: 0 0 16px; padding-left: 0;
+      display: flex; flex-wrap: wrap; gap: 4px 0; max-width: none; }
+    .related-list li { margin: 0; color: var(--ink-55); font-size: 15px; }
+    .related-list li:not(:last-child)::after { content: "·"; margin: 0 9px; color: var(--ink-55); }
+    .subpage .related-list a { color: var(--ink-55); text-decoration: underline;
+      text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    .subpage .related-list a:hover { color: var(--ink); }
     .page-faq { display: flex; flex-direction: column; gap: 12px; margin: 0 0 14px; }
     /* Quirks buendig ohne Bullets — die Standard-Listeneinrueckung der
        Subpage wirkte hier neben den buendigen Absaetzen verrutscht
@@ -549,14 +561,14 @@
       10 tracks, which is enough for one real set on your own stick. After
       that it's €30 including VAT, once. No subscription.
     </p>
-    <p>
-      <a data-download href="../../index.html#download" class="btn btn-primary">
-        <i data-lucide="arrow-down-to-line" class="w-5 h-5"></i>Download for free
+    <p class="page-cta">
+      <a data-download href="../../index.html#download" class="btn btn-primary page-cta__btn">
+        <i data-lucide="arrow-down-to-line" class="w-6 h-6"></i>Download for free
       </a>
     </p>
 
     
-    <h2>Related players</h2>
+    <h3 class="related-kopf">Related players</h3>
     <ul class="related-list">
       
       <li><a href="../../usb/denon-prime-go/">Denon DJ Prime Go</a></li>
