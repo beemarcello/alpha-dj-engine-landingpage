@@ -359,6 +359,43 @@ body {
   letter-spacing: .03em;
   margin: 0;
 }
+/* --------------------------------------------------------------------------
+   Erfolgsschritt des Download-Modals (Marcel, 2026-09-01)
+
+   Aufbau von oben: Doto-Titel "Check your inbox" ZENTRIERT, darunter der
+   gruene Haken, darunter der Spam-Hinweis in semibold, zuunterst die
+   Bestaetigung mit Adresse und Gueltigkeit.
+
+   Der Titel wird nur in DIESEM Schritt zentriert; im E-Mail-Schritt bleibt er
+   linksbuendig. Das Schliessen-X liegt dafuer absolut in der Ecke — mit
+   space-between wuerde die Ueberschrift sonst um die halbe Buttonbreite aus
+   der Mitte rutschen, was bei zentriertem Satz sofort auffaellt.
+   -------------------------------------------------------------------------- */
+.dl-modal[data-step="done"] .dl-modal__head {
+  position: relative;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.dl-modal[data-step="done"] .dl-modal__title { text-align: center; }
+.dl-modal[data-step="done"] .dl-modal__close { position: absolute; top: 0; right: 0; }
+
+.dl-modal__done-text { font-size: 14px; margin: 0; }
+
+/* Beide Zeilen als display:block-<span>, NICHT als <p>: dieselbe Funktion
+   rendert auch in die Status-Absaetze unter den Inline-Formularen, und ein
+   <p> im <p> ist ungueltiges HTML. */
+.lead-spam {
+  display: block;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lead-info {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-55);
+  line-height: 1.5;
+}
+
 .dl-modal__close {
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; flex-shrink: 0;

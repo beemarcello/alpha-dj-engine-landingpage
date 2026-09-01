@@ -142,17 +142,25 @@
      schreiben koennen. */
   function renderLeadSuccess(el, email) {
     el.textContent = '';
+
+    var spam = document.createElement('span');
+    spam.className = 'lead-spam';
+    spam.textContent = 'Also check your Spam folder!';
+
+    var info = document.createElement('span');
+    info.className = 'lead-info';
     if (email) {
-      el.append('We sent the download link to ');
+      info.append('We sent the download link to ');
       var adresse = document.createElement('strong');
       adresse.textContent = email;
-      el.append(adresse, '. ');
+      info.append(adresse, '.');
     } else {
-      el.append('We sent you the download link. ');
+      info.append('We sent you the download link.');
     }
-    var spam = document.createElement('strong');
-    spam.textContent = 'Please check your spam folder too';
-    el.append(spam, ' — it sometimes ends up there. The link is valid for 48 hours.');
+    // Zweiter Satz auf eigener Zeile — so vorgegeben (Marcel, 2026-09-01).
+    info.append(document.createElement('br'), 'The link is valid for 48 hours.');
+
+    el.append(spam, info);
   }
 
   function initLeadForms() {
@@ -919,8 +927,7 @@
         '<div class="dl-step" data-for="done">' +
           '<div class="dl-modal__done">' +
             '<span class="mark"><i data-lucide="check" class="w-6 h-6 stroke-[2.5]"></i></span>' +
-            '<p style="font-weight:600;font-size:17px;margin:0 0 6px" data-dl-done-title></p>' +
-            '<p style="font-size:14px;color:var(--ink-55);margin:0" data-dl-done-text></p>' +
+            '<p class="dl-modal__done-text" data-dl-done-text></p>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -938,7 +945,7 @@
 
     var TITLES = {
       email: 'Download for free',
-      done:  'You\'re in'
+      done:  'Check your inbox'
     };
 
     // titel ueberschreibt den Standard — gebraucht im Fallback, wo der Nutzer
@@ -1002,11 +1009,8 @@
       busy(this, true);
       try {
         await submitLead(email, dlg.querySelector('[data-dl-turnstile]'));
-        var t = dlg.querySelector('[data-dl-done-title]');
-        var p = dlg.querySelector('[data-dl-done-text]');
-        t.textContent = 'Check your inbox';
-        renderLeadSuccess(p, email);
-        setStep('done', 'Check your email');
+        renderLeadSuccess(dlg.querySelector('[data-dl-done-text]'), email);
+        setStep('done');
         dlg.querySelector('[data-dl-close]').focus();
       } catch (error) {
         showError(error.message);
