@@ -406,6 +406,37 @@ body {
    --dark ist fuer das schwarze Abschlussband.
    -------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------
+   Rechte Kante des Hero (2026-09-03)
+
+   PROBLEM: Die Navigation sitzt in einem zentrierten 1080px-Container, die
+   Hero-Textspalte dagegen in 50% der Fensterbreite mit fester Innenabstands-
+   Stufe (px-16/px-24). Beide rechten Kanten laufen mit wachsender Breite
+   auseinander — bei 1900px lagen Login-Knopf (1466), "USB"-Textkante (1524)
+   und die Plattform-Logos (1622) auf drei verschiedenen Linien, die Logos
+   sichtbar "raus".
+
+   LOESUNG: Der rechte Innenabstand der Spalte folgt demselben 1080er-Raster
+   wie die Navigation — (100vw - 1080px) / 2 ist der Aussenrand des
+   Nav-Containers, +1.5rem sein eigener Innenabstand (px-6). Damit endet die
+   Textspalte exakt dort, wo der Login-Knopf endet.
+
+   Der linke Innenabstand sinkt dafuer auf 2rem. Sonst bliebe die Spalte nur
+   ~420px breit und die Ueberschrift "Gig-ready USB" (478px) wuerde umbrechen.
+   So bleibt die Inhaltsbreite ab 1080px konstant bei 484px — die Zeile passt.
+   -------------------------------------------------------------------------- */
+/* Innenabstand bewusst NICHT ueber Tailwind (px-8 o.ae.): css/site.css wird
+   VOR css/tailwind.css geladen, eine Utility gleicher Spezifitaet gewinnt also
+   immer gegen diese Regel. Genau daran ist der erste Versuch gescheitert — die
+   Logos standen weiter 92px zu weit rechts. */
+.hero-text { padding-left: 2rem; padding-right: 2rem; }
+
+@media (min-width: 1024px) {
+  .hero-text {
+    padding-right: calc(max(0px, (100vw - 1080px) / 2) + 1.5rem);
+  }
+}
+
+/* --------------------------------------------------------------------------
    Eyebrow-Zeile des Hero: Hardware links, Betriebssysteme rechts (2026-09-03)
 
    Der Plattform-Hinweis stand zuerst in der Menueleiste (zu gedraengt), dann
