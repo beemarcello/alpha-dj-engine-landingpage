@@ -50,7 +50,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/site.css?v=48">
+  <link rel="stylesheet" href="css/site.css?v=49">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -133,6 +133,22 @@
           ACHTUNG: die Unterseiten tragen weiterhin "Download for free" — wer
           das vereinheitlicht, macht es dort ueberall gleich.
         -->
+        <!--
+          Plattform-Logos links vom Download-Knopf (Marcel, 2026-09-03). Der
+          Hinweis stand vorher in der Eyebrow-Zeile des Hero; hier steht er
+          neben dem Handlungsaufruf, auf den er sich bezieht.
+
+          UNTER 1024px AUSGEBLENDET, und das ist kein Platzproblem: dort liegt
+          die Navigation ueber dem dunklen Hero-Foto, und die grauen Logos
+          verschwinden darin fast vollstaendig (nachgemessen bei 980px). Fuer
+          schmale Schirme steht der Hinweis stattdessen unter dem Demo-Knopf
+          (.os-badge--mobile) — es ist also immer genau einer sichtbar.
+        -->
+        <p class="nav-os">
+          <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
+          and
+          <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
+        </p>
         <a data-download href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download</a>
         <!-- Login zum Portal (Marcel, 2026-08-27). Bewusst ausserhalb der
              cta-Weiche: der Login gilt auf jedem Geraet. -->
@@ -180,27 +196,11 @@
               wird es nirgends, nur nicht nach vorne gestellt.
             -->
               <!--
-                Eyebrow und Plattform-Hinweis teilen sich eine Zeile (Marcel,
-                2026-09-03): links die Hardware-Zusage, rechtsbuendig die beiden
-                Betriebssystem-Logos. Der Hinweis stand vorher unter dem
-                Demo-Knopf und davor in der Menueleiste — beides wirkte
-                angeflanscht; hier liest er sich als zweite Haelfte derselben
-                Aussage ("fuer diese Geraete, auf diesen Systemen").
-
-                UNTER 1024px AUSGEBLENDET: dort klappt der Hero einspaltig, die
-                Zeile wird schmal und der Hinweis wuerde den Eyebrow brechen.
-                Fuer Mobil ist noch keine Platzierung entschieden (Marcel) —
-                bis dahin bleibt er dort bewusst unsichtbar. Wer ihn mobil
-                zeigen will, entscheidet zuerst, WO.
+                Die Plattform-Logos standen hier zwischenzeitlich rechtsbuendig in
+                derselben Zeile. Sie sitzen seit 2026-09-03 in der Navigation, links
+                vom Download-Knopf (Marcel) — dort einmal und nirgends doppelt.
               -->
-              <div class="hero-meta">
-                <p class="eyebrow">For Denon and Pioneer DJ gear</p>
-                <p class="os-badge os-badge--desktop">
-                  <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
-                  and
-                  <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
-                </p>
-              </div>
+              <p class="eyebrow mb-4">For Denon and Pioneer DJ gear</p>
 
             <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1] reveal">
               Gig-ready USB<br>in seconds.
@@ -231,7 +231,7 @@
               <!--
                 Plattform-Hinweis fuer schmale Schirme (Marcel, 2026-09-03).
                 Ab 1024px steht er stattdessen rechtsbuendig in der
-                Eyebrow-Zeile (.os-badge--desktop) — dort ist die Zeile breit
+                Navigation (.nav-os), links vom Download-Knopf — dort ist Platz
                 genug. Zwei Elemente statt einem, weil CSS Knoten nicht
                 verschieben kann; es ist immer genau EINES sichtbar, das andere
                 liegt per display:none auch fuer Screenreader still.

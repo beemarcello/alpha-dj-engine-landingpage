@@ -440,24 +440,23 @@ body {
    Plattform-Hinweis "macOS and Windows" (2026-09-03)
 
    Zwei Platzierungen, je nach Breite — CSS kann keine Knoten verschieben,
-   deshalb steht der Hinweis zweimal im Markup und es ist immer genau EINER
-   sichtbar. Der jeweils andere liegt per display:none auch fuer Screenreader
-   still, wird also nicht doppelt vorgelesen.
+   deshalb steht der Hinweis zweimal im Markup. Es ist immer genau EINER
+   sichtbar; der andere liegt per display:none auch fuer Screenreader still
+   und wird nicht doppelt vorgelesen.
 
-     ab 1024px  .os-badge--desktop  rechtsbuendig in der Eyebrow-Zeile,
-                gegenueber "For Denon and Pioneer DJ gear"
-     darunter   .os-badge--mobile   unter dem Demo-Knopf
+     ab 1024px  .nav-os            in der Navigation, links vom Download-Knopf
+     darunter   .os-badge--mobile  unter dem Demo-Knopf im Hero
 
-   Auf schmalen Schirmen stand vorher an dieser Stelle das E-Mail-Formular;
-   seit es entfallen ist, endet der Hero mit Demo-Knopf und dieser Zeile.
+   Warum in der Navigation erst ab 1024px: darunter liegt die Leiste ueber dem
+   dunklen Hero-Foto, und die grauen Logos verschwinden darin fast vollstaendig
+   (bei 980px nachgemessen). Der Download-Knopf bleibt dort lesbar, weil er
+   eine weisse Flaeche mitbringt — blosse Logos haben die nicht.
 
    11px Anzeigehoehe passt zur x-Hoehe des Textes daneben; die Windows-Flagge
    bekommt 1px mehr, weil ein kompaktes Symbol optisch weniger traegt als eine
    Wortmarke.
    -------------------------------------------------------------------------- */
-.hero-meta { margin-bottom: 1rem; }
-.hero-meta .eyebrow { margin: 0; }
-
+.nav-os,
 .os-badge {
   display: flex;
   align-items: center;
@@ -469,20 +468,16 @@ body {
   white-space: nowrap;
   user-select: none;
 }
+.nav-os img,
 .os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
+.nav-os img[alt="Windows"],
 .os-badge img[alt="Windows"] { height: 12px; }
 
-.os-badge--desktop { display: none; }
+.nav-os { display: none; }
 .os-badge--mobile { margin-top: 16px; }
 
 @media (min-width: 1024px) {
-  .hero-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-  }
-  .os-badge--desktop { display: flex; }
+  .nav-os { display: inline-flex; }
   .os-badge--mobile { display: none; }
 }
 
