@@ -437,20 +437,43 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   Eyebrow-Zeile des Hero: Hardware links, Betriebssysteme rechts (2026-09-03)
+   Plattform-Hinweis "macOS and Windows" (2026-09-03)
 
-   Der Plattform-Hinweis stand zuerst in der Menueleiste (zu gedraengt), dann
-   unter dem Demo-Knopf (angeflanscht). Jetzt teilt er sich eine Zeile mit dem
-   Eyebrow: links "For Denon and Pioneer DJ gear", rechtsbuendig die beiden
-   Logos. Das Wort "for" entfaellt — der Eyebrow links traegt es schon.
+   Zwei Platzierungen, je nach Breite — CSS kann keine Knoten verschieben,
+   deshalb steht der Hinweis zweimal im Markup und es ist immer genau EINER
+   sichtbar. Der jeweils andere liegt per display:none auch fuer Screenreader
+   still, wird also nicht doppelt vorgelesen.
 
-   Unter 1024px ausgeblendet: dort klappt der Hero einspaltig und die Zeile
-   wird zu schmal. Eine Mobil-Platzierung ist noch nicht entschieden.
+     ab 1024px  .os-badge--desktop  rechtsbuendig in der Eyebrow-Zeile,
+                gegenueber "For Denon and Pioneer DJ gear"
+     darunter   .os-badge--mobile   unter dem Demo-Knopf
+
+   Auf schmalen Schirmen stand vorher an dieser Stelle das E-Mail-Formular;
+   seit es entfallen ist, endet der Hero mit Demo-Knopf und dieser Zeile.
+
+   11px Anzeigehoehe passt zur x-Hoehe des Textes daneben; die Windows-Flagge
+   bekommt 1px mehr, weil ein kompaktes Symbol optisch weniger traegt als eine
+   Wortmarke.
    -------------------------------------------------------------------------- */
 .hero-meta { margin-bottom: 1rem; }
 .hero-meta .eyebrow { margin: 0; }
 
-.os-badge { display: none; }
+.os-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--ink-55);
+  white-space: nowrap;
+  user-select: none;
+}
+.os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
+.os-badge img[alt="Windows"] { height: 12px; }
+
+.os-badge--desktop { display: none; }
+.os-badge--mobile { margin-top: 16px; }
 
 @media (min-width: 1024px) {
   .hero-meta {
@@ -459,21 +482,8 @@ body {
     justify-content: space-between;
     gap: 28px;
   }
-  /* 11px passt zur x-Hoehe des Eyebrow-Textes; die Windows-Flagge bekommt 1px
-     mehr, weil ein kompaktes Symbol optisch weniger traegt als Buchstaben. */
-  .os-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
-    font-size: 12px;
-    line-height: 1;
-    color: var(--ink-55);
-    white-space: nowrap;
-    user-select: none;
-  }
-  .os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
-  .os-badge img[alt="Windows"] { height: 12px; }
+  .os-badge--desktop { display: flex; }
+  .os-badge--mobile { display: none; }
 }
 
 .ns-note {

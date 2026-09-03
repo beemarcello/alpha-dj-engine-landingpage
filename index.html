@@ -50,7 +50,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/site.css?v=47">
+  <link rel="stylesheet" href="css/site.css?v=48">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -190,7 +190,7 @@
               -->
               <div class="hero-meta">
                 <p class="eyebrow">For Denon and Pioneer DJ gear</p>
-                <p class="os-badge">
+                <p class="os-badge os-badge--desktop">
                   <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
                   and
                   <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
@@ -223,30 +223,33 @@
                 <i data-lucide="play" class="w-5 h-5"></i>Watch demo
               </button>
 
-              <!-- Entschlackt am 2026-08-27 (Marcel): nur Feld + Button, kein
-                   Erklaertext. data-lead-status bleibt leer stehen — dort
-                   schreibt initLeadForms Erfolg und Fehler hinein. -->
-              <div class="cta-email" hidden>
-                <form class="flex flex-col sm:flex-row gap-3" data-lead-form>
-                  <label class="sr-only" for="hero-email">Email address</label>
-                  <input id="hero-email" name="email" type="email" autocomplete="email" required
-                         placeholder="Email address" class="input flex-1 sm:max-w-[280px]">
-                  <button type="submit" class="btn btn-primary">Get Downloadlink via Mail</button>
-                </form>
-                <p class="mt-3 text-xs text-[var(--ink-55)] font-medium" data-lead-status></p>
-              </div>
+              <!--
+                Plattform-Hinweis fuer schmale Schirme (Marcel, 2026-09-03).
+                Ab 1024px steht er stattdessen rechtsbuendig in der
+                Eyebrow-Zeile (.os-badge--desktop) — dort ist die Zeile breit
+                genug. Zwei Elemente statt einem, weil CSS Knoten nicht
+                verschieben kann; es ist immer genau EINES sichtbar, das andere
+                liegt per display:none auch fuer Screenreader still.
+              -->
+              <p class="os-badge os-badge--mobile">
+                <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
+                and
+                <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
+              </p>
 
-              <!-- Ohne JavaScript bleiben die Bloecke darueber leer: das Formular geht
-                   per fetch raus, das Download-Modal wird per JS gebaut. Statt eines
-                   toten Knopfes hier ein Weg, der ohne Skript funktioniert. -->
-              <noscript>
-                <p class="ns-note">
-                  The download form needs JavaScript. With it switched off, email
-                  <a href="mailto:info@alphabees.de?subject=Alpha-DJ-Engine%20download">info@alphabees.de</a>
-                  and we&rsquo;ll send you the link &mdash; or open your
-                  <a href="https://app.alpha-dj-engine.com/sign-in">account</a>.
-                </p>
-              </noscript>
+              <!--
+                ENTFERNT am 2026-09-03 (Marcel): hier stand das E-Mail-Feld mit
+                "Get Downloadlink via Mail" (Block .cta-email). Auf dem Hero
+                schmaler Schirme war das drei Bedienelemente uebereinander —
+                Demo-Knopf, Feld, Knopf. Der Weg zum Downloadlink bleibt
+                vollstaendig erhalten: der immer sichtbare "Get the link" in der
+                Navigation oeffnet dasselbe Modal, und das Abschlussband
+                (#download) traegt weiterhin Formular UND noscript-Ausweg.
+
+                Das noscript hier ist mit dem Formular entfallen — ohne Formular
+                haette der Satz "The download form needs JavaScript" an dieser
+                Stelle ins Leere gezeigt.
+              -->
             </div>
           </div>
         </div>
