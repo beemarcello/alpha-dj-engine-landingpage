@@ -50,7 +50,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/site.css?v=44">
+  <link rel="stylesheet" href="css/site.css?v=45">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -174,7 +174,28 @@
               weiter unten, auf /features/ und auf compatibility.html — verschwiegen
               wird es nirgends, nur nicht nach vorne gestellt.
             -->
-            <p class="eyebrow mb-4">For Denon and Pioneer DJ gear</p>
+              <!--
+                Eyebrow und Plattform-Hinweis teilen sich eine Zeile (Marcel,
+                2026-09-03): links die Hardware-Zusage, rechtsbuendig die beiden
+                Betriebssystem-Logos. Der Hinweis stand vorher unter dem
+                Demo-Knopf und davor in der Menueleiste — beides wirkte
+                angeflanscht; hier liest er sich als zweite Haelfte derselben
+                Aussage ("fuer diese Geraete, auf diesen Systemen").
+
+                UNTER 1024px AUSGEBLENDET: dort klappt der Hero einspaltig, die
+                Zeile wird schmal und der Hinweis wuerde den Eyebrow brechen.
+                Fuer Mobil ist noch keine Platzierung entschieden (Marcel) —
+                bis dahin bleibt er dort bewusst unsichtbar. Wer ihn mobil
+                zeigen will, entscheidet zuerst, WO.
+              -->
+              <div class="hero-meta">
+                <p class="eyebrow">For Denon and Pioneer DJ gear</p>
+                <p class="os-badge">
+                  <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
+                  and
+                  <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
+                </p>
+              </div>
 
             <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-[1.1] reveal">
               Gig-ready USB<br>in seconds.
@@ -201,19 +222,6 @@
               <button type="button" class="btn btn-primary btn-lg" data-demo-open>
                 <i data-lucide="play" class="w-5 h-5"></i>Watch demo
               </button>
-
-              <!--
-                Plattform-Hinweis direkt unter dem Demo-Knopf (Marcel,
-                2026-09-03). Stand zuvor in der Menueleiste und wirkte dort
-                gedraengt. Die Bedeutung steckt in den alt-Texten, nicht nur im
-                Bild: ohne geladene Bilder liest man "for macOS and Windows".
-              -->
-              <p class="os-badge">
-                for
-                <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
-                and
-                <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
-              </p>
 
               <!-- Entschlackt am 2026-08-27 (Marcel): nur Feld + Button, kein
                    Erklaertext. data-lead-status bleibt leer stehen — dort

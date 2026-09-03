@@ -406,32 +406,44 @@ body {
    --dark ist fuer das schwarze Abschlussband.
    -------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------
-   Plattform-Hinweis unter dem Demo-Knopf (2026-09-03)
+   Eyebrow-Zeile des Hero: Hardware links, Betriebssysteme rechts (2026-09-03)
 
-   "for [macOS] and [Windows]". Stand zuerst in der Menueleiste — dort wirkte
-   er gedraengt und stritt mit dem Download-Knopf um die Breite. Unter dem
-   Demo-Knopf ist Platz, deshalb hier auch KEIN Ausblenden auf schmalen
-   Schirmen: die Information gilt auf jedem Geraet.
+   Der Plattform-Hinweis stand zuerst in der Menueleiste (zu gedraengt), dann
+   unter dem Demo-Knopf (angeflanscht). Jetzt teilt er sich eine Zeile mit dem
+   Eyebrow: links "For Denon and Pioneer DJ gear", rechtsbuendig die beiden
+   Logos. Das Wort "for" entfaellt — der Eyebrow links traegt es schon.
 
-   Die Bilder sind auf ihre Tinte beschnitten und liegen in dreifacher
-   Aufloesung vor (48px hoch), damit sie auf Retina scharf bleiben. 11px
-   Anzeigehoehe passt zur x-Hoehe des 13px-Textes daneben; die Windows-Flagge
-   bekommt 1px mehr, weil ein kompaktes Symbol bei gleicher Hoehe optisch
-   weniger traegt als eine Wortmarke.
+   Unter 1024px ausgeblendet: dort klappt der Hero einspaltig und die Zeile
+   wird zu schmal. Eine Mobil-Platzierung ist noch nicht entschieden.
    -------------------------------------------------------------------------- */
-.os-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 14px 0 0;
-  font-size: 13px;
-  line-height: 1;
-  color: var(--ink-55);
-  white-space: nowrap;
-  user-select: none;
+.hero-meta { margin-bottom: 1rem; }
+.hero-meta .eyebrow { margin: 0; }
+
+.os-badge { display: none; }
+
+@media (min-width: 1024px) {
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  /* 11px passt zur x-Hoehe des Eyebrow-Textes; die Windows-Flagge bekommt 1px
+     mehr, weil ein kompaktes Symbol optisch weniger traegt als Buchstaben. */
+  .os-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--ink-55);
+    white-space: nowrap;
+    user-select: none;
+  }
+  .os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
+  .os-badge img[alt="Windows"] { height: 12px; }
 }
-.os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
-.os-badge img[alt="Windows"] { height: 12px; }
 
 .ns-note {
   font-size: 14px;
