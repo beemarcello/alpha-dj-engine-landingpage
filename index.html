@@ -50,7 +50,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/site.css?v=43">
+  <link rel="stylesheet" href="css/site.css?v=44">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -129,21 +129,6 @@
           herunter, er oeffnet ein Formular und schickt den Link per Mail.
         -->
         <a data-download href="#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Get the link</a>
-        <!--
-          Plattform-Hinweis (Marcel, 2026-09-03): Wortmarke fuer macOS, Flaggen-
-          Symbol fuer Windows. Steht bewusst ZWISCHEN Download-Knopf und Login —
-          der Knopf bleibt damit an seiner Stelle, nur das Login-Symbol rueckt nach
-          rechts. Unter 900px blendet .os-badge sich aus: dort reicht die Breite
-          fuer Logo + Knopf + Hinweis + Login nicht, und der Knopf hat Vorrang.
-          Die alt-Texte tragen die Bedeutung — ein Screenreader liest "for macOS
-          and Windows", auch wenn die Bilder nicht laden.
-        -->
-        <span class="os-badge">
-          for
-          <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
-          and
-          <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
-        </span>
         <!-- Login zum Portal (Marcel, 2026-08-27). Bewusst ausserhalb der
              cta-Weiche: der Login gilt auf jedem Geraet. -->
         <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
@@ -205,11 +190,30 @@
                 Bewusst nur EIN CTA hier: der Download steht schon oben in der Nav
                 und im Final-CTA-Band. Doppelung im Hero vermieden (Marcel, 2026-08-18).
               -->
-              <div class="cta-desktop" hidden>
-                <button type="button" class="btn btn-primary btn-lg" data-demo-open>
-                  <i data-lucide="play" class="w-5 h-5"></i>Watch demo
-                </button>
-              </div>
+              <!--
+                Der Demo-Knopf steht seit 2026-09-03 AUSSERHALB der
+                Plattform-Weiche. Vorher sass er in .cta-desktop und war damit
+                fuer jeden unsichtbar, der nicht an einem Mac sass: Windows bis
+                zur Weichen-Korrektur von heute, Mobil dauerhaft. Ein Video
+                anzusehen setzt aber nichts voraus — das geht auf jedem Geraet,
+                und gerade wer nicht sofort installieren kann, will es sehen.
+              -->
+              <button type="button" class="btn btn-primary btn-lg" data-demo-open>
+                <i data-lucide="play" class="w-5 h-5"></i>Watch demo
+              </button>
+
+              <!--
+                Plattform-Hinweis direkt unter dem Demo-Knopf (Marcel,
+                2026-09-03). Stand zuvor in der Menueleiste und wirkte dort
+                gedraengt. Die Bedeutung steckt in den alt-Texten, nicht nur im
+                Bild: ohne geladene Bilder liest man "for macOS and Windows".
+              -->
+              <p class="os-badge">
+                for
+                <img src="assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
+                and
+                <img src="assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
+              </p>
 
               <!-- Entschlackt am 2026-08-27 (Marcel): nur Feld + Button, kein
                    Erklaertext. data-lead-status bleibt leer stehen — dort

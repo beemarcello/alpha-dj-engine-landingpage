@@ -406,40 +406,32 @@ body {
    --dark ist fuer das schwarze Abschlussband.
    -------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------
-   Plattform-Hinweis in der Navigation (2026-09-03)
+   Plattform-Hinweis unter dem Demo-Knopf (2026-09-03)
 
-   "for [macOS] and [Windows]" zwischen Download-Knopf und Login. Die Bilder
-   sind auf ihre Tinte beschnitten und liegen in dreifacher Aufloesung vor
-   (48px hoch), damit sie auf Retina scharf bleiben.
+   "for [macOS] and [Windows]". Stand zuerst in der Menueleiste — dort wirkte
+   er gedraengt und stritt mit dem Download-Knopf um die Breite. Unter dem
+   Demo-Knopf ist Platz, deshalb hier auch KEIN Ausblenden auf schmalen
+   Schirmen: die Information gilt auf jedem Geraet.
 
-   Die Windows-Flagge ist optisch schwerer als eine Wortmarke gleicher Hoehe —
-   deshalb 1px kleiner, sonst dominiert sie den macOS-Schriftzug.
-
-   AUSGEBLENDET UNTER 900px: darunter konkurriert der Hinweis mit dem
-   Download-Knopf um die Breite, und der Knopf gewinnt. Bewusst per
-   media-query und nicht per Tailwind-Utility — die stehen im gepurgten
-   Build nicht zwingend zur Verfuegung.
+   Die Bilder sind auf ihre Tinte beschnitten und liegen in dreifacher
+   Aufloesung vor (48px hoch), damit sie auf Retina scharf bleiben. 11px
+   Anzeigehoehe passt zur x-Hoehe des 13px-Textes daneben; die Windows-Flagge
+   bekommt 1px mehr, weil ein kompaktes Symbol bei gleicher Hoehe optisch
+   weniger traegt als eine Wortmarke.
    -------------------------------------------------------------------------- */
 .os-badge {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  margin: 14px 0 0;
+  font-size: 13px;
   line-height: 1;
   color: var(--ink-55);
   white-space: nowrap;
   user-select: none;
 }
-/* 10px: die Wortmarke soll neben "for" und "and" nicht groesser wirken als
-   der Fliesstext. Buchstabenhoehe 13px sah gegen ~9px x-Hoehe zu wuchtig aus.
-   Die Windows-Flagge bekommt 1px mehr — ein kompaktes Symbol traegt bei
-   gleicher Hoehe optisch weniger als eine Wortmarke. */
-.os-badge img { display: block; width: auto; height: 10px; opacity: .75; }
-.os-badge img[alt="Windows"] { height: 11px; }
-
-@media (min-width: 900px) {
-  .os-badge { display: inline-flex; }
-}
+.os-badge img { display: block; width: auto; height: 11px; opacity: .75; }
+.os-badge img[alt="Windows"] { height: 12px; }
 
 .ns-note {
   font-size: 14px;
