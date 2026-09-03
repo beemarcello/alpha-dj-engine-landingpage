@@ -405,6 +405,42 @@ body {
    hier steht deshalb ein Kontaktweg, der ohne Skript funktioniert.
    --dark ist fuer das schwarze Abschlussband.
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Plattform-Hinweis in der Navigation (2026-09-03)
+
+   "for [macOS] and [Windows]" zwischen Download-Knopf und Login. Die Bilder
+   sind auf ihre Tinte beschnitten und liegen in dreifacher Aufloesung vor
+   (48px hoch), damit sie auf Retina scharf bleiben.
+
+   Die Windows-Flagge ist optisch schwerer als eine Wortmarke gleicher Hoehe —
+   deshalb 1px kleiner, sonst dominiert sie den macOS-Schriftzug.
+
+   AUSGEBLENDET UNTER 900px: darunter konkurriert der Hinweis mit dem
+   Download-Knopf um die Breite, und der Knopf gewinnt. Bewusst per
+   media-query und nicht per Tailwind-Utility — die stehen im gepurgten
+   Build nicht zwingend zur Verfuegung.
+   -------------------------------------------------------------------------- */
+.os-badge {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--ink-55);
+  white-space: nowrap;
+  user-select: none;
+}
+/* 10px: die Wortmarke soll neben "for" und "and" nicht groesser wirken als
+   der Fliesstext. Buchstabenhoehe 13px sah gegen ~9px x-Hoehe zu wuchtig aus.
+   Die Windows-Flagge bekommt 1px mehr — ein kompaktes Symbol traegt bei
+   gleicher Hoehe optisch weniger als eine Wortmarke. */
+.os-badge img { display: block; width: auto; height: 10px; opacity: .75; }
+.os-badge img[alt="Windows"] { height: 11px; }
+
+@media (min-width: 900px) {
+  .os-badge { display: inline-flex; }
+}
+
 .ns-note {
   font-size: 14px;
   line-height: 1.6;

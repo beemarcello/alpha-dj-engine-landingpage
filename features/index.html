@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://alpha-dj-engine.com/features/">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="../css/site.css?v=42">
+  <link rel="stylesheet" href="../css/site.css?v=43">
   <link rel="stylesheet" href="../css/tailwind.css?v=22">
 
   <!-- ====================================================================
@@ -96,6 +96,21 @@
       </a>
       <div class="flex items-center gap-3">
         <a data-download href="../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        <!--
+          Plattform-Hinweis (Marcel, 2026-09-03): Wortmarke fuer macOS, Flaggen-
+          Symbol fuer Windows. Steht bewusst ZWISCHEN Download-Knopf und Login —
+          der Knopf bleibt damit an seiner Stelle, nur das Login-Symbol rueckt nach
+          rechts. Unter 900px blendet .os-badge sich aus: dort reicht die Breite
+          fuer Logo + Knopf + Hinweis + Login nicht, und der Knopf hat Vorrang.
+          Die alt-Texte tragen die Bedeutung — ein Screenreader liest "for macOS
+          and Windows", auch wenn die Bilder nicht laden.
+        -->
+        <span class="os-badge">
+          for
+          <img src="../assets/img/os-macos.png" alt="macOS" width="204" height="48" decoding="async">
+          and
+          <img src="../assets/img/os-windows.png" alt="Windows" width="52" height="48" decoding="async">
+        </span>
         <!-- Login zum Portal (Marcel, 2026-08-27) -->
         <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
       </div>
