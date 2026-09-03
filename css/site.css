@@ -430,6 +430,29 @@ body {
    Logos standen weiter 92px zu weit rechts. */
 .hero-text { padding-left: 2rem; padding-right: 2rem; }
 
+/* --------------------------------------------------------------------------
+   Einspaltiger Hero: alles zentriert (Marcel, 2026-09-03)
+
+   Unter 1024px steht das Foto ueber dem Text statt daneben. In dieser
+   gestapelten Anordnung wirkt linksbuendiger Text an der Kante angeklebt —
+   vom Eyebrow "For Denon and Pioneer DJ gear" bis zur Plattformzeile steht
+   deshalb alles mittig, der Demo-Knopf eingeschlossen.
+
+   Ab 1024px greift die Regel NICHT: dort sitzt der Text in der rechten
+   Haelfte neben dem Foto und bleibt linksbuendig.
+
+   Die Absaetze brauchen zusaetzlich margin-inline:auto — text-align zentriert
+   nur den Inhalt einer Box, nicht die Box selbst, und der Fliesstext traegt
+   max-w-lg. Die Plattformzeile ist ein Flex-Container, sie braucht
+   justify-content statt text-align.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023.98px) {
+  .hero-text { text-align: center; }
+  .hero-text h1,
+  .hero-text p { margin-inline: auto; }
+  .os-badge--mobile { justify-content: center; }
+}
+
 @media (min-width: 1024px) {
   .hero-text {
     padding-right: calc(max(0px, (100vw - 1080px) / 2) + 1.5rem);
