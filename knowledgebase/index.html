@@ -311,6 +311,8 @@
           <li><a href="#serato-export">Serato export</a></li>
           <li><a href="#traktor-export">Traktor export</a></li>
           <li><a href="#playlists-on-device">Playlists on device</a></li>
+          <li><a href="#free-version-sign-in">Free version and signing in</a></li>
+          <li><a href="#windows-install">Installing Alpha on Windows</a></li>
           <li><a href="#macos-blocked">macOS blocked Alpha</a></li>
         </ul>
       </nav>
@@ -327,14 +329,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="analysis"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Track analysis</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -412,14 +414,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="analysis"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Track selection</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -492,14 +494,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="analysis"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>rekordbox import</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -595,7 +597,7 @@
           <h3>Common questions about rekordbox import</h3>
           <dl class="kb-qa">
             <dt>My library has over a thousand tracks &mdash; do they all go into the Composer?</dt>
-            <dd>No. A set is a selection, so the import asks how to continue. Use <span class="kb-verbatim">Pick tracks for a set</span> to filter and choose the tracks for one set, or <span class="kb-verbatim">Write whole library to USB</span> to transfer everything without composing. Since 1.0.3, writing the whole library requires being signed in and online &mdash; the export sign-off comes from the Alpha cloud, the same as for a composed set.</dd>
+            <dd>No. A set is a selection, so the import asks how to continue. Use <span class="kb-verbatim">Pick tracks for a set</span> to filter and choose the tracks for one set, or <span class="kb-verbatim">Write whole library to USB</span> to transfer everything without composing. Writing the whole library requires being online &mdash; the export sign-off comes from the Alpha cloud, the same as for a composed set. Since 1.1.0 signing in is only asked for at Export, not before.</dd>
             <dt>Why are some tracks reported as missing?</dt>
             <dd>Those files could not be found on disk at the paths stored in the XML (moved or renamed since the export). They are skipped; the found tracks import normally.</dd>
             <dt>Do I lose my BPM and key by importing?</dt>
@@ -613,14 +615,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="sequencing"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Compose</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -660,10 +662,11 @@
             <span class="kb-verbatim">Send to Export without composing &#8594;</span>
             at the top right of the Compose step sends all analyzed tracks
             straight to Export in their current order. The set is still signed
-            off by the Alpha cloud (this requires being signed in and online),
-            so the free-version song count and device registration apply exactly
-            as for a composed set. The Refine step stays available afterwards
-            for manual reordering or deletions.
+            off by the Alpha cloud, so an internet connection is required.
+            Since 1.1.0 no sign-in is needed at this step &mdash; the app only
+            asks for an account at Export (see the Free version and signing in
+            entry). The Refine step stays available afterwards for manual
+            reordering or deletions.
           </p>
         </section>
 
@@ -731,6 +734,8 @@
             <dd>Pull toward Harmonic for the smoothest key transitions; pull toward Energy arc to follow the drawn curve more closely, even if some key changes are rougher.</dd>
             <dt>Can I change the order after generating?</dt>
             <dd>Yes. The generated order opens in the Refine step, where individual tracks can be reordered or removed.</dd>
+            <dt>Do I need an account to compose?</dt>
+            <dd>No. Since 1.1.0 Compose works without signing in &mdash; analyze, compose and refine are all open. The app only asks for an account at Export, where the first 10 exported tracks are free (see the Free version and signing in entry).</dd>
           </dl>
         </section>
 
@@ -740,14 +745,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="sequencing"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Refine</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -846,14 +851,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Local backups</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -925,14 +930,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Match loudness</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1184,14 +1189,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Skip duplicates</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1273,14 +1278,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>USB export</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1342,6 +1347,7 @@
                 <tr><td>Note under the device chooser</td><td><span class="kb-verbatim">Works with any Denon Engine OS 3.x hardware - validated on the Prime Go</span></td></tr>
                 <tr><td>Tooltip on the Write to USB button</td><td><span class="kb-verbatim">Sends all Music Files including interpreted Metadata and Playlist order on your USB stick.</span></td></tr>
                 <tr><td>Tooltip on the eject control</td><td><span class="kb-verbatim">Safely unmount the USB stick so you can remove it</span></td></tr>
+                <tr><td>Export step, after clicking Write to USB while not signed in (since 1.1.0)</td><td><span class="kb-verbatim">Register or sign in to export - your first 10 tracks are free.</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -1365,6 +1371,8 @@
             <dd>No. USB export adds the new set and makes a local backup of the stick's existing library first.</dd>
             <dt>Can I remove the stick as soon as writing finishes?</dt>
             <dd>Use the eject control first. It safely unmounts the stick so it can be removed without corrupting the library.</dd>
+            <dt>Do I need to sign in to write a USB stick?</dt>
+            <dd>Yes. Since 1.1.0 Export is the only step that asks for an account: clicking <span class="kb-verbatim">Write to USB</span> while not signed in opens the sign-in window, and the first 10 exported tracks are free. Everything before Export works without an account. See the Free version and signing in entry.</dd>
           </dl>
         </section>
 
@@ -1389,14 +1397,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>VirtualDJ export</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1480,14 +1488,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>rekordbox export</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1572,14 +1580,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Serato export</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1656,14 +1664,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="export"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Traktor export</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1734,14 +1742,14 @@
                data-kb-status="available"
                data-kb-since="1.0.0"
                data-kb-category="library"
-               data-kb-platforms="macOS">
+               data-kb-platforms="macOS, Windows">
 
         <h2>Playlists on device</h2>
 
         <p class="kb-meta">
           <span class="is-available">Available</span>
           <span>Since 1.0.0</span>
-          <span>macOS</span>
+          <span>macOS &amp; Windows</span>
         </p>
 
         <p class="kb-summary">
@@ -1809,9 +1817,243 @@
 
       </article>
 
-      <!-- <h2 class="kb-category">Licensing and account</h2> -->
+      <h2 class="kb-category">Licensing and account</h2>
+
+      <article class="kb-feature" id="free-version-sign-in"
+               data-kb-status="available"
+               data-kb-since="1.0.0"
+               data-kb-category="licensing"
+               data-kb-platforms="macOS, Windows">
+
+        <h2>Free version and signing in</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.0.0 &mdash; sign-in moved to Export in 1.1.0</span>
+          <span>macOS &amp; Windows</span>
+        </p>
+
+        <p class="kb-summary">
+          The free version runs the entire workflow &mdash; analyze, compose,
+          refine &mdash; without an account; the app only asks to register or
+          sign in at the Export step, and the first 10 exported tracks are
+          free.
+        </p>
+
+        <section class="kb-block">
+          <h3>What the free version includes</h3>
+          <p>
+            Every feature of Alpha DJ Engine is open in the free version:
+            analyzing any number of tracks, composing sets, refining them,
+            match loudness, and all export formats. The only limit is the
+            number of tracks that can be written in Export: the first 10
+            exported tracks are free. The lifetime licence (a one-time
+            purchase, see the pricing page) removes that limit and covers up
+            to 2 registered computers &mdash; a Mac and a Windows PC can share
+            one account.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>When the app asks to sign in (since 1.1.0)</h3>
+          <p>
+            Since version 1.1.0 nothing before Export requires an account.
+            Clicking <span class="kb-verbatim">Write to USB</span> while not
+            signed in opens the sign-in window with the message below; after
+            signing in, the export continues. In versions 1.0.x the app asked
+            to sign in earlier, before composing &mdash; updating to the
+            current version moves that to Export.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How signing in works</h3>
+          <ol>
+            <li>Click <span class="kb-verbatim">Login</span> (or <span class="kb-verbatim">New here? Register</span>) in the sign-in window.</li>
+            <li>The browser opens on the Alpha DJ Engine portal. Sign in or register there &mdash; no password is ever typed into the app itself.</li>
+            <li>The portal asks to connect this computer to the account (a licence covers up to 2 registered computers).</li>
+            <li>Back in the app, the sign-in completes automatically &mdash; the app notices the finished browser sign-in on its own.</li>
+          </ol>
+          <p>
+            The app stays signed in across restarts: the sign-in is stored in
+            the macOS Keychain or the Windows Credential Manager, never in a
+            plain file.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>Free version and sign-in &mdash; on-screen text</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>Where it appears</th><th>Exact wording in the app</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Sign-in window, title</td><td><span class="kb-verbatim">Hey &mdash; it&rsquo;s still free!</span></td></tr>
+                <tr><td>Sign-in window, text</td><td><span class="kb-verbatim">Export up to 10 tracks for free and test the whole workflow &mdash; register or sign in to continue. Sign-in happens in your browser; no password is ever typed into this window. Finish there and this app notices automatically.</span></td></tr>
+                <tr><td>Sign-in window, buttons</td><td><span class="kb-verbatim">Login</span> / <span class="kb-verbatim">New here? Register</span></td></tr>
+                <tr><td>Export step, after clicking Write to USB while not signed in</td><td><span class="kb-verbatim">Register or sign in to export - your first 10 tracks are free.</span></td></tr>
+                <tr><td>Export step, when the account&rsquo;s licence is not active</td><td><span class="kb-verbatim">Your license is inactive &mdash; export is locked.</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What the free version does not do</h3>
+          <ul>
+            <li>The free version does not limit analyzing, composing or refining &mdash; only the number of exported tracks.</li>
+            <li>The free version does not expire and does not watermark or alter any audio.</li>
+            <li>The free allowance counts exported tracks, not days or sets.</li>
+            <li>Signing in does not happen inside the app window &mdash; the password is only ever typed in the browser, on the Alpha DJ Engine portal.</li>
+            <li>Signing in on a second computer does not need a second licence: one account covers up to 2 registered computers, Mac and Windows mixed.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about the free version and signing in</h3>
+          <dl class="kb-qa">
+            <dt>Do I need an account to try Alpha?</dt>
+            <dd>No. Analyze, compose and refine work without an account. The app only asks to register or sign in at Export &mdash; and even then the first 10 exported tracks are free, so the whole workflow can be tested end to end.</dd>
+            <dt>How many tracks can I export for free?</dt>
+            <dd>10 tracks. After that, exporting needs the lifetime licence (one-time purchase, see the pricing page).</dd>
+            <dt>Can I use the same account on my Mac and my Windows PC?</dt>
+            <dd>Yes. One account covers up to 2 registered computers, and Mac and Windows can be mixed freely.</dd>
+            <dt>I clicked Login and signed in on the website, but the app still asks me to sign in?</dt>
+            <dd>Finish every step in the browser, including the page that asks to connect this computer. The app picks the sign-in up automatically once the browser flow is complete. If the browser showed a message about an expired session or a pending email confirmation, complete that first and click Login in the app again.</dd>
+            <dt>Where is my password stored?</dt>
+            <dd>Nowhere in the app. The password is only entered in the browser on the Alpha DJ Engine portal; the app stores a sign-in token in the macOS Keychain or the Windows Credential Manager.</dd>
+          </dl>
+        </section>
+
+        <section class="kb-block">
+          <h3>Free version and sign-in troubleshooting</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>What the customer sees</th><th>Why it happens</th><th>What to do</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>The browser sign-in page says the sign-in has expired or is incomplete</td><td>The portal session ended before the connection to the computer was confirmed, or the account&rsquo;s email address is not confirmed yet</td><td>Sign in on the portal again (confirm the email first if one is pending), then click <span class="kb-verbatim">Login</span> in the app once more.</td></tr>
+                <tr><td>The portal says no more computers can be connected</td><td>The account already has 2 registered computers</td><td>Disconnect a computer that is no longer used on the account page of the portal, then connect the new one.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </article>
 
       <h2 class="kb-category">The app itself</h2>
+
+      <article class="kb-feature" id="windows-install"
+               data-kb-status="available"
+               data-kb-since="1.1.0"
+               data-kb-category="app"
+               data-kb-platforms="Windows">
+
+        <h2>Installing Alpha on Windows</h2>
+
+        <p class="kb-meta">
+          <span class="is-available">Available</span>
+          <span>Since 1.1.0</span>
+          <span>Windows 10 / 11, 64-bit</span>
+        </p>
+
+        <p class="kb-summary">
+          Since version 1.1.0 Alpha DJ Engine runs on Windows 10 and 11
+          (64-bit): the installer
+          (<span class="kb-verbatim">Alpha-DJ-Engine-&lt;version&gt;-win-x64-setup.exe</span>)
+          sets up the same app as on the Mac, with every feature and the same
+          account working on both platforms.
+        </p>
+
+        <section class="kb-block">
+          <h3>What installing Alpha on Windows involves</h3>
+          <p>
+            The download is a standard setup program. It installs Alpha DJ
+            Engine into the programs folder (or, if chosen, just for the
+            current user), creates a Start menu entry and an uninstaller, and
+            checks whether the Microsoft Edge WebView2 runtime is present
+            &mdash; if it is missing, the installer installs it automatically.
+            The current Windows build is not yet code-signed, so Windows
+            SmartScreen can show a blue warning on first run; the steps below
+            get past it safely.
+          </p>
+        </section>
+
+        <section class="kb-block">
+          <h3>How to install Alpha on Windows</h3>
+          <ol>
+            <li>Download the installer and double-click it.</li>
+            <li>If a blue <span class="kb-verbatim">Windows protected your PC</span> screen appears, click <span class="kb-verbatim">More info</span>, then <span class="kb-verbatim">Run anyway</span>.</li>
+            <li>Choose whether to install for all users (asks for administrator confirmation) or only for the current user.</li>
+            <li>Follow the installer to the end &mdash; it adds the WebView2 runtime by itself when the PC does not have it.</li>
+            <li>Start <span class="kb-verbatim">Alpha DJ Engine</span> from the Start menu. The very first start can take a moment while Windows scans the new app &mdash; give it up to a few minutes once.</li>
+          </ol>
+        </section>
+
+        <section class="kb-block">
+          <h3>Installing Alpha on Windows &mdash; the exact wording on screen</h3>
+          <p>
+            The SmartScreen warning is a Windows dialog, so its wording follows
+            the PC&rsquo;s system language.
+          </p>
+          <div class="kb-table-wrap"><table class="kb-table">
+            <tr><th>Where</th><th>English Windows</th><th>German Windows</th></tr>
+            <tr><td>SmartScreen warning on first run</td>
+                <td><span class="kb-verbatim">Windows protected your PC</span></td>
+                <td><span class="kb-verbatim">Der Computer wurde durch Windows gesch&uuml;tzt</span></td></tr>
+            <tr><td>Link that reveals the run option</td>
+                <td><span class="kb-verbatim">More info</span></td>
+                <td><span class="kb-verbatim">Weitere Informationen</span></td></tr>
+            <tr><td>Button that starts the installer</td>
+                <td><span class="kb-verbatim">Run anyway</span></td>
+                <td><span class="kb-verbatim">Trotzdem ausf&uuml;hren</span></td></tr>
+          </table></div>
+        </section>
+
+        <section class="kb-block">
+          <h3>What installing Alpha on Windows does not mean</h3>
+          <ul>
+            <li>The SmartScreen warning does not mean the download carries malware &mdash; it appears because the Windows build is not yet code-signed, which SmartScreen reports for new software from smaller developers.</li>
+            <li>Installing Alpha on Windows does not require lowering any Windows security setting &mdash; <span class="kb-verbatim">Run anyway</span> for this one program is all it takes.</li>
+            <li>The Windows version does not differ from the Mac version &mdash; same features, same export formats, same account (a licence covers up to 2 computers, Mac and Windows mixed).</li>
+            <li>Alpha does not run on 32-bit Windows or on Windows on ARM &mdash; it needs a 64-bit (x64) Windows 10 or 11.</li>
+            <li>Installing does not need any DJ software on the PC &mdash; Alpha writes the USB library itself.</li>
+          </ul>
+        </section>
+
+        <section class="kb-block">
+          <h3>Common questions about installing Alpha on Windows</h3>
+          <dl class="kb-qa">
+            <dt>Is the Windows version different from the Mac version?</dt>
+            <dd>No. Analyze, compose, refine and every export format work identically, and one account can be used on both platforms.</dd>
+            <dt>Why does Windows warn about the app?</dt>
+            <dd>The Windows build is not yet code-signed, so SmartScreen shows its standard warning for unknown publishers. Click <span class="kb-verbatim">More info</span>, then <span class="kb-verbatim">Run anyway</span>.</dd>
+            <dt>Do I need administrator rights to install?</dt>
+            <dd>Only for installing for all users &mdash; the installer offers installing just for the current user as well, which works without administrator confirmation.</dd>
+            <dt>What does Alpha need on the PC?</dt>
+            <dd>A 64-bit Windows 10 or 11 and the Microsoft Edge WebView2 runtime, which the installer adds automatically when it is missing. Composing and export sign-off need an internet connection; audio analysis runs locally on the PC.</dd>
+          </dl>
+        </section>
+
+        <section class="kb-block">
+          <h3>Installing Alpha on Windows troubleshooting</h3>
+          <div class="kb-table-wrap">
+            <table class="kb-table">
+              <thead>
+                <tr><th>What the customer sees</th><th>Why it happens</th><th>What to do</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Double-clicking the app icon and nothing seems to happen</td><td>On the first start Windows Defender scans the freshly installed app before letting it run</td><td>Wait up to a few minutes on the very first start &mdash; later starts are fast. If the window still never appears, send the file <span class="kb-verbatim">%LOCALAPPDATA%\Alpha DJ Engine\launch.log</span> to support; it records every startup step.</td></tr>
+                <tr><td>The SmartScreen screen has no <span class="kb-verbatim">Run anyway</span> button</td><td>On managed PCs (company or school) a policy can hide the button</td><td>Ask the administrator of the PC to allow the installer, or install on a personally managed PC.</td></tr>
+                <tr><td>The app window opens but stays empty or white</td><td>The WebView2 runtime is missing or damaged</td><td>Run the Alpha installer again &mdash; it repairs the WebView2 runtime automatically.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </article>
 
       <article class="kb-feature" id="macos-blocked"
                data-kb-status="available"

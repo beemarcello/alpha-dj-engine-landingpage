@@ -7,7 +7,7 @@
     "kbAnchor": "knowledgebase/#usb-export",
     "formatBlock": "<p>Alpha writes a standard Engine OS 3.x library straight onto the stick: the audio files, the interpreted metadata — BPM, musical key in Camelot notation, energy and loudness — and the playlist in exactly the order you built it. That is the format the whole Engine DJ family reads, so the drive plays the moment you plug it in. No Engine DJ desktop session, no re-analysis on the unit.</p><p>Before Alpha touches a stick that already has a library, it copies that library to your computer as a backup. Writing adds to what is on the drive — it never erases it — and a track that is already there is linked into the new playlist instead of being copied a second time. After writing, Alpha validates the result and lets you eject safely.</p>",
     "steps": [
-      "Point Alpha at your music — whole folders or hand-picked files. It reads BPM, key, energy and loudness out of the audio, locally on your Mac, without modifying your files.",
+      "Point Alpha at your music — whole folders or hand-picked files. It reads BPM, key, energy and loudness out of the audio, locally on your computer, without modifying your files.",
       "Pick the energy arc your night should follow — Journey, Wave, Build, Peak-time or Cooldown, or drag the curve yourself — set the length, and Alpha orders the tracks so neighboring songs actually mix.",
       "Audition the set in the built-in player and drag any track to a new position until the order feels right.",
       "Plug in your stick and click Write to USB. Alpha backs up the stick's existing Engine library, writes the set, matches loudness if you asked it to, validates the result — then eject and go straight into the {model}."
