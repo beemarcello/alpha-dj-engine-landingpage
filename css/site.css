@@ -396,6 +396,26 @@ body {
   line-height: 1.5;
 }
 
+/* --------------------------------------------------------------------------
+   <noscript>-Ausweg (2026-09-03)
+
+   Hero und Abschlussband zeigen ihren CTA erst, nachdem site.js die passende
+   Variante eingeblendet hat; das Formular laeuft ueber fetch, das Modal wird
+   per JS gebaut. Ohne JavaScript gaebe es also gar keinen Weg zum Download —
+   hier steht deshalb ein Kontaktweg, der ohne Skript funktioniert.
+   --dark ist fuer das schwarze Abschlussband.
+   -------------------------------------------------------------------------- */
+.ns-note {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-55);
+  max-width: 46ch;
+  margin: 0;
+}
+.ns-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.ns-note--dark { color: rgba(255, 255, 255, .8); margin-inline: auto; }
+.ns-note--dark a { color: var(--white); }
+
 .dl-modal__close {
   display: inline-flex; align-items: center; justify-content: center;
   width: 36px; height: 36px; flex-shrink: 0;

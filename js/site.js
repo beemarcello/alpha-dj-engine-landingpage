@@ -8,23 +8,35 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ------------------------------------------------------------------------
-     1. Adaptiver CTA — macOS bekommt den Download, alles andere E-Mail-Capture
-     Strategie: Die App läuft nur auf dem Desktop. Mobile Besucher können nicht
-     installieren, also halten wir den Lead per E-Mail statt sie in eine
-     Sackgasse zu schicken.
+     1. Adaptiver CTA — wer installieren kann, bekommt den Download-CTA;
+        alle anderen das E-Mail-Capture.
+
+     Geaendert am 2026-09-03: seit 1.1.0 gibt es die App fuer macOS UND
+     Windows. Vorher hiess die Bedingung isMac, und Windows-Besucher landeten
+     im E-Mail-Formular — waehrend die Seite ihnen an anderer Stelle Windows
+     zusagt. Genau dieser Widerspruch war der Anlass.
+
+     Die Klassen heissen deshalb jetzt .cta-desktop / .cta-email statt
+     .cta-mac / .cta-other: benannt nach dem, was sie TUN, nicht danach, wer
+     sie sieht. Eine Klasse namens "cta-mac", die auf Windows erscheint, waere
+     die naechste Fehlerquelle.
+
+     Linux bleibt bewusst beim E-Mail-Weg — dafuer gibt es keinen Build.
+     Touch-Geraete ebenfalls: iPadOS meldet sich als "MacIntel", ohne den
+     Touch-Ausschluss bekaeme ein iPad den Desktop-Download angeboten.
      ------------------------------------------------------------------------ */
   function initAdaptiveCta() {
     var ua = navigator.userAgent;
     var platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || '';
+    var kennung = platform + ' ' + ua;
     var isTouch = window.matchMedia('(pointer: coarse)').matches;
-    // iPadOS meldet sich als "MacIntel" mit Touch → als Mobile behandeln.
-    var isMac = /Mac/i.test(platform + ' ' + ua) && !isTouch;
+    var kannInstallieren = (/Mac/i.test(kennung) || /Win/i.test(kennung)) && !isTouch;
 
-    document.querySelectorAll('.cta-mac').forEach(function (el) {
-      el.hidden = !isMac;
+    document.querySelectorAll('.cta-desktop').forEach(function (el) {
+      el.hidden = !kannInstallieren;
     });
-    document.querySelectorAll('.cta-other').forEach(function (el) {
-      el.hidden = isMac;
+    document.querySelectorAll('.cta-email').forEach(function (el) {
+      el.hidden = kannInstallieren;
     });
   }
 
@@ -1261,6 +1273,10 @@
     if (el.closest('nav')) return 'nav';
     if (el.closest('.dl-modal')) return 'download_modal';
     if (el.closest('footer')) return 'footer';
+    // <p class="page-cta"> ist der Abschluss-CTA der generierten Geraete- und
+    // Feature-Seiten. Ohne diese Zeile faellt er auf #main zurueck und ist vom
+    // Nav-Knopf nicht mehr zu unterscheiden.
+    if (el.closest('.page-cta')) return 'page_end';
     var sec = el.closest('section[id]');
     if (sec && sec.id) return sec.id;
     // Nicht jeder CTA sitzt in einer <section> — der naechste benannte

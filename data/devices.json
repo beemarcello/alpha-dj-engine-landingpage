@@ -30,7 +30,7 @@
       "primaryKeyword": "prepare usb for denon prime go",
       "title": "Prepare a USB stick for the Denon DJ Prime Go — Alpha-DJ-Engine",
       "h1": "A gig-ready USB stick for your Denon Prime Go",
-      "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS.",
+      "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes an Engine DJ USB the Prime Go plays natively — no Engine DJ desktop needed. First 10 tracks free, then €30 once. macOS & Windows.",
       "intro": "The Prime Go is our reference device — every Alpha release is tested on one before it ships. Point Alpha at a folder of tracks, pick the energy arc your night should follow, and the stick comes out analyzed, harmonically ordered and ready to play the moment it clicks into the Prime Go's USB port.",
       "deviceDetail": "The Prime Go is a battery-powered two-deck standalone, and that is exactly the setup Alpha is built around: no laptop in the booth, just the unit and a prepared drive. It takes both USB sticks and SD cards, and the on-disk format Alpha writes is identical for either — point the export at whichever is mounted.",
       "quirks": [
@@ -91,7 +91,7 @@
       "primaryKeyword": "denon prime 2 usb export",
       "title": "Denon DJ Prime 2 USB export — Alpha-DJ-Engine",
       "h1": "Your set, exported and ready to play on the Denon Prime 2",
-      "description": "Alpha-DJ-Engine turns a folder of tracks into an Engine DJ USB export the Prime 2 reads natively: analyzed, harmonically ordered, loudness-matched. First 10 tracks free, then €30 once. macOS.",
+      "description": "Alpha-DJ-Engine turns a folder of tracks into an Engine DJ USB export the Prime 2 reads natively: analyzed, harmonically ordered, loudness-matched. First 10 tracks free, then €30 once. macOS & Windows.",
       "intro": "The Prime 2 does everything from the unit itself — two decks, a mixer, and media slots waiting for a prepared drive. Alpha covers the part before the gig: it analyzes your tracks, sequences them harmonically along the energy arc you choose, and writes the Engine library the Prime 2 expects.",
       "deviceDetail": "As a two-deck standalone the Prime 2 lives or dies by how well the drive is prepared — there is no laptop to bail you out mid-set. Alpha writes the full Engine OS 3.x library with BPM, Camelot key and playlist order to your USB stick or SD card; the Prime 2's internal drive bay stays device-managed and untouched.",
       "quirks": [
@@ -154,7 +154,7 @@
       "h1": "A four-deck-ready USB export for your Denon Prime 4",
       "description": "Alpha-DJ-Engine analyzes your music, builds a harmonically sequenced set and writes the Engine DJ USB the Prime 4 reads natively — no laptop, no Engine desktop. First 10 tracks free, then €30 once.",
       "intro": "Four decks deserve a library that's actually prepared. Alpha reads BPM, key, energy and loudness out of your audio, orders the set so neighboring tracks mix, and writes the Engine OS drive the Prime 4 picks up the second you plug it in.",
-      "deviceDetail": "The Prime 4 is the four-deck flagship of the Prime family, with four USB ports, an SD slot and an internal drive bay. Alpha writes to the removable media — the USB stick or SD card you plug into your Mac — and leaves the internal bay alone; that drive stays managed by the device itself.",
+      "deviceDetail": "The Prime 4 is the four-deck flagship of the Prime family, with four USB ports, an SD slot and an internal drive bay. Alpha writes to the removable media — the USB stick or SD card you plug into your computer — and leaves the internal bay alone; that drive stays managed by the device itself.",
       "quirks": [
         "Alpha prepares USB sticks and SD cards; the Prime 4's internal drive bay is not touched — it stays exactly as the device manages it.",
         "The unit re-analyzes nothing: Alpha's BPM, key and beatgrid load as-is from the Engine library on the stick.",
@@ -163,7 +163,7 @@
       "faq": [
         {
           "q": "Can Alpha write to the Prime 4's internal drive?",
-          "a": "No — Alpha writes to removable USB sticks and SD cards you plug into your Mac. The internal bay stays managed by the Prime 4 itself; play Alpha's set from the stick or migrate it with the device's own tools."
+          "a": "No — Alpha writes to removable USB sticks and SD cards you plug into your computer. The internal bay stays managed by the Prime 4 itself; play Alpha's set from the stick or migrate it with the device's own tools."
         },
         {
           "q": "I want to move from rekordbox to Engine DJ on the Prime 4 — how?",
@@ -324,9 +324,9 @@
       "primaryKeyword": "sc6000 rekordbox usb",
       "title": "Prepare a USB stick for the Denon DJ SC6000 Prime — Alpha-DJ-Engine",
       "h1": "A gig-ready USB for your Denon SC6000 Prime",
-      "description": "Skip the slow rekordbox USB import: Alpha-DJ-Engine analyzes your music, builds a harmonic set and writes a native Engine DJ USB the SC6000 Prime reads instantly. First 10 tracks free, then €30 once. macOS.",
-      "intro": "The SC6000 Prime is Denon's flagship media player, and it's happiest with a drive that arrives prepared. Alpha analyzes your tracks on your Mac, sequences them along the energy arc you pick, and writes the Engine OS library the SC6000 loads without a second of re-analysis.",
-      "deviceDetail": "With its 10.1-inch screen and dual-layer playback, the SC6000 shows off exactly what's in the library — so Alpha writes a complete one: BPM, Camelot key, playlist order and loudness-matched copies of your tracks. It writes to the USB stick or SD card you plug into your Mac; the SC6000's internal drive bay stays untouched and device-managed.",
+      "description": "Skip the slow rekordbox USB import: Alpha-DJ-Engine analyzes your music, builds a harmonic set and writes a native Engine DJ USB the SC6000 Prime reads instantly. First 10 tracks free, then €30 once. macOS & Windows.",
+      "intro": "The SC6000 Prime is Denon's flagship media player, and it's happiest with a drive that arrives prepared. Alpha analyzes your tracks on your computer, sequences them along the energy arc you pick, and writes the Engine OS library the SC6000 loads without a second of re-analysis.",
+      "deviceDetail": "With its 10.1-inch screen and dual-layer playback, the SC6000 shows off exactly what's in the library — so Alpha writes a complete one: BPM, Camelot key, playlist order and loudness-matched copies of your tracks. It writes to the USB stick or SD card you plug into your computer; the SC6000's internal drive bay stays untouched and device-managed.",
       "quirks": [
         "Alpha writes removable media — USB stick or SD card. The SC6000's internal SATA bay is not written to; it stays as the device manages it.",
         "Linked players share a source: one prepared stick in one SC6000 can feed a networked second player.",
@@ -335,7 +335,7 @@
       "faq": [
         {
           "q": "Importing a rekordbox USB on the SC6000 takes forever — what's the alternative?",
-          "a": "Let Alpha do the conversion on your Mac instead: it imports your rekordbox XML, keeps the BPM, key and beatgrid, and writes a native Engine OS library. The SC6000 loads it instantly — no on-device import, no beatgrids shifting."
+          "a": "Let Alpha do the conversion on your computer instead: it imports your rekordbox XML, keeps the BPM, key and beatgrid, and writes a native Engine OS library. The SC6000 loads it instantly — no on-device import, no beatgrids shifting."
         },
         {
           "q": "Does the SC6000 need Engine DJ desktop to read Alpha's stick?",
@@ -453,7 +453,7 @@
       "faq": [
         {
           "q": "Does the Mixstream Pro work without a laptop?",
-          "a": "Yes — that's the point of it, and of Alpha: the stick is prepared on your Mac at home, and at the gig it's just the Mixstream Pro and the drive. No laptop, no Engine desktop, no WiFi needed."
+          "a": "Yes — that's the point of it, and of Alpha: the stick is prepared on your computer at home, and at the gig it's just the Mixstream Pro and the drive. No laptop, no Engine desktop, no WiFi needed."
         },
         {
           "q": "Does the Mixstream Pro read Alpha's stick like a Denon Prime device?",
@@ -566,7 +566,7 @@
         },
         {
           "q": "Can I use the CDJ-3000's SD card slot?",
-          "a": "Yes — the CDJ-3000 reads the same rekordbox library from USB stick or SD card. Point Alpha's export at whichever is mounted on your Mac."
+          "a": "Yes — the CDJ-3000 reads the same rekordbox library from USB stick or SD card. Point Alpha's export at whichever is mounted on your computer."
         },
         {
           "q": "Which filesystem should the stick use — FAT32 or exFAT?",
@@ -678,7 +678,7 @@
       "primaryKeyword": "xdj rx3 usb export",
       "title": "XDJ-RX3 USB export — prepared without rekordbox — Alpha-DJ-Engine",
       "h1": "A ready-to-play rekordbox USB for your XDJ-RX3",
-      "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes the rekordbox USB the XDJ-RX3 reads natively — no rekordbox software needed. First 10 tracks free, then €30 once. macOS.",
+      "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes the rekordbox USB the XDJ-RX3 reads natively — no rekordbox software needed. First 10 tracks free, then €30 once. macOS & Windows.",
       "intro": "The XDJ-RX3 gives you the CDJ layout without the laptop — as long as the USB is prepared right. Alpha does the preparation: it analyzes your music, sequences it harmonically along the arc you choose, and writes the rekordbox library the RX3 reads straight from the stick.",
       "deviceDetail": "The RX3's 10.1-inch touchscreen browses the rekordbox library on the stick — which Alpha writes in full: both database formats, beat grids, waveforms, artwork and your playlist in set order. Two USB ports mean two DJs can each bring their own Alpha-prepared stick and hand over without a pause.",
       "quirks": [
@@ -819,7 +819,7 @@
         },
         {
           "q": "Do I need rekordbox or a laptop anywhere?",
-          "a": "No. Alpha writes the rekordbox USB itself on your Mac; the XZ plays it directly on its two standalone decks."
+          "a": "No. Alpha writes the rekordbox USB itself on your computer; the XZ plays it directly on its two standalone decks."
         },
         {
           "q": "Will the same stick play on club CDJs?",
@@ -926,7 +926,7 @@
       "title": "XDJ-700 USB export — prepared without rekordbox — Alpha-DJ-Engine",
       "h1": "A rekordbox USB for your XDJ-700",
       "description": "Alpha-DJ-Engine writes the rekordbox USB export the XDJ-700 reads natively — tracks analyzed, harmonically ordered and loudness-matched, no rekordbox software needed. First 10 tracks free, then €30 once.",
-      "intro": "The XDJ-700 packs the CDJ workflow into the smallest touchscreen player Pioneer makes — perfect for home booths and tight setups. Alpha feeds it the way it wants to be fed: a rekordbox USB written directly from your Mac, analyzed and sequenced before you ever touch the jog wheel.",
+      "intro": "The XDJ-700 packs the CDJ workflow into the smallest touchscreen player Pioneer makes — perfect for home booths and tight setups. Alpha feeds it the way it wants to be fed: a rekordbox USB written directly from your computer, analyzed and sequenced before you ever touch the jog wheel.",
       "deviceDetail": "Like its bigger siblings the XDJ-700 reads the rekordbox library straight from USB. Alpha writes the full package — both database formats, beat grids, waveforms, artwork, playlist order — so the compact screen browses a finished set, not a pile of files.",
       "quirks": [
         "USB-only media: the XDJ-700 has no SD slot, so the prepared stick carries everything.",
@@ -987,7 +987,7 @@
       "title": "OPUS-QUAD USB export — no rekordbox required — Alpha-DJ-Engine",
       "h1": "A rekordbox USB for your OPUS-QUAD — no rekordbox required",
       "description": "Alpha-DJ-Engine writes both rekordbox libraries — including the newer Device Library Plus format — straight to USB. The OPUS-QUAD reads it natively. Analyzed, harmonic, loudness-matched. First 10 tracks free, then €30 once.",
-      "intro": "The OPUS-QUAD is AlphaTheta's statement piece — four decks, a 10.1-inch screen, and standalone playback that leans on the newer encrypted rekordbox library. Alpha writes exactly that library, straight from your Mac, with your set analyzed and harmonically ordered before it ever reaches the booth.",
+      "intro": "The OPUS-QUAD is AlphaTheta's statement piece — four decks, a 10.1-inch screen, and standalone playback that leans on the newer encrypted rekordbox library. Alpha writes exactly that library, straight from your computer, with your set analyzed and harmonically ordered before it ever reaches the booth.",
       "deviceDetail": "As one of the newest players, the OPUS-QUAD prefers the encrypted exportLibrary.db — the format behind rekordbox's \"Device Library Plus\" — which Alpha writes alongside the classic export.pdb, so the same stick also plays on older CDJs and XDJs. Beat grids, waveforms, artwork and playlist order all land where the player looks for them.",
       "quirks": [
         "The OPUS-QUAD leans on the newer encrypted library (Device Library Plus) — Alpha writes it natively, plus the classic one for older gear on the same stick.",
@@ -1044,10 +1044,10 @@
       ],
       "hubMeta": "rekordbox USB · newest flagship all-in-one",
       "primaryKeyword": "xdj az usb export",
-      "title": "XDJ-AZ USB export — written on your Mac — Alpha-DJ-Engine",
-      "h1": "A rekordbox USB for the XDJ-AZ, written on your Mac",
+      "title": "XDJ-AZ USB export — written on your computer — Alpha-DJ-Engine",
+      "h1": "A rekordbox USB for the XDJ-AZ, written on your computer",
       "description": "Alpha-DJ-Engine analyzes your tracks, builds a harmonic set and writes the rekordbox USB export the XDJ-AZ reads natively — including the newer Device Library Plus format. First 10 tracks free, then €30 once.",
-      "intro": "The XDJ-AZ is AlphaTheta's newest full-size all-in-one — the four-channel booth that travels. Alpha prepares what it plays: a rekordbox USB written directly on your Mac, with analysis, harmonic order and loudness handled before the gig, not during it.",
+      "intro": "The XDJ-AZ is AlphaTheta's newest full-size all-in-one — the four-channel booth that travels. Alpha prepares what it plays: a rekordbox USB written directly on your computer, with analysis, harmonic order and loudness handled before the gig, not during it.",
       "deviceDetail": "As a current-generation player the XDJ-AZ reads the newer encrypted rekordbox library — Device Library Plus — which Alpha writes alongside the classic format: one stick for the AZ and for every older player you might encounter. Playlists arrive in set order with beat grids and waveforms ready.",
       "quirks": [
         "Current-generation player, current-generation library: Alpha writes the encrypted Device Library Plus database the AZ prefers, plus the classic export.pdb for everything older.",
