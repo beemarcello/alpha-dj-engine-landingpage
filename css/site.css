@@ -474,7 +474,10 @@ body {
 .os-badge img[alt="Windows"] { height: 12px; }
 
 .nav-os { display: none; }
-.os-badge--mobile { margin-top: 16px; }
+/* 28px statt 16px (Marcel, 2026-09-03): der Hinweis klebte am "Watch demo".
+   Die Zeile gehoert nicht zum Knopf, sie ist eine eigene Aussage — sie
+   braucht Luft, sonst liest sie sich wie dessen Beschriftung. */
+.os-badge--mobile { margin-top: 28px; }
 
 @media (min-width: 1024px) {
   .nav-os { display: inline-flex; }
