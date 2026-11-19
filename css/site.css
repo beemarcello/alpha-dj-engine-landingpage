@@ -1977,3 +1977,9 @@ body {
   border-radius: var(--r-md);
 }
 .post-hero .usb-spin { width: clamp(150px, 30vw, 220px); }
+
+/* Mehrere Karten teilen sich dasselbe Objekt. Liefen sie synchron, sah das wie
+   ein Darstellungsfehler aus statt wie zwei Beitraege - der versetzte Start
+   bricht den Gleichlauf. Negative Verzoegerung, damit nichts erst wartet. */
+.post-list > li:nth-child(even) .usb-spin__strip { animation-delay: -1.65s; }
+.post-list > li:nth-child(3n) .usb-spin__strip { animation-delay: -2.8s; }

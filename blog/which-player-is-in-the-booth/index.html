@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Which player is in the booth? — Alpha-DJ-Engine</title>
+  <meta name="description" content="Your USB format depends on the player in the booth — a fact only the promoter has. What to ask, where that answer lives, and what to do without one.">
+
+  <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/blog/which-player-is-in-the-booth/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Which player is in the booth?">
+  <meta property="og:description" content="The USB format depends on the gear — and that is the one fact you cannot prepare on your own.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/blog/which-player-is-in-the-booth/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../../css/site.css?v=53">
+
+  <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
+       site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
+       Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
+       Konfiguration in tailwind.config.js. -->
+  <link rel="stylesheet" href="../../css/tailwind.css?v=22">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Which player is in the booth?",
+    "description": "Why the USB format depends on gear you do not control, what to ask the promoter, and what to write when nobody answers.",
+    "datePublished": "2026-11-19",
+    "dateModified": "2026-11-19",
+    "mainEntityOfPage": "https://alpha-dj-engine.com/blog/which-player-is-in-the-booth/",
+    "image": "https://alpha-dj-engine.com/assets/img/og-image.png",
+    "author": { "@type": "Organization", "name": "Alphabees" },
+    "publisher": { "@type": "Organization", "name": "Alpha-DJ-Engine" }
+  }
+  </script>
+
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
+  <script src="../../js/icons.js?v=8" defer></script>
+  <script src="../../js/site.js?v=36" defer></script>
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  Blogbeitrag "Which player is in the booth?" (2026-11-19)
+
+  PARTNERBEITRAG. Alpha Events (alphaevents.tech) hat am selben Tag einen
+  Beitrag veroeffentlicht, der auf uns verlinkt:
+  /en/blog/prepare-dj-usb-stick. Dieser Text ist die Gegenrichtung.
+
+  Bewusst KEIN zweiter USB-Vorbereitungs-Leitfaden: den haben sie schon
+  geschrieben, zwei Texte zum selben Thema waeren fuer beide Seiten eine
+  Dublette. Dieser Text deckt ab, was ihrer offen laesst - woher der DJ
+  ueberhaupt erfaehrt, welches Geraet in der Kanzel steht. Die Verlinkung
+  traegt sich dadurch inhaltlich selbst; ein Link, der nur aus
+  SEO-Gruenden dastuende, waere fuer beide Seiten wertlos.
+
+  Die drei Links nach alphaevents.tech tragen UTM-Parameter, damit die
+  andere Seite den Zulauf messen kann - so halten sie es bei ihren Links
+  auf uns auch. Sie sind BEWUSST nicht auf nofollow gesetzt.
+
+  Belege: die Dateisystem-Angaben je Player stehen in data/devices.json
+  (quirks), die Export-Formulierungen in /knowledgebase/#usb-export. Die
+  Aussagen ueber Alpha Events stammen von deren eigenen Seiten
+  (/en/artist-booking, /en/artist-crew-portal), Stand 2026-11-19.
+================================================================================
+-->
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="../../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="../../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <div class="flex items-center gap-3">
+        <a data-download href="../../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        <!-- Login zum Portal (Marcel, 2026-08-27) -->
+        <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="subpage">
+    <div class="subpage__inner">
+
+      <article>
+
+        <p class="post-meta"><time datetime="2026-11-19">19 November 2026</time></p>
+        <h1>Which player is in the booth?</h1>
+        <p class="subpage__lead">
+          Almost everything about preparing a USB is in your hands. One thing is not —
+          and it decides the format you write.
+        </p>
+
+        <div class="post-hero">
+          <span class="usb-spin">
+            <img src="../../assets/img/usb-spin.svg" alt="" class="usb-spin__strip"
+                 width="1656" height="46" decoding="async">
+          </span>
+        </div>
+
+        <h2>One stick, two worlds</h2>
+        <p>
+          A DJ player does not read a folder of MP3s. It reads a library written in the
+          format its own ecosystem uses: <strong>Engine OS</strong> on Denon DJ hardware,
+          <strong>rekordbox</strong> on Pioneer DJ and AlphaTheta players. Both are
+          perfectly ordinary USB sticks. They are not interchangeable.
+        </p>
+        <p>
+          Alpha asks you which one it should write right before it writes — the target
+          format sits at the top of the Export step, and the app's own line there reads
+          “Pick the controller format for your device - Alpha writes the matching
+          library.” Picking it takes two seconds. <em>Knowing</em> what to pick is the
+          part that happens days earlier, in a conversation with whoever booked you.
+        </p>
+
+        <h2>“CDJs” is not an answer</h2>
+        <p>
+          This is where most of the trouble starts. A promoter writes back “we have
+          CDJs” and everyone considers the question settled. It isn't, because the
+          differences that break a stick sit <em>between</em> models of the same family.
+        </p>
+        <ul>
+          <li>
+            The <strong>CDJ-2000NXS2</strong> reads FAT32 and HFS+ — and nothing else.
+            Hand it an exFAT stick and it will keep asking you to format the drive.
+          </li>
+          <li>
+            The <strong>XDJ-1000MK2</strong> and the <strong>XDJ-700</strong> belong to
+            the same generation: FAT32 or HFS+, no exFAT.
+          </li>
+          <li>
+            The <strong>XDJ-XZ</strong>, the <strong>OPUS-QUAD</strong> and the
+            <strong>XDJ-AZ</strong> do read exFAT. The AZ has no SD slot at all, so USB
+            is your only way in.
+          </li>
+          <li>
+            Newer AlphaTheta players lean on the encrypted
+            <strong>Device Library Plus</strong> library rather than the classic one.
+          </li>
+        </ul>
+        <p>
+          Four answers that all sounded like “CDJs”, four different sticks. Our
+          <a href="../../compatibility.html">compatibility list</a> and the
+          <a href="../../usb/">per-device guides</a> spell out the quirks model by model
+          — but they can only help once you know which line to read.
+        </p>
+
+        <h2>What to ask, in one message</h2>
+        <p>
+          You do not need a long exchange. You need five facts, and they fit in a single
+          message:
+        </p>
+        <ul>
+          <li>The <strong>exact model</strong> of the players — including the suffix. NXS2 and MK2 are not decoration.</li>
+          <li><strong>How many</strong>, and whether they are linked, because that changes whether one stick has to serve every deck.</li>
+          <li>Whether the booth runs <strong>Engine OS or rekordbox</strong> hardware, if the room has both.</li>
+          <li>Whether there is a <strong>window to test</strong> your stick on the actual player before doors.</li>
+          <li>Who is <strong>in the booth before you</strong>, since a changeover on one shared player is a different plan than two decks of your own.</li>
+        </ul>
+        <p>
+          Ask early. The answer costs the promoter thirty seconds a week before the show
+          and nothing at all on the night; asked at 23:50 in the booth, it costs
+          everybody.
+        </p>
+
+        <h2>Where that answer actually lives</h2>
+        <p>
+          From the organiser's side, this is not an obscure detail — it is a line item.
+          The booth spec belongs to the technical rider, and the rider belongs to the
+          booking. Promoters who run their events on
+          <a href="https://alphaevents.tech/en?utm_source=alpha-dj-engine&amp;utm_medium=blog&amp;utm_campaign=which-player-is-in-the-booth&amp;utm_content=intro">Alpha Events</a>
+          have it in one place: their
+          <a href="https://alphaevents.tech/en/artist-booking?utm_source=alpha-dj-engine&amp;utm_medium=blog&amp;utm_campaign=which-player-is-in-the-booth&amp;utm_content=rider">artist booking module</a>
+          matches the stage equipment against the technical riders, so the gear list and
+          your requirements are compared before anyone drives to the venue.
+        </p>
+        <p>
+          For you as the booked artist, the useful half is the
+          <a href="https://alphaevents.tech/en/artist-crew-portal?utm_source=alpha-dj-engine&amp;utm_medium=blog&amp;utm_campaign=which-player-is-in-the-booth&amp;utm_content=portal">artist portal</a>:
+          you edit your own rider there instead of attaching a PDF to a mail thread, and
+          each artist gets a day sheet with arrival, soundcheck and set times. If your
+          rider says “Engine OS preferred, otherwise please confirm rekordbox model”,
+          that sentence is sitting in the promoter's workflow rather than in an inbox.
+        </p>
+        <p>
+          It is worth putting the booth question into your rider once and never typing it
+          again. Alpha Events is a German platform with a free tier, which makes it an
+          easy thing to point a promoter at when they are still running the night out of
+          a spreadsheet.
+        </p>
+
+        <h2>When nobody answers</h2>
+        <p>
+          Sometimes the reply never comes. Then you prepare for the worst plausible booth:
+        </p>
+        <ul>
+          <li>
+            <strong>Format the stick FAT32.</strong> It is the one file system every
+            player in both families reads. exFAT buys you nothing on a night where you do
+            not know the model.
+          </li>
+          <li>
+            <strong>Carry two identical sticks.</strong> Not a backup of your laptop — a
+            second stick, written the same way, in your other pocket.
+          </li>
+          <li>
+            <strong>Write both formats if the brand is genuinely unknown.</strong> In
+            Alpha the target is a chooser at the Export step, so writing the same set
+            again for the other ecosystem is one more pass, not a second evening of work.
+          </li>
+          <li>
+            <strong>Get to the booth early enough to load one track.</strong> Thirty
+            seconds on the real player answers what no message did.
+          </li>
+        </ul>
+
+        <h2>The short version</h2>
+        <p>
+          Everything on a prepared stick is your decision — the tracks, the order, the
+          levels. The format is the exception: it is a property of a booth you have never
+          seen. Ask for it in writing, keep it in your rider, and write FAT32 when the
+          room stays silent.
+        </p>
+
+        <div class="post-cta">
+          <p>
+            Alpha writes Engine OS and rekordbox sticks from the same set — you pick the
+            target right before it writes. The first ten tracks are free, on macOS and
+            Windows.
+          </p>
+          <p><a href="../../index.html#download" class="btn btn-primary">Download Alpha</a></p>
+        </div>
+
+        <p class="post-back"><a href="../">← All posts</a></p>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="../../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="../../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="site-footer__main" aria-label="Product">
+        <a href="../../features/">Features</a>
+        <a href="../../compatibility.html">Works with your setup?</a>
+        <a href="../../usb/">USB guides</a>
+        <a href="../../pricing.html">Pricing</a>
+        <a href="../">Blog</a>
+      </nav>
+
+      <nav class="site-footer__legal" aria-label="Legal and settings">
+        <a href="../../terms.html">Terms</a>
+        <a href="../../withdrawal.html">Withdrawal</a>
+        <a href="../../privacy.html">Privacy</a>
+        <a href="#" data-cookie-settings>Cookie settings</a>
+        <a href="../../imprint.html">Imprint</a>
+      </nav>
+
+    </div>
+  </footer>
+
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
+</body>
+</html>

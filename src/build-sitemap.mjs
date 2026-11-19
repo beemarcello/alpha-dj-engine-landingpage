@@ -75,6 +75,7 @@ const STATIC_PAGES = [
     loc: '/blog/', file: 'blog/index.html', priority: '0.6',
     comment: 'Blog. Die Uebersicht ist aus dem Footer verlinkt, die einzelnen Beitraege\n       sind es NICHT — jeder neue Beitrag braucht hier eine eigene Zeile, sonst\n       findet ihn kein Crawler (Marcel, 2026-11-19).',
   },
+  { loc: '/blog/which-player-is-in-the-booth/', file: 'blog/which-player-is-in-the-booth/index.html', priority: '0.5' },
   { loc: '/blog/who-picks-the-tracks/', file: 'blog/who-picks-the-tracks/index.html', priority: '0.5' },
   {
     loc: '/knowledgebase/', file: 'knowledgebase/index.html', priority: '0.6',
