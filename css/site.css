@@ -1997,3 +1997,21 @@ body {
    bricht den Gleichlauf. Negative Verzoegerung, damit nichts erst wartet. */
 .post-list > li:nth-child(even) .pixel-spin__strip { animation-delay: -1.65s; }
 .post-list > li:nth-child(3n) .pixel-spin__strip { animation-delay: -2.8s; }
+
+/* Kurzfassung oben im Beitrag. Gleiche Bauweise wie .post-cta, aber auf
+   --paper-2 statt weiss: sie soll als Vorspann lesbar sein und nicht mit der
+   Handlungsaufforderung am Ende verwechselt werden. */
+.post-takeaways {
+  background: var(--paper-2);
+  border: var(--stroke);
+  border-radius: var(--r-md);
+  padding: clamp(18px, 2.6vw, 26px);
+  margin: 0 0 34px;
+}
+.post-takeaways h2 {
+  font-size: 15px !important;      /* .subpage h2 ist groesser; hier ist es ein Label */
+  margin: 0 0 10px !important;
+  letter-spacing: .02em;
+}
+.subpage .post-takeaways ul { margin: 0; }
+.subpage .post-takeaways li:last-child { margin-bottom: 0; }

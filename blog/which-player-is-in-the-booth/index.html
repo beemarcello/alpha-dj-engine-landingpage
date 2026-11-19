@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://alpha-dj-engine.com/blog/which-player-is-in-the-booth/">
   <meta name="theme-color" content="#d5d5d4">
 
-  <link rel="stylesheet" href="../../css/site.css?v=54">
+  <link rel="stylesheet" href="../../css/site.css?v=55">
 
   <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
        site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
@@ -38,6 +38,44 @@
     "image": "https://alpha-dj-engine.com/assets/img/og-image.png",
     "author": { "@type": "Organization", "name": "Alphabees" },
     "publisher": { "@type": "Organization", "name": "Alpha-DJ-Engine" }
+  }
+  </script>
+
+  <!-- FAQPage zu den fuenf Fragen weiter unten. Die Antworten hier muessen
+       WORTGLEICH zu denen im Text bleiben: Google wertet strukturierte Daten
+       ab, die auf der Seite nicht sichtbar sind. Wer eine Frage aendert,
+       aendert beide Stellen. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can one stick work on both Denon and Pioneer gear?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not as one library. Engine OS and rekordbox are different formats, and Alpha writes one of them per pass. If you genuinely do not know the brand, write the same set twice onto two sticks and carry both. It costs one more export, not another evening." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which file system should I use if I don't know the player?",
+        "acceptedAnswer": { "@type": "Answer", "text": "FAT32. It is the one file system every player in both families reads. exFAT works on newer models and fails on older ones, so it buys you nothing on a night where the model is unknown." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need rekordbox or Engine DJ installed to prepare the stick?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Alpha writes the library the player reads directly, so neither desktop application has to be involved." }
+      },
+      {
+        "@type": "Question",
+        "name": "The promoter says it's all set up, just bring your USB. What now?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Reply with the five questions above. They are not a demand for special treatment — they are the same facts the booth's own equipment list already contains, and a promoter who runs bookings properly can answer them in a minute." }
+      },
+      {
+        "@type": "Question",
+        "name": "How early should I ask?",
+        "acceptedAnswer": { "@type": "Answer", "text": "As soon as the booking is confirmed. Set building and USB prep happen in the days before the show, not in the booth — an answer that arrives on the day arrives after the work is done." }
+      }
+    ]
   }
   </script>
 
@@ -143,6 +181,32 @@
           </span>
         </div>
 
+        <div class="post-takeaways">
+          <h2>Key takeaways</h2>
+          <ul>
+            <li>
+              The USB format follows the gear: Engine OS for Denon DJ, rekordbox for
+              Pioneer DJ and AlphaTheta. You choose it in the app — you cannot guess it.
+            </li>
+            <li>
+              &#8220;CDJs&#8221; is not an answer. A CDJ-2000NXS2 refuses an exFAT stick
+              that an XDJ-XZ mounts without complaint.
+            </li>
+            <li>
+              Ask for the exact model, how many, and whether you can test — in writing,
+              days before the show.
+            </li>
+            <li>
+              Slot length is not set length. The changeover belongs to the stage, not to
+              your set.
+            </li>
+            <li>
+              No answer? FAT32, two identical sticks, and both formats if the brand is
+              genuinely unknown.
+            </li>
+          </ul>
+        </div>
+
         <h2>One stick, two worlds</h2>
         <p>
           A DJ player does not read a folder of MP3s. It reads a library written in the
@@ -208,6 +272,38 @@
           everybody.
         </p>
 
+        <h2>How long is the set, really?</h2>
+        <p>
+          The second number on your booking is just as slippery as the first. A slot is
+          not a set: if the stage carries a changeover, those minutes are not yours. A
+          90-minute slot with a 20-minute changeover is seventy minutes of music, and a
+          DJ who built ninety either gets cut off or rushes the ending — the part people
+          actually remember.
+        </p>
+        <p>
+          There is a second, smaller mismatch underneath it. Timetable grids tend to snap
+          to quarter hours — that is how the
+          <a href="https://alphaevents.tech/en/lineup-timetable-planner?utm_source=alpha-dj-engine&amp;utm_medium=blog&amp;utm_campaign=which-player-is-in-the-booth&amp;utm_content=timetable">line-up planners
+          promoters use</a> lay out a night, with a changeover time set per stage. Set
+          builders work in rounder steps: in Alpha the target length moves in ten-minute
+          increments from one hour, or snaps to <em>Fit all tracks</em>. A 75-minute slot
+          therefore lands between two steps.
+        </p>
+        <p>
+          Round down, both times. Then ask the promoter for the one number that settles
+          it — not &#8220;22:00&#8211;23:30&#8221;, but &#8220;last track ends
+          23:10&#8221;.
+        </p>
+        <p>
+          Where the slot sits in the night matters just as much as how long it is. The
+          same ninety minutes at 22:00 and at 03:00 are opposite jobs, and that decides
+          the shape you build:
+          <a href="../../features/">Alpha's energy arc</a> ships as templates called
+          Journey, Wave, Build, Peak-time and Cooldown, and you drag the curve from
+          there. Booked to open and prepared a peak-time set? Technically perfect,
+          wrong room.
+        </p>
+
         <h2>Where that answer actually lives</h2>
         <p>
           From the organiser's side, this is not an obscure detail — it is a line item.
@@ -232,6 +328,21 @@
           again. Alpha Events is a German platform with a free tier, which makes it an
           easy thing to point a promoter at when they are still running the night out of
           a spreadsheet.
+        </p>
+
+        <h2>One night, several rooms</h2>
+        <p>
+          On a multi-stage event everything above splits. 01:00 on the main stage and
+          01:00 in the second room are different positions in different nights — and the
+          two rooms may not run the same gear. Festivals mix brands constantly: a main
+          stage on Denon and a side tent on Pioneer is an ordinary arrangement, not an
+          exotic one.
+        </p>
+        <p>
+          So the question is never &#8220;what does this festival use&#8221;. It is
+          &#8220;what does <em>my stage</em> use&#8221;. If you are playing two rooms in
+          one night, assume two answers until someone tells you otherwise — and if they
+          do differ, that is two sticks, not one.
         </p>
 
         <h2>When nobody answers</h2>
@@ -266,6 +377,88 @@
           seen. Ask for it in writing, keep it in your rider, and write FAT32 when the
           room stays silent.
         </p>
+
+        <h2>Questions DJs actually ask</h2>
+
+        <div class="mt-10 flex flex-col gap-3">
+
+          <details class="faq-item">
+            <summary>
+              Can one stick work on both Denon and Pioneer gear?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Not as one library. Engine OS and rekordbox are different formats, and
+                Alpha writes one of them per pass. If you genuinely do not know the
+                brand, write the same set twice onto two sticks and carry both. It costs
+                one more export, not another evening.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Which file system should I use if I don't know the player?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                FAT32. It is the one file system every player in both families reads.
+                exFAT works on newer models and fails on older ones, so it buys you
+                nothing on a night where the model is unknown.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              Do I need rekordbox or Engine DJ installed to prepare the stick?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                No. Alpha writes the library the player reads directly, so neither
+                desktop application has to be involved. The
+                <a href="../../compatibility.html">compatibility list</a> shows which
+                players are covered.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              The promoter says &#8220;it's all set up, just bring your USB&#8221;. What now?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                Reply with the five questions above. They are not a demand for special
+                treatment — they are the same facts the booth's own equipment list
+                already contains, and a promoter who runs bookings properly can answer
+                them in a minute.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              How early should I ask?
+              <i data-lucide="chevron-down" class="faq-chevron w-5 h-5"></i>
+            </summary>
+            <div class="faq-answer">
+              <p>
+                As soon as the booking is confirmed. Set building and USB prep happen in
+                the days before the show, not in the booth — an answer that arrives on
+                the day arrives after the work is done. Alpha Events has written up the
+                whole preparation from the organiser's side in
+                <a href="https://alphaevents.tech/en/blog/prepare-dj-usb-stick?utm_source=alpha-dj-engine&amp;utm_medium=blog&amp;utm_campaign=which-player-is-in-the-booth&amp;utm_content=guide">their
+                guide to preparing a DJ USB</a>.
+              </p>
+            </div>
+          </details>
+
+        </div>
 
         <div class="post-cta">
           <p>
