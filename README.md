@@ -30,6 +30,10 @@ AMC_Landingpage_2026/
 ├── withdrawal.html         Widerrufsbelehrung EN + DE — geprüft
 ├── privacy.html            Datenschutz — Entwurf, trägt noindex
 ├── imprint.html            Impressum — vollständig
+├── blog/                   Blog — Übersicht + ein Ordner je Beitrag, VON HAND
+│                           gepflegt (kein Generator). Neuer Beitrag: Ordner
+│                           blog/<slug>/index.html, <li> in blog/index.html,
+│                           Zeile in src/build-sitemap.mjs (STATIC_PAGES).
 ├── robots.txt · sitemap.xml   (sitemap ERZEUGT — npm run build:sitemap)
 ├── usb/                    ERZEUGT — Programmatic-SEO-Seiten (npm run build:pages)
 ├── data/                   Geraete, Export-Pfade, Keywords (Quelle der usb/-Seiten)

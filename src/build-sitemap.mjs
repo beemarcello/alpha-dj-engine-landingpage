@@ -72,6 +72,11 @@ const STATIC_PAGES = [
   { loc: '/features/', file: 'features/index.html', priority: '0.9' },
   { loc: '/pricing.html', file: 'pricing.html', priority: '0.8' },
   {
+    loc: '/blog/', file: 'blog/index.html', priority: '0.6',
+    comment: 'Blog. Die Uebersicht ist aus dem Footer verlinkt, die einzelnen Beitraege\n       sind es NICHT — jeder neue Beitrag braucht hier eine eigene Zeile, sonst\n       findet ihn kein Crawler (Marcel, 2026-11-19).',
+  },
+  { loc: '/blog/who-picks-the-tracks/', file: 'blog/who-picks-the-tracks/index.html', priority: '0.5' },
+  {
     loc: '/knowledgebase/', file: 'knowledgebase/index.html', priority: '0.6',
     comment: 'Wissensbasis des AI-Support-Agents. Steht hier drin, weil sie von keiner\n       Seite verlinkt ist — ohne Sitemap-Eintrag wuerde ein Crawler sie nie\n       finden. Muss indexierbar bleiben, sonst kann der Support-Agent sie nicht\n       lesen (Marcel, 2026-08-22).',
   },

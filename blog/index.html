@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Blog — Alpha-DJ-Engine</title>
+  <meta name="description" content="The Alpha-DJ-Engine blog: how the app prepares a gig-ready USB stick, what it decides for you, and what stays with the DJ.">
+
+  <link rel="icon" href="../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/blog/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog — Alpha-DJ-Engine">
+  <meta property="og:description" content="How Alpha prepares a gig-ready USB stick, what it decides for you, and what stays with the DJ.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/blog/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../css/site.css?v=52">
+
+  <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
+       site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
+       Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
+       Konfiguration in tailwind.config.js. -->
+  <link rel="stylesheet" href="../css/tailwind.css?v=22">
+
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
+  <script src="../js/icons.js?v=8" defer></script>
+  <script src="../js/site.js?v=36" defer></script>
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  Blog-Uebersicht
+
+  Angelegt am 2026-11-19 (Marcel: "Haben wir bereits einen Blog?").
+
+  REGELN, wenn hier ein Beitrag dazukommt:
+
+  1. Ein Beitrag = ein <li> mit .post-card, NEUESTER ZUERST. Die Liste ist von
+     Hand gepflegt, es gibt keinen Generator dafuer. Das ist Absicht: das
+     Programmatic-SEO-System unter usb/ lebt von 22 fast gleichen Seiten,
+     Blogbeitraege sind Einzelstuecke.
+  2. Jeder Beitrag bekommt einen eigenen Ordner blog/<slug>/index.html, damit
+     die URL ohne .html auskommt und spaeter umgezogen werden kann, ohne den
+     Link zu brechen.
+  3. Neuen Beitrag in src/build-sitemap.mjs (STATIC_PAGES) eintragen, sonst
+     findet ihn kein Crawler - der Blog ist nur aus dem Footer verlinkt.
+  4. Jede Funktionsaussage muss in /knowledgebase/ belegt sein (README,
+     Abschnitt "Keine unbelegten Feature-Aussagen"). Der Blog ist kein Ort fuer
+     Behauptungen, die der Support danach geradebiegen muss.
+================================================================================
+-->
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <div class="flex items-center gap-3">
+        <a data-download href="../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        <!-- Login zum Portal (Marcel, 2026-08-27) -->
+        <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="subpage">
+    <div class="subpage__inner">
+
+      <h1>Blog</h1>
+      <p class="subpage__lead">
+        Notes on preparing music for a gig — what the app decides, what stays with
+        the DJ, and how the stick ends up in the format your player reads.
+      </p>
+
+      <ul class="post-list">
+
+        <li>
+          <a class="post-card" href="who-picks-the-tracks/">
+            <!--
+              Vorschaubild: Sprite-Streifen aus src/build-usb-spin.mjs, 24 Frames.
+              alt bleibt leer - das Bild wiederholt nur den Titel daneben und
+              waere fuer einen Screenreader Laerm. Die Beschreibung steckt im
+              aria-label der SVG selbst, falls sie einzeln geoeffnet wird.
+            -->
+            <span class="post-card__media">
+              <span class="usb-spin">
+                <img src="../assets/img/usb-spin.svg" alt="" class="usb-spin__strip"
+                     width="1656" height="46" decoding="async" loading="lazy">
+              </span>
+            </span>
+            <span class="post-card__body">
+              <span class="post-card__date"><time datetime="2026-11-19">19 November 2026</time></span>
+              <h2 class="post-card__title">Who picks the tracks: you or Alpha?</h2>
+              <span class="post-card__excerpt">
+                Tell a DJ that software builds their set and the conversation usually
+                ends there. Here is the honest split: what Alpha decides, what you
+                set before it starts, and what it never touches.
+              </span>
+              <span class="post-card__more">Read →</span>
+            </span>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="site-footer__main" aria-label="Product">
+        <a href="../features/">Features</a>
+        <a href="../compatibility.html">Works with your setup?</a>
+        <a href="../usb/">USB guides</a>
+        <a href="../pricing.html">Pricing</a>
+        <a href="./">Blog</a>
+      </nav>
+
+      <nav class="site-footer__legal" aria-label="Legal and settings">
+        <a href="../terms.html">Terms</a>
+        <a href="../withdrawal.html">Withdrawal</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="#" data-cookie-settings>Cookie settings</a>
+        <a href="../imprint.html">Imprint</a>
+      </nav>
+
+    </div>
+  </footer>
+
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
+</body>
+</html>

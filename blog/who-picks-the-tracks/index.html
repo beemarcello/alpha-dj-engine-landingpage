@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Who picks the tracks: you or Alpha? — Alpha-DJ-Engine</title>
+  <meta name="description" content="What Alpha-DJ-Engine decides when it composes a set — the arc you draw, two sliders, the track order — and everything that stays with the DJ.">
+
+  <link rel="icon" href="../../assets/icons/favicon.png" type="image/png" sizes="256x256">
+  <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
+  <link rel="canonical" href="https://alpha-dj-engine.com/blog/who-picks-the-tracks/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Who picks the tracks: you or Alpha?">
+  <meta property="og:description" content="What Alpha decides when it composes a set — and everything that stays with the DJ.">
+  <meta property="og:image" content="https://alpha-dj-engine.com/assets/img/og-image.png">
+  <meta property="og:url" content="https://alpha-dj-engine.com/blog/who-picks-the-tracks/">
+  <meta name="theme-color" content="#d5d5d4">
+
+  <link rel="stylesheet" href="../../css/site.css?v=52">
+
+  <!-- Tailwind: lokal gebaut und gepurgt (npm run build:css). Wird NACH
+       site.css geladen, weil die frühere Play-CDN ihren <style> ebenfalls ans
+       Ende des <head> gehängt hat — die Kaskade bleibt damit identisch.
+       Konfiguration in tailwind.config.js. -->
+  <link rel="stylesheet" href="../../css/tailwind.css?v=22">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Who picks the tracks: you or Alpha?",
+    "description": "What Alpha-DJ-Engine decides when it composes a set, and what stays with the DJ.",
+    "datePublished": "2026-11-19",
+    "dateModified": "2026-11-19",
+    "mainEntityOfPage": "https://alpha-dj-engine.com/blog/who-picks-the-tracks/",
+    "image": "https://alpha-dj-engine.com/assets/img/og-image.png",
+    "author": { "@type": "Organization", "name": "Alphabees" },
+    "publisher": { "@type": "Organization", "name": "Alpha-DJ-Engine" }
+  }
+  </script>
+
+  <!-- ====================================================================
+       Google-Tag mit Consent Mode
+
+       Reihenfolge ist hier alles: der consent-default MUSS vor dem Laden von
+       gtag.js stehen. Was Google vor dem ersten Default sieht, behandelt es als
+       uneingeschraenkt erlaubt — ein spaeter nachgereichter Default wird
+       ignoriert. Wer diese drei Bloecke umsortiert, hebelt die Einwilligung aus,
+       ohne dass man es der Seite ansieht.
+
+       Solange "denied" gilt, setzt GA KEINE Cookies und sendet nur einen
+       anonymen Ping. Erst der consent-update aus js/site.js (applyConsent)
+       schaltet die volle Messung frei.
+
+       Das Tag steht bewusst fest im Quelltext: Googles Installationspruefung
+       ruft die Seite ab und sucht es dort. Wird es per JavaScript nachgeladen,
+       findet sie es nie und meldet dauerhaft "not installed" — deswegen steht
+       es hier und nicht in loadAnalytics().
+       ==================================================================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DQBC6VLYFP"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-DQBC6VLYFP');
+  </script>
+
+  <script src="../../js/icons.js?v=8" defer></script>
+  <script src="../../js/site.js?v=36" defer></script>
+</head>
+
+<body class="antialiased">
+
+<!--
+================================================================================
+  Blogbeitrag "Who picks the tracks: you or Alpha?" (2026-11-19)
+
+  Jede Funktionsaussage in diesem Text ist in /knowledgebase/ belegt - die
+  Arc-Vorlagen, die zwei Regler samt Voreinstellung Mitte, 1h 00m in
+  10-Minuten-Schritten, "Fit all tracks", die 1000-Track-Grenze, der Link
+  "Send to Export without composing" (seit 1.0.3) und die drei Punkte unter
+  "What Compose does not do" / "What Refine does not do". App-Texte stehen
+  wortwoertlich in Anfuehrungszeichen.
+
+  Wer hier etwas ergaenzt: erst in der Wissensbasis nachsehen, nicht aus dem
+  Gedaechtnis schreiben. Die README fuehrt unter "Keine unbelegten
+  Feature-Aussagen" zwei Faelle auf, in denen genau das schon schiefging.
+================================================================================
+-->
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="fixed z-50 w-full top-0" id="navbar">
+    <div class="flex h-16 max-w-[1080px] mx-auto px-6 items-center justify-between">
+      <a href="../../index.html" class="flex items-center no-underline shrink-0" aria-label="Alpha-DJ-Engine — home">
+        <img src="../../assets/logo/logo-alpha-dj-engine-animated.svg" alt="Alpha-DJ-Engine" width="908" height="230"
+             class="h-9 sm:h-10 w-auto" decoding="async">
+      </a>
+      <div class="flex items-center gap-3">
+        <a data-download href="../../index.html#download" class="btn btn-primary text-sm px-4 min-h-[36px] whitespace-nowrap">Download for free</a>
+        <!-- Login zum Portal (Marcel, 2026-08-27) -->
+        <a href="https://app.alpha-dj-engine.com/sign-in" class="flex items-center" aria-label="Sign in" title="Sign in"><i data-lucide="log-in" class="w-6 h-6"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="subpage">
+    <div class="subpage__inner">
+
+      <article>
+
+        <p class="post-meta"><time datetime="2026-11-19">19 November 2026</time></p>
+        <h1>Who picks the tracks: you or Alpha?</h1>
+        <p class="subpage__lead">
+          Tell a DJ that software builds their set and the conversation usually ends
+          there — and fairly so, because the set is the job. So here is the split,
+          control by control.
+        </p>
+
+        <!--
+          Dasselbe Objekt wie auf der Blog-Uebersicht, nur groesser. Ein
+          Vorschaubild, das im Beitrag nicht wieder auftaucht, laesst den Text
+          nackt wirken - deshalb steht es hier und nicht nur auf der Karte.
+        -->
+        <div class="post-hero">
+          <span class="usb-spin">
+            <img src="../../assets/img/usb-spin.svg" alt="" class="usb-spin__strip"
+                 width="1656" height="46" decoding="async">
+          </span>
+        </div>
+
+        <h2>What you set before Alpha does anything</h2>
+        <p>
+          Nothing is generated until three decisions are made, and all three are yours.
+        </p>
+        <ul>
+          <li>
+            <strong>The shape of the night.</strong> You pick an energy arc template —
+            Journey, Wave, Build, Peak-time or Cooldown — and then drag its points to
+            bend the curve into whatever your room actually needs.
+          </li>
+          <li>
+            <strong>The length.</strong> One hour by default, adjusted in ten-minute
+            steps. <em>Fit all tracks</em> sizes the set to everything you imported.
+          </li>
+          <li>
+            <strong>How it weighs things.</strong> Two sliders, both centred until you
+            move them. The first runs between harmonic mixing and following your drawn
+            curve; the app puts it plainly in its own tooltip: “Pull toward Harmonic for
+            the smoothest key transitions between tracks; pull toward Energy arc to
+            follow your drawn energy curve more closely, even if some key changes are
+            rougher.” The second decides whether neighbouring tracks are matched more on
+            key or on tempo.
+          </li>
+        </ul>
+
+        <h2>What Alpha decides</h2>
+        <p>
+          One thing: the order. It takes the tracks it analyzed and arranges them so the
+          sequence follows the curve you drew, weighted by the two sliders you set. Up
+          to a thousand tracks in a set. That is the entire extent of the machine's
+          judgement — an order, proposed.
+        </p>
+
+        <h2>What you do with that order</h2>
+        <p>
+          The generated set opens in Refine as a row of energy bars with a mini-player.
+          Click a bar to load that track, play it, scrub it. Drag a bar left or right to
+          move the track. Remove anything that does not belong. The hint under the set
+          reads “drag bars to fine-tune”, which is the honest description of the step.
+        </p>
+        <p>
+          And if your playlist is already in exactly the order you want, the sequencer
+          can be skipped outright: <em>Send to Export without composing →</em> at the top
+          right of the Compose step sends every analyzed track to Export in its current
+          order. Alpha then does no ordering at all.
+        </p>
+
+        <h2>What Alpha never touches</h2>
+        <ul>
+          <li>Your audio files. Nothing is rewritten, nothing is re-encoded.</li>
+          <li>A track's key or tempo. Alpha orders tracks; it does not change them.</li>
+          <li>
+            Your library on disk. Removing a track in Refine takes it out of this set —
+            the file stays where it is.
+          </li>
+        </ul>
+
+        <h2>The short version</h2>
+        <p>
+          Alpha does the part of the evening nobody misses: reading every file, finding
+          key and tempo, proposing a first order, and writing the stick in the format
+          your player reads natively. Then the USB comes out, goes into your gear, and
+          the set is yours to play.
+        </p>
+
+        <div class="post-cta">
+          <p>
+            The first ten tracks are free — the full app, no demo mode, no card.
+            Alpha runs on macOS and Windows.
+          </p>
+          <p><a href="../../index.html#download" class="btn btn-primary">Download Alpha</a></p>
+        </div>
+
+        <p class="post-back"><a href="../">← All posts</a></p>
+
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="../../index.html" class="inline-flex no-underline" aria-label="Alpha-DJ-Engine — home">
+          <img src="../../assets/logo/Logo_Alpha_DJ_Engine.png" alt="Alpha-DJ-Engine" width="908" height="230"
+               class="h-8 w-auto" decoding="async" loading="lazy">
+        </a>
+        <span class="site-footer__tag">Engineered in Berlin by Alphabees</span>
+      </div>
+
+      <nav class="site-footer__main" aria-label="Product">
+        <a href="../../features/">Features</a>
+        <a href="../../compatibility.html">Works with your setup?</a>
+        <a href="../../usb/">USB guides</a>
+        <a href="../../pricing.html">Pricing</a>
+        <a href="../">Blog</a>
+      </nav>
+
+      <nav class="site-footer__legal" aria-label="Legal and settings">
+        <a href="../../terms.html">Terms</a>
+        <a href="../../withdrawal.html">Withdrawal</a>
+        <a href="../../privacy.html">Privacy</a>
+        <a href="#" data-cookie-settings>Cookie settings</a>
+        <a href="../../imprint.html">Imprint</a>
+      </nav>
+
+    </div>
+  </footer>
+
+  <!--
+    Chat-Widget (Marcel, 2026-08-22).
+
+    Laedt von chat.alphalearn.ai. Das ist zwar dieselbe Firma, aber NICHT diese
+    Domain — die Seite ist damit nicht mehr frei von externen Requests. Der Satz
+    in privacy.html ("loads nothing from anyone else") wurde entsprechend
+    angepasst; wer das Widget wieder entfernt, muss ihn zurueckdrehen.
+
+    Steht bewusst ganz am Ende des <body>: das Snippet haengt sich selbst per
+    document.body.appendChild ein und braucht den Body deshalb bereits.
+  -->
+  <script>var e=document,t=e.createElement("script");t.src="https://chat.alphalearn.ai/chat-widget.js",t.onload=function(){_loadAlChat({apiKey:"a84a3e40-0048-49b3-a27f-8f29d3e5862f",botId:"7b48dbc1-a760-4fcb-bc58-8f146eb20c00"})},e.body.appendChild(t);</script>
+
+</body>
+</html>

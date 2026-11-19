@@ -19,12 +19,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alpha-dj-engine.com/compatibility.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/imprint.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
@@ -34,13 +34,26 @@
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/features/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/pricing.html</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.8</priority>
+  </url>
+  <!-- Blog. Die Uebersicht ist aus dem Footer verlinkt, die einzelnen Beitraege
+       sind es NICHT — jeder neue Beitrag braucht hier eine eigene Zeile, sonst
+       findet ihn kein Crawler (Marcel, 2026-11-19). -->
+  <url>
+    <loc>https://alpha-dj-engine.com/blog/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alpha-dj-engine.com/blog/who-picks-the-tracks/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.5</priority>
   </url>
   <!-- Wissensbasis des AI-Support-Agents. Steht hier drin, weil sie von keiner
        Seite verlinkt ist — ohne Sitemap-Eintrag wuerde ein Crawler sie nie
@@ -48,113 +61,113 @@
        lesen (Marcel, 2026-08-22). -->
   <url>
     <loc>https://alpha-dj-engine.com/knowledgebase/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/terms.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/withdrawal.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/privacy.html</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.4</priority>
   </url>
   <!-- Generierte Geraeteseiten (Programmatic SEO), Quelle: data/devices.json -->
   <url>
     <loc>https://alpha-dj-engine.com/usb/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/alphatheta-opus-quad/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/alphatheta-xdj-az/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-2/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-4/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-prime-go/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-sc5000-prime/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-sc5000m-prime/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-sc6000-prime/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/denon-sc6000m-prime/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/numark-mixstream-pro/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-cdj-2000nxs2/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-cdj-3000/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-1000mk2/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-700/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-rx2/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-rx3/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://alpha-dj-engine.com/usb/pioneer-xdj-xz/</loc>
-    <lastmod>2026-09-05</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
