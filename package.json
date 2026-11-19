@@ -9,10 +9,11 @@
     "build:icons": "node src/build-icons.mjs",
     "build:pages": "node src/build-pages.mjs",
     "build:sitemap": "node src/build-sitemap.mjs",
-    "build": "npm run build:pages && npm run build:css && npm run build:icons && npm run build:horse && npm run build:usb && npm run build:sitemap && npm run build:check",
+    "build": "npm run build:pages && npm run build:css && npm run build:icons && npm run build:horse && npm run build:usb && npm run build:player && npm run build:sitemap && npm run build:check",
     "build:horse": "node src/build-horse.mjs",
     "build:check": "node src/check-versions.mjs",
-    "build:usb": "node src/build-usb-spin.mjs"
+    "build:usb": "node src/build-usb-spin.mjs",
+    "build:player": "node src/build-player-spin.mjs"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.0",

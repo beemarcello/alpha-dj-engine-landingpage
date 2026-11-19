@@ -1934,35 +1934,48 @@ body {
 .subpage .post-cta p:last-child { margin: 0; }
 
 /* --------------------------------------------------------------------------
-   Rotierendes Pixel-Objekt (Blog)
+   Rotierende Pixel-Objekte (Blog)
 
-   assets/img/usb-spin.svg ist ein Sprite-Streifen mit 24 Frames nebeneinander
-   (je 69x46 Zellen), erzeugt von src/build-usb-spin.mjs. Gleiche Mechanik wie
-   beim Pferd: der Container zeigt genau ein Frame, der Streifen wandert in 24
-   Schritten durch. image-rendering: pixelated ist nicht Deko - ohne sie
-   interpoliert der Browser beim Hochskalieren und die Pixelkanten verwaschen.
+   assets/img/usb-spin.svg und assets/img/player-spin.svg sind Sprite-Streifen
+   mit je 24 Frames nebeneinander, erzeugt von src/build-usb-spin.mjs und
+   src/build-player-spin.mjs (gemeinsamer Renderer: src/lib/iso-pixel.mjs).
+   Gleiche Mechanik wie beim Pferd: der Container zeigt genau ein Frame, der
+   Streifen wandert in 24 Schritten durch.
+
+   Rastergroesse und Framezahl stehen NICHT fest in der Regel, sondern je
+   Objekt in --spin-ratio und --frames. Die Erzeuger geben beim Bauen aus,
+   welche Werte gelten - aendert sich ein Modell, aendern sie sich mit, und
+   nur die eine Zeile hier muss nach.
+
+   image-rendering: pixelated ist nicht Deko: ohne sie interpoliert der
+   Browser beim Hochskalieren und die Pixelkanten verwaschen.
    -------------------------------------------------------------------------- */
-.usb-spin {
-  --usb-frames: 24;
+.pixel-spin {
+  --frames: 24;
   width: clamp(116px, 20vw, 160px);
-  aspect-ratio: 69 / 46;
+  aspect-ratio: var(--spin-ratio);
   overflow: hidden;
   flex-shrink: 0;
 }
-.usb-spin__strip {
+.pixel-spin--usb    { --spin-ratio: 69 / 46; }
+/* Der Player ist breiter und flacher - etwas mehr Breite, damit beide Karten
+   optisch gleich schwer wirken. */
+.pixel-spin--player { --spin-ratio: 71 / 41; width: clamp(130px, 23vw, 182px); }
+
+.pixel-spin__strip {
   display: block;
-  width: calc(var(--usb-frames) * 100%);
+  width: calc(var(--frames) * 100%);
   height: 100%;
   max-width: none;                 /* Tailwind-Preflight setzt max-width:100% */
   image-rendering: pixelated;
-  animation: usb-turn 4s steps(var(--usb-frames)) infinite;
+  animation: pixel-turn 4s steps(var(--frames)) infinite;
 }
-@keyframes usb-turn {
+@keyframes pixel-turn {
   from { transform: translateX(0); }
   to   { transform: translateX(-100%); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .usb-spin__strip { animation: none !important; }
+  .pixel-spin__strip { animation: none !important; }
 }
 
 /* Auf der Beitragsseite steht dasselbe Objekt groesser ueber dem Text. */
@@ -1976,10 +1989,11 @@ body {
   border: var(--stroke);
   border-radius: var(--r-md);
 }
-.post-hero .usb-spin { width: clamp(150px, 30vw, 220px); }
+.post-hero .pixel-spin { width: clamp(150px, 30vw, 220px); }
+.post-hero .pixel-spin--player { width: clamp(168px, 34vw, 248px); }
 
 /* Mehrere Karten teilen sich dasselbe Objekt. Liefen sie synchron, sah das wie
    ein Darstellungsfehler aus statt wie zwei Beitraege - der versetzte Start
    bricht den Gleichlauf. Negative Verzoegerung, damit nichts erst wartet. */
-.post-list > li:nth-child(even) .usb-spin__strip { animation-delay: -1.65s; }
-.post-list > li:nth-child(3n) .usb-spin__strip { animation-delay: -2.8s; }
+.post-list > li:nth-child(even) .pixel-spin__strip { animation-delay: -1.65s; }
+.post-list > li:nth-child(3n) .pixel-spin__strip { animation-delay: -2.8s; }
