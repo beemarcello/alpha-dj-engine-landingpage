@@ -174,7 +174,7 @@
       info.append('We sent you the download link.');
     }
     // Zweiter Satz auf eigener Zeile — so vorgegeben (Marcel, 2026-09-01).
-    info.append(document.createElement('br'), 'The link is valid for 48 hours.');
+    info.append(document.createElement('br'), 'The link is valid for 24 hours.');
 
     el.append(spam, info);
   }
