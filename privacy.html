@@ -184,20 +184,65 @@
       </p>
       <p>
         Arranging your set is done on our servers. For that, the app sends the
-        <em>metadata</em> of the tracks in your set — such as title, artist, tempo, key,
-        energy and duration — so the sequencing engine can order them. This is what
-        makes the harmonic arrangement work.
+        analysis record of each track in your set: its musical metadata — title,
+        artist, tempo, key, energy and duration — and, as part of
+        the same record, technical fields such as album, year, file size and the
+        track&rsquo;s file name and full path on your computer (a path can contain
+        your user name). This is what makes the harmonic arrangement work. Each
+        composed set is stored on our server — while you are signed in, with your
+        account — with the name you gave it, the ordered track list and its technical
+        scores, because the free-song count and the export licence are checked
+        against exactly this set.
       </p>
       <p>
         Writing the USB drive is local as well — the drive is plugged into your machine,
-        not ours.
+        not ours. The app does report the outcome to our server. A successful export
+        confirms which tracks went onto the stick (artist, title, genre, tempo and key,
+        plus technical quality metrics): the tracks are counted into anonymous play
+        statistics per country and month — those counts are not linked to your
+        account — while the quality metrics are stored with your account. A failed
+        export is reported as well, so that free songs used up by a failed write can
+        be given back to you; that report includes the technical error text, which can
+        contain file names and paths (including the name of the drive), and it is
+        stored with your account. Both reports happen independently of the analytics
+        switch below.
+      </p>
+      <!--
+        Geaendert am 2026-11-24: hier stand vorher "no crash reporting and no
+        usage analytics" — das stimmt seit App-Version 1.1.1 (19.11.2026) nicht
+        mehr (Funnel-Telemetrie, telemetry.py im Engine-Repo; Event-Whitelist
+        portal/app/api/telemetry/route.ts — neue Events heissen auch hier).
+        Export-confirm/report-failure (Absatz davor) laufen unabhaengig davon.
+        Wird die Telemetrie wieder entfernt, gehoert der alte Absatz zurueck.
+      -->
+      <p>
+        The app also sends us usage analytics: technical events that record the steps
+        of using the app and where it stops. They cover opening the app; an analysis,
+        an arrangement or a USB write starting, succeeding, failing or being skipped,
+        and the kind of error that occurred; the sign-in steps (login window shown or
+        dismissed, sign-in or registration started and completed, the e-mail-confirmation
+        notice shown and its resend button clicked); and the free-limit notice being
+        shown and the upgrade button being clicked. Each event carries the app version,
+        the operating system and small technical values such as track counts, the
+        chosen preset and export format, or your plan — never your audio, and with one
+        exception no track titles or file names: the failed-USB-write event carries
+        the same technical error text as the failure report above, which can name
+        files and paths. The events carry a pseudonymous
+        installation ID (a one-way hash derived from a machine identifier), and while
+        you are signed in they are linked to your account. You can switch these events
+        off at any time by placing an empty file named <code>telemetry-off</code> in
+        the app&rsquo;s data folder
+        (<code>Library/Application&nbsp;Support/Alpha&nbsp;DJ&nbsp;Engine</code>
+        on macOS, <code>%APPDATA%\Alpha&nbsp;DJ&nbsp;Engine</code> on Windows) — the
+        app then records no new events.
       </p>
       <p>
-        The app contains no crash reporting and no usage analytics. It does not report
-        back what you do with it.
-      </p>
-      <p>
-        Legal basis: Art. 6(1)(b) GDPR — performance of a contract.
+        Legal basis: Art. 6(1)(b) GDPR — performance of a contract — for the set
+        metadata, the stored composed sets, closing an export and the failure report
+        that returns your free songs; Art. 6(1)(f) GDPR — our legitimate interest in understanding where
+        people stop using the app, what is being played, and in keeping the app
+        working — for the usage analytics, the anonymous play statistics and the
+        quality metrics.
       </p>
 
       <h2>How long we keep your account</h2>
